@@ -3,12 +3,8 @@ import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Calendar;
-import java.util.stream.Stream;
 
 public class Main {
 
@@ -38,29 +34,32 @@ public class Main {
                     // ... using a small buffer byte array.
                     byte[] buffer = new byte[2048];
 
-                    //Java 8: Stream class
-                    Stream<String> lines = Files.lines(f, StandardCharsets.UTF_8 );
-
                     int bytesRead;
 
-                    Calendar cal = Calendar.getInstance();
-
-                    long startTime = cal.getTimeInMillis();
-                    long currentTime =startTime;
-
-                    FileWriter fw = new FileWriter("output.txt", true);
+                    // initialize file class with output.xml as our output file
+                    FileWriter fw = new FileWriter("output.xml", true);
                     BufferedWriter bw = new BufferedWriter(fw);
                     PrintWriter out = new PrintWriter(bw);
+                    String content = "";
 
-                    while(currentTime<startTime+1000 && (bytesRead = sevenZFile.read(buffer)) != -1) {
-                        startTime = cal.getTimeInMillis();
+                    // we set the current time and the end time for running our code
+                    long t= System.currentTimeMillis();
+                    long end = t+1000;
+
+                    // run the code for 1 millisecond
+                    while(System.currentTimeMillis() < end) {
+                        bytesRead = sevenZFile.read(buffer);
+
+                        // read contents of the file and write it into our byte array buffer
                         contentBytes.write(buffer, 0, bytesRead);
-                        // Assuming the content is a UTF-8 text file we can interpret the
-                        // bytes as a string.
-                        String content = contentBytes.toString("UTF-8");
-                        // System.out.println(content);
-                        out.println(content);
                     }
+
+                    // Assuming the content is a UTF-8 text file we can interpret the
+                    // bytes as a string.
+                    content = contentBytes.toString("UTF-8");
+
+                    // write the contents of the file into output.xml
+                    out.println(content);
 
                     out.close();
                 }
