@@ -1,0 +1,2684 @@
+<p>I want to use a track-bar to change a form's opacity.</p>
+
+<p>This is my code:</p>
+
+<pre><code>decimal trans = trackBar1.Value / 5000;
+this.Opacity = trans;
+</code></pre>
+
+<p>When I try to build it, I get this error:</p>
+
+<blockquote>
+  <p>Cannot implicitly convert type 'decimal' to 'double'.</p>
+</blockquote>
+
+<p>I tried making <code>trans</code> a <code>double</code>, but then the control doesn't work. This code has worked fine for me in VB.NET in the past. </p>
+
+<p>I have an absolutely positioned <code>div</code> containing several children, one of which is a relatively positioned <code>div</code>. When I use a <strong>percentage-based width</strong> on the child <code>div</code>, it collapses to '0' width on <a href="http://en.wikipedia.org/wiki/Internet_Explorer_7">Internet&nbsp;Explorer&nbsp;7</a>, but not on Firefox or Safari.</p>
+
+<p>If I use <strong>pixel width</strong>, it works. If the parent is relatively positioned, the percentage width on the child works.</p>
+
+<ol>
+<li>Is there something I'm missing here?</li>
+<li>Is there an easy fix for this besides the <em>pixel-based width</em> on the
+child?</li>
+<li>Is there an area of the CSS specification that covers this?</li>
+</ol>
+
+<p>Given a <code>DateTime</code> representing a person's birthday, how do I calculate their age?  </p>
+
+<p>Given a specific <code>DateTime</code> value, how do I display relative time, like:</p>
+
+<ul>
+<li>2 hours ago</li>
+<li>3 days ago</li>
+<li>a month ago</li>
+</ul>
+
+<p>Is there any standard way for a Web Server to be able to determine a user's timezone within a web page? Perhaps from a <code>HTTP</code> header? Or part of the user-agent string?</p>
+
+<p>What is the difference between <a href="http://msdn.microsoft.com/en-us/library/9a6a2sxy.aspx"><code>Math.Floor()</code></a> and <a href="http://msdn.microsoft.com/en-us/library/system.math.truncate.aspx"><code>Math.Truncate()</code></a> in .NET?</p>
+
+<p>How do you expose a <strong>LINQ</strong> query as an <strong>ASMX</strong> web service? Usually, from the business tier, I can return a typed <code>DataSet</code> or <code>DataTable</code> which can be serialized for transport over <strong>ASMX</strong>.</p>
+
+<p>How can I do the same for a <strong>LINQ</strong> query? Is there a way to populate a typed <code>DataSet</code> or <code>DataTable</code> via a <strong>LINQ</strong> query?: </p>
+
+<pre><code>public static MyDataTable CallMySproc()    
+{    
+    string conn = ...;
+
+    MyDatabaseDataContext db = new MyDatabaseDataContext(conn);    
+    MyDataTable dt = new MyDataTable();
+
+    // execute a sproc via LINQ
+    var query = from dr in db.MySproc().AsEnumerable
+    select dr;
+
+    // copy LINQ query resultset into a DataTable -this does not work !    
+    dt = query.CopyToDataTable();
+
+    return dt;
+}
+</code></pre>
+
+<p>How can I get the resultset of a <strong>LINQ</strong> query into a <code>DataSet</code> or <code>DataTable</code>? Alternatively, is the <strong>LINQ</strong> query serializeable so that I can expose it as an <strong>ASMX</strong> web service?</p>
+
+<p>How do I store binary data in <a href="http://en.wikipedia.org/wiki/MySQL">MySQL</a>?</p>
+
+<p>Solutions are welcome in any language. :-) I'm looking for the fastest way to obtain the value of π, as a personal challenge. More specifically I'm using ways that don't involve using <code>#define</code>d constants like <code>M_PI</code>, or hard-coding the number in.</p>
+
+<p>The program below tests the various ways I know of. The inline assembly version is, in theory, the fastest option, though clearly not portable; I've included it as a baseline to compare the other versions against. In my tests, with built-ins, the <code>4 * atan(1)</code> version is fastest on GCC 4.2, because it auto-folds the <code>atan(1)</code> into a constant. With <code>-fno-builtin</code> specified, the <code>atan2(0, -1)</code> version is fastest.</p>
+
+<p>Here's the main testing program (<code>pitimes.c</code>):</p>
+
+<pre class="lang-c prettyprint-override"><code>#include &lt;math.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define ITERS 10000000
+#define TESTWITH(x) {                                                       \
+    diff = 0.0;                                                             \
+    time1 = clock();                                                        \
+    for (i = 0; i &lt; ITERS; ++i)                                             \
+        diff += (x) - M_PI;                                                 \
+    time2 = clock();                                                        \
+    printf("%s\t=&gt; %e, time =&gt; %f\n", #x, diff, diffclock(time2, time1));   \
+}
+
+static inline double
+diffclock(clock_t time1, clock_t time0)
+{
+    return (double) (time1 - time0) / CLOCKS_PER_SEC;
+}
+
+int
+main()
+{
+    int i;
+    clock_t time1, time2;
+    double diff;
+
+    /* Warmup. The atan2 case catches GCC's atan folding (which would
+     * optimise the ``4 * atan(1) - M_PI'' to a no-op), if -fno-builtin
+     * is not used. */
+    TESTWITH(4 * atan(1))
+    TESTWITH(4 * atan2(1, 1))
+
+#if defined(__GNUC__) &amp;&amp; (defined(__i386__) || defined(__amd64__))
+    extern double fldpi();
+    TESTWITH(fldpi())
+#endif
+
+    /* Actual tests start here. */
+    TESTWITH(atan2(0, -1))
+    TESTWITH(acos(-1))
+    TESTWITH(2 * asin(1))
+    TESTWITH(4 * atan2(1, 1))
+    TESTWITH(4 * atan(1))
+
+    return 0;
+}
+</code></pre>
+
+<p>And the inline assembly stuff (<code>fldpi.c</code>), noting that it will only work for x86 and x64 systems:</p>
+
+<pre class="lang-c prettyprint-override"><code>double
+fldpi()
+{
+    double pi;
+    asm("fldpi" : "=t" (pi));
+    return pi;
+}
+</code></pre>
+
+<p>And a build script that builds all the configurations I'm testing (<code>build.sh</code>):</p>
+
+<pre><code>#!/bin/sh
+gcc -O3 -Wall -c           -m32 -o fldpi-32.o fldpi.c
+gcc -O3 -Wall -c           -m64 -o fldpi-64.o fldpi.c
+
+gcc -O3 -Wall -ffast-math  -m32 -o pitimes1-32 pitimes.c fldpi-32.o
+gcc -O3 -Wall              -m32 -o pitimes2-32 pitimes.c fldpi-32.o -lm
+gcc -O3 -Wall -fno-builtin -m32 -o pitimes3-32 pitimes.c fldpi-32.o -lm
+gcc -O3 -Wall -ffast-math  -m64 -o pitimes1-64 pitimes.c fldpi-64.o -lm
+gcc -O3 -Wall              -m64 -o pitimes2-64 pitimes.c fldpi-64.o -lm
+gcc -O3 -Wall -fno-builtin -m64 -o pitimes3-64 pitimes.c fldpi-64.o -lm
+</code></pre>
+
+<p>Apart from testing between various compiler flags (I've compared 32-bit against 64-bit too, because the optimisations are different), I've also tried switching the order of the tests around. The <code>atan2(0, -1)</code> version still comes out top every time, though.</p>
+
+<p>If I have a <code>trigger</code> <code>before the update</code> on a table, how can I throw an error that prevents the update on that table?</p>
+
+<p>I've been having issues getting the <strong>C sockets API</strong> to work properly in <code>C++</code>. Specifically, even though I'm including <code>sys/socket.h</code>, I'm still getting compile time errors telling me that <code>AF_INET</code> is not defined. Am I missing something obvious, or could this be related to the fact that I'm doing this coding on <code>z/OS</code> and my problems are much more complicated?</p>
+
+<hr>
+
+<p><strong>Update</strong>: Upon further investigation, I discovered that there is an <code>#ifdef</code> that I'm hitting. Apparently <code>z/OS</code> isn't happy unless I define which <em>type</em> of sockets I'm using with:</p>
+
+<pre><code>#define _OE_SOCKETS
+</code></pre>
+
+<p>Now, I personally have no idea what this <code>_OE_SOCKETS</code> is actually for, so if any <code>z/OS</code> sockets programmers are out there (all 3 of you), perhaps you could give me a rundown on how this all works?</p>
+
+<p>How do I forcefully unload a <code>ByteArray</code> from memory in ActionScript 3?</p>
+
+<p>I have tried (without success):</p>
+
+<pre><code>byteArray.length = 0;
+byteArray = new ByteArray();
+</code></pre>
+
+<p>And</p>
+
+<pre><code>for ( var i:int=0; i &lt; byteArray.length; i++ ) {
+    byteArray[i] = null;
+}
+</code></pre>
+
+<p>How can I monitor an SQL Server database for changes to a table without using triggers or modifying the structure of the database in any way? My preferred programming environment is <a href="http://en.wikipedia.org/wiki/.NET_Framework">.NET</a> and C#.</p>
+
+<p>I'd like to be able to support any <a href="http://en.wikipedia.org/wiki/Microsoft_SQL_Server#Genesis">SQL&nbsp;Server 2000</a> SP4 or newer. My application is a bolt-on data visualization for another company's product. Our customer base is in the thousands, so I don't want to have to put in requirements that we modify the third-party vendor's table at every installation.</p>
+
+<p>By <em>"changes to a table"</em> I mean changes to table data, not changes to table structure.</p>
+
+<p>Ultimately, I would like the change to trigger an event in my application, instead of having to check for changes at an interval.</p>
+
+<hr>
+
+<p>The best course of action given my requirements (no triggers or schema modification, SQL&nbsp;Server 2000 and 2005) seems to be to use the BINARY_CHECKSUM function in <a href="http://en.wikipedia.org/wiki/Transact-SQL">T-SQL</a>. The way I plan to implement is this:</p>
+
+<p>Every X seconds run the following query:</p>
+
+<pre><code>SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM sample_table WITH (NOLOCK);
+</code></pre>
+
+<p>and compare that against the stored value. If the value has changed, go through the table row by row using the query</p>
+
+<pre><code>select row_id,BINARY_CHECKSUM(*) from sample_table WITH (NOLOCK);
+</code></pre>
+
+<p>and compare the returned checksums against stored values.</p>
+
+<p>I am aware that in <a href="http://en.wikipedia.org/wiki/.NET_Framework">.NET</a> there are three timer types (see <em><a href="http://msdn.microsoft.com/en-us/magazine/cc164015.aspx">Comparing the Timer Classes in the .NET Framework Class Library</a></em>). I have chosen a threaded timer as the other types can drift if the main thread is busy, and I need this to be reliable.</p>
+
+<p>The way this timer works in the control of the timer is put on another thread so it can always tick along with the work begin completed on the parent thread when it is not busy.</p>
+
+<p>The issue with this timer in a console application is that while the timer is ticking along on another thread the main thread is not doing anything so the application closes.</p>
+
+<p>I tried adding a <code>while true</code> loop, but then the main thread is too busy when the timer does go off.</p>
+
+<p>I am starting a new web application in PHP and this time around I want to create something that people can extend by using a plugin interface. </p>
+
+<p>How does one go about writing 'hooks' into their code so that plugins can attach to specific events?</p>
+
+<p>Let's say you create a Wizard in an HTML form. One button goes back and one goes forward.  Since the <em>back</em> button appears first in the markup, when you press Enter it will use that button to submit the form. </p>
+
+<p>Example:</p>
+
+<pre><code>&lt;form&gt;
+   &lt;input type="text" name="field1" /&gt; &lt;!-- put your cursor in this field and press Enter --&gt;
+
+   &lt;input type="submit" name="prev" value="Previous Page" /&gt; &lt;!-- This is the button that will submit --&gt;
+   &lt;input type="submit" name="next" value="Next Page" /&gt; &lt;!-- But this is the button that I WANT to submit --&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>What I would like to do, is get to decide which button is used to submit the form when a user presses Enter. That way, when you press Enter the Wizard will move to the next page, not the previous. Do you have to use <code>tabindex</code> to do this?</p>
+
+<p>Let's say I have a <code>DataTable</code> with a <code>Name</code> column. I want to have a collection of the unique names ordered alphabetically. The following query ignores the order by clause.</p>
+
+<pre><code>var names =
+    (from DataRow dr in dataTable.Rows
+    orderby (string)dr["Name"]
+    select (string)dr["Name"]).Distinct();
+</code></pre>
+
+<p>Why does the <code>orderby</code> not get enforced?</p>
+
+<p>Where can I find a list of the MIME types and identifying characters for Office 2007 files?</p>
+
+<p>I have an upload form that is restricting uploads based on extension and identifying characters, but I cannot seem to find the Office 2007 MIME types.</p>
+
+<p>How do you page through a collection in LINQ given that you have a <code>startIndex</code> and a <code>count</code>?</p>
+
+<p>I've got all these comments that I want to make into 'RDoc comments', so they can be formatted appropriately and viewed using <code>ri</code>.  Can anyone get me started on understanding how to use RDoc?</p>
+
+<p>The version of <strong>Subclipse (1.2.4)</strong> currently available through Aptana's automatic <em>Plugins Manager</em> does not work with the newest version of Subversion.</p>
+
+<p>I see on the Subclipse website however that they have 1.4.2 out for Eclipse. So I added a <a href="http://subclipse.tigris.org/update_1.4.x">new remote update site</a> to my Update manager. When I tried to install it, it told me I needed <strong>Mylyn 3.0.0</strong>. So after much searching I found Mylyn 3.0.0 and added <a href="http://download.eclipse.org/tools/mylyn/update/e3.3">another new remote update site</a> to my update manager. Then when I tried to install that, it told me I needed <strong>org.eclipse.ui 3.3.0</strong> or equivalent.</p>
+
+<p>Looking at the configuration details for Aptana, it looks like it is built against eclipse 3.2.2.</p>
+
+<p>Does anyone know if there is a way to upgrade the version of Eclipse Aptana that is built against to 3.3.0? Or if there is some other way to get Subclipse to work with the very newest version of Subversion?</p>
+
+<p>I know this isn't necessarily a "programming" question, but I hope it's ok since it's highly relevant to the programming experience.</p>
+
+<p>I've written a database generation script in <a href="http://en.wikipedia.org/wiki/SQL">SQL</a> and want to execute it in my <a href="http://en.wikipedia.org/wiki/Adobe_Integrated_Runtime">Adobe AIR</a> application:</p>
+
+<pre><code>Create Table tRole (
+      roleID integer Primary Key
+      ,roleName varchar(40)
+);
+Create Table tFile (
+    fileID integer Primary Key
+    ,fileName varchar(50)
+    ,fileDescription varchar(500)
+    ,thumbnailID integer
+    ,fileFormatID integer
+    ,categoryID integer
+    ,isFavorite boolean
+    ,dateAdded date
+    ,globalAccessCount integer
+    ,lastAccessTime date
+    ,downloadComplete boolean
+    ,isNew boolean
+    ,isSpotlight boolean
+    ,duration varchar(30)
+);
+Create Table tCategory (
+    categoryID integer Primary Key
+    ,categoryName varchar(50)
+    ,parent_categoryID integer
+);
+...
+</code></pre>
+
+<p>I execute this in Adobe AIR using the following methods:</p>
+
+<pre><code>public static function RunSqlFromFile(fileName:String):void {
+    var file:File = File.applicationDirectory.resolvePath(fileName);
+    var stream:FileStream = new FileStream();
+    stream.open(file, FileMode.READ)
+    var strSql:String = stream.readUTFBytes(stream.bytesAvailable);
+    NonQuery(strSql);
+}
+
+public static function NonQuery(strSQL:String):void
+{
+    var sqlConnection:SQLConnection = new SQLConnection();
+    sqlConnection.open(File.applicationStorageDirectory.resolvePath(DBPATH);
+    var sqlStatement:SQLStatement = new SQLStatement();
+    sqlStatement.text = strSQL;
+    sqlStatement.sqlConnection = sqlConnection;
+    try
+    {
+        sqlStatement.execute();
+    }
+    catch (error:SQLError)
+    {
+        Alert.show(error.toString());
+    }
+}
+</code></pre>
+
+<p>No errors are generated, however only <code>tRole</code> exists. It seems that it only looks at the first query (up to the semicolon- if I remove it, the query fails). Is there a way to call multiple queries in one statement?</p>
+
+<p>What are your best practices around creating flat file database structures in PHP?  A lot of the more mature PHP flat file frameworks I see out there attempt to implement SQL-like query syntax, which is over the top for my purposes in most cases (I would just use a database at that point).</p>
+
+<p>Are there any elegant tricks out there to get good performance and features with the small code overhead one would want by taking on this problem in the first place?</p>
+<p>So I find myself porting a game, that was originally written for the Win32 API, to Linux (well, porting the OS X port of the Win32 port to Linux). I have implemented <code>QueryPerformanceCounter</code> by giving the uSeconds since the process start up:  </p>
+
+<pre><code>BOOL QueryPerformanceCounter(LARGE_INTEGER* performanceCount)
+{
+    gettimeofday(&amp;currentTimeVal, NULL);
+    performanceCount-&gt;QuadPart = (currentTimeVal.tv_sec - startTimeVal.tv_sec);
+    performanceCount-&gt;QuadPart *= (1000 * 1000);
+    performanceCount-&gt;QuadPart += (currentTimeVal.tv_usec - startTimeVal.tv_usec);
+
+    return true;
+}
+</code></pre>
+
+<p>This, coupled with <code>QueryPerformanceFrequency()</code> giving a constant 1000000 as the frequency, works well <b>on my machine</b>, giving me a 64 bit variable that contains <code>uSeconds</code> since the program's start up. So <em>is this portable?</em> I don't want to discover it works differently if the kernel was compiled in a certain way or anything like that. I am fine with it being non-portable to something other than Linux, however.</p>
+
+<p>Are there any really good tutorials explaining <a href="http://svnbook.red-bean.com/en/1.8/svn.branchmerge.html" rel="nofollow">branching and merging</a> with Apache Subversion? </p>
+
+<p>All the better if it's specific to TortoiseSVN client.</p>
+
+<p>In .NET perspective:</p>
+
+<ul>
+<li>What is a <strong><a href="http://en.wikipedia.org/wiki/Memory_leak">Memory Leak</a></strong>?</li>
+<li>How can you determine whether your application leaks? What are the effects?</li>
+<li>How can you prevent a memory leak?</li>
+<li>If your application has memory leak, does it go away when the process exits or is killed? Or do memory leaks in your application affect other processes on the system even after process completion?</li>
+<li>And what about unmanaged code accessed via COM Interop and/or P/Invoke?</li>
+</ul>
+
+<p>I have some answers for these questions myself, but they are incomplete. What do you think?</p>
+
+<p>I've been using <a href="http://tortoisesvn.tigris.org/">TortoiseSVN </a> in a Windows environment for quite some time.  It seems very feature-complete and nicely integrated into the Windows shell, and more importantly, it's fairly painless to teach to colleagues with little or no experience with source control.  <strong>However</strong>, since we have moved to Windows Vista 64bit, Tortoise has been very buggy and has seemed to cause lots of explorer.exe abnormalities and crashes.  This has happened both with older versions of the software and the latest version (1.5.1 build 13563).</p>
+
+<p>I was curious if anyone has suggestions for other Subversion clients that will run on Windows (specifically Vista 64bit).  Developers here use a variety of text editors so using Visual Studio or Dreamweaver for SVN is not ideal.</p>
+
+<p>I have heard great things about <a href="http://www.zennaware.com/cornerstone/">Cornerstone</a>, and would love something similar for Windows if it exists.</p>
+
+<hr>
+
+<p>I'm correlating the Vista/explorer problems with Tortoise because they normally occur when I'm using the functionality in Tortoise.  Sometimes bringing up the "merge" screen will cause the GUI to start acting very strange and eventually hang or crash.</p>
+
+<p>I did not see 1.5.2 -- I'm installing now, maybe that will fix some of my issues.</p>
+
+<p>Recently our site has been deluged with the resurgence of the <a href="https://en.wikipedia.org/wiki/Asprox_botnet">Asprox botnet</a> <a href="http://en.wikipedia.org/wiki/SQL_injection">SQL injection</a> attack. Without going into details, the attack attempts to execute SQL code by encoding the <a href="http://en.wikipedia.org/wiki/Transact-SQL">T-SQL</a> commands in an ASCII encoded BINARY string. It looks something like this:</p>
+
+<pre><code>DECLARE%20@S%20NVARCHAR(4000);SET%20@S=CAST(0x44004500...06F007200%20AS%20NVARCHAR(4000));EXEC(@S);--
+</code></pre>
+
+<p>I was able to decode this in SQL, but I was a little wary of doing this since I didn't know exactly what was happening at the time.</p>
+
+<p>I tried to write a simple decode tool, so I could decode this type of text without even touching <a href="http://en.wikipedia.org/wiki/Microsoft_SQL_Server">SQL&nbsp;Server</a>. The main part I need decoded is:</p>
+
+<pre><code>CAST(0x44004500...06F007200 AS
+NVARCHAR(4000))
+</code></pre>
+
+<p>I've tried all of the following commands with no luck:</p>
+
+<pre><code>txtDecodedText.Text =
+    System.Web.HttpUtility.UrlDecode(txtURLText.Text);
+txtDecodedText.Text =
+    Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(txtURLText.Text));
+txtDecodedText.Text =
+    Encoding.Unicode.GetString(Encoding.Unicode.GetBytes(txtURLText.Text));
+txtDecodedText.Text =
+    Encoding.ASCII.GetString(Encoding.Unicode.GetBytes(txtURLText.Text));
+txtDecodedText.Text =
+    Encoding.Unicode.GetString(Convert.FromBase64String(txtURLText.Text));
+</code></pre>
+
+<p>What is the proper way to translate this encoding without using SQL Server? Is it possible? I'll take VB.NET code since I'm familiar with that too.</p>
+
+<hr>
+
+<p>Okay, I'm sure I'm missing something here, so here's where I'm at.</p>
+
+<p>Since my input is a basic string, I started with just a snippet of the encoded portion - 4445434C41 (which translates to DECLA) - and the first attempt was to do this...</p>
+
+<pre><code>txtDecodedText.Text = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(txtURL.Text));
+</code></pre>
+
+<p>...and all it did was return the exact same thing that I put in, since it converted each character into is byte.</p>
+
+<p>I realized that I need to parse each two characters into a byte manually since I don't know of any methods yet that will do that, so now my little decoder looks something like this:</p>
+
+<pre><code>while (!boolIsDone)
+{
+    bytURLChar = byte.Parse(txtURLText.Text.Substring(intParseIndex, 2));
+    bytURL[intURLIndex] = bytURLChar;
+    intParseIndex += 2;
+    intURLIndex++;
+
+    if (txtURLText.Text.Length - intParseIndex &lt; 2)
+    {
+        boolIsDone = true;
+    }
+}
+
+txtDecodedText.Text = Encoding.UTF8.GetString(bytURL);
+</code></pre>
+
+<p>Things look good for the first couple of pairs, but then the loop balks when it gets to the "4C" pair and says that the string is in the incorrect format.</p>
+
+<p>Interestingly enough, when I step through the debugger and to the GetString method on the byte array that I was able to parse up to that point, I get ",-+" as the result.</p>
+
+<p>How do I figure out what I'm missing - do I need to do a "direct cast" for each byte instead of attempting to parse it?</p>
+
+<p>Has anyone got experience creating <strong>SQL-based ASP.NET</strong> site-map providers?</p>
+
+<p>I've got the default XML file <code>web.sitemap</code> working properly with my Menu and <strong>SiteMapPath</strong> controls, but I'll need a way for the users of my site to create and modify pages dynamically.</p>
+
+<p>I need to tie page viewing permissions into the standard <code>ASP.NET</code> membership system as well.</p>
+
+<p>Is there an existing application or library in <em>Java</em> which will allow me to convert a <code>CSV</code> data file to <code>XML</code> file?  </p>
+
+<p>The <code>XML</code> tags would be provided through possibly the first row containing column headings.</p>
+
+<p>What is the "purist" or "correct" way to access an object's properties from within an object method that is not a getter/setter method?</p>
+
+<p>I know that from outside of the object you should use a getter/setter, but from within would you just do:</p>
+
+<p>Java:</p>
+
+<pre><code>String property = this.property;
+</code></pre>
+
+<p>PHP:</p>
+
+<pre><code>$property = $this-&gt;property;
+</code></pre>
+
+<p>or would you do:</p>
+
+<p>Java:</p>
+
+<pre><code>String property = this.getProperty();
+</code></pre>
+
+<p>PHP:</p>
+
+<pre><code>$property = $this-&gt;getProperty();
+</code></pre>
+
+<p>Forgive me if my Java is a little off, it's been a year since I programmed in Java...</p>
+
+<p><strong>EDIT:</strong></p>
+
+<p>It seems people are assuming I am talking about private or protected variables/properties only. When I learned OO I was taught to use getters/setters for every single property even if it was public (and actually I was told never to make any variable/property public). So, I may be starting off from a false assumption from the get go. It appears that people answering this question are maybe saying that you should have public properties and that those don't need getters and setters, which goes against what I was taught, and what I was talking about, although maybe that needs to be discussed as well. That's probably a good topic for a different question though...</p>
+
+<p>I've been banging my head against <code>SQL Server 2005</code> trying to get a lot of data out.  I've been given a database with nearly 300 tables in it and I need to turn this into a MySQL database.  My first call was to use bcp but unfortunately it doesn't produce valid CSV - strings aren't encapsulated, so you can't deal with any row that has a string with a comma in it (or whatever you use as a delimiter) and I would still have to hand write all of the create table statements, as obviously CSV doesn't tell you anything about the data types.</p>
+
+<p>What would be better is if there was some tool that could connect to both SQL Server and MySQL, then do a copy. You lose views, stored procedures, trigger, etc, but it isn't hard to copy a table that only uses base types from one DB to another... is it?</p>
+
+<p>Does anybody know of such a tool?  I don't mind how many assumptions it makes or what simplifications occur, as long as it supports integer, float, datetime and string. I have to do a lot of pruning, normalising, etc. anyway so I don't care about keeping keys, relationships or anything like that, but I need the initial set of data in fast!</p>
+
+<p>I have a pretty standard table set-up in a current application using the <a href="http://en.wikipedia.org/wiki/.NET_Framework" rel="nofollow">.NET</a> <a href="http://en.wikipedia.org/wiki/XML_Schema_%28W3C%29" rel="nofollow">XSD</a> <code>DataSet</code> and <code>TableAdapter</code> features. My <code>contracts</code> table consists of some standard contract information, with a column for the <code>primary department</code>. This column is a <a href="http://en.wikipedia.org/wiki/Foreign_key" rel="nofollow">foreign key</a> to my <code>Departments</code> table, where I store the basic <code>department name</code>, <code>id</code>, <code>notes</code>. This is all setup and functioning in my <a href="http://en.wikipedia.org/wiki/Microsoft_SQL_Server" rel="nofollow">SQL Server</a>.</p>
+
+<p>When I use the XSD tool, I can drag both tables in at once and it auto detects/creates the foreign key I have between these two tables. This works great when I'm on my main page and am viewing contract data.</p>
+
+<p>However, when I go to my administrative page to modify the department data. I typically do something like this:</p>
+
+<pre><code>Dim dtDepartment As New DepartmentDataTable()
+Dim taDepartment As New DepartmentTableAdapter()
+
+taDepartment.Fill(dtDepartment)
+</code></pre>
+
+<p>However, at this point an exception is thrown saying to the effect that there is a foreign key reference broken here, I'm guessing since I don't have the <code>Contract</code> <code>DataTable</code> filled. </p>
+
+<p>How can I fix this problem? I know I can simply remove the foreign key from the XSD to make things work fine, but having the additional integrity check there and having the XSD schema match the SQL schema in the database is nice.</p>
+
+<p>Does anyone know of a good way to compress or decompress files and folders in C# quickly? Handling large files might be necessary.</p>
+
+<p><img src="http://i.stack.imgur.com/O0LGd.png" alt=""></p>
+
+<p>I have a website that plays mp3s in a flash player. If a user clicks 'play' the flash player automatically downloads an mp3 and starts playing it. </p>
+
+<p>Is there an easy way to track how many times a particular song clip (or any binary file) has been downloaded?</p>
+
+<hr>
+
+<blockquote>
+  <p>Is the play link a link to the actual
+  mp3 file or to some javascript code
+  that pops up a player?</p>
+  
+  <p>If the latter, you can easily add your
+  own logging code in there to track the
+  number of hits to it.</p>
+  
+  <p>If the former, you'll need something
+  that can track the web server log
+  itself and make that distinction. My
+  hosting plan comes with webalizer,
+  which does this nicely.</p>
+</blockquote>
+
+<p>It's javascript code, so that answers that. </p>
+
+<p>However, it would be nice to know how to track downloads using the other method (without switching hosts).</p>
+
+<p>Stack Overflow has a subversion version number at the bottom:</p>
+
+<blockquote>
+  <p>svn revision: 679</p>
+</blockquote>
+
+<p>I want to use such automatic versioning with my <code>.NET Web Site/Application</code>, Windows Forms, WPD projects/solutions.</p>
+
+<p>How do I implement this?</p>
+
+<p>We are using <a href="http://en.wikipedia.org/wiki/Windows_Media_Video">WMV</a> videos on an internal site, and we are embedding them into web sites. Now, this works quite well on Internet Explorer, but not on Firefox. I've found ways to make it work in Firefox, but then it stops working in Internet Explorer.</p>
+
+<p>We do not want to use Silverlight just yet, especially since we cannot be sure that all clients will be running Windows XP with Windows Media Player installed. </p>
+
+<p>Is there some sort of Universal Code that embeds WMP into both Internet Explorer and Firefox, or do we need to implement some user-agent-detection and deliver different HTML for different browsers?</p>
+
+<p>I want to get my databases under version control.  Does anyone have any advice or recommended articles to get me started?</p>
+
+<p>I'll always want to have at least <em>some</em> data in there (as <a href="http://stackoverflow.com/users/80/alumb">alumb</a> mentions: user types and administrators).  I'll also often want a large collection of generated test data for performance measurement.</p>
+
+<p>I want to print HTML from a C# web service.  The Web Browser control is overkill, and does not function well in a service environment, nor does it function well on a system with very tight security constraints.  Is there any sort of free <code>.NET</code> library that will support the printing of a basic HTML page?  Here is the code I have so far, which does not run properly.</p>
+
+<pre><code>public void PrintThing(string document)
+{
+    if (Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
+    {
+        Thread thread =
+            new Thread((ThreadStart) delegate { PrintDocument(document); });
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
+    }
+    else
+    {
+        PrintDocument(document);
+    }
+}
+
+protected void PrintDocument(string document)
+{
+    WebBrowser browser = new WebBrowser();
+    browser.DocumentText = document;
+    while (browser.ReadyState != WebBrowserReadyState.Complete)
+    {
+        Application.DoEvents();
+    }
+    browser.Print();
+}
+</code></pre>
+
+<p>This works fine when called from UI-type threads, but nothing happens when called from a service-type thread.  Changing <code>Print()</code> to <code>ShowPrintPreviewDialog()</code> yields the following IE script error:</p>
+
+<blockquote>
+  <p>Error: 'dialogArguments.___IE_PrintType' is null or not an object<br />
+  URL: res://ieframe.dll/preview.dlg</p>
+</blockquote>
+
+<p>And a small empty print preview dialog appears.</p>
+
+<p>I want to be able to display a normal YouTube video with overlaid <code>annotations</code>, consisting of coloured rectangles for each frame. The only requirement is that this should be done programmatically. YouTube has <code>annotations</code> now, but require you to use their front end to create them by hand. I want to be able to generate them. What's the best way of doing this?</p>
+
+<p>Some ideas:</p>
+
+<blockquote>
+  <ol>
+  <li>Build your own Flash player (ew?)</li>
+  <li>Somehow draw over the YouTube Flash player. Will this work?</li>
+  <li>Reverse engineer &amp; hijack YouTube's annotation system. Either messing with the local files or redirecting its attempt to download
+  the annotations. (using Greasemonkey? Firefox plugin?)</li>
+  </ol>
+</blockquote>
+
+<p>Idea that doesn't count: </p>
+
+<blockquote>
+  <p>download the video</p>
+</blockquote>
+
+<p>On one Linux Server running Apache and PHP 5, we got multiple Virtual Hosts with separate logfiles and everything. The only thing we cannot seem to separate between virtual hosts is the php <code>error_log</code>. </p>
+
+<p>Overriding this setting in the <code>&lt;Location&gt;</code> of the <code>httpd.conf</code> does not seem to do anything.</p>
+
+<p>Did I overlook something? Is there a way to have separate php <code>error_logs</code> for each Virtual Host?</p>
+
+<p>This is something I've pseudo-solved many times and never quite found a solution. That's stuck with me. The problem is to come up with a way to generate <code>N</code> colors, that are as distinguishable as possible where <code>N</code> is a parameter.</p>
+
+<p>One of the fun parts of multi-cultural programming is number formats.</p>
+
+<ul>
+<li>Americans use 10,000.50</li>
+<li>Germans use 10.000,50</li>
+<li>French use 10 000,50</li>
+</ul>
+
+<p>My first approach would be to take the string, parse it backwards, until I encounter a separator and use this as my decimal separator. There is an obvious flaw with that: 10.000 would be interpreted as 10.</p>
+
+<p>Another approach: if the string contains 2 different non-numeric characters, use the last one as the decimal separator and discard the others. If I only have one, check if it occurs more than once and discard it if it does. If it only appears once, check if it has 3 digits after it. If yes, discard it, otherwise use it as decimal separator.</p>
+
+<p>The obvious "best solution" would be to detect the User's culture or Browser, but that does not work if you have a Frenchman using an en-US Windows/Browser.</p>
+
+<p>Does the .net Framework contain some mythical black magic floating point parser that is better than <code>Double.(Try)Parse()</code> in trying to auto-detect the number format?</p>
+
+<p>Yes, I know.  The existence of a running copy of <code>SQL Server 6.5</code> in 2008 is absurd.</p>
+
+<p>That stipulated, what is the best way to migrate from <code>6.5</code> to <code>2005</code>?  Is there any direct path?  Most of the documentation I've found deals with upgrading <code>6.5</code> to <code>7</code>.</p>
+
+<p>Should I forget about the native <code>SQL Server</code> upgrade utilities, script out all of the objects and data, and try to recreate from scratch?</p>
+
+<p>I was going to attempt the upgrade this weekend, but server issues pushed it back till next.  So, any ideas would be welcomed during the course of the week.</p>
+
+<p><em>Update.  This is how I ended up doing it:</em></p>
+
+<ul>
+<li>Back up the database in question and Master on <code>6.5</code>.</li>
+<li>Execute <code>SQL Server 2000</code>'s <code>instcat.sql</code> against <code>6.5</code>'s Master.  This allows <code>SQL Server 2000</code>'s OLEDB provider to connect to <code>6.5</code>.</li>
+<li>Use <code>SQL Server 2000</code>'s standalone <code>"Import and Export Data"</code> to create a DTS package, using <code>OLEDB</code> to connect to 6.5.  This successfully copied all <code>6.5</code>'s tables to a new <code>2005</code> database (also using <code>OLEDB</code>).</li>
+<li>Use <code>6.5</code>'s Enterprise Manager to script out all of the database's indexes and triggers to a .sql file.</li>
+<li>Execute that .sql file against the new copy of the database, in 2005's Management Studio.</li>
+<li>Use 6.5's Enterprise Manager to script out all of the stored procedures.</li>
+<li>Execute that <code>.sql</code> file against the <code>2005</code> database.  Several dozen sprocs had issues making them incompatible with <code>2005</code>.  Mainly <code>non-ANSI joins</code> and <code>quoted identifier issues</code>.</li>
+<li>Corrected all of those issues and re-executed the <code>.sql</code> file.</li>
+<li>Recreated the <code>6.5</code>'s logins in <code>2005</code> and gave them appropriate permissions.</li>
+</ul>
+
+<p>There was a bit of rinse/repeat when correcting the stored procedures (there were hundreds of them to correct), but the upgrade went great otherwise.</p>
+
+<p>Being able to use Management Studio instead of <code>Query Analyzer</code> and <code>Enterprise Manager 6.5</code> is such an amazing difference.  A few report queries that took 20-30 seconds on the <code>6.5 database</code> are now running in 1-2 seconds, without any modification, new indexes, or anything.  I didn't expect that kind of immediate improvement.</p>
+
+<p>I have the following arrays:</p>
+
+<pre><code>$artist = array("the roots", "michael jackson", "billy idol", "more", "and more", "and_YET_MORE");
+$count = array(5, 3, 9, 1, 1, 3);
+</code></pre>
+
+<p>I want to generate a tag cloud that will have artists with a higher number in <code>$count</code> enclosed in <code>h6</code> tags and the lowest enclosed <code>h1</code> tags.</p>
+
+<p>How do I make it so <code>mailto:</code> links will be registered with my program?</p>
+
+<p>How would I then handle that event in my program?</p>
+
+<p>Most of the solutions I found from a quick Google search are how to do this manually, but I need to do this automatically for users of my program if they click a button, such as "set as default email client".</p>
+
+<p><strong>Edit</strong>: Removed reference to Delphi, because the answer is independent of your language.</p>
+
+<p>MySQL has this incredibly useful yet properitary <code>REPLACE INTO</code> SQL Command. </p>
+
+<p>I wonder: Can this easily be emulated in SQL Server 2005?</p>
+
+<p>Starting a new Transaction, doing a <code>Select()</code> and then either <code>UPDATE</code> or <code>INSERT</code> and <code>COMMIT</code> is always a little bit of a pain, especially when doing it in the application and therefore always keeping 2 versions of the statement.</p>
+
+<p>I wonder if there is an easy and <strong>universal</strong> way to implement such a function into SQL Server 2005?</p>
+
+<p>Does anybody know if there is a way to create a SQLite database based on an XSD <code>DataSet</code>? In the past I've just used a basic SQLite manager, but want to fuse things a bit more with my .NET development if possible.</p>
+
+<p>I have a little game written in C#. It uses a database as back-end. It's 
+a <a href="http://en.wikipedia.org/wiki/Collectible_card_game">trading card game</a>, and I wanted to implement the function of the cards as a script.</p>
+
+<p>What I mean is that I essentially have an interface, <code>ICard</code>, which a card class implements (<code>public class Card056 : ICard</code>) and which contains function that are called by the game.</p>
+
+<p>Now, to make the thing maintainable/moddable, I would like to have the class for each card as source code in the database and essentially compile it on first use. So when I have to add/change a card, I'll just add it to the database and tell my application to refresh, without needing any assembly deployment (especially since we would be talking about 1 assembly per card which means hundreds of assemblies).</p>
+
+<p>Is that possible? Register a class from a source file and then instantiate it, etc.</p>
+
+<pre><code>ICard Cards[current] = new MyGame.CardLibrary.Card056();
+Cards[current].OnEnterPlay(ref currentGameState);
+</code></pre>
+
+<p>The language is C#, but extra bonus if it's possible to write the script in any .NET language.</p>
+
+<p>I have been trying to implement Win32's <code>MessageBox</code> using GTK. The app using SDL/OpenGL, so this isn't a GTK app. </p>
+
+<p>I handle the initialisation (<code>gtk_init</code>) sort of stuff inside the <code>MessageBox</code> function as follows:</p>
+
+<pre><code>int MessageBox(HWND hwnd, const char* text, const char* caption, UINT type)
+{
+    GtkWidget *window = NULL;
+    GtkWidget *dialog = NULL;
+
+    gtk_init(&amp;gtkArgc, &amp;gtkArgv);
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    g_signal_connect(G_OBJECT(window), "delete_event", G_CALLBACK(delete_event), NULL);
+    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(destroy), NULL);
+    // gcallback calls gtk_main_quit()
+    gtk_init_add((GtkFunction)gcallback, NULL);
+
+    if (type &amp; MB_YESNO) {
+        dialog = gtk_message_dialog_new(GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, text);
+    } else {
+        dialog = gtk_message_dialog_new(GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, text);
+    }
+
+    gtk_window_set_title(GTK_WINDOW(dialog), caption);
+    gint result = gtk_dialog_run(GTK_DIALOG(dialog));
+
+    gtk_main();
+
+    gtk_widget_destroy(dialog);
+
+    if (type &amp; MB_YESNO) {
+        switch (result) {
+        default:
+        case GTK_RESPONSE_DELETE_EVENT:
+        case GTK_RESPONSE_NO:
+            return IDNO;
+            break;
+        case GTK_RESPONSE_YES:
+            return IDYES;
+            break;
+        }
+    }
+
+    return IDOK;
+} 
+</code></pre>
+
+<p>Now, I am by no means an experienced GTK programmer, and I realise that I'm probably doing something(s) horribly wrong.</p>
+
+<p>However, my problem is that the last dialog popped up with this function stays around until the process exits. Any ideas?</p>
+
+<ul>
+<li>What's the optimal level of concurrency that the C++ implementation of BerkeleyDB can reasonably support?</li>
+<li>How many threads can I have hammering away at the DB before throughput starts to suffer because of resource contention?</li>
+</ul>
+
+<p>I've read the manual and know how to set the number of locks, lockers, database page size, etc., but I'd just like some advice from someone who has real-world experience with BDB concurrency.</p>
+
+<p>My application is pretty simple, I'll be doing gets and puts of records that are about 1KB each. No cursors, no deleting.</p>
+
+<p>What are the best practices for checking in BIN directories in a collaborative development environment using SVN?  Should project level references be excluded from checkin?  Is it easier to just add all bin directories?</p>
+
+<p>I develop a lot of DotNetNuke sites and it seems that in a multi-developer environment, it's always a huge task to get the environment setup correctly.</p>
+
+<p>The ultimate goal (of course) is to have a new developer checkout the trunk from SVN, restore the DNN database and have it all just 'work'...</p>
+
+<p>I often have to sort a dictionary, consisting of keys &amp; values, by value. For example, I have a hash of words and respective frequencies, that I want to order by frequency.</p>
+
+<p>There is a <code>SortedList</code> which is good for a single value (say frequency), that I want to map it back to the word.</p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/f7fta44c.aspx">SortedDictionary</a> orders by key, not value. Some resort to a <a href="http://www.codeproject.com/KB/recipes/lookupcollection.aspx">custom class</a>, but is there a cleaner way?</p>
+
+<p>I often run into the following problem.</p>
+
+<p>I work on some changes to a project that require new tables or columns in the database. I make the database modifications and continue my work. Usually, I remember to write down the changes so that they can be replicated on the live system. However, I don't always remember what I've changed and I don't always remember to write it down.</p>
+
+<p>So, I make a push to the live system and get a big, obvious error that there is no <code>NewColumnX</code>, ugh.</p>
+
+<p>Regardless of the fact that this may not be the best practice for this situation, is there a version control system for databases? I don't care about the specific database technology. I just want to know if one exists. If it happens to work with MS SQL Server, then great.</p>
+
+<p>What are some guidelines for maintaining responsible session security with PHP?  There's information all over the web and it's about time it all landed in one place!</p>
+
+<p>I am working on a collection of classes used for video playback and recording. I have one main class which acts like the public interface, with methods like <code>play()</code>, <code>stop()</code>, <code>pause()</code>, <code>record()</code> etc... Then I have workhorse classes which do the video decoding and video encoding. </p>
+
+<p>I just learned about the existence of nested classes in C++, and I'm curious to know what programmers think about using them. I am a little wary and not really sure what the benefits/drawbacks are, but they seem (according to the book I'm reading) to be used in cases such as mine.</p>
+
+<p>The book suggests that in a scenario like mine, a good solution would be to nest the workhorse classes inside the interface class, so there are no separate files for classes the client is not meant to use, and to avoid any possible naming conflicts? I don't know about these justifications. Nested classes are a new concept to me. Just want to see what programmers think about the issue.</p>
+
+<p>When is it appropriate to use an unsigned variable over a signed one? What about in a <code>for</code> loop?</p>
+
+<p>I hear a lot of opinions about this and I wanted to see if there was anything resembling a consensus. </p>
+
+<pre><code>for (unsigned int i = 0; i &lt; someThing.length(); i++) {  
+    SomeThing var = someThing.at(i);  
+    // You get the idea.  
+}
+</code></pre>
+
+<p>I know Java doesn't have unsigned values, and that must have been a concious decision on <a href="https://en.wikipedia.org/wiki/Sun_Microsystems">Sun Microsystems</a>' part. </p>
+
+<p>I'm about to build a piece of a project that will need to construct and post an XML document to a web service and I'd like to do it in Python, as a means to expand my skills in it.  </p>
+
+<p>Unfortunately, whilst I know the XML model fairly well in .NET, I'm uncertain what the pros and cons are of the XML models in Python.  </p>
+
+<p>Anyone have experience doing XML processing in Python? Where would you suggest I start? The XML files I'll be building will be fairly simple.</p>
+
+<p>How would I go about generating a list of all possible permutations of a string between x and y characters in length, containing a variable list of characters.</p>
+
+<p>Any language would work, but it should be portable.</p>
+
+<p>This is a tricky one and I've always relied on techniques, such as permission-based emails (i.e. only sending to people you have permission to send to) and not using blatantly <em>spamish</em> terminology.</p>
+
+<p>Of late, some of the emails I send out programmatically have started being shuffled into people's spam folder automatically and I'm wondering what I can do about it.</p>
+
+<p>This is despite the fact that these particular emails are not ones that humans would mark as spam, specifically, they are emails that contain license keys that people have paid good money for, so I don't think they're going to consider them spam</p>
+
+<p>I figure this is a big topic in which I am essentially an ignorant simpleton.</p>
+
+<p>What is the meaning of the <em>Java warning</em>?</p>
+
+<blockquote>
+  <p>Type safety: The cast from Object to List is actually checking against the erased type List</p>
+</blockquote>
+
+<p>I get this warning when I try to cast an Object to a type with generic information, such as in the following code:</p>
+
+<pre><code>Object object = getMyList();
+List&lt;Integer&gt; list = (List&lt;Integer&gt;) object;
+</code></pre>
+
+<p>In Lucene if you had multiple indexes that covered only one partition each. Why does the same search on different indexes return results with different scores? The results from different servers match exactly. I.e. if i searched for:</p>
+
+<ul>
+<li>Name - John Smith</li>
+<li>DOB - 11/11/1934</li>
+</ul>
+
+<p>Partition 0 would return a score of 0.345</p>
+
+<p>Partition 1 would return a score of 0.337</p>
+
+<p>Both match exactly on name and DOB.</p>
+
+<p>Note: this question is from 2008 and now is of only historic interest.</p>
+
+<hr>
+
+<p>What's the best way to create an iPhone application that runs in landscape mode from the start, regardless of the position of the device?</p>
+
+<p>Both programmatically and using the Interface Builder.</p>
+
+<p>Part of my everyday work is maintaining and extending legacy VB6 applications. A common engine is written in C/C++ and VB6 uses these functions in order to improve performance. </p>
+
+<p>When it comes to asynchronous programming, a C interface is not enough and we rely on COM controls to fire events to VB6.</p>
+
+<p>My problem is that when I register the control in VB6, VB loads this control in memory and does not unload it until I quit the VB6 IDE. As the control is loaded the whole time, I am unable to recompile it in VC6, because the DLL file is locked.</p>
+
+<p>A solution I found is not to enable the control in VB but use the <code>CreateObject()</code> with the full name of my control. The problem then is that I must declare my control as an Object because VB6 knows nothing of the interface I am using and I do not have access to IntelliSense, which is a pain.</p>
+
+<p>Any idea how I can tell VB6 to unload controls after quitting the application? Or directly in the IDE?</p>
+
+<p>Is there any way to launch IE Mobile's "Favorites" screen directly by
+specifying any command line parameter?</p>
+
+<p>My Rails-app has a sign in box with a "remember me" checkbox. Users who check that box should remain logged in even after closing their browser. I'm keeping track of whether users are logged in by storing their id in the user's session. </p>
+
+<p>But sessions are implemented in Rails as session cookies, which are not persistent. I can <em>make</em> them persistent:</p>
+
+<pre><code><br>    class ApplicationController &lt; ActionController::Base<br>      before_filter :update_session_expiration_date<br><br>      private<br><br>      def update_session_expiration_date<br>        options = ActionController::Base.session_options<br>        unless options[:session_expires]<br>          options[:session_expires] = 1.year.from_now<br>        end<br>      end<br>    end<br></code></pre>
+
+<p>But that seems like a hack, which is surprising for such common functionality. Is there a better way?</p>
+
+<p><strong>Edit</strong></p>
+
+<p>Gareth's answer is pretty good, but I would still like an answer from someone familiar with Rails 2 (because of its unique CookieSessionStore).</p>
+<p>I am using the Photoshop's javascript API to find the fonts in a given PSD.</p>
+
+<p>Given a font name returned by the API, I want to find the actual physical font file that that font name corresponds to on the disc.</p>
+
+<p>This is all happening in a python program running on OSX so I guess I'm looking for one of:</p>
+
+<ul>
+<li>Some Photoshop javascript</li>
+<li>A Python function</li>
+<li>An OSX API that I can call from python</li>
+</ul>
+
+<p>I've been writing a few web services for a .net app, now I'm ready to consume them. I've seen numerous examples where there is homegrown code for consuming the service as opposed to using the auto generated methods Visual Studio creates when adding the web reference. </p>
+
+<p>Is there some advantage to this?</p>
+
+<p>Ok, I'm a web developer, but I find myself dabbling in windows forms projects every now and then. One thing that confounds me to this day is the following.</p>
+
+<p>Assume you are doing something like the following</p>
+
+<pre><code>List&lt;string&gt; myitems = new List&lt;string&gt;
+{
+    "Item 1",
+    "Item 2",
+    "Item 3"
+};
+
+ComboBox box = new ComboBox();
+box.DataSource = myitems;
+
+ComboBox box2 = new ComboBox();
+box2.DataSource = myitems
+</code></pre>
+
+<p>So now we have 2 combo boxes bound to that array, and everything works fine. But when you change the value of one combo box, it changes BOTH combo boxes to the one you just selected.</p>
+
+<p>Now, I know that Arrays are always passed by reference (learned that when i learned C :D), but why on earth would the combo boxes change together? I don't believe the combo box control is modifying the collection at all. </p>
+
+<p>As a work around, don't this would achieve the funcionality that is expected / desired</p>
+
+<pre><code>ComboBox box = new ComboBox();
+box.DataSource = myitems.ToArray();
+</code></pre>
+
+<p>I have a cross-platform (Python) application which needs to generate a JPEG preview of the first page of a PDF.</p>
+
+<p>On the Mac I am spawning <a href="http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/sips.1.html">sips</a>.  Is there something similarly simple I can do on Windows?</p>
+
+<p>I have a Ruby on Rails Website that makes HTTP calls to an external Web Service.</p>
+
+<p>About once a day I get a SystemExit (stacktrace below) error email where a call to the service has failed.  If I then try the exact same query on my site moments later it works fine.
+It's been happening since the site went live and I've had no luck tracking down what causes it.</p>
+
+<p>Ruby is version 1.8.6 and rails is version 1.2.6.</p>
+
+<p>Anyone else have this problem?</p>
+
+<p>This is the error and stacktrace.</p>
+
+<pre>
+A SystemExit occurred
+/usr/local/lib/ruby/gems/1.8/gems/rails-1.2.6/lib/fcgi_handler.rb:116:in `exit'
+/usr/local/lib/ruby/gems/1.8/gems/rails-1.2.6/lib/fcgi_handler.rb:116:in `exit_now_handler'
+/usr/local/lib/ruby/gems/1.8/gems/activesupport-1.4.4/lib/active_support/inflector.rb:250:in `to_proc'
+/usr/local/lib/ruby/1.8/net/protocol.rb:133:in `call'
+/usr/local/lib/ruby/1.8/net/protocol.rb:133:in `sysread'
+/usr/local/lib/ruby/1.8/net/protocol.rb:133:in `rbuf_fill'
+/usr/local/lib/ruby/1.8/timeout.rb:56:in `timeout'
+/usr/local/lib/ruby/1.8/timeout.rb:76:in `timeout'
+/usr/local/lib/ruby/1.8/net/protocol.rb:132:in `rbuf_fill'
+/usr/local/lib/ruby/1.8/net/protocol.rb:116:in `readuntil'
+/usr/local/lib/ruby/1.8/net/protocol.rb:126:in `readline'
+/usr/local/lib/ruby/1.8/net/http.rb:2017:in `read_status_line'
+/usr/local/lib/ruby/1.8/net/http.rb:2006:in `read_new'
+/usr/local/lib/ruby/1.8/net/http.rb:1047:in `request'
+/usr/local/lib/ruby/1.8/net/http.rb:945:in `request_get'
+/usr/local/lib/ruby/1.8/net/http.rb:380:in `get_response'
+/usr/local/lib/ruby/1.8/net/http.rb:543:in `start'
+/usr/local/lib/ruby/1.8/net/http.rb:379:in `get_response'
+</pre>
+
+<p>I'm starting work on a hobby project with a python codebase and would like to set up some form of continuous integration (i.e. running a battery of test-cases each time a check-in is made and sending nag e-mails to responsible persons when the tests fail) similar to CruiseControl or TeamCity.</p>
+
+<p>I realize I could do this with hooks in most VCSes, but that requires that the tests run on the same machine as the version control server, which isn't as elegant as I would like. Does anyone have any suggestions for a small, user-friendly, open-source continuous integration system suitable for a Python codebase?</p>
+
+<h2>Form-based authentication for websites</h2>
+
+<p>We believe that Stack&nbsp;Overflow should not just be a resource for very specific technical questions, but also for general guidelines on how to solve variations on common problems. "Form based authentication for websites" should be a fine topic for such an experiment.</p>
+
+<h3>It should include topics such as:</h3>
+
+<ul>
+<li>How to log in</li>
+<li>How to remain logged in</li>
+<li>Managing cookies (including recommended settings)</li>
+<li>SSL/HTTPS encryption</li>
+<li>How to store passwords</li>
+<li>Using secret questions</li>
+<li>Forgotten username/password functionality</li>
+<li>Use of <a href="https://en.wikipedia.org/wiki/Cryptographic_nonce">nonces</a> to prevent <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">cross-site request forgeries (CSRF)</a></li>
+<li><a href="http://openid.net/">OpenID</a></li>
+<li>"Remember me" checkbox</li>
+<li>Browser autocompletion of usernames and passwords</li>
+<li>Secret URLs (public <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Locator">URL</a> protected by digest)</li>
+<li>Checking password strength</li>
+<li>E-mail validation</li>
+<li><em>and much more about</em> <a href="http://en.wikipedia.org/wiki/Form-based_authentication">form based authentication</a>...</li>
+</ul>
+
+<h3>It should not include things like:</h3>
+
+<ul>
+<li>Roles and authorization</li>
+<li>HTTP basic authentication</li>
+</ul>
+
+<h3>Please help us by:</h3>
+
+<ol>
+<li>Suggesting subtopics</li>
+<li>Submitting good articles about this subject</li>
+<li>Editing the official answer</li>
+</ol>
+
+<p>I would like to test a function with a tuple from a set of fringe cases and normal values. For example, while testing a function which returns <code>true</code> whenever given three lengths that form a valid triangle, I would have specific cases, negative / small / large numbers, values close-to being overflowed, etc.; what is more, main aim is to generate combinations of these values, <em>with</em> or <em>without</em> repetition, in order to get a set of test data.</p>
+
+<pre><code>(inf,0,-1), (5,10,1000), (10,5,5), (0,-1,5), (1000,inf,inf),
+...
+</code></pre>
+
+<p><em>As a note: I actually know the answer to this, but it might be helpful for others, and a challenge for people here! --will post my answer later on.</em></p>
+
+<p>Uploading my first decently sized web app to my shared host provided me with a fresh set of challenges, by which I mean, sleepless nights. The issue was that I had most certainly not developed my application for medium trust (or had any clue what that was.) </p>
+
+<p>I mitigated all of the issues, save one. </p>
+
+<p>I had written an installer for the admin to be able to specify their connectionstring and other preferences, but I cannot find a way to write to a web.config in medium trust. Does anyone have a solution, or should I just be putting preferences in another file?</p>
+
+<p>I was just sitting at my local <a href="http://en.wikipedia.org/wiki/Borders_%28UK%29">Borders</a> sipping coffee and reading <em><a href="http://rads.stackoverflow.com/amzn/click/1430209879">More Joel on Software</a></em> (for free) when I came across <a href="http://en.wikipedia.org/wiki/Joel_Spolsky">Joel Spolsky</a> saying something about a particular type of programmer knowing the difference between an int and an Integer in Java/C# (Object Oriented Programming Languages).</p>
+
+<p>After a quick 'brain check,' I realized, to my dismay, that I didn't know the answer.</p>
+
+<p>I wonder how you guys manage deployment of a database between 2 SQL Servers, specifically SQL Server 2005.
+Now, there is a development and a live one. As this should be part of a buildscript (standard windows batch, even do with current complexity of those scripts, i might switch to PowerShell or so later), Enterprise Manager/Management Studio Express do not count.</p>
+
+<p>Would you just copy the .mdf File and attach it? I am always a bit careful when working with binary data, as this seems to be a compatiblity issue (even though development and live should run the same version of the server at all time).</p>
+
+<p>Or - given the lack of "EXPLAIN CREATE TABLE" in T-SQL - do you do something that exports an existing database into SQL-Scripts which you can run on the target server? If yes, is there a tool that can automatically dump a given Database into SQL Queries and that runs off the command line? (Again, Enterprise Manager/Management Studio Express do not count).</p>
+
+<p>And lastly - given the fact that the live database already contains data, the deployment may not involve creating all tables but rather checking the difference in structure and ALTER TABLE the live ones instead, which may also need data verification/conversion when existing fields change.</p>
+
+<p>Now, i hear a lot of great stuff about the <a href="http://www.red-gate.com/products/index.htm">Red Gate</a> products, but for hobby projects, the price is a bit steep.</p>
+
+<p>So, what are you using to automatically deploy SQL Server Databases from Test to Live?</p>
+
+<p>I'm writing a CMS application in PHP and one of the requirements is that it must be able to interface with the customer's Exchange server.  I've written up this functionality a few times before and have always used <a href="http://en.wikipedia.org/wiki/WebDAV">WebDAV</a> to do it, but now I'm leaning away from that.</p>
+
+<p>I will be running the site on IIS OR Apache (no preference) on Windows server 2008.  A few things I would need to do include adding contacts to a given user's address book, sending emails as a given user and running reports on contacts for a user.</p>
+
+<p>All of this is pretty easy to do with WebDAV, but if there is a better way that doesn't require any functionality that is likely to be deprecated any time soon.</p>
+
+<p>Any ideas?</p>
+
+<h3>Update:</h3>
+
+<p>Justin, I love the idea of using com objects, I just worry about maintaining a 3rd product to make everything work...</p>
+
+<p>John, I can write a web service in C# to interface with for these functions and access it with my PHP app, but it's also a little bit out of the way.</p>
+
+<p>So far, I'm not 100% convinced that either of these is better than WebDAV... </p>
+
+<p>Can anyone show me where I'm being silly?</p>
+
+<p>There are several ways to iterate over a result set, which way is the best?</p>
+
+<p>I'm looking for a performant, reasonably robust RNG using no special hardware. It can use mathematical methods (Mersenne Twister, etc), it can "collect entropy" from the machine, whatever. On Linux/etc we have a <code>drand48()</code> which generates 48 random bits. I'd like a similar function/class for C++ or C# which can generate more than 32 bits of randomness and which low-order bits are equally as random as high-order bits.</p>
+
+<p>It doesn't have to be cryptographically secure but it must not use or be based on the C-language <code>rand()</code> or .NET <code>System.Random</code>.</p>
+
+<p>Any source code, links to source, etc. would be appreciated! Failing that, what TYPE of RNG should I be looking for?</p>
+
+<p>An MFC application that I'm trying to migrate uses <code>afxext.h</code>, which causes <code>_AFXDLL</code> to get set, which causes this error if I set <code>/MT</code>:</p>
+
+<blockquote>
+  <p>Please use the /MD switch for _AFXDLL builds</p>
+</blockquote>
+
+<p>My research to date indicates that it is impossible to build an application for execution on Windows NT 4.0 using Visual Studio (C++, in this case) 2005.</p>
+
+<p>Is this really true? Are there any workaround available?</p>
+
+<p>I want to print the first 10000 prime numbers.
+Can anyone give me the most efficient code for this?
+Clarifications:</p>
+
+<ol>
+<li>It does not matter if your code is inefficient for n &gt;10000.</li>
+<li>The size of the code does not matter.</li>
+<li>You cannot just hard code the values in any manner.</li>
+</ol>
+<p>In Ruby 1.8, there are subtle differences between proc/lambda on the one hand, and <code>Proc.new</code> on the other. </p>
+
+<ul>
+<li>What are those differences?</li>
+<li>Can you give guidelines on how to decide which one to choose?</li>
+<li>In Ruby 1.9, proc and lambda are different. What's the deal?</li>
+</ul>
+
+<p>I have a database table and one of the fields (not the primary key) is having a unique index on it. Now I want to swap values under this column for two rows. How could this be done? Two hacks I know are:</p>
+
+<ol>
+<li>Delete both rows and re-insert them</li>
+<li>Update rows with some other value
+and swap and then update to actual value.</li>
+</ol>
+
+<p>But I don't want to go for these as they do not seem to be the appropriate solution to the problem.
+Could anyone help me out?</p>
+
+<p>I would like the version property of my application to be incremented for each build but I'm not sure on how to enable this functionality in Visual Studio (2005/2008). I have tried to specify the AssemblyVersion as 1.0.* but it doesn't get me exactly what I want. </p>
+
+<p>I'm also using a settings file and in earlier attempts when the assembly version changed my settings got reset to the default since the application looked for the settings file in another directory. </p>
+
+<p>I would like to be able to display a version number in the form of 1.1.38 so when a user finds a problem I can log the version they are using as well as tell them to upgrade if they have an old release.</p>
+
+<p>A short explanation of how the versioning works would also be appreciated. When does the build and revision number get incremented?</p>
+<p>I've been having trouble getting my ASP.NET application to automatically log users into the Intranet site I'm building.  No matter the googling or the experimentation I applied, there is always a login box displayed by IE7.</p>
+
+<p>I've got Windows authentication mode set in the Web.config, disabled anonymous access and configured the correct default domain in IIS, but it's still asking the user to log in and, more annoyingly, the user is required to provide the domain too (<em>DOMAIN\auser</em>), which is causing problems with non-technical visitors.  Thank Zeus for password remembering functionality.</p>
+
+<p>I'm not the network administrator so it's possible that something about Active Directory is set up incorrectly, or it could just be me missing something very simple.  Please note that I don't want to impersonate the user, I just need to know that the IPrincipal.Name property matches that of a valid record in my user database, hence authenticating the user to my application.</p>
+
+<p>To this end, it would be very useful to have a checklist of all configuration requirements for AD, ASP.NET and IIS to work together in this manner as a reference for debugging and hopefully reducing some user friction.</p>
+
+<p>What is the fastest, yet secure way to encrypt passwords in (PHP preferred), and for which ever method you choose is it portable?</p>
+
+<p>In other words if I later migrate my website to a different server will my passwords continue to work?</p>
+
+<p>The method I am using now as I was told is dependent on the exact versions of the libraries installed on the server.</p>
+
+<p>I don't remember whether I was dreaming or not but I seem to recall there being a function which allowed something like,</p>
+
+<pre><code>foo in iter_attr(array of python objects, attribute name)</code></pre>
+
+<p>I've looked over the docs but this kind of thing doesn't fall under any obvious listed headers</p>
+<p>I've got an upcoming project wherein I will need to connect our website (<code>PHP5/Apache 1.3/OpenBSD 4.1</code>) to our back-end system running on a iSeries with OS400 V5R3 so that I can access some tables stored there. I've done some checking around but am running into some roadblocks.</p>
+
+<p>From what I've seen the DB2 extensions and DB2 software from IBM only run under Linux. I've tried compiling the extensions with all the software from IBM and even tried their precompiled ibm_db2 extension with no luck. IBM only supports Linux so I turned on the Linux emulation in the kernel but that didn't seem to help anything.</p>
+
+<p>If anyone has run across getting everything to run natively under OpenBSD that would be great, but what I think I may have to do is setting up a second server running CentOS with DB2 installed (most likely via ZendCore for IBM since it seems to do all this for me) and the driver so that I can set up a small transaction server that I can post against and get a JSON representation of the DB2 data that I need.</p>
+
+<p>Does the second option seem overkill or does anyone else have any better ideas?</p>
+
+<p>I was (and still am) looking for an embedded database to be used in a .net (c#) application. The caveat: The Application (or at least the database) is stored on a Network drive, but only used by 1 user at a time.</p>
+
+<p>Now, my first idea was <a href="http://www.microsoft.com/sql/editions/compact/default.mspx">SQL Server Compact edition</a>. That is really nicely integreated, but it can not run off a network.</p>
+
+<p><a href="http://www.firebirdsql.org/dotnetfirebird/">Firebird</a> seems to have the same issue, but the .net Integration seems to be not really first-class and is largely undocumented.</p>
+
+<p><a href="http://www.codegear.com/products/blackfish">Blackfish SQL</a> looks interesting, but there is no trial of the .net Version. Pricing is also OK.</p>
+
+<p>Any other suggestions of something that works well with .net <strong>and</strong> runs off a network without the need of actually installing a server software?</p>
+<p>I'm looking to introduce a unit testing framework into the mix at my job.  We're using Visual Studio 2005 (though we may be moving to 2008 within the next 6 months) and work primarily in C#.  If the framework has some kind of IDE integration that would be best, but I'm open to frameworks that don't have integration but are still relatively simple to get set up.  I'm going to get resistance to it one way or another, so if I can make sure what I'm pushing isn't a pain in the neck, that would help my case.</p>
+
+<p>The obvious choice from the research I've done so far points to nUnit, but I'd like to get the impressions of someone who's actually used it before recommending it to my team.</p>
+
+<p>Has anyone out there used nUnit?  If so, are there any pitfalls or limitations of which I should be aware?  Are there other good options out there?  If so, if you've used both nUnit at that, I'd greatly appreciate an idea of the strengths and weaknesses of them.</p>
+
+<p>I wrote a windows service using VB that read some legacy data from Visual Foxpro Databases to be inserted in SQL 2005. The problem is this use to run fine in Windows server 2003 32-Bits, but the client recently moved to Windows 2003 64-Bits and now the service won't work. I'm getting a message the the VFP .NET OLEdb provider is not found. I researched and everything seems to point out that there is no solution. Any Help, please...</p>
+<p><a href="http://www.djangoproject.com/">Django</a> view points to a function, which can be a problem if you want to change only a bit of functionality. Yes, I could have million keyword arguments and even more if statements in the function, but I was thinking more of an object oriented approach.</p>
+
+<p>For example, I have a page that displays a user. This page is very similar to page that displays a group, but it's still not so similar to just use another data model. Group also has members etc...</p>
+
+<p>One way would be to point views to class methods and then extend that class. Has anyone tried this approach or has any other idea? </p>
+<p>How do I format a string to <a href="http://www.grammar-monster.com/lessons/capital_letters_title_case.htm" rel="nofollow">title case</a>?</p>
+
+<p>One may not always know the Type of an object at compile-time, but may need to create an instance of the Type.  How do you get a new object instance from a Type?</p>
+<p>What is the best way to localise a date format descriptor?</p>
+
+<p>As anyone from a culture which does not use the mm/dd/yyyy format knows, it is annoying to have to enter dates in this format. The .NET framework provides some very good localisation support, so it's trivial to parse dates according to the users culture, but you often want to also display a helpful hint as to the format required (especially to distinguish between yy and yyyy which is interchangeable in most cultures).</p>
+
+<p>What is the best way to do this in a way that make sense to most users (e.g. dd/M/yyy is confusing because of the change in case and the switching between one and two letters).</p>
+
+<p>I can get Python to work with Postgresql but I cannot get it to work with MySQL. The main problem is that on the shared hosting account I have I do not have the ability to install things such as Django or PySQL, I generally fail when installing them on my computer so maybe it's good I can't install on the host.</p>
+
+<p>I found <a href="http://barryp.org/software/bpgsql/">bpgsql</a> really good because it does not require an install, it's a single file that I can look at, read and then call the functions of. Does anybody know of something like this for MySQL?</p>
+<p>I need to programmatically solve a system of linear equations in C, Objective C, or (if needed) C++.</p>
+
+<p>Here's an example of the equations:</p>
+
+<pre><code>-44.3940 = a * 50.0 + b * 37.0 + tx
+-45.3049 = a * 43.0 + b * 39.0 + tx
+-44.9594 = a * 52.0 + b * 41.0 + tx
+</code></pre>
+
+<p>From this, I'd like to get the best approximation for <code>a</code>, <code>b</code>, and <code>tx</code>.</p>
+
+<p>I haven't been able to find an understandable explanation of how to actually use Python's <code>itertools.groupby()</code> function.  What I'm trying to do is this:</p>
+
+<ul>
+<li>Take a list - in this case, the children of an objectified <code>lxml</code> element</li>
+<li>Divide it into groups based on some criteria</li>
+<li>Then later iterate over each of these groups separately.</li>
+</ul>
+
+<p>I've reviewed <a href="https://docs.python.org/2/library/itertools.html">the documentation</a>, and <a href="https://docs.python.org/2/library/itertools.html#itertools.groupby">the examples</a>, but I've had trouble trying to apply them beyond a simple list of numbers. </p>
+
+<p>So, how do I use of <code>itertools.groupby()</code>?  Is there another technique I should be using?  Pointers to good "prerequisite" reading would also be appreciated.</p>
+
+<p>This is ASP classic, not .Net.  We have to get a way to SFTP into a server to upload and download a couple of files, kicked off by a user.</p>
+
+<p>What have other people used to do SFTP in ASP classic?  Not necessarily opposed to purchasing a control.</p>
+
+<p>I'm trying to maintain a Setup Project in <code>Visual Studio 2003</code> (yes, it's a legacy application). The problem we have at the moment is that we need to write registry entries to <code>HKCU</code> for every user on the computer. They need to be in the <code>HKCU</code> rather than <code>HKLM</code> because they are the default user settings, and they do change per user. My feeling is that</p>
+
+<ol>
+<li>This isn't possible</li>
+<li>This isn't something the installer should be doing, but something the application should be doing (after all what happens when a user profile is created after the install?).</li>
+</ol>
+
+<p>With that in mind, I still want to change as little as possible in the application, so my question is, <strong>is it possible to add registry entries for every user in a <code>Visual Studio 2003</code> setup project?</strong> </p>
+
+<p>And, at the moment the project lists five registry root keys (<code>HKEY_CLASSES_ROOT, HKEY_CURRENT_USER</code>, <code>HKEY_LOCAL_MACHINE</code>, <code>HKEY_USERS</code>, and User/Machine Hive). I don't really know anything about the Users root key, and haven't seen User/Machine Hive. Can anyone enlighten me on what they are? Perhaps they could solve my problem above.</p>
+
+<p>You have an ascending list of numbers, what is the most efficient algorithm you can think of to get the ascending list of sums of every two numbers in that list.  Duplicates in the resulting list are irrelevant, you can remove them or avoid them if you like.</p>
+
+<p>To be clear, I'm interested in the algorithm.  Feel free to post code in any language and paradigm that you like.</p>
+<p>SQL:</p>
+
+<pre><code>SELECT
+   u.id,
+   u.name,
+   isnull(MAX(h.dateCol), '1900-01-01') dateColWithDefault
+FROM universe u
+LEFT JOIN history h 
+   ON u.id=h.id 
+   AND h.dateCol&lt;GETDATE()-1
+GROUP BY u.Id, u.name
+</code></pre>
+
+<P>I have designed database tables (normalised, on an MS SQL server) and created a standalone windows front end for an application that will be used by a handful of users to add and edit information. We will add a web interface to allow searching accross our production area at a later date.</P>
+<P>I am concerned that if two users start editing the same record then the last to commit the update would be the 'winner' and important information may be lost. A number of solutions come to mind but I'm not sure if I am going to create a bigger headache.</P>
+<OL>
+<LI>Do nothing and hope that two users are never going to be editing the same record at the same time. <EM>- Might never happed but what if it does?</EM></LI>
+<LI>Editing routine could store a copy of the original data as well as the updates and then compare when the user has finished editing. If they differ show user and comfirm update <EM>- Would require two copies of data to be stored.</EM></LI>
+<LI>Add last updated DATETIME column and check it matches when we update, if not then show differences. <EM>- requires new column in each of the relevant tables.</EM></LI>
+<LI>Create an editing table that registers when users start editing a record that will be checked and prevent other users from editing same record. <EM>- would require carful thought of program flow to prevent deadlocks and records becoming locked if a user crashes out of the program.</EM></LI></OL>
+<P>Are there any better solutions or should I go for one of these?</P>
+<p>I'm trying to setup CruiseControl.net at the moment. So far it works nice, but I have a Problem with the MSBuild Task.</p>
+
+<p>According to the <a href="http://confluence.public.thoughtworks.org/display/CCNET/MsBuild+Task" rel="nofollow">Documentation</a>, it passes CCNetArtifactDirectory to MSBuild. But how do I use it?</p>
+
+<p>I tried this:</p>
+
+<pre><code>&lt;buildArgs&gt;
+   /noconsolelogger /p:OutputPath=$(CCNetArtifactDirectory)\test
+&lt;/buildArgs&gt;
+</code></pre>
+
+<p>But that does not work. In fact, it kills the service with this error:</p>
+
+<blockquote>
+  <p>ThoughtWorks.CruiseControl.Core.Config.Preprocessor.EvaluationException: Reference to unknown symbol CCNetArtifactDirectory</p>
+</blockquote>
+
+<p>Documentation is rather sparse, and google und mainly offers modifying the .sln Project file, which is what I want to avoid in order to be able to manually build this project later - I would really prefer <code>/p:OutputPath</code>.</p>
+
+<p>Suppose I have the following CSS rule in my page:</p>
+
+<pre class="lang-css prettyprint-override"><code>body {
+    font-family: Calibri, Trebuchet MS, Helvetica, sans-serif;
+}
+</code></pre>
+
+<p>How can I detect which one of the defined fonts was used in the user's browser?</p>
+
+<p><strong>Edit for people wondering why I want to do this:</strong> The font I'm detecting contains glyph's that are not available in other fonts and when the user does not have the font I want to display a link asking the user to download that font so they can use my web application with the correct font.</p>
+
+<p>Currently I am displaying the download font link for all users, I want to only display this for people who do not have the correct font installed.</p>
+
+<p>Is there an easy way to produce MSDN-style documentation from the Visual Studio XML output?<br>
+I'm not patient enough to set up a good xslt for it because I know I'm not the first person to cross this bridge.  </p>
+
+<p>Also, I tried setting up sandcastle recently, but it really made my eyes cross.  Either I was missing something important in the process or it is just way too involved.</p>
+
+<p>I know somebody out there has a really nice dead-simple solution.</p>
+
+<p>I'm reiterating here because I think my formatting made that paragraph non-inviting to read:</p>
+
+<blockquote>
+  <p>I gave sandcastle a try but had a really hard time getting it set up.
+  What I really have in mind is something much simpler.</p>
+</blockquote>
+
+<p>That is, unless I just don't understand the sandcastle process.  It seemed like an awful lot of extra baggage to me just to produce something nice for the testers to work with.</p>
+
+<p>I've been using <a href="http://en.wikipedia.org/wiki/Apache_Subversion" rel="nofollow">Subversion</a> for a few years and after using <a href="http://en.wikipedia.org/wiki/Microsoft_Visual_SourceSafe" rel="nofollow">SourceSafe</a>, I just love Subversion.  Combined with <a href="http://en.wikipedia.org/wiki/TortoiseSVN" rel="nofollow">TortoiseSVN</a>, I can't really imagine how it could be any better.  </p>
+
+<p>Yet there's a growing number of developers claiming that Subversion has problems and that we should be moving to the new breed of distributed version control systems, such as <a href="http://git.or.cz/" rel="nofollow" title="Git Distributed Version Control System">Git</a>.  </p>
+
+<p>How does Git improve upon Subversion?</p>
+
+<p>Are PHP variables passed by value or by reference?</p>
+
+<p>How do you debug <strong>PHP</strong> scripts?</p>
+
+<p>I am aware of basic debugging such as using the Error Reporting. The breakpoint debugging in <strong>PHPEclipse</strong> is also quite useful.</p>
+
+<p>What is the <strong>best</strong> (in terms of fast and easy) way to debug in phpStorm or any other IDE?</p>
+
+<p>How have you implemented Internationalization (i18n) in actual projects you've worked on?</p>
+
+<p>I took an interest in making software cross-cultural after I read the famous post by Joel, <a href="http://www.joelonsoftware.com/articles/Unicode.html" rel="nofollow">The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!)</a>. However, I have yet to able to take advantage of this in a real project, besides making sure I used Unicode strings where possible. But making all your strings Unicode and ensuring you understand what encoding everything you work with is in is just the tip of the i18n iceberg.</p>
+
+<p>Everything I have worked on to date has been for use by a controlled set of US English speaking people, or i18n just wasn't something we had time to work on before pushing the project live. So I am looking for any tips or war stories people have about making software more localized in real world projects.</p>
+
+<p>Given a relatively simple CSS:</p>
+
+<pre><code>&lt;div style="width:150px;"&gt;
+  12333-2333-233-23339392-332332323
+&lt;/div&gt;
+</code></pre>
+
+<p>How do I make it so that the string stays constrained to the <code>width</code> of <strong>150</strong>, and simply wraps to a newline on the hyphen?</p>
+
+<p>We're upgrading an existing program from <code>Win2k/SQL Server 2k</code> to <code>Windows 2003 and SQL Server 2005</code> as well as purchasing a new program that also uses <code>2k3/2k5</code>. The vendor says that for us to host both databases we need to get the Enterprise version because the softwares clients use different collation for the connections and only Enterprise supports this.</p>
+
+<p>I cannot find anything on MS's site to support this and, honestly, don't want to pay the extra for Enterprise if the Standard edition works. Am I missing some not talked about feature of SQL Server or is this, as I suspect, a vendor trying to upsell me?</p>
+
+<p>What's the simplest way to connect and query a database for a set of records in C#?</p>
+
+<p>Attempting to insert an escape character into a table results in a warning. </p>
+
+<p>For example:</p>
+
+<pre><code>create table EscapeTest (text varchar(50));
+
+insert into EscapeTest (text) values ('This is the first part \n And this is the second');
+</code></pre>
+
+<p>Produces the warning:</p>
+
+<pre><code>WARNING:  nonstandard use of escape in a string literal
+</code></pre>
+
+<p>(<em>Using PSQL 8.2</em>)</p>
+
+<p>Anyone know how to get around this?</p>
+
+<p>I'm maintaining a <code>.NET 1.1</code> application, and one of the things I've been tasked with is making sure the user doesn't see any unfriendly error notifications.</p>
+
+<p>I've added handlers to <code>Application.ThreadException</code> and <code>AppDomain.CurrentDomain.UnhandledException</code>, which do get called. My problem is that the standard <code>CLR</code> error dialog is still displayed (before the exception handler is called).</p>
+
+<p>Jeff talks about this problem on his blog <a href="http://www.codinghorror.com/blog/archives/000201.html">here</a> and <a href="http://www.codinghorror.com/blog/archives/000216.html">here</a>. But there's no solution. So what is the standard way in <code>.NET 1.1</code> to handle uncaught exceptions and display a friendly dialog box?</p>
+
+<p><strong>Edit</strong>: Jeff's response was marked as the correct answer, because the link he provided has the most complete information on how to do what's required.</p>
+
+<p>I have imported the kernel32 library so I have the <code>createMutex</code> function available but I am not quite sure of the various parameters and return values.</p>
+
+<p>This is classic Visual Basic, not Visual Basic.NET but I can probably work with either language in the form of an answer.</p>
+
+<p>I've read that it is possible to add a method to an existing object (e.g. not in the class definition) in <strong>Python</strong>, I think this is called <em>Monkey Patching</em> (or in some cases <em>Duck Punching</em>). I understand that it's not always a good decision to do so. But, how might one do this?</p>
+
+<p><strong>UPDATE 8/04/2008 00:21:01 EST:</strong></p>
+
+<p><a href="http://stackoverflow.com/a/982">That</a> looks like a good answer John Downey, I tried it but it appears that it ends up being not a <em>true</em> method.</p>
+
+<p>Your example defines the new patch function with an argument of <strong><code>self</code></strong>, but if you write actual code that way, the now patched class method asks for an argument named <code>self</code> (it doesn't automagically recognize it as the object to which it is supposed to bind, which is what would happen if defined within the class definition), meaning you have to call <strong><code>class.patch(obj)</code></strong> instead of just <strong><code>class.patch()</code></strong> if you want the same functionality as a <em>true</em> method.</p>
+
+<p><strong>It looks like Python isn't really treating it as a method, but more just as a variable which happens to be a function</strong> (and as such is callable).  Is there any way to attach an actual method to a class?</p>
+
+<p>Oh, and Ryan, <a href="http://pypi.python.org/pypi/monkey">that</a> isn't exactly what I was looking for (it isn't a builtin functionality), but it is quite cool nonetheless.</p>
+
+<p>Often while editing config files, I'll open one with vi and then when I go to save it realize that I didn't type</p>
+
+<pre><code>sudo vi filename
+</code></pre>
+
+<p>Is there any way to give vi sudo privileges to save the file? I seem to recall seeing something about this while looking up some stuff about vi a while ago, but now I can't find it.</p>
+<p>I need to grab the base64-encoded representation of the ViewState. Obviously this would not be available until fairly late in the request lifecycle, which is OK.</p>
+
+<p>For example, if the output of the page includes:</p>
+
+<pre><code>&lt;input type="hidden" name="__VIEWSTATE" 
+  id="__VIEWSTATE" value="/wEPDwUJODU0Njc5MD...==" /&gt;
+</code></pre>
+
+<p>I need a way on the server side to get the value <code>"/wEPDwUJODU0Njc5MD...=="</code></p>
+
+<p>To clarify, I need this value when the page is being rendered, not on PostBack. e.g. I need to know the ViewState value that is being <em>sent</em> to the client, not the ViewState I'm getting back from them.</p>
+
+<p>After upgrading a rails 1.2 website to 2.1, the <a href="http://agilewebdevelopment.com/plugins/exception_notifier">ExceptionNotifier plugin</a> no longer works, complaining about this error:</p>
+
+<pre><code>ActionView::TemplateFinder::InvalidViewPath: 
+Unprocessed view path found: "/path/to/appname/vendor/plugins/exception_notification/lib/../views".  Set your view paths with #append_view_path, #prepend_view_path, or #view_paths=.
+</code></pre>
+
+<p>What causes it and how do I fix it?</p>
+
+<p>Does anyone know of a simple way to retrieve the country for a given IP Address? Preferably in <code>ISO_3166-1</code> format?</p>
+
+<p>What is the best way to display <code>Flash</code> content in a <strong>C#</strong> WinForms application? I would like to create a user control (similar to the current <code>PictureBox</code>) that will be able to display images and flash content.</p>
+
+<p>It would be great to be able to load the flash content from a <strong>stream</strong> of sorts rather than a file on disk.</p>
+
+<p>I'm looking for a way to delete a file which is locked by another process using C#. I suspect the method must be able to find which process is locking the file (perhaps by tracking the handles, although I'm not sure how to do this in C#) then close that process before being able to complete the file delete using <code>File.Delete()</code>.</p>
+
+<p>I'm looking for a robust, easy-to-use, regular expression evaluator for native C++, either platform-independent or Windows-specific.</p>
+
+<p>Requirements:</p>
+
+<ul>
+<li>Can't use Boost or ACE regex libraries (unfortunately)</li>
+<li>Can't use .NET Regex (or any managed code)</li>
+</ul>
+
+<p>The main requirement is that it should be standalone and open.</p>
+
+<p>For instance, my query is like the following using SQL Server 2005:</p>
+
+<pre><code>SELECT * FROM Table WHERE FREETEXT(SearchField, 'c#')
+</code></pre>
+
+<p>I have a full text index defined to use the column SearchField which returns results when using:</p>
+
+<pre><code>SELECT * FROM Table WHERE SearchField LIKE '%c#%'
+</code></pre>
+
+<p>I believe # is a special letter, so how do I allow FREETEXT to work correctly for the query above?</p>
+
+<p>Most mathematicians agree that:</p>
+
+<blockquote>
+  <p>e<sup>πi</sup> + 1 = 0</p>
+</blockquote>
+
+<p>However, most floating point implementations disagree. How well can we settle this dispute?</p>
+
+<p>I'm keen to hear about different languages and implementations, and various methods to make the result as close to zero as possible. Be creative!</p>
+
+<p>I'd like to display ~100 floating cubes using <code>DirectX</code> or <code>OpenGL</code>.</p>
+
+<p>I'm looking for either some sample source code, or a description of the technique. I know this kind of thing is easy for you accomplished '3D' gurus out there but I have enough trouble getting even one cube to display correctly.</p>
+
+<p>I've combed the net for a good series of tutorials and although they talk about how to do <code>3D</code> primitives, what I can't find is information on how to do large numbers of <code>3D</code> primitives - <code>cubes</code>, <code>spheres</code>, <code>pyramids</code>, and so forth.</p>
+
+<p>I'm working on a <strong>multithreaded</strong> C++ application that is corrupting the heap.  The usual tools to locate this corruption seem to be inapplicable.  Old builds (18 months old) of the source code exhibit the same behaviour as the most recent release, so this has been around for a long time and just wasn't noticed; on the downside, source deltas can't be used to identify when the bug was introduced - there are <em>a lot</em> of code changes in the repository.</p>
+
+<p>The prompt for crashing behaviuor is to generate throughput in this system - socket transfer of data which is munged into an internal representation.  I have a set of test data that will periodically cause the app to exception (various places, various causes - including heap alloc failing, thus: heap corruption).</p>
+
+<p>The behaviour seems related to CPU power or memory bandwidth; the more of each the machine has, the easier it is to crash.  Disabling a hyper-threading core or a dual-core core reduces the rate of (but does not eliminate) corruption.  This suggests a timing related issue.</p>
+
+<p>Now here's the rub:<br>
+When it's run under a lightweight debug environment (say <code>Visual Studio 98 / AKA MSVC6</code>) the heap corruption is reasonably easy to reproduce - ten or fifteen minutes pass before something fails horrendously and exceptions, like an <code>alloc;</code> when running under a sophisticated debug environment (Rational Purify, <code>VS2008/MSVC9</code> or even Microsoft Application Verifier) the system becomes memory-speed bound and doesn't crash (Memory-bound: CPU is not getting above <code>50%</code>, disk light is not on, the program's going as fast it can, box consuming <code>1.3G</code> of 2G of RAM).  So, <strong>I've got a choice between being able to reproduce the problem (but not identify the cause) or being able to idenify the cause or a problem I can't reproduce.</strong></p>
+
+<p>My current best guesses as to where to next is:</p>
+
+<ol>
+<li>Get an insanely grunty box (to replace the current dev box: 2Gb RAM in an <code>E6550 Core2 Duo</code>); this will make it possible to repro the crash causing mis-behaviour when running under a powerful debug environment; or</li>
+<li>Rewrite operators <code>new</code> and <code>delete</code> to use <code>VirtualAlloc</code> and <code>VirtualProtect</code> to mark memory as read-only as soon as it's done with.  Run under <code>MSVC6</code> and have the OS catch the bad-guy who's writing to freed memory.  Yes, this is a sign of desperation: who the hell rewrites <code>new</code> and <code>delete</code>?!  I wonder if this is going to make it as slow as under Purify et al.</li>
+</ol>
+
+<p>And, no: Shipping with Purify instrumentation built in is not an option.</p>
+
+<p>A colleague just walked past and asked "Stack Overflow?  Are we getting stack overflows now?!?"</p>
+
+<p>And now, the question: <strong>How do I locate the heap corruptor?</strong></p>
+
+<hr>
+
+<p>Update: balancing <code>new[]</code> and <code>delete[]</code> seems to have gotten a long way towards solving the problem.  Instead of 15mins, the app now goes about two hours before crashing.  Not there yet.  Any further suggestions? The heap corruption persists.</p>
+
+<p>Update: a release build under Visual Studio 2008 seems dramatically better; current suspicion rests on the <code>STL</code> implementation that ships with <code>VS98</code>.</p>
+
+<hr>
+
+<blockquote>
+  <ol>
+  <li>Reproduce the problem. <code>Dr Watson</code> will produce a dump that might be helpful in further analysis. </li>
+  </ol>
+</blockquote>
+
+<p>I'll take a note of that, but I'm concerned that Dr Watson will only be tripped up after the fact, not when the heap is getting stomped on.</p>
+
+<blockquote>
+  <p>Another try might be using <code>WinDebug</code> as a debugging tool which is quite powerful being at the same time also lightweight.</p>
+</blockquote>
+
+<p>Got that going at the moment, again: not much help until something goes wrong.  I want to catch the vandal in the act.</p>
+
+<blockquote>
+  <p>Maybe these tools will allow you at least to narrow the problem to certain component.</p>
+</blockquote>
+
+<p>I don't hold much hope, but desperate times call for...</p>
+
+<blockquote>
+  <p>And are you sure that all the components of the project have correct runtime library settings (<code>C/C++ tab</code>, Code Generation category in VS 6.0 project settings)?</p>
+</blockquote>
+
+<p>No I'm not, and I'll spend a couple of hours tomorrow going through the workspace (58 projects in it) and checking they're all compiling and linking with the appropriate flags.
+<hR>
+Update: This took 30 seconds.  Select all projects in the <code>Settings</code> dialog, unselect until you find the project(s) that don't have the right settings (they all had the right settings).</p>
+
+<p>What is the correct way to get the process size on <code>Solaris, HP-UX</code> and <code>AIX</code>? Should we use <code>top</code> or <code>ps -o vsz</code> or something else?</p>
+
+<P>I was wondering if there is any good and clean oo implementation of bayesian filtering for spam and text classification? For learning purposes.</P>
+<p>Exceptions in C++ don't need to be caught (no compile time errors) by the calling function. So it's up to developer's judgment whether to catch it using try/catch (unlike in Java). </p></p>
+
+<p><p>Is there a way one can ensure that the exceptions thrown are always caught using try/catch by the calling function?</p>
+
+<p>Given that indexing is so important as your data set increases in size, can someone explain how does indexing works at a database agnostic level?</p>
+
+<p>For information on queries to index a field, check out <a href="http://stackoverflow.com/questions/1156/">How do I index a database column</a></p>
+
+<p>Back in the old days, Help was not trivial but possible: generate some funky .rtf file with special tags, run it through a compiler, and you got a WinHelp file (.hlp) that actually works really well.</p>
+
+<p>Then, Microsoft decided that WinHelp was not hip and cool anymore and switched to CHM, up to the point they actually axed WinHelp from Vista.</p>
+
+<p>Now, CHM maybe nice, but everyone that tried to open a .chm file on the Network will know the nice "Navigation to the webpage was canceled" screen that is caused by security restrictions.</p>
+
+<p>While there are ways to make CHM work off the network, this is hardly a good choice, because when a user presses the Help Button he wants help and not have to make some funky settings.</p>
+
+<p>Bottom Line: I find CHM absolutely unusable. But with WinHelp not being an option anymore either, I wonder what the alternatives are, especially when it comes to integrate with my Application (i.e. for WinHelp and CHM there are functions that allow you to directly jump to a topic)?</p>
+
+<p>PDF has the disadvantage of requiring the Adobe Reader (or one of the more lightweight ones that not many people use). I could live with that seeing as this is kind of standard nowadays, but can you tell it reliably to jump to a given page/anchor?</p>
+
+<p>HTML files seem to be the best choice, you then just have to deal with different browsers (CSS and stuff).</p>
+
+<p><em>Edit:</em> I am looking to create my own Help Files. As I am a fan of the "No Setup, Just Extract and Run" Philosophy, i had that problem many times in the past because many of my users will run it off the network, which causes exactly this problem.</p>
+
+<p>So i am looking for a more robust and future-proof way to provide help to my users without having to code a different help system for each application i make.</p>
+
+<p>CHM is a really nice format, but that Security Stuff makes it unusable, as a Help system is supposed to provide help to the user, not to generate even more problems.</p>
+
+<p>I've tried to write a string replace function in C, which works on a <code>char *</code>, which has been allocated using <code>malloc()</code>.  It's a little different in that it will find and replace strings, rather than characters in the starting string.</p>
+
+<p>It's trivial to do if the search and replace strings are the same length (or the replace string is shorter than the search string), since I have enough space allocated.  If I try to use <code>realloc()</code>, I get an error that tells me I am doing a double free - which I don't see how I am, since I am only using <code>realloc()</code>.</p>
+
+<p>Perhaps a little code will help:</p>
+
+<pre><code>void strrep(char *input, char *search, char *replace) {
+    int searchLen = strlen(search);
+    int replaceLen = strlen(replace);
+    int delta = replaceLen - searchLen;
+    char *find = input;
+
+    while (find = strstr(find, search)) {
+
+        if (delta &gt; 0) {
+            realloc(input, strlen(input) + delta);
+            find = strstr(input, search);            
+        }
+
+        memmove(find + replaceLen, find + searchLen, strlen(input) - (find - input));
+        memmove(find, replace, replaceLen);
+    }
+}
+</code></pre>
+
+<p>The program works, until I try to <code>realloc()</code> in an instance where the replaced string will be longer than the initial string.  (It still kind of works, it just spits out errors as well as the result).</p>
+
+<p>If it helps, the calling code looks like:</p>
+
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+void strrep(char *input, char *search, char *replace);
+
+int main(void) {
+    char *input = malloc(81);
+
+    while ((fgets(input, 81, stdin)) != NULL) {
+        strrep(input, "Noel", "Christmas");
+    }
+}
+</code></pre>
+
+<p>Hopefully, I can get answers for each database server.</p>
+
+<p>For an outline of how indexing works check out: <a href="http://stackoverflow.com/questions/1108/how-does-database-indexing-work" rel="nofollow">http://stackoverflow.com/questions/1108/how-does-database-indexing-work</a></p>
+<p>I am using CCNET on a sample project with SVN as my source control. CCNET is configured to create a build on every check in. CCNET uses MSBuild to build the source code.</p>
+
+<p>I would like to use the latest revision number to generate AssemblyInfo.cs while compiling.
+How can I retrieve the latest revision from subversion and use the value in CCNET?</p>
+
+<p>Edit: I'm not using NAnt - only MSBuild.</p>
+<p>I need to be able to manipulate a large (10^7 nodes) graph in python. The data corresponding to each node/edge is minimal, say, a small number of strings. What is the most efficient, in terms of <strong><em>memory and speed</em></strong>, way of doing this? </p>
+
+<p>A dict of dicts is more flexible and simpler to implement, but I intuitively expect a list of lists to be faster. The list option would also require that I keep the data separate from the structure, while dicts would allow for something of the sort:</p>
+
+<pre><code>graph[I][J]["Property"]="value"
+</code></pre>
+
+<p>What would you suggest?</p>
+
+<hr>
+
+<p>Yes, I should have been a bit clearer on what I mean by efficiency. In this particular case I mean it in terms of random access retrieval.</p>
+
+<p>Loading the data in to memory isn't a huge problem. That's done once and for all. The time consuming part is visiting the nodes so I can extract the information and measure the metrics I'm interested in.</p>
+
+<p>I hadn't considered making each node a class (properties are the same for all nodes) but it seems like that would add an extra layer of overhead? I was hoping someone would have some direct experience with a similar case that they could share. After all, graphs are one of the most common abstractions in CS.</p>
+
+<p>I have just recently started to study Ruby, and in lieu of Jeff's advice over the weekend...</p>
+
+<ol>
+<li>Stop theorizing.</li>
+<li>Write lots of software.</li>
+<li>Learn from your mistakes. </li>
+</ol>
+
+<p>...I was interested in honing my skills while helping out the Open Source Community the process so I thought I'd ask if anyone have any suggestions for cool/interesting Open Source Projects written in Ruby that you know of or are involved in.</p>
+<p>I am looking to allow users to control of subdomain of an app I am toying with, much like Basecamp where it is <code>customusername.seework.com</code>.</p>
+
+<p>What is required on the <code>DNS</code> end to allow these to be created dynamically and be available instantly. </p>
+
+<p>And how do you recommend dealing with this in the logic of the site? <code>Htaccess</code> rule to  lookup the subdomain in the <code>DB</code>?</p>
+
+<p>One of the sites I maintain relies heavily on use of <code>ViewState</code> (it isn't my code). However, on certain pages where the <code>ViewState</code> is extra-bloated, Safari throws a <code>"Validation of viewstate MAC failed"</code> error.</p>
+
+<p>This appears to only happen in Safari. Firefox, IE and Opera all load successfully in the same scenario.</p>
+
+<p>I want to link to a specific slide in an online PowerPoint file, (e.g.  <code>http://www.example.com/hello.ppt</code>) but what I want is that when people click on my link, it goes straight to the nth slide.</p>
+
+<p>Is this possible?</p>
+
+<p>I have a file in the following format:</p>
+
+<pre>
+Data Data
+Data
+[Start]
+Data i want
+[End]
+Data
+</pre>
+
+<p>I'd like to grab the <code>Data i want</code> from between the <code>[Start]</code> and <code>[End]</code> tags using a RegEx. Can anyone show me how this might be done?</p>
+
+<p>I have a client-server app where the client is on a Windows Mobile 6 device, written in C++ and the server is on full Windows and written in C#. </p>
+
+<p>Originally, I only needed it to send messages from the client to the server, with the server only ever sending back an acknowledgment that it received the message.  Now, I would like to update it so that the server can actually send a message to the client to request data.  As I currently have it set up so the client is only in receive mode after it sends data to the server, this doesn't allow for the server to send a request at any time.  I would have to wait for client data.  My first thought would be to create another thread on the client with a separate open socket, listening for server requests...just like the server already has in respect the the client.  Is there a way, within the same thread and using the same socket, to all the server to send requests at any time?</p>
+
+<p>Can you use something to the affect of <code>WaitForMultipleObjects()</code> and pass it a receive buffer and an event that tells it there is data to be sent?</p>
+
+<p>My company is using CVS as our de-facto standard for source control. However, I've heard a lot of people say that SVN is better.</p>
+
+<p>I know SVN is newer, but other than that, I'm unfamiliar with its benefits.</p>
+
+<p>What I'm looking for is a good, succinct comparison of the two systems, noting any advantages or disadvantages of each in a Java/Eclipse development environment.</p>
+
+<p>At what point does a MySQL database start to lose performance?</p>
+
+<ul>
+<li>Does physical database size matter?</li>
+<li>Do number of records matter?</li>
+<li>Is any performance degradation linear or exponential?</li>
+</ul>
+
+<p>I have what I believe to be a large database, with roughly 15M records which take up almost 2GB. Based on these numbers, is there any incentive for me to clean the data out, or am I safe to allow it to continue scaling for a few more years?</p>
+
+<p>I am looking for a tool that can detect malicious requests (such as obvious SQL injection gets or posts) and will immediately ban the IP address of the requester/add to a blacklist. I am aware that in an ideal world our code should be able to handle such requests and treat them accordingly, but there is a lot of value in such a tool even when the site is safe from these kinds of attacks, as it can lead to saving bandwidth, preventing bloat of analytics, etc.</p>
+
+<p>Ideally, I'm looking for a cross-platform (LAMP/.NET) solution that sits at a higher level than the technology stack; perhaps at the web-server or hardware level. I'm not sure if this exists, though.</p>
+
+<p>Either way, I'd like to hear the community's feedback so that I can see what my options might be with regard to implementation and approach.</p>
+
+<p>I have a Queue&lt;T&gt; object that I have initialised to a capacity of 2, but obviously that is just the capacity and it keeps expanding as I add items.  Is there already an object that automatically dequeues an item when the limit is reached, or is the best solution to create my own inherited class?</p>
+<p>I am using MSBuild to build my stuff. I want to use CruiseControl.net as by Build Server.</p>
+
+<p>Now, CCNET refers nAnt a lot, but it looks as if ccnet can do most of the stuff nant could do through the project configuration and msbuild. Also, nAnt seems a bit unsupported, with a Beta release that is almost a year old now.</p>
+
+<p>In short: I am actually quite happy with MSBuild (especially since it's the "official" compiler front end) and a bit uncomfortable with nAnt, but I do not want to judge prematurely.</p>
+
+<p>What would be reasons to use nAnt over MSBuild? Especially with ccnet, which seems to overlap a bit with nant in terms of features (and adding the automated build related stuff)</p>
+<p>Is there any way to check whether a file is locked without using a try/catch block?  </p>
+
+<p>Right now, the only way I know of is to just open the file and catch any <code>System.IO.IOException</code>.</p>
+
+<p>I'd like to create a progress bar to indicate the status of an a batch job in <code>Ruby</code>. </p>
+
+<p>I've read some <a href="http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/" rel="nofollow" title="NCURSES Programming HOWTO">tutorials</a> / <a href="http://ncurses-ruby.berlios.de/" rel="nofollow" title="ncurses-ruby">libraries</a> on using <em>(n)curses</em>, none of which were particularly helpful in explaining how to create an <em>"animated"</em> progress bar in the terminal or using curses with <code>Ruby</code>. </p>
+
+<p>I'm already aware of using a separate thread to monitor the progress of a given job, I'm just not sure how to proceed with drawing a progress bar. </p>
+
+<hr>
+
+<p><strong>Update</strong>  </p>
+
+<p><a href="http://0xcc.net/ruby-progressbar/" rel="nofollow" title="ruby-progressbar">ProgressBar</a> class was incredibly straight-forward, perfectly solved my problem.</p>
+
+<p>How do you specify a callback for <code>rb-&gt;pcm_play_data()</code>?</p>
+
+<p><a href="http://stackoverflow.com/questions/180/function-for-creating-color-wheels" rel="nofollow">Original Question</a></p>
+
+<p>I am looking for a function that attempts to quantify how "distant" (or distinct) two colors are. This question is really in two parts: </p>
+
+<ol>
+<li>What color space best represents human vision?</li>
+<li>What distance metric in that space best represents human vision (euclidean?)</li>
+</ol>
+<p>We have been using CruiseControl for quite a while with NUnit and NAnt.  For a recent project we decided to use the testing framework that comes with Visual Studio, which so far has been adequate.</p>
+
+<p>I'm attempting to get the solution running in CruiseControl. I've finally got the build itself to work; however, I have been unable to get any tests to show up in the CruiseControl interface despite adding custom build tasks and components designed to do just that.  Does anyone have a definitive link out there to instructions on getting this set up?</p>
+
+<p><a href="http://stackoverflow.com/questions/180/function-for-creating-color-wheels" rel="nofollow">Original Question</a></p>
+
+<p>If you are given N maximally distant colors (and some associated distance metric), can you come up with a way to sort those colors into some order such that the first M are also reasonably close to being a maximally distinct set?</p>
+
+<p>In other words, given a bunch of distinct colors, come up with an ordering so I can use as many colors as I need starting at the beginning and be reasonably assured that they are all distinct and that nearby colors are also very distinct (e.g., bluish red isn't next to reddish blue).</p>
+
+<p>Randomizing is OK but certainly not optimal.</p>
+
+<p><em>Clarification: Given some large and visually distinct set of colors (say 256, or 1024), I want to sort them such that when I use the first, say, 16 of them that I get a relatively visually distinct subset of colors. This is equivalent, roughly, to saying I want to sort this list of 1024 so that the closer individual colors are visually, the farther apart they are on the list.</em></p>
+<p>I need to copy hundreds of gigs of random files around on my computer and am pretty leery of using the vanilla file copy built into Windows.</p>
+
+<p>I don't want it to hang on a "Are you sure?", "Are you really sure?", "Even zip files?", "Surely not read-only files too!" loop as soon as I step away.</p>
+
+<p>I don't want it to work for hours and then stop unexpectedly: "Someone once opened this file and so I won't copy it!" and then cancel the whole copy or just quit with no indication of what was done and what work remains.</p>
+
+<p>What file management programs do you have experience with?  Which do you recommend?</p>
+
+<p>This question is related to my other question: <a href="http://stackoverflow.com/questions/225/how-can-i-use-an-old-pata-hard-disk-drive-on-my-newer-sata-only-computer" rel="nofollow">How can I use an old PATA hard disk drive on my newer SATA-only computer?</a></p>
+
+<p>I need the name of the current logged in user in my Air/Flex application. The application will only be deployed on Windows machines. I think I could attain this by regexing the User directory, but am open to other ways.</p>
+<p>I saw many questions asking 'how' to unit test in a specific language, but no question asking 'what', 'why', and 'when'.</p>
+
+<ul>
+<li>What is it?</li>
+<li>What does it do for me?</li>
+<li>Why should I use it?</li>
+<li>When should I use it (also when not)?</li>
+<li>What are some common pitfalls and misconceptions</li>
+</ul>
+
+<p>What is the concensus on when to use one of these tools adversed to the other? I find Subsonic very useful in terms of getting things done quickly, but on large projects it tends not to scale, and its ties your domain model to your database model. That is where Nhibernate comes in as it gives you lightweight POCOs that are unrelated to your database model, but the setup time is much longer.</p>
+
+<p>This is an open-ended question.  What approaches should I consider?</p>
+<p>I'm setting up a dedicated SQL Server 2005 box on Windows Server 2008 this week, and would like to pare it down to be as barebones as possible while still being fully functional.</p>
+
+<p>To that end, the "Server Core" option sounds appealing, but I'm not clear about whether or not I can run SQL Server on that SKU.  Several services are addressed on the <a href="http://www.microsoft.com/windowsserver2008/en/us/compare-core-installation.aspx">Microsoft website</a>, but I don't see any indication about SQL Server.</p>
+
+<p>Does anyone know definitively?</p>
+
+<p>I have a custom validation function in JavaScript in a user control on a .Net 2.0 web site which checks to see that the fee paid is not in excess of the fee amount due. </p>
+
+<p>I've placed the validator code in the ascx file, and I have also tried using <code>Page.ClientScript.RegisterClientScriptBlock()</code> and in both cases the validation fires, but cannot find the JavaScript function.</p>
+
+<p>The output in Firefox's error console is "feeAmountCheck is not defined". Here is the function (this was taken directly from firefox->view source)</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+    function feeAmountCheck(source, arguments)
+    {
+        var amountDue = document.getElementById('ctl00_footerContentHolder_Fees1_FeeDue');
+        var amountPaid = document.getElementById('ctl00_footerContentHolder_Fees1_FeePaid');
+
+        if (amountDue.value &gt; 0 &amp;&amp; amountDue &gt;= amountPaid)
+        {
+            arguments.IsValid = true;
+        }
+        else
+        {
+            arguments.IsValid = false;
+        }
+
+        return arguments;
+    }
+&lt;/script&gt;
+</code></pre>
+
+<p>Any ideas as to why the function isn't being found? How can I remedy this without having to add the function to my master page or consuming page?</p>
+
+<p>Is it possible to configure <a href="http://www.apachefriends.org/en/xampp.html">xampp</a> to serve up a file outside of the <code>htdocs</code> directory?</p>
+
+<p>For instance, say I have a file located as follows:</p>
+
+<p><code>C:\projects\transitCalculator\trunk\TransitCalculator.php</code></p>
+
+<p>and my <a href="http://www.apachefriends.org/en/xampp.html">xampp</a> files are normally served out from:</p>
+
+<p><code>C:\xampp\htdocs\</code></p>
+
+<p>(because that's the default configuration) Is there some way to make Apache recognize and serve up my <code>TransitCalculator.php</code> file without moving it under <code>htdocs</code>? Preferably I'd like Apache to serve up/have access to the entire contents of the projects directory, and I don't want to move the projects directory under <code>htdocs</code>.</p>
+
+<p>edit: edited to add Apache to the question title to make Q/A more "searchable"</p>
+
+<p>I am writing an application that downloads large files in the background. All clients are logged in locally, or through a VPN. When they are logged in locally, I do not want to throttle downloads. However, I would like to limit downloads to 10 KBps when the user is connected via VPN. I can differentiate between these users by IP Address range.</p>
+
+<p>Since this is an AIR Application, I figure I will throttle via server-side since I can do it from either the server itself (IIS 6) or the web service (asp.net / C#). </p>
+
+<p>Throttling through IIS 6 seems to work fine, but it seems like it has to be done across the entire web site. Is there anyway to do this via IP? Or will I have to rig this up in .NET?</p>
+
+<p>First, let's get the security considerations out of the way. I'm using simple authentication under Apache for a one-off, internal use only, non-internet connected lan, php web app.</p>
+
+<p>How can get I the HTTP authenticated user name in PHP?</p>
+<p>I often encounter the following scenario where I need to offer many different types of permissions. I primarily use ASP.NET / VB.NET with SQL Server 2000.</p>
+
+<p><strong>Scenario</strong></p>
+
+<p>I want to offer a dynamic permission system that can work on different parameters. Let's say that I want to give either a department or just a specific person access to an application. And pretend that we have a number of applications that keeps growing.</p>
+
+<p>In the past, I have chosen one of the following two ways that I know to do this.</p>
+
+<p>1) Use a single permission table with special columns that are used for determining a how to apply the parameters. The special columns in this example are TypeID and TypeAuxID. The SQL would look something like this.</p>
+
+<pre><code>SELECT COUNT(PermissionID)
+FROM application_permissions
+WHERE
+(TypeID = 1 AND TypeAuxID = @UserID) OR
+(TypeID = 2 AND TypeAuxID = @DepartmentID)
+AND ApplicationID = 1
+</code></pre>
+
+<p>2) Use a mapping table for each type of permission, then joining them all together.</p>
+
+<pre><code>SELECT COUNT(perm.PermissionID)
+FROM application_permissions perm
+LEFT JOIN application_UserPermissions emp
+ON perm.ApplicationID = emp.ApplicationID
+LEFT JOIN application_DepartmentPermissions dept
+ON perm.ApplicationID = dept.ApplicationID
+WHERE q.SectionID=@SectionID
+  AND (emp.UserID=@UserID OR dept.DeptID=@DeptID OR
+ (emp.UserID IS NULL AND dept.DeptID IS NULL)) AND ApplicationID = 1
+ORDER BY q.QID ASC
+</code></pre>
+
+<p><strong>My Thoughts</strong></p>
+
+<p>I hope that the examples make sense. I cobbled them together.</p>
+
+<p>The first example requires less work, but neither of them feel like the best answer. Is there a better way to handle this?</p>
+
+<p>I'm trying to do this (which produces an unexpected T_VARIABLE error):</p>
+
+<pre><code>public function createShipment($startZip, $endZip, $weight = $this-&gt;getDefaultWeight()){}
+</code></pre>
+
+<p>I don't want to put a magic number in there for weight, since the object I am using has a <code>"defaultWeight"</code> parameter that all new shipments get if you don't specify a weight. I can't put the <code>defaultWeight</code> in the shipment itself, because it changes from shipment group to shipment group. Is there a better way to do it than the following?</p>
+
+<pre><code>public function createShipment($startZip, $endZip, weight = 0){
+    if($weight &lt;= 0){
+        $weight = $this-&gt;getDefaultWeight();
+    }
+}
+</code></pre>
+
+<p>I'm writing an AJAX app, but as the user moves through the app, I'd like the URL in the address bar to update despite the lack of page reloads. Basically, I'd like for them to be able to bookmark at any point and thereby return to the current state. </p>
+
+<p>How are people handling maintaining RESTfulness in AJAX apps? </p>
+
+<p>How do you express an integer as a binary number with Python literals?</p>
+
+<p>I was easily able to find the answer for hex:</p>
+
+<pre><code>    &gt;&gt;&gt; 0x12AF
+    4783
+    &gt;&gt;&gt; 0x100
+    256
+</code></pre>
+
+<p>and octal:</p>
+
+<pre><code>    &gt;&gt;&gt; 01267
+    695
+    &gt;&gt;&gt; 0100
+    64
+</code></pre>
+
+<p><strong>How do you use literals to express binary in Python?</strong></p>
+
+<hr>
+
+<p><strong><em>Summary of Answers</em></strong></p>
+
+<ul>
+<li>Python 2.5 and earlier: can express binary using <code>int('01010101111',2)</code> but not with a literal.</li>
+<li>Python 2.5 and earlier: there is <em>no way</em> to express binary literals.</li>
+<li>Python 2.6 beta: You can do like so: <code>0b1100111</code> or <code>0B1100111</code>.</li>
+<li>Python 2.6 beta: will also allow <code>0o27</code> or <code>0O27</code> (second character is the letter O) to represent an octal.</li>
+<li>Python 3.0 beta: Same as 2.6, but will no longer allow the older <code>027</code> syntax for octals.</li>
+</ul>
+
+<p>For those of us that like to use the graphical version of Vim or Emacs, instead of the console version, which version do you recommend?</p>
+
+<p>For Vim, there's <a href="http://sourceforge.net/projects/macosxvim/">Mac OS X Vim</a>, <a href="http://code.google.com/p/macvim/">MacVim</a>, <a href="http://code.google.com/p/vim-cocoa/">Vim-Cocoa</a>.</p>
+
+<p>For Emacs, <a href="http://www.apple.com/downloads/macosx/unix_open_source/carbonemacspackage.html">CarbonEmacs</a>, <a href="http://www.xemacs.org/">XEmacs</a>, and <a href="http://aquamacs.org/">Aquamacs</a>.</p>
+
+<p>Are there more? Which of these are ready for prime-time? If it's a tough call, what are the trade-offs? Are all of these still being maintained?</p>
+
+<p>No discussion of Vim vs. Emacs, if you don't mind, or comparisons with other editors.</p>
+
+<p>I'm looking into using Visual Studio 2008's built in unit test projects instead of NUnit and I was wondering if anyone has any experience in trying to integrate this type of unit test project with Cruise Control.Net.</p>
+<p>How do I set the icon that appears on the iPhone for the web sites I create?</p>
+<p>My office has a central Source Safe 2005 install that we use for source control. I can't change what the office uses on the server. </p>
+
+<p>I develop on a laptop and would like to have a different local source control repository that can sync with the central server (when available) regardless of the what that central provider is. The reason for the request is so I can maintain a local stable branch/build for client presentations while continuing to develop without having to jump through flaming hoops. Also, as a consultant, my clients may request that I use their source control provider and flexibility here would make life easier.</p>
+
+<p>Can any of the existing distributed source control clients handle that?</p>
+<p>I'm looking for some way to effectively hide inherited members. I have a library of classes which inherit from common base classes.  Some of the more recent descendant classes inherit dependency properties which have become vestigial and can be a little confusing when using <em>IntelliSense</em> or using the classes in a visual designer.</p>
+
+<p>These classes are all controls that are written to be compiled for either WPF or Silverlight 2.0.  I know about <code>ICustomTypeDescriptor</code> and <code>ICustomPropertyProvider</code>, but I'm pretty certain those can't be used in Silverlight.  </p>
+
+<p>It's not as much a functional issue as a usability issue.  What should I do?</p>
+
+<p><strong>Update</strong></p>
+
+<p>Some of the properties that I would really like to hide come from ancestors that are not my own and because of a specific tool I'm designing for, I can't do member hiding with the <code>new</code> operator.  (I know, it's ridiculous)</p>
+
+<p>I've never been completely happy with the way exception handling works, there's a lot exceptions and try/catch brings to the table (stack unwinding, etc.), but it seems to break a lot of the OO model in the process.</p>
+
+<p>Anyway, here's the problem:</p>
+
+<p>Let's say you have some class which wraps or includes networked file IO operations (e.g. reading and writing to some file at some particular UNC path somewhere). For various reasons you don't want those IO operations to fail, so if you detect that they fail you retry them and you keep retrying them until they succeed or you reach a timeout. I already have a convenient RetryTimer class which I can instantiate and use to sleep the current thread between retries and determine when the timeout period has elapsed, etc.</p>
+
+<p>The problem is that you have a bunch of IO operations in several methods of this class, and you need to wrap each of them in try-catch / retry logic.</p>
+
+<p>Here's an example code snippet:</p>
+
+<pre><code>RetryTimer fileIORetryTimer = new RetryTimer(TimeSpan.FromHours(10));<br>bool success = false;<br>while (!success)<br>{<br>    try<br>    {<br>        // do some file IO which may succeed or fail<br>        success = true;<br>    }<br>    catch (IOException e)<br>    {<br>        if (fileIORetryTimer.HasExceededRetryTimeout)<br>        {<br>            throw e;<br>        }<br>        fileIORetryTimer.SleepUntilNextRetry();<br>    }<br>}<br></code></pre>
+
+<p>So, how do you avoid duplicating most of this code for every file IO operation throughout the class? My solution was to use anonymous delegate blocks and a single method in the class which executed the delegate block passed to it. This allowed me to do things like this in other methods:</p>
+
+<pre><code>this.RetryFileIO( delegate()<br>    {<br>        // some code block<br>    } );<br></code></pre>
+
+<p>I like this somewhat, but it leaves a lot to be desired. I'd like to hear how other people would solve this sort of problem.</p>
+<p>As a LAMP developer considering moving to a .Net IIS platform, one of my concerns is the loss of productivity due to lack of shell... Has anyone else had this experience?  Is there possibly a Linux shell equivalent for Windows?</p>
+
+<p>I'm not sure what the correct size should be.</p>
+
+<p>Many sites seem to repeat that the apple-touch-icon should be 57x57 pixels but cite a broken link as their source.</p>
+
+<p><a href="http://www.hanselman.com/blog/MakeYourWebsiteMobileAndIPhoneFriendlyAddHomeScreenIPhoneIconsAndAdjustTheViewPort.aspx">Hanselman</a>'s and <a href="http://playgroundblues.com/posts/2008/jan/15/iphone-bookmark-iconage/">playgroundblues</a>'s comments suggest different sizes including 163x163 and 60x60.</p>
+
+<p>Apple's own <a href="http://www.apple.com/apple-touch-icon.png">apple.com icon</a> is 129x129!</p>
+
+<p>See my related question:
+<a href="http://stackoverflow.com/questions/1505/how-do-i-give-my-web-sites-an-icon-for-iphone">How do I give my web sites an icon for iPhone?</a></p>
+
+<p>I always create a new empty database, after that backup and restore of the existing database into it, but is this really the best way? As it seems very error prone and over complicated for me.</p>
+
+<p>What are the best methods for tracking and/or automating DB schema changes?  Our team uses Subversion for version control and we've been able to automate some of our tasks this way (pushing builds up to a staging server, deploying tested code to a production server) but we're still doing database updates manually.  I would like to find or create a solution that allows us to work efficiently across servers with different environments while continuing to use Subversion as a backend through which code and DB updates are pushed around to various servers.</p>
+
+<p>Many popular software packages include auto-update scripts which detect DB version and apply the necessary changes.  Is this the best way to do this even on a larger scale (across multiple projects and sometimes multiple environments and languages)?  If so, is there any existing code out there that simplifies the process or is it best just to roll our own solution?  Has anyone implemented something similar before and integrated it into Subversion post-commit hooks, or is this a bad idea?</p>
+
+<p>While a solution that supports multiple platforms would be preferable, we definitely need to support the Linux/Apache/MySQL/PHP stack as the majority of our work is on that platform.</p>
+<p>If I'm adding a column to a table in Microsoft SQL Server, can I control where the column is displayed logically in queries?</p>
+
+<p>I don't want to mess with the physical layout of columns on disk, but I would like to logically group columns together when possible so that tools like SQL Server Management Studio list the contents of the table in a convenient way.</p>
+
+<p>I know that I can do this through SQL Management Studio by going into their "design" mode for tables and dragging the order of columns around, but I'd like to be able to do it in raw SQL so that I can perform the ordering scripted from the command line.</p>
+
+<p>The <code>.XFDL</code> file extension identifies <code>XFDL</code> Formatted Document files. These belong to the XML-based document and template formatting standard. This format is exactly like the XML file format however, contains a level of encryption for use in secure communications.</p>
+
+<p>I know how to view XFDL files using a file viewer I found <a href="http://www.e-publishing.af.mil/viewerdownload.asp">here</a>.  I can also modify and save these files by doing File:Save/Save As.  I'd like, however, to modify these files on the fly. Any suggestions? Is this even possible?</p>
+
+<p>Update #1: I have now successfully decoded and unziped a <code>.xfdl</code> into an XML file which I can then edit. Now, I am looking for a way to re-encode the modified XML file back into base64-gzip (using Ruby or the command line)</p>
+
+<p>When spliting a solution in to logical layers, when is it best to use a separate project over just grouping by a folder?</p>
+<p>What software is recommended for working with and editing large XML schemas? I'm looking for both Windows and Linux software (doesn't have to be cross platform, just want suggestions for both) that help with dealing with huge XML files.</p>
+<p>Yes, Podcasts, those nice little Audiobooks I can listen to on the way to work. With the current amount of Podcasts, it's like searching a needle in a haystack, except that the haystack happens to be the Internet and is filled with too many of these "Hot new Gadgets" stuff :(</p>
+
+<p>Now, even though <strong>I</strong> am mainly a .NET developer nowadays, maybe anyone knows some good Podcasts from people regarding the whole software lifecycle? Unit Testing, Continous Integration, Documentation, Deployment...</p>
+
+<p>So - what are you guys and gals listening to?</p>
+
+<hr>
+
+<p>Please note that the categorizations are somewhat subjective and may not be 100% accurate as many podcasts cover several areas. Categorization is made against what is considered the "main" area.</p>
+
+<h1>General Software Engineering / Productivity</h1>
+
+<ul>
+<li><a href="http://blog.stackoverflow.com/category/podcasts/" rel="nofollow">Stack Overflow </a>(inactive, but still a good listen)</li>
+<li><a href="http://tekpub.com" rel="nofollow">TekPub (Requires Paid Subscription)</a></li>
+<li><a href="http://www.se-radio.net/" rel="nofollow">Software Engineering Radio</a></li>
+<li><a href="http://www.43folders.com/podcast" rel="nofollow">43 Folders</a></li>
+<li><a href="http://perspectives.on10.net/" rel="nofollow">Perspectives</a></li>
+<li><a href="http://www.drdobbs.com/tv/" rel="nofollow">Dr. Dobb's</a> (now a video feed)</li>
+<li><a href="http://www.pragprog.com/podcasts" rel="nofollow">The Pragmatic Podcast</a> (Inactive)</li>
+<li><a href="http://www.thoughtworks.com/what-we-say/podcasts.html" rel="nofollow">IT Matters</a> </li>
+<li><a href="http://agiletoolkit.libsyn.com/" rel="nofollow">Agile Toolkit Podcast</a></li>
+<li><a href="http://thestacktrace.libsyn.com/" rel="nofollow">The Stack Trace</a> (Inactive)</li>
+<li><a href="http://www.parleys.com/display/PARLEYS/Home#page=Home" rel="nofollow">Parleys</a></li>
+<li><a href="http://techzinglive.com/" rel="nofollow">Techzing</a></li>
+<li><a href="http://startuppodcast.wordpress.com/" rel="nofollow">The Startup Success Podcast</a></li>
+<li><a href="http://webcast.berkeley.edu/course_feeds.php" rel="nofollow">Berkeley CS class lectures</a></li>
+<li><a href="http://twit.tv/FLOSS" rel="nofollow">FLOSS Weekly</a></li>
+<li><a href="http://www.thisdeveloperslife.com/" rel="nofollow">This Developer's Life</a></li>
+</ul>
+
+<h1>.NET / Visual Studio / Microsoft</h1>
+
+<ul>
+<li><a href="http://herdingcode.com/" rel="nofollow">Herding Code</a></li>
+<li><a href="http://www.hanselminutes.com/" rel="nofollow">Hanselminutes</a></li>
+<li><a href="http://www.dotnetrocks.com/" rel="nofollow">.NET Rocks!</a></li>
+<li><a href="http://deepfriedbytes.com/" rel="nofollow">Deep Fried Bytes</a></li>
+<li><a href="http://altnetpodcast.com/" rel="nofollow">Alt.Net Podcast</a> (inactive)</li>
+<li><a href="http://www.polymorphicpodcast.com/" rel="nofollow">Polymorphic Podcast</a> (inconsistent)</li>
+<li><a href="http://www.sparklingclient.com/" rel="nofollow">Sparkling Client (The Silverlight Podcast)</a></li>
+<li><a href="http://www.dnrtv.com/default.aspx" rel="nofollow">dnrTV!</a></li>
+<li><a href="http://feeds.feedburner.com/SpaghettiCodePodcasts" rel="nofollow">Spaghetti Code</a></li>
+<li><a href="http://aspnetpodcast.com/CS11/Default.aspx" rel="nofollow">ASP.NET Podcast</a></li>
+<li><a href="http://channel9.msdn.com/Media/Podcasts/" rel="nofollow">Channel 9</a></li>
+<li><a href="http://www.radiotfs.com/" rel="nofollow">Radio TFS</a></li>
+<li><a href="http://feeds.feedburner.com/powerscripting" rel="nofollow">PowerScripting Podcast</a></li>
+<li><a href="http://thirstydeveloper.com/" rel="nofollow">The Thirsty Developer</a></li>
+<li><a href="http://elegantcode.com/elegantcode-cast/" rel="nofollow">Elegant Code</a> (inactive)</li>
+<li><a href="http://www.connectedshow.com/" rel="nofollow">ConnectedShow</a></li>
+<li><a href="http://craftycoders.com/?tag=/podcast" rel="nofollow">Crafty Coders</a></li>
+<li><a href="http://codingqa.com" rel="nofollow">Coding QA</a></li>
+</ul>
+
+<h1>jQuery</h1>
+
+<ul>
+<li><a href="http://yayquery.com/" rel="nofollow">yayQuery</a></li>
+<li><a href="http://blog.jquery.com/2009/11/13/announcing-the-official-jquery-podcast/" rel="nofollow">The official jQuery podcast</a></li>
+</ul>
+
+<h1>Java / Groovy</h1>
+
+<ul>
+<li><a href="http://javaposse.com/" rel="nofollow">The Java Posse</a></li>
+<li><a href="http://www.grailspodcast.com/blog/list" rel="nofollow">Grails Podcast</a></li>
+<li><a href="http://www.javaworld.com/podcasts/jtech/" rel="nofollow">Java Technology Insider</a></li>
+<li><a href="http://basementcoders.com/" rel="nofollow">Basement Coders</a></li>
+</ul>
+
+<h1>Ruby / Rails</h1>
+
+<ul>
+<li><a href="http://railscasts.com/" rel="nofollow">Railscasts</a></li>
+<li><a href="http://railsenvy.com/podcast" rel="nofollow">Rails Envy</a></li>
+<li><a href="http://podcast.rubyonrails.org/" rel="nofollow">The Ruby on Rails Podcast</a></li>
+<li><a href="http://rubiverse.com/" rel="nofollow">Rubiverse</a></li>
+<li><a href="http://ruby5.envylabs.com/" rel="nofollow">Ruby5</a></li>
+</ul>
+
+<h1>Web Design / JavaScript / Ajax</h1>
+
+<ul>
+<li><a href="http://webdevradio.com/" rel="nofollow">WebDevRadio</a></li>
+<li><a href="http://boagworld.com/" rel="nofollow">Boagworld</a></li>
+<li><a href="http://therissingtonpodcast.co.uk/" rel="nofollow">The Rissington podcast</a></li>
+<li><a href="http://ajaxian.com/by/category/podcasts" rel="nofollow">Ajaxian</a></li>
+<li><a href="http://developer.yahoo.com/yui/theater/" rel="nofollow">YUI Theater</a></li>
+</ul>
+
+<h1>Unix / Linux / Mac / iPhone</h1>
+
+<ul>
+<li><a href="http://www.mac-developer-network.com/" rel="nofollow">Mac Developer Network</a></li>
+<li><a href="http://www.hackerpublicradio.org/" rel="nofollow">Hacker Public Radio</a></li>
+<li><a href="http://www.linuxoutlaws.com/" rel="nofollow">Linux Outlaws</a></li>
+<li><a href="http://macosken.com/" rel="nofollow">Mac OS Ken</a></li>
+<li><a href="http://lugradio.org/" rel="nofollow">LugRadio Linux radio show</a> (Inactive)</li>
+<li><a href="http://www.jupiterbroadcasting.com/?cat=4" rel="nofollow">The Linux Action Show!</a></li>
+<li><a href="http://www.kernelpodcast.org/" rel="nofollow">Linux Kernel Mailing List (LKML) Summary Podcast</a></li>
+<li><a href="http://itunes.stanford.edu/" rel="nofollow">Stanford's iPhone programming class</a></li>
+<li><a href="http://www.sunsetlakesoftware.com/2010/06/03/advanced-iphone-development-course-now-itunes-u" rel="nofollow">Advanced iPhone Development Course - Madison Area Technical College</a></li>
+<li><a href="http://developer.apple.com/videos/wwdc/2010/" rel="nofollow">WWDC 2010 Session Videos (requires Apple Developer registration)</a></li>
+</ul>
+
+<h1>System Administration, Security or Infrastructure</h1>
+
+<ul>
+<li><a href="http://feeds.feedburner.com/RunasRadio" rel="nofollow">RunAs Radio</a></li>
+<li><a href="http://www.grc.com/securitynow.htm" rel="nofollow">Security Now!</a></li>
+<li><a href="http://crypto-gram.libsyn.com/" rel="nofollow">Crypto-Gram Security Podcast</a></li>
+<li><a href="http://www.hak5.org/" rel="nofollow">Hak5</a></li>
+<li><a href="http://blogs.vmware.com/vmtn/podcasts/index.html" rel="nofollow">VMWare VMTN</a></li>
+<li><a href="http://twit.tv/ww" rel="nofollow">Windows Weekly</a></li>
+<li><a href="http://pauldotcom.com/" rel="nofollow">PaulDotCom Security</a></li>
+<li><a href="http://www.theregister.co.uk/hardware/semi_coherent/podcast.rss" rel="nofollow">The Register - Semi-Coherent Computing</a></li>
+<li><a href="http://feathercast.org/" rel="nofollow">FeatherCast</a></li>
+</ul>
+
+<h1>General Tech / Business</h1>
+
+<ul>
+<li><a href="http://revision3.com/tekzilla/" rel="nofollow">Tekzilla</a></li>
+<li><a href="http://twit.tv/twit" rel="nofollow">This Week in Tech</a></li>
+<li><a href="http://www.guardian.co.uk/technology/series/techweekly" rel="nofollow">The Guardian Tech Weekly</a></li>
+<li><a href="http://www.pcmag.com/category2/0,2806,2007098,00.asp" rel="nofollow">PCMag Radio Podcast</a> (Inactive)</li>
+<li><a href="http://ecorner.stanford.edu/" rel="nofollow">Entrepreneurship Corner</a></li>
+<li><a href="http://www.manager-tools.com/" rel="nofollow">Manager Tools</a></li>
+</ul>
+
+<h1>Other / Misc. / Podcast Networks</h1>
+
+<ul>
+<li><a href="http://itc.conversationsnetwork.org/" rel="nofollow">IT Conversations</a></li>
+<li><a href="http://retrobits.libsyn.org/" rel="nofollow">Retrobits Podcast</a></li>
+<li><a href="http://cagematch.dvorak.org/index.php/board,45.0.html" rel="nofollow">No Agenda Netcast</a></li>
+<li><a href="http://www.crankygeeks.com/" rel="nofollow">Cranky Geeks</a></li>
+<li><a href="http://thecommandline.net/" rel="nofollow">The Command Line</a></li>
+<li><a href="http://www.freelanceswitch.com/podcasts/" rel="nofollow">Freelance Radio</a></li>
+<li><a href="http://www.ibm.com/developerworks/podcast/" rel="nofollow">IBM developerWorks</a></li>
+<li><a href="http://www.theregister.co.uk/software/open_season/podcast.rss" rel="nofollow">The Register - Open Season</a></li>
+<li><a href="http://www.drunkandretired.com/thepodcast/" rel="nofollow">Drunk and Retired</a></li>
+<li><a href="http://itc.conversationsnetwork.org/series/technometria.html" rel="nofollow">Technometria</a></li>
+<li><a href="http://www.sodthis.com/podcast/" rel="nofollow">Sod This</a></li>
+<li><a href="http://www.radio4nerds.com/" rel="nofollow">Radio4Nerds</a></li>
+<li><a href="http://hackermedley.org" rel="nofollow">Hacker Medley</a></li>
+</ul>
+
+<p><em>Preferred languages</em>: C/C++, Java, and Ruby.</p>
+
+<p>I am looking for some helpful books/tutorials on how to write your own compiler simply for educational purposes. I am most familiar with C/C++, Java, and Ruby, so I prefer resources that involve one of those three, but any good resource is acceptable.</p>
+
+<p>I'm writing an app to help facilitate some research, and part of this involves doing some statistical calculations. Right now, the researchers are using a program called <a href="http://en.wikipedia.org/wiki/Spss">SPSS</a>. Part of the output that they care about looks like this:</p>
+
+<p><img src="http://i.stack.imgur.com/m0swl.png" alt="[Part of the SPSS output"></p>
+
+<p>They're really only concerned about the <code>F</code> and <code>Sig.</code> values. My problem is that I have no background in statistics, and I can't figure out what the tests are called, or how to calculate them.</p>
+
+<p>I thought the <code>F</code> value might be the result of the <a href="http://en.wikipedia.org/wiki/F-test#Table_on_F-test">F-test</a>, but after following the steps given on Wikipedia, I got a result that was different from what <code>SPSS</code> gives.</p>
+
+<p>I am looking for guidance regarding the best practice around the use of the Profile feature in ASP.NET.</p>
+
+<p>How do you decide what should be kept in the built-in user Profile, or if you should create your own DB Table and add a column for the desired fields? For example, a user has a ZIP code, should I save the ZIP code in my own table, or should I add it to the web.config xml profile and access it via the user profile ASP.NET mechanize? </p>
+
+<p>The pros/cons I can think of are that since I don't know the profile very well (it is a bit of a <em>Matrix</em> right now), I probably can do whatever I want if I go the table route (e.g., SQL to get all the users in the same ZIP code as the current user); I don't know if I can do the same if I use the ASP.NET profile.</p>
+
+<p>My dilemma is, basically, how to share an enumeration between two applications.</p>
+
+<p>The users upload documents through a front-end application that is on the web. This application calls a web service of the back-end application and passes the document to it. The back-end app saves the document and inserts a row in the <em>Document</em> table.</p>
+
+<p>The document type (7 possible document types: <em>Invoice</em>, <em>Contract</em> etc.) is passed as a parameter to the web service's <em>UploadDocument</em> method. The question is, what should the type (and possible values) of this parameter be?</p>
+
+<p>Since you need to hardcode these values in both applications, I think it is O.K. to use a descriptive string (<em>Invoice</em>, <em>Contract</em>, <em>WorkOrder</em>, <em>SignedWorkOrder</em>). </p>
+
+<p>Is it maybe a better approach to create a <em>DocumentTypes</em> enumeration in the first application, and to reproduce it also in the second application, and then pass the corresponding integer value to the web service between them?</p>
+<p>If you could go back in time and tell yourself to read a specific book at the beginning of your career as a developer, which book would it be?</p>
+
+<p>I expect this list to be varied and to cover a wide range of things.</p>
+
+<p><strong>To search:</strong> Use the search box in the upper-right corner. To search the answers of the current question, use <code>inquestion:this</code>.  For example:</p>
+
+<pre><code>inquestion:this "Code Complete"
+</code></pre>
+
+<p>I was just looking through some information about Google's <a href="http://code.google.com/apis/protocolbuffers/">protocol buffers</a> data interchange format.  Has anyone played around with the code or even created a project around it?</p>
+
+<p>I'm currently using XML in a Python project for structured content created by hand in a text editor, and I was wondering what the general opinion was on Protocol Buffers as a user-facing input format.  The speed and brevity benefits definitely seem to be there, but there are so many factors when it comes to actually generating and processing the data.</p>
+<p>I am trying to grab the capital letters of a couple of words and wrap them in span tags. I am using <a href="http://php.net/manual/en/function.preg-replace.php">preg_replace</a> for extract and wrapping purposes, but it's not outputting anything.</p>
+
+<pre><code>preg_replace("/[A-Z]/", "&lt;span class=\"initial\"&gt;$1&lt;/span&gt;", $str)
+</code></pre>
+
+<p>Getting back into a bit more .NET after a few-years of not using it full-time, and wondering what the good unit testing packages are these days.</p>
+
+<p>I'm familiar with NUnit (a few years ago), and have played briefly around with IronRuby, with the goal of getting something like rspec going, but don't know much beyond that.</p>
+
+<p>I realize I could google for this and call it a day but I believe I'm likely to get a better and more informed response from asking a question here :-)</p>
+
+<p>Suggestions?</p>
+
+<p>I am trying to set a flag to show or hide a page element, but it always displays even when the expression is false. </p>
+
+<pre><code>$canMerge = ($condition1 &amp;&amp; $condition2) ? 'true' : 'false';<br>...<br>&lt;?php if ($canMerge) { ?&gt;Stuff&lt;?php } ?&gt;<br></code></pre>
+
+<p>What's up?</p>
+<p>Is it possible to create "federated" Subversion servers?
+As in one server at location A and another at location B that sync up their local versions of the repository automatically.  That way when someone at either location interacts with the repository they are accessing their respective local server and therefore has faster response times.</p>
+<p>I've got a menu in Python. That part was easy. I'm using <code>raw_input()</code> to get the selection from the user. </p>
+
+<p>The problem is that <code>raw_input</code> (and input) require the user to press <kbd>Enter</kbd> after they make a selection. Is there any way to make the program act immediately upon a keystroke? Here's what I've got so far:</p>
+
+<pre><code>import sys
+print """Menu
+1) Say Foo
+2) Say Bar"""
+answer = raw_input("Make a selection&gt; ")
+
+if "1" in answer: print "foo"
+elif "2" in answer: print "bar"
+</code></pre>
+
+<p>It would be great to have something like</p>
+
+<pre><code>print menu
+while lastKey = "":
+    lastKey = check_for_recent_keystrokes()
+if "1" in lastKey: #do stuff...
+</code></pre>
+
+<p>OK. This is a bit of a vanity app, but I had a situation today at work where I was in a training class and the machine was set to lock every 10 minutes.  Well, if the trainers got excited about talking - as opposed to changing slides - the machine would lock up.</p>
+
+<p>I'd like to write a teeny app that has nothing but a taskbar icon that does nothing but move the mouse by 1 pixel every 4 minutes.  </p>
+
+<p>I can do that in 3 ways with Delphi (my strong language) but I'm moving to C# for work and I'd like to know the path of least resistance there.</p>
+<p>I am currently working on a project and my goal is to locate text in an image. OCR'ing the text is not my intention as of yet. I want to basically obtain the bounds of text within an image. I am using the AForge.Net imaging component for manipulation. Any assistance in some sense or another?</p>
+
+<p>Update 2/5/09:
+I've since went along another route in my project. However I did attempt to obtain text using MODI (Microsoft Office Document Imaging). It allows you to OCR an image and pull text from it with some ease.</p>
+
+<p>What do I need to look at to see if I'm on Windows, Unix, etc?</p>
+
+<P>On the project that I am working on I have a couple of databases. Each table and each column in the database has a description set (as an extended property in SQL 2005). As a part of the documentation going to the client we need to produce a data dictionary showing all of the tables and columns along with a collection of meta data (data-type, optionality, constraints).</P>
+<P>Is anyone using a tool to automatically create this kind of document? If so, which tools do you use? I have used <A href="http://www.codeplex.com/datadictionary">Data Dictionary Creator</A> which is awesome but it doesn't seem to do data types or optionality (unless you want to add in custom fields and fill them in yourself).</P>
+<p>How do I delimit a Javascript databound string parameter in an anchor <code>OnClick</code> event?</p>
+
+<ul>
+<li>I have an anchor tag in an ASP.NET Repeater control.  </li>
+<li>The <code>OnClick</code> event of the anchor contains a call to a Javascript function.  </li>
+<li>The Javascript function takes a string for its input parameter.  </li>
+<li>The string parameter is populated with a databound value from the Repeater.</li>
+</ul>
+
+<p>I need the "double quotes" for the <code>Container.DataItem</code>.<br>
+I need the 'single quotes' for the <code>OnClick</code>.</p>
+
+<p>And I still need <em>one more delimiter</em> (triple quotes?) for the input string parameter of the Javascript function call.</p>
+
+<p>Since I can't use 'single quotes' again, how do I ensure the Javascript function knows the input parameter is a string and not an integer?</p>
+
+<p>Without the extra quotes around the input string parameter, the Javascript function thinks I'm passing in an integer.</p>
+
+<p>Cheers in advance for any knowledge you can drop.</p>
+
+<p>The anchor:</p>
+
+<pre><code>&lt;a id="aShowHide" onclick='ToggleDisplay(&lt;%# DataBinder.Eval(Container.DataItem, "JobCode") %&gt;);' &gt;Show/Hide&lt;/a&gt;    
+</code></pre>
+
+<p>and here is the Javascript:</p>
+
+<pre><code>&lt;script language="JavaScript" type="text/javascript"&gt;
+/* Shows/Hides the Jobs Div */
+  function ToggleDisplay(jobCode)
+  {
+  /* Each div has it's ID set dynamically ('d' plus the JobCode) */
+    var elem = document.getElementById('d' + jobCode);
+
+    if (elem) 
+    {
+      if (elem.style.display != 'block') 
+      {
+        elem.style.display = 'block';
+        elem.style.visibility = 'visible';
+      } 
+      else
+      {
+        elem.style.display = 'none';
+        elem.style.visibility = 'hidden';
+      }
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+
+<p>I realize this is a newbie question, but I'm looking for a simple solution - it seems like there should be one.</p>
+
+<p>What's the best way to import a CSV file into a strongly-typed data structure?  Again simple = better.</p>
+
+<p>I have a bunch of latitude/longitude pairs that map to known x/y coordinates on a (geographically distorted) map.</p>
+
+<p>Then I have one more latitude/longitude pair. I want to plot it on the map as best is possible. How do I go about doing this?</p>
+
+<p>At first I decided to create a system of linear equations for the three nearest lat/long points and compute a transformation from these, but this doesn't work well at all. Since that's a linear system, I can't use more nearby points either.</p>
+
+<p>You can't assume North is up: all you have is the existing lat/long->x/y mappings.</p>
+
+<p>EDIT: it's not a Mercator projection, or anything like that. It's arbitrarily distorted for readability (think subway map). I want to use only the nearest 5 to 10 mappings so that distortion on other parts of the map doesn't affect the mapping I'm trying to compute.</p>
+
+<p>Further, the entire map is in a very small geographical area so there's no need to worry about the globe--flat-earth assumptions are good enough.</p>
+<p>Using ASP.NET MVC there are situations (such as form submission) that may require a <code>RedirectToAction</code>.  </p>
+
+<p>One such situation is when you encounter validation errors after a form submission and need to redirect back to the form, but would like the URL to reflect the URL of the form, not the action page it submits to.</p>
+
+<p>As I require the form to contain the originally <code>POST</code>ed data, for user convenience, as well as validation purposes, how can I pass the data through the <code>RedirectToAction()</code>?  If I use the viewData parameter, my <code>POST</code> parameters will be changed to <code>GET</code> parameters.</p>
+
+<p>In order to fully use LinqToSql in an ASP.net 3.5 application, it is necessary to create <a href="http://msdn.microsoft.com/en-us/library/system.data.linq.datacontext.aspx">DataContext</a> <a href="http://dotnetslackers.com/articles/csharp/InsideTheLINQToSQLDataContextClass.aspx">classes</a> (which is usually done using the designer in VS 2008). From the UI perspective, the DataContext is a design of the sections of your database that you would like to expose to through LinqToSql and is integral in setting up the ORM features of LinqToSql.</p>
+
+<p>My question is: I am setting up a project that uses a large database where all tables are interconnected in some way through Foreign Keys. My first inclination is to make one huge DataContext class that models the entire database. That way I could in theory (though I don't know if this would be needed in practice) use the Foreign Key connections that are generated through LinqToSql to easily go between related objects in my code, insert related objects, etc.</p>
+
+<p>However, after giving it some thought, I am now thinking that it may make more sense to create multiple DataContext classes, each one relating to a specific namespace or logical interrelated section within my database. My main concern is that instantiating and disposing one huge DataContext class all the time for individual operations that relate to specific areas of the Database would be impose an unnecessary imposition on application resources. Additionally, it is easier to create and manage smaller DataContext files than one big one. The thing that I would lose is that there would be some distant sections of the database that would not be navigable through LinqToSql (even though a chain of relationships connects them in the actual database). Additionally, there would be some table classes that would exist in more than one DataContext.</p>
+
+<p>Any thoughts or experience on whether multiple DataContexts (corresponding to DB namespaces) are appropriate in place of (or in addition to) one very large DataContext class (corresponding to the whole DB)?</p>
+<p>PostgreSQL is interesting in that it supports several languages for writing stored procedures.  Which one do you use, and why?</p>
+
+<p>I was just wondering if there is an elegant way to set the maximum CPU load for a particular thread doing intensive calculations. 
+<br/><br/>Right now I have located the most time consuming loop in the thread (it does only compression) and use <code>GetTickCount()</code> and <code>Sleep()</code> with hardcoded values. It makes sure that the loop continues for a certain period of time and than sleeps for a certain minimal time. It more or less does the job i.e. guarantees that the thread will not use more than 50% of CPU. <br>However behavior is dependent on the number of CPU cores (huge disadvantage) and simply ugly (smaller disadvantage :)). <br>Any ideas?</p>
+
+<p>In many places, <code>(1,2,3)</code> and <code>[1,2,3]</code> can be used interchangeably.</p>
+
+<p>When should I use one or the other, and why?</p>
+
+<p>I have read a lot that LISP can redefine syntax on the fly, presumably with macros.  I am curious how far does this actually go?  Can you redefine the language structure so much that it borderline becomes a compiler for another language?  For example, could you change the functional nature of LISP into a more object oriented syntax and semantics, maybe say having syntax closer to something like Ruby?</p>
+
+<p>Especially, is it possible to get rid of the parenthesis hell using macros?  I have learned enough (Emacs-)LISP to customize Emacs with my own micro-features, but I am very curious how far macros can go in customizing the language.</p>
+
+<p>When you data bind in C#, the thread that changes the data causes the control to change too. But if this thread is not the one on which the control was created, you'll get the above exception.</p>
+
+<p>I surfed the net and found no good answer.</p>
+
+<p>Anyone?</p>
+
+<p>I have values stored as strings in a <code>DataTable</code> where each value could really represent an <code>int</code>, <code>double</code>, or <code>string</code> (they were all converted to strings during an import process from an external data source). I need to test and see what type each value really is.</p>
+
+<p>What is more efficient for the application (or is there no practical difference)?</p>
+
+<ol>
+<li>Try to convert to <code>int</code> (and then <code>double</code>). If conversion works, the return <code>true</code>. If an exception is thrown, return <code>false</code>.</li>
+<li>Regular expressions designed to match the pattern of an <code>int</code> or <code>double</code></li>
+<li>Some other method?</li>
+</ol>
+
+<p>When learning a new programming language, one of the possible roadblocks you might encounter is the question whether the language is, by default, <em>pass-by-value or pass-by-reference</em>.</p>
+
+<p>So here is my question to all of you, in your favorite language, <em>how</em> is it actually done? And what are the <em>possible pitfalls</em>?</p>
+
+<p>Your favorite language can, of course, be anything you have ever played with: <a href="http://www.ruby-lang.org/en/">popular</a>, <a href="http://www.devtopics.com/a-obscure-programming-language-of-the-month/">obscure</a>, <a href="http://en.wikipedia.org/wiki/Brainfuck">esoteric</a>, <a href="http://www.nvidia.com/object/cuda_get.html">new</a>, <a href="http://en.wikipedia.org/wiki/FORTRAN">old</a>...</p>
+
+<p>What do the result codes in SVN mean? I need a quick reference.</p>
+
+<p>How do I create a branch in SVN?</p>
+<p>A windows exe file has access to the command string which invoked it, including its path and filename. eg. <code>C:\MyApp\MyApp.exe --help</code>.</p>
+
+<p>But this is not so for a dll invoked via <code>LoadLibrary</code>. Does anyone know of a way for a dll to find out what its path and filename is?</p>
+
+<p>Specifically I'm interested in a Delphi solution, but I suspect that the answer would be pretty much the same for any language.</p>
+
+<p>As a novice in practicing test-driven development, I often end up in a quandary as to how to unit test persistence to a database.</p>
+
+<p>I know that technically this would be an integration test (not a unit test), but I want to find out the best strategies for the following:</p>
+
+<ol>
+<li>Testing queries. </li>
+<li>Testing inserts. How do I know that the insert that has gone wrong if it fails? I can test it by inserting and then querying, but how can I know that the query wasn't wrong? </li>
+<li>Testing updates and deletes -- same as testing inserts</li>
+</ol>
+
+<p>What are the best practices for doing these?</p>
+
+<hr>
+
+<p>Regarding testing SQL: I am aware that this could be done, but if I use an O/R Mapper like NHibernate, it attaches some naming warts in the aliases used for the output queries, and as that is somewhat unpredictable I'm not sure I could test for that.</p>
+
+<p>Should I just, abandon everything and simply trust NHibernate? I'm not sure that's prudent.</p>
+
+<p>For all the RSS feeds I subscribe to I use <a href="http://www.google.com/reader/" rel="nofollow">Google Reader</a>, which I love. I do however have a couple of specific RSS feeds that I'd like to be notified of as soon as they get updated (say, for example, an RSS feed for a forum I like to monitor and respond to as quickly as possible). </p>
+
+<p>Are there any tools out there for this kind of monitoring which also have some kind of alert functionality (for example, a prompt window)? </p>
+
+<p>I've tried <a href="http://www.simbolic.net/software/RSSAlert/" rel="nofollow">Simbolic RSS Alert</a> but I found it a bit buggy and couldn't get it to alert me as often as I liked.</p>
+
+<p>Suggestions? Or perhaps a different experience with Simbolic? </p>
+
+<p>When looking beyond the <a href="https://en.wikipedia.org/wiki/Rapid_application_development">RAD</a> (drag-drop and configure) way of building user interfaces that many tools encourage you are likely to come across three design patterns called <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-View-Controller</a>, <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter">Model-View-Presenter</a> and <a href="http://en.wikipedia.org/wiki/Model_View_ViewModel">Model-View-ViewModel</a>. My question has three parts to it:</p>
+
+<ol>
+<li>What issues do these patterns address?</li>
+<li>How are they similar?</li>
+<li>How are they different?</li>
+</ol>
+
+<p>Looking for books or other references that discuss actually <em>"how"</em> to write a code coverage tool in Java; some of the various techniques or tricks - source vs. byte code instrumentation. This is for a scripting language that generates java byte code under the hood.</p>
+
+<p>I want to get the MD5 Hash of a string value in SQL Server 2005. I do this with the following command:</p>
+
+<pre><code>SELECT HashBytes('MD5', 'HelloWorld')
+</code></pre>
+
+<p>However, this returns a VarBinary instead of a VarChar value. If I attempt to convert <code>0x68E109F0F40CA72A15E05CC22786F8E6</code> into a VarChar I get <code>há ðô§*à\Â'†øæ</code> instead of <code>68E109F0F40CA72A15E05CC22786F8E6</code>.</p>
+
+<p>Is there any SQL-based solution?</p>
+
+<p><strong><a href="http://stackoverflow.com/questions/2120/#2382">Yes</a></strong></p>
+
+<P>Checkboxes in html forms don't have implicit labels with them. Adding an explicit label (some text) next to it doesn't toggle the checkbox.</P>
+<p>I have come across a lot of optimization tips which say that you should mark your classes as sealed to get extra performance benefits.</p>
+
+<p>I ran some tests to check the performance differential and found none. Am I doing something wrong? Am I missing the case where sealed classes will give better results?</p>
+
+<p>Has anyone run tests and seen a difference?</p>
+
+<p>Help me learn :) </p>
+<p>Can a LINQ enabled app run on a machine that only has the .NET 2.0 runtime installed?</p>
+
+<p>In theory, LINQ is nothing more than syntactic sugar, and the resulting IL code should look the same as it would have in .NET 2.0.</p>
+
+<p>How can I write LINQ without using the .NET 3.5 libraries? Will it run on .NET 2.0?</p>
+<p>Instead of writing my ASP.NET C# applications in Visual Studio, I used my favorite text editor UltraEdit32.</p>
+
+<p>Is there anyway I can implement MVC without the use of VS?</p>
+
+<p>The web applications I develop often require co-dependant configuration settings and there are also settings that have to change as we move between each of our environments.  </p>
+
+<p>All our settings are currently simple key value pairs but it would be useful to create custom config sections so that it is obvious when two values need to change together or when the settings need to change for an environment.</p>
+
+<p>What's the best way to create custom config sections and are there any special considerations to make when retrieving the values?</p>
+<p>Is there a way to create a <code>JButton</code> with your own button graphic and not just with an image inside the button? </p>
+
+<p>If not, is there another way to create a custom button in java?</p>
+
+<p>I've got a web application that I'm trying to optimise. Some of the controls are hidden in dialog-style DIVs, so I'd like to have them load in via AJAX only when the user wants to see them.  This is fine for controls that are mostly Literal-based (various menus and widgets), but when I have what I call "dirty" controls - ones that write extensive information to the ViewState, put tons of CSS or script on the page, require lots of references etc - these are seemingly impossible to move "out of page", especially considering how ASP.NET will react on postback.</p>
+
+<p>I was considering some kind of step where I override Render, find markers for the bits I want to move out and put AJAX placeholders in there, but not only does the server overhead seem extreme, it also feels like a complete hack.  Besides, the key element here are the dialog boxes that contain forms with validation controls on them, and I can't imagine how I would move the controls <em>and</em> their required scripts.</p>
+
+<p>In my fevered imagination, I want to do this:</p>
+
+<pre><code>AJAXifier.AJAXify(ctlEditForm);
+</code></pre>
+
+<p>Sadly, I know this is a dream.  How close can I really get to a quick-and-easy AJAXification without causing too much load on the server?</p>
+
+<p>I specifically want to add the style of <code>background-color</code> to the <code>&lt;body&gt;</code> tag of a master page, from the code behind (C#) of a content page that uses that master page.  </p>
+
+<p>I have different content pages that need to make the master page has different colors depending on which content page is loaded, so that the master page matches the content page's theme.</p>
+
+<p>I have a solution below:</p>
+
+<hr>
+
+<p>I'm looking for something more like:</p>
+
+<pre><code>Master.Attributes.Add("style", "background-color: 2e6095");
+</code></pre>
+
+<p>Inside of the page load function of the content page.  But I can't get the above line to work. I only need to change the <code>background-color</code> for the <code>&lt;body&gt;</code> tag of the page.</p>
+
+<p>I'm looking to add a testing suite to my application, however I can't move to the newer testing frameworks for .NET 3.5. </p>
+
+<p>Does anyone have a suggestion about good testing frameworks to use?</p>
+
+<p>I'm currently working on an application with a frontend written in Adobe Flex 3. I'm aware of <a href="http://code.google.com/p/as3flexunitlib/" rel="nofollow">FlexUnit</a> but what I'd really like is a unit test runner for Ant/NAnt and a runner that integrates with the Flex Builder IDE (AKA Eclipse). Does one exist? </p>
+
+<p>Also, are there any other resources on how to do Flex development "the right way" besides the <a href="http://labs.adobe.com/wiki/index.php/Cairngorm" rel="nofollow">Cairngorm microarchitecture</a> example?</p>
+
+<p>How do I call shell commands from inside of a Ruby program? How do I then get output from these commands back into Ruby?</p>
+
+<p>I currently use a DataTable to get results from a database which I can use in my code.</p>
+
+<p>However, many example on the web show using a DataSet instead and accessing the table(s) through the collections method.</p>
+
+<p>Is there any advantage, performance wise or otherwise, of using DataSets or DataTables as a storage method for SQL results?</p>
+
+<p>Is there a way of mapping data collected on a stream or array to a data structure or vice-versa?
+In C++ this would simply be a matter of casting a pointer to the stream as a data type I want to use (or vice-versa for the reverse)
+eg: in C++</p>
+
+<pre><code>Mystruct * pMyStrct = (Mystruct*)&amp;SomeDataStream;
+pMyStrct-&gt;Item1 = 25;
+
+int iReadData = pMyStrct-&gt;Item2;
+</code></pre>
+
+<p>obviously the C++ way is pretty unsafe unless you are sure of the quality of the stream data when reading incoming data, but for outgoing data is super quick and easy.</p>
+
+<p>How do I rewrite URL's in ASP.NET?</p>
+
+<p>I would like users to be able to goto <strong><a href="http://www.website.com/users/smith">http://www.website.com/users/smith</a></strong> instead of <strong><a href="http://www.website.com/?user=smith">http://www.website.com/?user=smith</a></strong></p>
+
+<p>I am building a web page to show a customer what software they purchased and to give them a link to download said software.  Unfortunately, the data on what was purchased and the download information are in separate databases so I can't just take care of it with joins in a query.</p>
+
+<p>The common item is SKU.  I'll be pulling back a list of SKUs from the customer purchases database, and on the download table is a comma delineated list of SKUs associated with that download.  My intention, at the moment, is to create from this one datatable to populate a GridView.</p>
+
+<p>Any suggestions on how to do this efficiently would be appreciated.  If it helps, I can pretty easily pull back the data as a DataSet or a DataReader, if either one would be better for this purpose.</p>
+
+<p>How can I add rules to Visual Studio (2005 and up) for validating property markup (HTML) for a vendor's proprietary controls?</p>
+
+<p>My client uses a control which requires several properties to be set as tags in the aspx file which generates something like 215 validation errors on each build. It's not preventing me from building, but real errors are getting lost in the noise.</p>
+<p>If you're following an Open Source project and would like to contribute code changes, what will you need to do?</p>
+<P>I want to be able to do:</P><PRE><CODE>For Each thing In things
+End For
+</CODE></PRE>
+<P>CLASSIC ASP - NOT .NET!</P>
+<p>I see in the Stack Overflow footer that the SVN Revision number is displayed. Is this automated and if so, how does one implement it in ASP.NET?</p>
+
+<p><em>(Solutions in other languages are acceptable)</em></p>
+<p>I have created a PHP-script to update a webserver that is live inside a local directory.
+I'm migrating the script into Python. It works fine for the most part, but after a PUT command the size of the file appears to change. Thus, the size of the file is different from that of the file on the server. </p>
+
+<p>Once I download again the file from the FTP server, the only difference is the CR/LF mark. This annoys me because the same script is comparing the size of the files to update. Also, in case it means anything, the script works perfectly in PHP vía ftp_put.</p>
+
+<pre><code>from ftplib import FTP
+
+ftpserver = "myserver"
+ftpuser = "myuser"
+ftppass = "mypwd"
+
+locfile =  "g:/test/style.css"
+ftpfile =  "/temp/style.css"
+
+try:
+    ftp = FTP(ftpserver, ftpuser, ftppass)
+except:
+    exit ("Cannot connect")
+
+f = open (locfile, "r")
+try:
+    ftp.delete (ftpfile)
+except:
+    pass
+
+# ftp.sendcmd ("TYPE I")
+# ftp.storlines("STOR %s" % ftpfile, f)
+ftp.storbinary("STOR %s" % ftpfile, f)
+f.close()
+
+ftp.dir (ftpfile)
+ftp.quit()
+</code></pre>
+
+<p>Any suggestions?</p>
+
+<p>I have a problem with maintaining state in an ASP.NET AJAX page. Short version: I need some way to update the page ViewState after an async callback has been made, to reflect any state changes the server made during the async call. </p>
+
+<p>This seems to be a common problem, but I will describe my scenario to help explain:</p>
+
+<p>I have a grid-like control which has some JavaScript enhancements - namely, the ability to drag and drop columns and rows. When a column or row is dropped into a new position, an AJAX method is invoked to notify the control server-side and fire a corresponding server-side event ("OnColumnMoved" or "OnRowMoved").</p>
+
+<p>ASP.NET AJAX calls, by default, send the entire page as the request. That way the page goes through a complete lifecycle, viewstate is persisted and the state of the control is restored before the RaiseCallbackEvent method is invoked.</p>
+
+<p>However, since the AJAX call does not update the page, the ViewState reflects the <em>original</em> state of the control, even after the column or row has been moved. So the second time a client-side action occurs, the AJAX request goes to the server and the page &amp; control are built back up again to reflect the <em>first</em> state of the control, not the state after the first column or row was moved.</p>
+
+<p>This problem extends to many implications. For example if we have a client-side/AJAX action to add a new item to the grid, and then a row is dragged, the grid is built server-side with one less item than on the client-side.</p>
+
+<p>And finally &amp; most seriously for my specific example, the actual data source object we are acting upon is stored in the page ViewState. That was a design decision to allow keeping a stateful copy of the manipulated data which can either be committed to DB after many manipulations or discarded if the user backs out. That is very difficult to change.</p>
+
+<p>So, again, I need a way for the page ViewState to be updated on callback after the AJAX method is fired.</p>
+
+<p>I am fed up having to turn them on every time I open the application.</p>
+<p>In the code below</p>
+
+<pre><code>For i = LBound(arr) To UBound(arr)
+</code></pre>
+
+<p>What is the point in asking using <code>LBound</code>? Surely that is always 0.</p>
+
+<p>In Windows, in any windows form or web browser, you can use the tab button to switch focus through all of the form fields. </p>
+
+<p>It will stop on textboxes, radiobuttons, checkboxes, dropdown menus, etc. </p>
+
+<p>However, in Mac OSX, tab skips dropdown menus. Is there anyway to change this behavior, or access the above items mentioned, without using a mouse?</p>
+
+<p>//Yes, Virginia, there is a wikipedia.</p>
+
+<p>What I'm asking here is what you've found unit testing to be in your own practice. </p>
+
+<p>It would be helpful to know the pros, cons, obstacles to introducing unit testing, flaws in the unit testing process, value gained by unit testing, and so on that the developers here have observed in their day to day practice.</p>
+
+<p><strong>What we're doing:</strong>  </p>
+
+<p>I work on a web application w/ an Oracle backend. </p>
+
+<p>The application has been in production for 8+ years, and there are ongoing enhancement efforts along with the maintenance work.</p>
+
+<p>My development team does Unit Test Scripts (UTS) that aim to walk a developer through the unit test of a given code package. </p>
+
+<p>These UTS are 2-20 page Word documents that describe the purpose of the package, the structure, and elaborate on given modules within a package. </p>
+
+<p>The UTS concludes with a section that describes an Application Test of the package.</p>
+
+<p>This doesn't sound like unit testing to me. It sounds a lot more like system integration testing w/ a description of the package. </p>
+
+<p>It certainly is not automated.</p>
+
+<p>With our UTS practice in its current state, managing/editing/follwing the documents is not a trivial task. And when enhancements or maintenance work to a given package is needed, there are not strict testing procedures put in place to guarantee outputs are satisfactory. </p>
+
+<p>Instead, we have this higher level UTS to follow, which does not come close to guaranteeing correct output in various code traces.</p>
+
+<blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href="http://stackoverflow.com/questions/44965/what-is-a-monad">What is a monad?</a>  </p>
+</blockquote>
+
+
+
+<p>I think I understand what 'Maybe Monads' are, but I'm not sure about the other types.</p>
+
+<P>I'm trying to read binary data using C#. I have all information about the layout of the data in the files I want to read. I'm able to read the data "chunk by chunk", i.e. getting the first 40 bytes of data converting it to a string, get the next 40 bytes, ...</P>
+<P>Since there are at least three slighlty different version of the data, I would like to read the data directly into a struct. It just feels so much more right than by reading it "line by line".</P>
+<P>I have tried the following approach but to no avail:</P><PRE><CODE>StructType aStruct;
+int count = Marshal.SizeOf(typeof(StructType));
+byte[] readBuffer = new byte[count];
+BinaryReader reader = new BinaryReader(stream);
+readBuffer = reader.ReadBytes(count);
+GCHandle handle = GCHandle.Alloc(readBuffer, GCHandleType.Pinned);
+aStruct = (StructType) Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(StructType));
+handle.Free();
+</CODE></PRE>
+<P>The stream is an opened FileStream from which I have began to read from. I get an AccessViolationException when using Marshal.PtrToStructure.</P>
+<P>The stream contains more information than I'm trying to read since I'm not interested in data at the end of the file.</P>
+<P>The struct is defined like:</P><PRE><CODE>[StructLayout(LayoutKind.Explicit)]
+struct StructType
+{
+    [FieldOffset(0)]
+    public string FileDate;
+    [FieldOffset(8)]
+    public string FileTime;
+    [FieldOffset(16)]
+    public int Id1;
+    [FieldOffset(20)]
+    public string Id2;
+}
+</CODE></PRE>
+<P>The examples code is changed from original to make this question shorter.</P>
+<P>How would I read binary data from a file into a struct?</P>
+<p>Where are some good sources of information on binary file layout structures?</p>
+
+<p>If I wanted to pull in a <code>BTrieve</code> index file, parse <code>MP3</code> headers, etc. Where does one get reliable information?</p>
+
+<p>Have you ever seen any of there error messages?</p>
+
+<blockquote>
+  <p>-- SQL Server 2000</p>
+  
+  <p>Could not allocate ancillary table for view or function resolution.<br>
+  The maximum number of tables in a query (256) was exceeded.</p>
+  
+  <p>-- SQL Server 2005</p>
+  
+  <p>Too many table names in the query. The maximum allowable is 256.</p>
+</blockquote>
+
+<p>If yes, what have you done?</p>
+
+<p>Given up? Convinced the customer to simplify their demands? Denormalized the database?</p>
+
+<hr>
+
+<p>@(everyone wanting me to post the query):</p>
+
+<ol>
+<li>I'm not sure if I can paste 70 kilobytes of code in the answer editing window.</li>
+<li>Even if I can this this won't help since this 70 kilobytes of code will reference 20 or 30 views that I would also have to post since otherwise the code will be meaningless.</li>
+</ol>
+
+<p>I don't want to sound like I am boasting here but the problem is not in the queries. The queries are optimal (or at least almost optimal). I have spent countless hours optimizing them, looking for every single column and every single table that can be removed. Imagine a report that has 200 or 300 columns that has to be filled with a single SELECT statement (because that's how it was designed a few years ago when it was still a small report).</p>
+
+<p>Regarding Agile development.</p>
+
+<p>What are the best practices for testing security per release?  </p>
+
+<p>If it is a monthly release, are there shops doing pen-tests every month?</p>
+
+<p>What is the best way to record statistics on the number of visitors visiting my site that have set their browser to block ads?</p>
+
+<p>I've been able to find details on several self-balancing <code>BST</code>s through several sources, but I haven't found any good descriptions detailing which one is best to use in different situations (or if it really doesn't matter).  </p>
+
+<p>I want a <code>BST</code> that is optimal for storing in excess of ten million nodes. The order of insertion of the nodes is basically random, and I will never need to delete nodes, so insertion time is the only thing that would need to be optimized.  </p>
+
+<p>I intend to use it to store previously visited game states in a puzzle game, so that I can quickly check if a previous configuration has already been encountered.</p>
+
+<P>With the rise of multicore CPUs on the desktop, multithreading skills will become a valuable asset for programmers. Can you recommend some good resources (books, tutorials, websites, etc.) for a programmer who is looking to learn about threaded programming?</P>
+<blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href="http://stackoverflow.com/questions/496096/casting-vs-using-the-as-keyword-in-the-clr">Casting vs using the &#39;as&#39; keyword in the CLR</a>  </p>
+</blockquote>
+
+
+
+<p>What is actually the difference between these two casts?</p>
+
+<pre><code>SomeClass sc = (SomeClass)SomeObject;
+SomeClass sc2 = SomeObject as SomeClass;
+</code></pre>
+
+<p>Normally, they should both be explicit casts to the specified type?</p>
+
+<p>Jeff mentioned the concept of 'Progressive Enhancement' when talking about using JQuery to write stackoverflow.</p>
+
+<p>After a quick Google, I found a couple of high-level discussions about it.</p>
+
+<p>Can anyone recommend a good place to start as a programmer.</p>
+
+<p>Specifically, I have been writing web apps in PHP and would like to use YUI to improve the pages I am writing, but a lot of them seem very JavaScript based, with most of the donkey work being done using JavaScript. To me, that seems a bit overkill, since viewing the site without Javascript will probably break most of it.</p>
+
+<p>Anyone have some good places to start using this idea, I don't really care about the language.</p>
+
+<p>Ideally, I would like to see how you start creating the static HTML first, and then adding the YUI (or whatever Ajax framework) to it so that you get the benefits of a richer client?</p>
+
+<p>I'm tired of opening Dia and creating a database diagram at the beginning of every project. Is there a tool out there that will let me select specific tables and then create a database diagram for me based on a MySQL database? Preferably it would allow me to edit the diagram afterward since none of the foreign keys are set...</p>
+
+<p>Here is what I am picturing diagram-wise (please excuse the horrible data design, I didn't design it. Let's focus on the diagram concept and not on the actual data it represents for this example ;) ):</p>
+
+<p><img src="http://i.stack.imgur.com/lxvlR.jpg" alt="diagram">
+<a href="http://i.stack.imgur.com/ZnN2O.png">see full size diagram</a></p>
+
+<p>Test Driven Development has been the rage in the .NET community for the last few years. Recently, I have heard grumblings in the ALT.NET community about BDD. What is it? What makes it different from TDD?</p>
+<p>I have 2 SQLite databases, one downloaded from a server (server.db), and one used as storage on the client (client.db). I need to perform various sync queries on the client database, using data from the server database.</p>
+
+<p>For example, I want to delete all rows in the client.db tRole table, and repopulate with all rows in the server.db tRole table.</p>
+
+<p>Another example, I want to delete all rows in the client.db tFile table where the fileID is not in the server.db tFile table.</p>
+
+<p>In SQL Server you can just prefix the table with the name of the database. Is there anyway to do this in SQLite using Adobe Air?</p>
+<p>I get the following error pretty regularly when compiling in Visual Studio and running my web application:</p>
+
+<p>"Unable to start debugging on the web server. The web server did not respond in a timely manner.  This may be because another debugger is already attached to the web server."</p>
+
+<p>Normally this is after having debug the application once already. From the command line I run "iisreset /restart" and it fixes the problem.</p>
+
+<p>How do I prevent this from happening in the first place?</p>
+<p>My product has several components: ASP.NET, Windows Forms App and Windows Service. 95% or so of the code is written in VB.NET.</p>
+
+<p>For Intellectual Property reasons, I need to obfuscate the code, and until now I have been using a version of dotfuscator which is now over 5 years old. I'm thinking it is time to move to a new generation tool. What I'm looking for is a list of requirements which I should consider when searching for a new obfuscator.</p>
+
+<p>What I know I should look for so far:</p>
+
+<ul>
+<li><strong><em>Serialization/De-serialization</em></strong>. In my current solution, I simply tell the tool <strong>not</strong> to obfuscate any class data members because the pain of not being able to load data which was previously serialized is simply too big.</li>
+<li><strong><em>Integration with Build Process</em></strong></li>
+<li><strong><em>Working with ASP.NET</em></strong>. In the past, I have found this problematic due to changing .dll names (you often have one per page) - which not all tools handle well.</li>
+</ul>
+
+<p>How can I find out which node in a tree list the context menu has been activated? For instance right-clicking a node and selecting an option from the menu. </p>
+
+<p>I can't use the TreeViews' <code>SelectedNode</code> property because the node is only been right-clicked and not selected.</p>
+
+<p>How do you disable <code>autocomplete</code> in the major browsers for a specific <code>input</code> (or <code>form field</code>)?</p>
+
+<p>What are good libraries for C with datastructures like vectors, deques, stacks, hashmaps, treemaps, sets, etc.? Plain C, please, and platform-independent.</p>
+<p>I'm aware of <a href="http://www.fusioncharts.com/">FusionCharts</a>, are there other good solutions, or APIs, for creating charts in Adobe Flash?</p>
+
