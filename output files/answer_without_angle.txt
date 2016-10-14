@@ -14,41 +14,41 @@ Well, here's how we do it on Stack Overflow.
 var ts = new TimeSpan(DateTime.UtcNow.Ticks - dt.Ticks);
 double delta = Math.Abs(ts.TotalSeconds);
 
-if (delta &lt; 60)
+if (delta < 60)
 {
   return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
 }
-if (delta &lt; 120)
+if (delta < 120)
 {
   return "a minute ago";
 }
-if (delta &lt; 2700) // 45 * 60
+if (delta < 2700) // 45 * 60
 {
   return ts.Minutes + " minutes ago";
 }
-if (delta &lt; 5400) // 90 * 60
+if (delta < 5400) // 90 * 60
 {
   return "an hour ago";
 }
-if (delta &lt; 86400) // 24 * 60 * 60
+if (delta < 86400) // 24 * 60 * 60
 {
   return ts.Hours + " hours ago";
 }
-if (delta &lt; 172800) // 48 * 60 * 60
+if (delta < 172800) // 48 * 60 * 60
 {
   return "yesterday";
 }
-if (delta &lt; 2592000) // 30 * 24 * 60 * 60
+if (delta < 2592000) // 30 * 24 * 60 * 60
 {
   return ts.Days + " days ago";
 }
-if (delta &lt; 31104000) // 12 * 30 * 24 * 60 * 60
+if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
 {
   int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-  return months &lt;= 1 ? "one month ago" : months + " months ago";
+  return months <= 1 ? "one month ago" : months + " months ago";
 }
 int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-return years &lt;= 1 ? "one year ago" : years + " years ago";
+return years <= 1 ? "one year ago" : years + " years ago";
 
 
 Suggestions? Comments? Ways to improve this algorithm?
@@ -67,17 +67,17 @@ CREATE TABLE binary_data (
 
 Here is a PHP example:
 
-&lt;?php
-    // store.php3 - by Florian Dittmer &lt;dittmer@gmx.net&gt;
+<?php
+    // store.php3 - by Florian Dittmer <dittmer@gmx.net>
     // Example php script to demonstrate the storing of binary files into
     // an sql database. More information can be found at http://www.phpbuilder.com/
-?&gt;
+?>
 
-&lt;html&gt;
-    &lt;head&gt;&lt;title&gt;Store binary data into SQL Database&lt;/title&gt;&lt;/head&gt;
+<html>
+    <head><title>Store binary data into SQL Database</title></head>
 
-    &lt;body&gt;
-        &lt;?php
+    <body>
+        <?php
             // Code that will be executed if the form has been submitted:
 
             if ($submit) {
@@ -93,34 +93,34 @@ Here is a PHP example:
                                     "VALUES ('$form_description', '$data', '$form_data_name', '$form_data_size', '$form_data_type')");
 
                 $id= mysql_insert_id();
-                print "&lt;p&gt;This file has the following Database ID: &lt;b&gt;$id&lt;/b&gt;";
+                print "<p>This file has the following Database ID: <b>$id</b>";
 
                 mysql_close();
             } else {
 
                 // else show the form to submit new data:
-        ?&gt;
-        &lt;form method="post" action="&lt;?php echo $PHP_SELF; ?&gt;" enctype="multipart/form-data"&gt;
-            File Description:&lt;br&gt;
-            &lt;input type="text" name="form_description"  size="40"&gt;
-            &lt;input type="hidden" name="MAX_FILE_SIZE" value="1000000"&gt;
-            &lt;br&gt;File to upload/store in database:&lt;br&gt;
-            &lt;input type="file" name="form_data"  size="40"&gt;
-            &lt;p&gt;&lt;input type="submit" name="submit" value="submit"&gt;
-        &lt;/form&gt;
+        ?>
+        <form method="post" action="<?php echo $PHP_SELF; ?>" enctype="multipart/form-data">
+            File Description:<br>
+            <input type="text" name="form_description"  size="40">
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+            <br>File to upload/store in database:<br>
+            <input type="file" name="form_data"  size="40">
+            <p><input type="submit" name="submit" value="submit">
+        </form>
 
-        &lt;?php
+        <?php
             }
-        ?&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
+        ?>
+    </body>
+</html>
 
 
 Many years ago, to provide an age calculator gimmick on my website, I wrote a function to calculate age to a fraction. This is a quick port of that function to C# (from the PHP version). I'm afraid I haven't been able to test the C# version, but hope you enjoy all the same!
 
 (Admittedly this is a bit gimmicky for the purposes of showing user profiles on Stack Overflow, but maybe readers will find some use for it. :-))
 
-double AgeDiff(DateTime date1, DateTime date2) {    double years = date2.Year - date1.Year;    /*     * If date2 and date1 + round(date2 - date1) are on different sides     * of 29 February, then our partial year is considered to have 366     * days total, otherwise it's 365. Note that 59 is the day number     * of 29 Feb.     */    double fraction = 365            + (DateTime.IsLeapYear(date2.Year) &amp;&amp; date2.DayOfYear &gt;= 59            &amp;&amp; (date1.DayOfYear &lt; 59 || date1.DayOfYear &gt; date2.DayOfYear)            ? 1 : 0);    /*     * The only really nontrivial case is if date1 is in a leap year,     * and date2 is not. So let's handle the others first.     */    if (DateTime.IsLeapYear(date2.Year) == DateTime.IsLeapYear(date1.Year))        return years + (date2.DayOfYear - date1.DayOfYear) / fraction;    /*     * If date2 is in a leap year, but date1 is not and is March or     * beyond, shift up by a day.     */    if (DateTime.IsLeapYear(date2.Year)) {        return years + (date2.DayOfYear - date1.DayOfYear                - (date1.DayOfYear &gt;= 59 ? 1 : 0)) / fraction;    }    /*     * If date1 is not on 29 February, shift down date1 by a day if     * March or later. Proceed normally.     */    if (date1.DayOfYear != 59) {        return years + (date2.DayOfYear - date1.DayOfYear                + (date1.DayOfYear &gt; 59 ? 1 : 0)) / fraction;    }    /*     * Okay, here date1 is on 29 February, and date2 is not on a leap     * year. What to do now? On 28 Feb in date2's year, the ``age''     * should be just shy of a whole number, and on 1 Mar should be     * just over. Perhaps the easiest way is to a point halfway     * between those two: 58.5.     */    return years + (date2.DayOfYear - 58.5) / fraction;}
+double AgeDiff(DateTime date1, DateTime date2) {    double years = date2.Year - date1.Year;    /*     * If date2 and date1 + round(date2 - date1) are on different sides     * of 29 February, then our partial year is considered to have 366     * days total, otherwise it's 365. Note that 59 is the day number     * of 29 Feb.     */    double fraction = 365            + (DateTime.IsLeapYear(date2.Year) && date2.DayOfYear >= 59            && (date1.DayOfYear < 59 || date1.DayOfYear > date2.DayOfYear)            ? 1 : 0);    /*     * The only really nontrivial case is if date1 is in a leap year,     * and date2 is not. So let's handle the others first.     */    if (DateTime.IsLeapYear(date2.Year) == DateTime.IsLeapYear(date1.Year))        return years + (date2.DayOfYear - date1.DayOfYear) / fraction;    /*     * If date2 is in a leap year, but date1 is not and is March or     * beyond, shift up by a day.     */    if (DateTime.IsLeapYear(date2.Year)) {        return years + (date2.DayOfYear - date1.DayOfYear                - (date1.DayOfYear >= 59 ? 1 : 0)) / fraction;    }    /*     * If date1 is not on 29 February, shift down date1 by a day if     * March or later. Proceed normally.     */    if (date1.DayOfYear != 59) {        return years + (date2.DayOfYear - date1.DayOfYear                + (date1.DayOfYear > 59 ? 1 : 0)) / fraction;    }    /*     * Okay, here date1 is on 29 February, and date2 is not on a leap     * year. What to do now? On 28 Feb in date2's year, the ``age''     * should be just shy of a whole number, and on 1 Mar should be     * just over. Perhaps the easiest way is to a point halfway     * between those two: 58.5.     */    return years + (date2.DayOfYear - 58.5) / fraction;}
 The best way that I know of because of leap years and everything is:
 
 DateTime birthDate = new DateTime(2000,3,1);int age = (int)Math.Floor((DateTime.Now - birthDate).TotalDays / 365.25D);
@@ -138,16 +138,16 @@ IMHO yours seems a little long.  However it does seem a little more robust with 
 
 This is the method I am currently using on one of my websites.  This only returns a relative day, hour, time.  And then the user has to slap on "ago" in the output.
 
-public static string ToLongString(this TimeSpan time){    string output = String.Empty;    if (time.Days &gt; 0)        output += time.Days + " days ";    if ((time.Days == 0 || time.Days == 1) &amp;&amp; time.Hours &gt; 0)        output += time.Hours + " hr ";    if (time.Days == 0 &amp;&amp; time.Minutes &gt; 0)        output += time.Minutes + " min ";    if (output.Length == 0)        output += time.Seconds + " sec";    return output.Trim();}
+public static string ToLongString(this TimeSpan time){    string output = String.Empty;    if (time.Days > 0)        output += time.Days + " days ";    if ((time.Days == 0 || time.Days == 1) && time.Hours > 0)        output += time.Hours + " hr ";    if (time.Days == 0 && time.Minutes > 0)        output += time.Minutes + " min ";    if (output.Length == 0)        output += time.Seconds + " sec";    return output.Trim();}
 There are no HTTP headers that will report the clients timezone so far although it has been suggested to include it in the HTTP specification.
 
 If it was me, I would probably try to fetch the timezone using clientside JavaScript and then submit it to the server using Ajax or something.
 I've had no trouble using the BSD sockets API in C++, in GNU/Linux. Here's the sample program I used:
 
-#include &lt;sys/socket.h&gt;intmain(){    return AF_INET;}
+#include <sys/socket.h>intmain(){    return AF_INET;}
 
 So my take on this is that z/OS is probably the complicating factor here, however, because I've never used z/OS before, much less programmed in it, I can't say this definitively. :-P
-The parent div needs to have a defined width, either in pixels or as a percentage. In Internet&nbsp;Explorer&nbsp;7, the parent div needs a defined width for child percentage divs to work correctly.
+The parent div needs to have a defined width, either in pixels or as a percentage. In Internet Explorer 7, the parent div needs a defined width for child percentage divs to work correctly.
 
 Math.Floor rounds down, Math.Ceiling rounds up, and Math.Truncate rounds towards zero. Thus, Math.Truncate is like Math.Floor for positive numbers, and like Math.Ceiling for negative numbers. Here's the reference.
 
@@ -157,7 +157,7 @@ See also: Pax Diablo's answer. Highly recommended!
 
 Sure I can post a test app.
 
-#include &lt;sys/socket.h&gt;int main(){    return AF_INET;}
+#include <sys/socket.h>int main(){    return AF_INET;}
 
 Compile/Link Output:
 
@@ -194,7 +194,7 @@ http://www.craftymind.com/2008/04/09/kick-starting-the-garbage-collector-in-acti
 
 So I'd recommend trying out their collection code and see if it helps
 
-private var gcCount:int;private function startGCCycle():void{    gcCount = 0;    addEventListener(Event.ENTER_FRAME, doGC);}private function doGC(evt:Event):void{    flash.system.System.gc();    if(++gcCount &gt; 1){        removeEventListener(Event.ENTER_FRAME, doGC);        setTimeout(lastGC, 40);    }}private function lastGC():void{    flash.system.System.gc();}
+private var gcCount:int;private function startGCCycle():void{    gcCount = 0;    addEventListener(Event.ENTER_FRAME, doGC);}private function doGC(evt:Event):void{    flash.system.System.gc();    if(++gcCount > 1){        removeEventListener(Event.ENTER_FRAME, doGC);        setTimeout(lastGC, 40);    }}private function lastGC():void{    flash.system.System.gc();}
 (I'm not positive about this, but...)
 
 AS3 uses a non-deterministic garbage collection. Which means that unreferenced memory will be freed up whenever the runtime feels like it (typically not unless there's a reason to run, since it's an expensive operation to execute). This is the same approach used by most modern garbage collected languages (like C# and Java as well).
@@ -213,8 +213,8 @@ You can read more here.
 
 Give your submit buttons same name like this:
 
-&lt;input type="submit" name="submitButton" value="Previous Page" /&gt;
-&lt;input type="submit" name="submitButton" value="Next Page" /&gt;
+<input type="submit" name="submitButton" value="Previous Page" />
+<input type="submit" name="submitButton" value="Next Page" />
 
 
 When the user presses enter and the Request goes to server, you can check the value for submitButton on your server-side code which contains a collection of form name/value pairs. For example in classic ASP:
@@ -230,12 +230,12 @@ Reference: Using multiple submit buttons on a single form
 
 Would it be possible for you to change the previous button type into a button like this:  
 
-&lt;input type="button" name="prev" value="Previous Page" /&gt;
+<input type="button" name="prev" value="Previous Page" />
 
 
 Now the Next button would be the default, plus you could also add the default attribute to it so that your browser will highlight it like so:
 
-&lt;input type="submit" name="next" value="Next Page" default /&gt;
+<input type="submit" name="next" value="Next Page" default />
 
 
 Hope that helps.
@@ -264,7 +264,7 @@ The problem is that the Distinct
 So your query will need to work like this
 
 var names = (from DataRow dr in dataTable.Rows
-             select (string)dr["Name"]).Distinct().OrderBy( name =&gt; name );
+             select (string)dr["Name"]).Distinct().OrderBy( name => name );
 
 
 Office 2007 MIME Types for IIS
@@ -313,7 +313,7 @@ This is not a quick method to use. But it's a nice example of a Monte Carlo meth
 
 @Jax: The extern "C" thing matters, very very much. If a header file doesn't have one, then (unless it's a C++-only header file), you would have to enclose your #include with it:
 
-extern "C" {#include &lt;sys/socket.h&gt;// include other similarly non-compliant header files}
+extern "C" {#include <sys/socket.h>// include other similarly non-compliant header files}
 
 Basically, anytime where a C++ program wants to link to C-based facilities, the extern "C" is vital. In practical terms, it means that the names used in external references will not be mangled, like normal C++ names would. Reference.
 I believe the easiest way would be to follow Jeff's own advice and have a look around existing code. Try looking at Wordpress, Drupal, Joomla and other well known PHP-based CMS's to see how their API hooks look and feel. This way you can even get ideas you may have not thought of previously to make things a little more rubust.
@@ -321,7 +321,7 @@ I believe the easiest way would be to follow Jeff's own advice and have a look a
 A more direct answer would be to write general files that they would "include_once" into their file that would provide the usability they would need. This would be broken up into categories and NOT provided in one MASSIVE "hooks.php" file. Be careful though, because what ends up happening is that files that they include end up having more and more dependencies and functionality improves. Try to keep API dependencies low. I.E fewer files for them to include.
 You could use an Observer pattern.  A simple functional way to accomplish this:
 
-&lt;?php/** Plugin system **/$listeners = array();/* Create an entry point for plugins */function hook(){  global $listeners;  $num_args = func_num_args();  $args = func_get_args();  if($num_args &lt; 2)    trigger_error("Insufficient arguments", E_USER_ERROR);  // Hook name should always be first argument  $hook_name = array_shift($args);  if(!isset($listeners[$hook_name]))    return; // No plugins have registered this hook  foreach($listeners[$hook_name] as $func){    $args = $func($args);   }  return $args;}/* Attach a function to a hook */function add_listener($hook, $function_name){  global $listeners;  $listeners[$hook][] = $function_name;}//////////////////////////** Sample Plugin **/add_listener('a_b', 'my_plugin_func1');add_listener('str', 'my_plugin_func2');function my_plugin_func1($args){  return array(4, 5);}function my_plugin_func2($args){  return str_replace('sample', 'CRAZY', $args[0]);}//////////////////////////** Sample Application **/$a = 1;$b = 2;list($a, $b) = hook('a_b', $a, $b);$str  = "This is my sample application\n";$str .= "$a + $b = ".($a+$b)."\n";$str .= "$a * $b = ".($a*$b)."\n";$str = hook('str', $str);echo $str;?&gt;
+<?php/** Plugin system **/$listeners = array();/* Create an entry point for plugins */function hook(){  global $listeners;  $num_args = func_num_args();  $args = func_get_args();  if($num_args < 2)    trigger_error("Insufficient arguments", E_USER_ERROR);  // Hook name should always be first argument  $hook_name = array_shift($args);  if(!isset($listeners[$hook_name]))    return; // No plugins have registered this hook  foreach($listeners[$hook_name] as $func){    $args = $func($args);   }  return $args;}/* Attach a function to a hook */function add_listener($hook, $function_name){  global $listeners;  $listeners[$hook][] = $function_name;}//////////////////////////** Sample Plugin **/add_listener('a_b', 'my_plugin_func1');add_listener('str', 'my_plugin_func2');function my_plugin_func1($args){  return array(4, 5);}function my_plugin_func2($args){  return str_replace('sample', 'CRAZY', $args[0]);}//////////////////////////** Sample Application **/$a = 1;$b = 2;list($a, $b) = hook('a_b', $a, $b);$str  = "This is my sample application\n";$str .= "$a + $b = ".($a+$b)."\n";$str .= "$a * $b = ".($a*$b)."\n";$str = hook('str', $str);echo $str;?>
 
 Output:
 
@@ -391,9 +391,9 @@ $data = array();
 if( $_POST ) {
     $data = $_POST;
 
-    $content = "&lt;?php\n";
+    $content = "<?php\n";
     $content .= '$data=' . var_export($data, true) . "\n";
-    $content .= "?&gt;";
+    $content .= "?>";
 
     save_to_file($filename, $content);
 }
@@ -457,7 +457,7 @@ I wound up using this. It is a kind of a hack, but it actually works pretty well
 var strSql:String = stream.readUTFBytes(stream.bytesAvailable);      
 var i:Number = 0;
 var strSqlSplit:Array = strSql.split(";");
-for (i = 0; i &lt; strSqlSplit.length; i++){
+for (i = 0; i < strSqlSplit.length; i++){
     NonQuery(strSqlSplit[i].toString());
 }
 
@@ -481,13 +481,13 @@ Another approach would be to utilize a private/protected method to actually do t
 
 PHP:
 
-public function getName() {    $this-&gt;incrementNameCalled();    return $this-&gt;_getName();}protected function _getName() {    return $this-&gt;name;}
+public function getName() {    $this->incrementNameCalled();    return $this->_getName();}protected function _getName() {    return $this->name;}
 
 and then from within the object itself:
 
 PHP:
 
-$name = $this-&gt;_getName();
+$name = $this->_getName();
 
 This way you can still use that first argument for something else (like sending a flag for whether or not to used cached data here perhaps). 
 Another tool to try would be the SQLMaestro suite - http://www.sqlmaestro.com It is a little tricky nailing down the precise tool, but they have a variety of tools, both free and for purchase that handle a wide variety of tasks for multiple database platforms. I'd suggest trying the Data Wizard tool first for MySQL, since I believe that will have the proper "import" tool you need.
@@ -543,15 +543,15 @@ function base64_url_encode($input) {
 
 http://us.php.net/manual/en/function.base64-encode.php
 
-If you are using some javascript or a flash player (JW player for example) that requires the actual link to be an mp3 file or whatever, you can append the text "&amp;type=.mp3" so the final linke becomes something like "www.example.com/xfer.php?file=34842ffjfjxfh&amp;type=.mp3". That way it looks like it ends with an mp3 extension without affecting the file link.
+If you are using some javascript or a flash player (JW player for example) that requires the actual link to be an mp3 file or whatever, you can append the text "&type=.mp3" so the final linke becomes something like "www.example.com/xfer.php?file=34842ffjfjxfh&type=.mp3". That way it looks like it ends with an mp3 extension without affecting the file link.
 
 You could even set up an Apache .htaccess directive that converts *.mp3 requests into the querystring dubayou is working with. It might be an elegant way to keep the direct request and still be able to slipstream log function into the response.
 Well, what is the nature of the flat databases.  Are they large or small.  Is it simple arrays with arrays in them?  if its something simple say userprofiles built as such:
 
-$user = array("name" =&gt; "dubayou", 
-              "age" =&gt; 20,
-              "websites" =&gt; array("dubayou.com","willwharton.com","codecream.com"),
-              "and_one" =&gt; "more");
+$user = array("name" => "dubayou", 
+              "age" => 20,
+              "websites" => array("dubayou.com","willwharton.com","codecream.com"),
+              "and_one" => "more");
 
 
 and to save or update the db record for that user.
@@ -562,7 +562,7 @@ file_put_contents($dir.$user['name'],serialize($user));
 
 and to load the record for the user
 
-function &amp;get_user($name){
+function &get_user($name){
     return unserialize(file_get_contents("../userdata/".$name));
 }
 
@@ -606,7 +606,7 @@ $Id:$
 
 So for example @Jeff did:
 
-&lt;div id="svnrevision"&gt;svn revision: $Id:$&lt;/div&gt;
+<div id="svnrevision">svn revision: $Id:$</div>
 
 
 and when checked in the server replaced $Id:$ with the current revision number.  I also found this reference.
@@ -615,7 +615,7 @@ There is also $Date:$, $Rev:$, $Revision:$
 
 You could use conditional comments to get IE and Firefox to do different things
 
-&lt;![if !IE]&gt;&lt;p&gt; Firefox only code&lt;/p&gt;&lt;![endif]&gt;&lt;!--[if IE]&gt;&lt;p&gt;Internet Explorer only code&lt;/p&gt;&lt;![endif]--&gt;
+<![if !IE]><p> Firefox only code</p><![endif]><!--[if IE]><p>Internet Explorer only code</p><![endif]-->
 
 The browsers themselves will ignore code that isn't meant for them to read.
 Personally, I feel like it's important to remain consistent.  If you have getters and setters, use them.  The only time I would access a field directly is when the accessor has a lot of overhead.  It may feel like you're bloating your code unnecessarily, but it can certainly save a whole lot of headache in the future.  The classic example:
@@ -634,7 +634,7 @@ Converting a CSV file to XML doesn't add any value. Your program is already read
 On the other hand, reading the CSV file, doing something with the values, and then serializing to XML does make sense (well, as much as using XML can make sense... ;)) but you would supposedly already have a means of serializing to XML.
 This is one of the "hard problems" surrounding development. As far as I know there are no perfect solutions. 
 
-If you only need to store the database structure and not the data you can export the database as SQL queries. (in Enterprise Manager: Right click on database -&gt; Generate SQL script. I recommend setting the "create one file per object" on the options tab) You can then commit these text files to svn and make use of svn's diff and logging functions. 
+If you only need to store the database structure and not the data you can export the database as SQL queries. (in Enterprise Manager: Right click on database -> Generate SQL script. I recommend setting the "create one file per object" on the options tab) You can then commit these text files to svn and make use of svn's diff and logging functions. 
 
 I have this tied together with a Batch script that takes a couple parameters and sets up the database. I also added some additional queries that enter default data like user types and the admin user. (If you want more info on this, post something and I can put the script somewhere accessible)
 
@@ -650,11 +650,11 @@ I'm not sure this is exactly what you want, but this is one way to randomly gene
 
 (beware, inconsistent pseudo-code ahead)
 
-//colors entered as 0-255 [R, G, B]colors = []; //holds final colors to be usedrand = new Random();//assumes n is less than 16,777,216randomGen(int n){   while (len(colors) &lt; n){      //generate a random number between 0,255 for each color      newRed = rand.next(256);      newGreen = rand.next(256);      newBlue = rand.next(256);      temp = [newRed, newGreen, newBlue];      //only adds new colors to the array      if temp not in colors {         colors.append(temp);      }   }}
+//colors entered as 0-255 [R, G, B]colors = []; //holds final colors to be usedrand = new Random();//assumes n is less than 16,777,216randomGen(int n){   while (len(colors) < n){      //generate a random number between 0,255 for each color      newRed = rand.next(256);      newGreen = rand.next(256);      newBlue = rand.next(256);      temp = [newRed, newGreen, newBlue];      //only adds new colors to the array      if temp not in colors {         colors.append(temp);      }   }}
 
 One way you could optimize this for better visibility would be to compare the distance between each new color and all the colors in the array:
 
-for item in color{   itemSq = (item[0]^2 + item[1]^2 + item[2]^2])^(.5);   tempSq = (temp[0]^2 + temp[1]^2 + temp[2]^2])^(.5);   dist = itemSq - tempSq;   dist = abs(dist);}//NUMBER can be your chosen distance apart.if dist &lt; NUMBER and temp not in colors {   colors.append(temp);}
+for item in color{   itemSq = (item[0]^2 + item[1]^2 + item[2]^2])^(.5);   tempSq = (temp[0]^2 + temp[1]^2 + temp[2]^2])^(.5);   dist = itemSq - tempSq;   dist = abs(dist);}//NUMBER can be your chosen distance apart.if dist < NUMBER and temp not in colors {   colors.append(temp);}
 
 But this approach would significantly slow down your algorithm.
 
@@ -663,11 +663,11 @@ You can try turning Check-constraints off on the DataSet (it's in its properties
 
 To set the Apache (not the PHP) log, the easiest way to do this would be to do:
 
-&lt;VirtualHost IP:Port&gt;
+<VirtualHost IP:Port>
    # Stuff,
    # More Stuff,
    ErrorLog /path/where/you/want/the/error.log
-&lt;/VirtualHost&gt;
+</VirtualHost>
 
 
 If there is no leading "/" it is assumed to be relative.
@@ -689,7 +689,7 @@ public static int GetAge(DateTime birthDate)
     DateTime n = DateTime.Now; // To avoid a race condition around midnight
     int age = n.Year - birthDate.Year;
 
-    if (n.Month &lt; birthDate.Month || (n.Month == birthDate.Month &amp;&amp; n.Day &lt; birthDate.Day))
+    if (n.Month < birthDate.Month || (n.Month == birthDate.Month && n.Day < birthDate.Day))
         age--;
 
     return age;
@@ -733,7 +733,7 @@ ELSE
 So hopefully the combination of those articles and this pseudo code can get things moving.
 Off the top of my head...
 
-$artist = array("the roots","michael jackson","billy idol","more","and more","and_YET_MORE");$count = array(5,3,9,1,1,3);$highest = max($count);for (int $x = 0; x &lt; count($artist); $x++){    $normalized = $count[$x] / $highest;    $heading = ceil($normalized * 6); // 6 heading types    echo "&lt;h".$heading."&gt;".$artist[$x]."&lt;/h".$heading."&gt;";}
+$artist = array("the roots","michael jackson","billy idol","more","and more","and_YET_MORE");$count = array(5,3,9,1,1,3);$highest = max($count);for (int $x = 0; x < count($artist); $x++){    $normalized = $count[$x] / $highest;    $heading = ceil($normalized * 6); // 6 heading types    echo "<h".$heading.">".$artist[$x]."</h".$heading.">";}
 I think the best you can do in this case is to take their input and then show them what you think they meant. If they disagree, show them the format you're expecting and get them to enter it again.
 Any assemblies that are expected to be in the GAC should stay in the GAC. This includes System.web.dll or any other 3rd party dll that you'll deploy to the GAC in production. This means a new developer would have to install these assemblies.
 
@@ -763,7 +763,7 @@ That's why I wanted to stay with a "real" .NET language to essentially be able t
 
 That's correct but it actually makes the tags with the least number, larger.  This code has been tested:
 
-$artist = array("the roots","michael jackson","billy idol","more","and more","and_YET_MORE");$count = array(5,3,9,1,1,3);$highest = max($count);for ($x = 0; $x &lt; count($artist); $x++) {    $normalized =  ($highest - $count[$x]+1) / $highest;    $heading = ceil($normalized * 6); // 6 heading types    echo "&lt;h$heading&gt;{$artist[$x]}&lt;/h$heading&gt;";}
+$artist = array("the roots","michael jackson","billy idol","more","and more","and_YET_MORE");$count = array(5,3,9,1,1,3);$highest = max($count);for ($x = 0; $x < count($artist); $x++) {    $normalized =  ($highest - $count[$x]+1) / $highest;    $heading = ceil($normalized * 6); // 6 heading types    echo "<h$heading>{$artist[$x]}</h$heading>";}
 
   kevind wrote:
   
@@ -784,7 +784,7 @@ It may be worth looking into that.
 Otherwise, I can't think of anything beyond the Web Browser control.
 Looking around, and using some C# 3.0 features we can do this:
 
-foreach (KeyValuePair&lt;string,int&gt; item in keywordCounts.OrderBy(key=&gt; key.Value))
+foreach (KeyValuePair<string,int> item in keywordCounts.OrderBy(key=> key.Value))
 { 
     // do something with item.Key and item.Value
 }
@@ -798,15 +798,15 @@ Maybe this helps:
 http://bytes.com/forum/thread563638.html
 Copy/Pasting from John Timney:
 
-Dictionary&lt;string, string&gt; s = new Dictionary&lt;string, string&gt;();
+Dictionary<string, string> s = new Dictionary<string, string>();
 s.Add("1", "a Item");
 s.Add("2", "c Item");
 s.Add("3", "b Item");
 
-List&lt;KeyValuePair&lt;string, string&gt;&gt; myList = new List&lt;KeyValuePair&lt;string, string&gt;&gt;(s);
+List<KeyValuePair<string, string>> myList = new List<KeyValuePair<string, string>>(s);
 myList.Sort(
-    delegate(KeyValuePair&lt;string, string&gt; firstPair,
-    KeyValuePair&lt;string, string&gt; nextPair)
+    delegate(KeyValuePair<string, string> firstPair,
+    KeyValuePair<string, string> nextPair)
     {
         return firstPair.Value.CompareTo(nextPair.Value);
     }
@@ -820,11 +820,11 @@ php_admin_value error_log "/var/www/vhosts/example.com/error_log"
 
 using System.Linq.Enumerable;
 ...
-List&lt;KeyValuePair&lt;string, string&gt;&gt; myList = aDictionary.ToList();
+List<KeyValuePair<string, string>> myList = aDictionary.ToList();
 
 myList.Sort(
-    delegate(KeyValuePair&lt;string, string&gt; pair1,
-    KeyValuePair&lt;string, string&gt; pair2)
+    delegate(KeyValuePair<string, string> pair1,
+    KeyValuePair<string, string> pair2)
     {
         return pair1.Value.CompareTo(pair2.Value);
     }
@@ -835,7 +835,7 @@ Since you're targeting .net 2.0 or above, you can simplify this into lambda synt
 
 var myList = aDictionary.ToList();
 
-myList.Sort((pair1,pair2) =&gt; pair1.Value.CompareTo(pair2.Value));
+myList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
 
 
 Try removing the 0x first and then call Encoding.UTF8.GetString. I think that may work.
@@ -977,16 +977,16 @@ function ajaxpage() {
     }
 
     if (bustcachevar) {
-        bustcacheparameter=(url.indexOf("?")!=-1) ? "&amp;"+new Date().getTime() : "?"+new Date().getTime();
+        bustcacheparameter=(url.indexOf("?")!=-1) ? "&"+new Date().getTime() : "?"+new Date().getTime();
     }
 
-    page_request.open('GET', url+bustcacheparameter+"&amp;time="+time, true);
+    page_request.open('GET', url+bustcacheparameter+"&time="+time, true);
     page_request.send(null);
 }
 
 function loadpage(page_request, containerid) {
-    if (page_request.readyState == 4 &amp;&amp; (page_request.status==200 || window.location.href.indexOf("http")==-1)) {
-        document.write('&lt;meta http-equiv="refresh" content="0;url=http://example.com/"/&gt;');
+    if (page_request.readyState == 4 && (page_request.status==200 || window.location.href.indexOf("http")==-1)) {
+        document.write('<meta http-equiv="refresh" content="0;url=http://example.com/"/>');
     }
 }
 
@@ -995,10 +995,10 @@ function loadpage(page_request, containerid) {
 
 timezone.php:
 
-&lt;?php
+<?php
 session_start();
 $_SESSION['time'] = $_GET['time'];
-?&gt;
+?>
 
 
 
@@ -1034,7 +1034,7 @@ you'd then need to remove all strings less than x in length, they'll be the firs
 There's a PHP5 "database migration framework" called Ruckusing. I haven't used it, but the examples show the idea, if you use the language to create the database as and when needed, you only have to track source files.
 I just whipped this up quick in Ruby:
 
-def perms(x, y, possible_characters)  all = [""]  current_array = all.clone  1.upto(y) { |iteration|    next_array = []    current_array.each { |string|      possible_characters.each { |c|        value = string + c        next_array.insert next_array.length, value        all.insert all.length, value      }    }    current_array = next_array  }  all.delete_if { |string| string.length &lt; x }end
+def perms(x, y, possible_characters)  all = [""]  current_array = all.clone  1.upto(y) { |iteration|    next_array = []    current_array.each { |string|      possible_characters.each { |c|        value = string + c        next_array.insert next_array.length, value        all.insert all.length, value      }    }    current_array = next_array  }  all.delete_if { |string| string.length < x }end
 
 You might look into language API for built in permutation type functions, and you might be able to write more optimized code, but if the numbers are all that high, I'm not sure there is much of a way around having a lot of results.
 
@@ -1056,8 +1056,8 @@ it took this long to call printf: 207485
 
 Here's the Intel developer's guide that  gives tons of detail.
 
-#include &lt;stdio.h&gt;
-#include &lt;stdint.h&gt;
+#include <stdio.h>
+#include <stdint.h>
 
 inline uint64_t rdtsc() {
     uint32_t lo, hi;
@@ -1068,7 +1068,7 @@ inline uint64_t rdtsc() {
       : "=a" (lo), "=d" (hi)
       :
       : "%ebx", "%ecx");
-    return (uint64_t)hi &lt;&lt; 32 | lo;
+    return (uint64_t)hi << 32 | lo;
 }
 
 main()
@@ -1085,23 +1085,23 @@ main()
 
 Personally I would do something like this:
 
-&lt;?php
-    $data = array($rating[0] =&gt; array('word0', 'word1', 'word2'), $rating[1] =&gt; array('word3', 'word4', 'word8',...));
+<?php
+    $data = array($rating[0] => array('word0', 'word1', 'word2'), $rating[1] => array('word3', 'word4', 'word8',...));
     //assums that $rating is an array with the weight of each word so the more popular words would have a higher value in rating
     usort($data); //sort the $data variable, this should give us the most popular words first
     $size = '1';
     foreach($data as $rank)
     {
         $i=0;
-        while($i&lt;$count($rank))
+        while($i<$count($rank))
         {
-            echo "&lt;h" . $size . "&gt;" . $rank[$i] . "&lt;/h" . $size . "&gt;";
+            echo "<h" . $size . ">" . $rank[$i] . "</h" . $size . ">";
             $i++;
         }
 
         $size++;
     }
-?&gt;
+?>
 
 
 Assuming I'm not a complete idiot this should work. But it is untested.
@@ -1117,13 +1117,13 @@ Put your site name or address in the subject
 Keep all links in the message pointing to your domain (and not email.com)
 Put an address or other contact information in the email
 
-This warning is there because Java is not actually storing type information at run-time in an object that uses generics.  Thus, if object is actually a List&lt;String&gt;, there will be no ClassCastException at run-time except until an item is accessed from the list that doesn't match the generic type defined in the variable.  
+This warning is there because Java is not actually storing type information at run-time in an object that uses generics.  Thus, if object is actually a List<String>, there will be no ClassCastException at run-time except until an item is accessed from the list that doesn't match the generic type defined in the variable.  
 
 This can cause further complications if items are added to the list, with this incorrect generic type information.  Any code still holding a reference to the list but with the correct generic type information will now have an inconsistent list.  
 
 To remove the warning, try:
 
-List&lt;?&gt; list = (List&lt;?&gt;) object;
+List<?> list = (List<?>) object;
 
 
 However, note that you will not be able to use certain methods such as add because the compiler doesn't know if you are trying to add an object of incorrect type.  The above will work in a lot of situations, but if you have to use add, or some similarly restricted method, you will just have to suffer the yellow underline in Eclipse (or a SuppressWarning annotation).
@@ -1134,7 +1134,7 @@ Lets say your set of possible characters is the 26 lowercase letters of the alph
 
 Here's a solution I put together in Java. You'll need to provide two runtime arguments (corresponding to x and y). Have fun.
 
-public class GeneratePermutations {    public static void main(String[] args) {        int lower = Integer.parseInt(args[0]);        int upper = Integer.parseInt(args[1]);        if (upper &lt; lower || upper == 0 || lower == 0) {            System.exit(0);        }        for (int length = lower; length &lt;= upper; length++) {            generate(length, "");        }    }    private static void generate(int length, String partial) {        if (length &lt;= 0) {            System.out.println(partial);        } else {            for (char c = 'a'; c &lt;= 'z'; c++) {                generate(length - 1, partial + c);            }        }    }}
+public class GeneratePermutations {    public static void main(String[] args) {        int lower = Integer.parseInt(args[0]);        int upper = Integer.parseInt(args[1]);        if (upper < lower || upper == 0 || lower == 0) {            System.exit(0);        }        for (int length = lower; length <= upper; length++) {            generate(length, "");        }    }    private static void generate(int length, String partial) {        if (length <= 0) {            System.out.println(partial);        } else {            for (char c = 'a'; c <= 'z'; c++) {                generate(length - 1, partial + c);            }        }    }}
 The scoring contains the Inverse Document Frequency(IDF). If the term "John Smith" is in one partition, 0, 100 times and in partition 1, once. The score for searching for John Smith would be higher search in partition 1 as the term is more scarce.
 
 To get round this you would wither have to have your index being over all partitions, or you would need to override the IDF.
@@ -1153,7 +1153,7 @@ Make sure that the IP-address that you're using is not on a blacklist
 
 Make sure that the reply-to address is a valid, existing address.
 
-Use the full, real name of the addressee in the To field, not just the email-address (e.g. "John Smith" &lt;john@blacksmiths-international.com&gt; ).
+Use the full, real name of the addressee in the To field, not just the email-address (e.g. "John Smith" <john@blacksmiths-international.com> ).
 
 Monitor your abuse accounts, such as abuse@yourdomain.com and postmaster@yourdomain.com. That means - make sure that these accounts exist, read what's sent to them, and act on complaints.
 
@@ -1175,7 +1175,7 @@ Tortoise SVN with Ankhsvn for VS 2005
 
 
 
-The difference between 12.345 in French and English is a factor of 1000. If you supply an expected range where max &lt; 1000*min, you can easily guess. 
+The difference between 12.345 in French and English is a factor of 1000. If you supply an expected range where max < 1000*min, you can easily guess. 
 
 Take for example the height of a person (including babies and children) in mm.
 
@@ -1209,7 +1209,7 @@ When a new session starts, check for the existence of the id/value cookie and au
 The author also recommends invalidating the random value and resetting the cookie at every login.  Personally I don't like that as you then can't stay logged into a site on two computers.  I would tend to make sure my password changing function also reset the random value thus locking out sessions on other machines. 
 
 As a final note, the advice he gives on making certain functions (password change/email change etc) unavailable to auto authenticated sessions is well worth following but rarely seen in the real world.
-open up a terminal (Applications-&gt;Utilities-&gt;Terminal) and type this in:
+open up a terminal (Applications->Utilities->Terminal) and type this in:
 
 locate InsertFontHere
 
@@ -1608,7 +1608,7 @@ For C++, Boost.Random is probably what you're looking for. It has support for MT
 The Gnu Scientific Library (GSL) has a pretty extensive set of RN generators, test harness, etc.  If you're on linux, it's probably already available on your system.
 Hmm, ok.  I'd suggest code like this, then:
 
-typedef struct {    int type;    int result;} DialogData;static gbooleandisplay_dialog(gpointer user_data){    DialogData *dialog_data = user_data;    GtkWidget *dialog;    if (dialog_data-&gt;type &amp; MB_YESNO)        dialog = gtk_message_dialog_new(...);    else        dialog = gtk_message_dialog_new(...);    // Set title, etc.    dialog_data-&gt;result = gtk_dialog_run(...);    gtk_main_quit();  // Quits the main loop run in MessageBox()    return FALSE;}int MessageBox(...){    DialogData dialog_data;    dialog_data.type = type;    gtk_idle_add(display_dialog, &amp;dialog_data);    gtk_main();    // Do stuff based on dialog_data.result}
+typedef struct {    int type;    int result;} DialogData;static gbooleandisplay_dialog(gpointer user_data){    DialogData *dialog_data = user_data;    GtkWidget *dialog;    if (dialog_data->type & MB_YESNO)        dialog = gtk_message_dialog_new(...);    else        dialog = gtk_message_dialog_new(...);    // Set title, etc.    dialog_data->result = gtk_dialog_run(...);    gtk_main_quit();  // Quits the main loop run in MessageBox()    return FALSE;}int MessageBox(...){    DialogData dialog_data;    dialog_data.type = type;    gtk_idle_add(display_dialog, &dialog_data);    gtk_main();    // Do stuff based on dialog_data.result}
 
 The struct is because you need to pass around a couple pieces of data.  The gtk_idle_add() call adds a method to be run when the main loop is running and idle, and the FALSE return value from the display_dialog() call means that it's only run once.  After we get the result from the dialog, we quit the main loop.  That'll cause the gtk_main() in your main MessageBox() method to return, and you'll be able to access the result from there.
 
@@ -1619,7 +1619,7 @@ As the answers mentioned, int is just a number (called the unboxed type), wherea
 
 Java 5 onwards have something called auto-boxing and auto-unboxing which allow the boxing/unboxing to be done behind the scenes. Compare and contrast: Java 5 version:
 
-Deque&lt;Integer&gt; queue;void add(int n) {    queue.add(n);}int remove() {    return queue.remove();}
+Deque<Integer> queue;void add(int n) {    queue.add(n);}int remove() {    return queue.remove();}
 
 Java 1.4 or earlier (no generics either):
 
@@ -1643,9 +1643,9 @@ Resource for my statement
 I found this page which shows what the difference between Proc.new and lambda are.  According to the page, the only difference is that a lambda is strict about the number of arguments it accepts, whereas Proc.new converts missing arguments to nil.  Here is an example IRB session illustrating the difference:
 
 irb(main):001:0> l = lambda { |x, y| x + y }
-=> #&lt;Proc:0x00007fc605ec0748@(irb):1&gt;
+=> #<Proc:0x00007fc605ec0748@(irb):1>
 irb(main):002:0> p = Proc.new { |x, y| x + y }
-=> #&lt;Proc:0x00007fc605ea8698@(irb):2&gt;
+=> #<Proc:0x00007fc605ea8698@(irb):2>
 irb(main):003:0> l.call "hello", "world"
 => "helloworld"
 irb(main):004:0> p.call "hello", "world"
@@ -1692,7 +1692,7 @@ I write a SOAP server that receives XML requests, and creates XML responses.  (U
 
 It turned out for me that creating (SOAP) XML documents is fairly simple, if you have a data structure that "fits" the schema.
 
-I keep the envelope, since the response envelope is (almost) the same as the request envelope.  Then, since my data structure is a (possibly nested) dictionary, I create a string that turns this dictionary into &lt;key>value&lt;/key> items.  
+I keep the envelope, since the response envelope is (almost) the same as the request envelope.  Then, since my data structure is a (possibly nested) dictionary, I create a string that turns this dictionary into <key>value</key> items.  
 
 This is a task that recursion makes simple, and I end up with the right structure.  This is all done in python code, and is currently fast enough for production use.
 
@@ -1760,7 +1760,7 @@ Oracle Berkeley DB:
 Performance Metrics and 
 Benchmarks
 Performance Metrics 
-&amp; Benchmarks: 
+& Benchmarks: 
 Berkeley DB
 
 If you are choosing an encryption method for your login system then speed is not your friend, Jeff had a to-and-frow with Thomas Ptacek about passwords and the conclusion was that you should use the slowest, most secure encryption method you can afford to. 
@@ -1786,7 +1786,7 @@ I would use Javascript to submit the form. The function would be triggered by th
 
 Here are two pages that give techniques on how to do this: 1, 2. Based on these, here is an example of usage (based on here):
 
-&lt;SCRIPT TYPE="text/javascript"&gt;&lt;!--function submitenter(myfield,e) {  var keycode;  if (window.event) {    keycode = window.event.keyCode;  } else if (e) {     keycode = e.which;  } else {    return true;  }  if (keycode == 13) {    myfield.form.submit();    return false;  } else {    return true;  }}//--&gt;&lt;/SCRIPT&gt;&lt;INPUT NAME="MyText" TYPE="Text" onKeyPress="return submitenter(this,event)" /&gt;
+<SCRIPT TYPE="text/javascript"><!--function submitenter(myfield,e) {  var keycode;  if (window.event) {    keycode = window.event.keyCode;  } else if (e) {     keycode = e.which;  } else {    return true;  }  if (keycode == 13) {    myfield.form.submit();    return false;  } else {    return true;  }}//--></SCRIPT><INPUT NAME="MyText" TYPE="Text" onKeyPress="return submitenter(this,event)" />
 The main problem with PHP sessions and security (besides session hijacking) comes with what environment you are in. By default PHP stores the session data in a file in the OS's temp directory. Without any special thought or planning this is a world readable directory so all of your session information is public to anyone with access to the server.
 
 As for maintaining sessions over multiple servers. At that point it would be better to switch PHP to user handled sessions where it calls your provided functions to CRUD (create, read, update, delete) the session data. At that point you could store the session information in a database or memcache like solution so that all application servers have access to the data.
@@ -1813,16 +1813,16 @@ The hard part would be convincing the application vendor to implement this featu
 
 The following works for me in Firefox and Internet Explorer:
 
-&lt;object id="mediaplayer" classid="clsid:22d6f312-b0f6-11d0-94ab-0080c74c7e95" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#version=5,1,52,701" standby="loading microsoft windows media player components..." type="application/x-oleobject" width="320" height="310"&gt;
-&lt;param name="filename" value="./test.wmv"&gt;
-     &lt;param name="animationatstart" value="true"&gt;
-     &lt;param name="transparentatstart" value="true"&gt;
-     &lt;param name="autostart" value="true"&gt;
-     &lt;param name="showcontrols" value="true"&gt;
-     &lt;param name="ShowStatusBar" value="true"&gt;
-     &lt;param name="windowlessvideo" value="true"&gt;
-     &lt;embed src="./test.wmv" autostart="true" showcontrols="true" showstatusbar="1" bgcolor="white" width="320" height="310"&gt;
-&lt;/object&gt;
+<object id="mediaplayer" classid="clsid:22d6f312-b0f6-11d0-94ab-0080c74c7e95" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#version=5,1,52,701" standby="loading microsoft windows media player components..." type="application/x-oleobject" width="320" height="310">
+<param name="filename" value="./test.wmv">
+     <param name="animationatstart" value="true">
+     <param name="transparentatstart" value="true">
+     <param name="autostart" value="true">
+     <param name="showcontrols" value="true">
+     <param name="ShowStatusBar" value="true">
+     <param name="windowlessvideo" value="true">
+     <embed src="./test.wmv" autostart="true" showcontrols="true" showstatusbar="1" bgcolor="white" width="320" height="310">
+</object>
 
 
 No, you were not dreaming.  Python has a pretty excellent list comprehension system that lets you manipulate lists pretty elegantly, and depending on exactly what you want to accomplish, this can be done a couple of ways.  In essence, what you're doing is saying "For item in list if criteria.matches", and from that you can just iterate through the results or dump the results into a new list.
@@ -1876,14 +1876,14 @@ In a Proc.new-created proc, the return statement is a little more surprising: it
 
 Here's lambda-created proc's return in action. It behaves in a way that you probably expect:
 
-def whowouldwin  mylambda = lambda {return "Freddy"}  mylambda.call  # mylambda gets called and returns "Freddy", and execution  # continues on the next line  return "Jason"endwhowouldwin=&gt; "Jason"
+def whowouldwin  mylambda = lambda {return "Freddy"}  mylambda.call  # mylambda gets called and returns "Freddy", and execution  # continues on the next line  return "Jason"endwhowouldwin=> "Jason"
 
 Now here's a Proc.new-created proc's return doing the same thing. You're about to see one of those cases where Ruby breaks the much-vaunted Principle of Least Surprise:
 
-def whowouldwin2  myproc = Proc.new {return "Freddy"}  myproc.call  # myproc gets called and returns "Freddy",   # but also returns control from whowhouldwin2!  # The line below *never* gets executed.  return "Jason"endwhowouldwin2         =&gt; "Freddy"
+def whowouldwin2  myproc = Proc.new {return "Freddy"}  myproc.call  # myproc gets called and returns "Freddy",   # but also returns control from whowhouldwin2!  # The line below *never* gets executed.  return "Jason"endwhowouldwin2         => "Freddy"
 
 Thanks to this surprising behaviour (as well as less typing), I tend to favour using lambda over Proc.new when making procs. 
-It sounds like you've covered all the server-side bases--maybe it's a client issue? I assume your users have integrated authentication enabled in IE7? (Tools -&gt; Internet Options -&gt; Advanced -&gt; Security). This is enabled by default.
+It sounds like you've covered all the server-side bases--maybe it's a client issue? I assume your users have integrated authentication enabled in IE7? (Tools -> Internet Options -> Advanced -> Security). This is enabled by default.
 Also, is your site correctly recognized by IE7 as being in the Local Intranet zone? The IE7 default is to allow automatic logon only in that zone, so users would be prompted if IE thinks your site is on the internet. I believe using a hostname with a dot in it causes IE to place the site into the Internet zone.
 Why not use SQL Server 2005 Express edition? 
 
@@ -1967,7 +1967,7 @@ public static object GetNewObject(Type t)
 
 Here is the same approach, contained in a generic method:
 
-public static T GetNewObject&lt;T&gt;()
+public static T GetNewObject<T>()
 {
     try
     {
@@ -2016,7 +2016,7 @@ See this thread for some background.
 Then start limiting your dependencies via preprocessor macros, and avoiding APIs which aren't supported on NT.
 Here is my current method. Any suggestions?
 
-Regex singleMToDoubleRegex = new Regex("(?&lt;!m)m(?!m)");Regex singleDToDoubleRegex = new Regex("(?&lt;!d)d(?!d)");CultureInfo currentCulture = CultureInfo.CurrentUICulture;// If the culture is netural there is no date pattern to use, so use the default.if (currentCulture.IsNeutralCulture){    currentCulture = CultureInfo.InvariantCulture;}// Massage the format into a more general user friendly form.string shortDatePattern = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern.ToLower();shortDatePattern = singleMToDoubleRegex.Replace(shortDatePattern, "mm");shortDatePattern = singleDToDoubleRegex.Replace(shortDatePattern, "dd");
+Regex singleMToDoubleRegex = new Regex("(?<!m)m(?!m)");Regex singleDToDoubleRegex = new Regex("(?<!d)d(?!d)");CultureInfo currentCulture = CultureInfo.CurrentUICulture;// If the culture is netural there is no date pattern to use, so use the default.if (currentCulture.IsNeutralCulture){    currentCulture = CultureInfo.InvariantCulture;}// Massage the format into a more general user friendly form.string shortDatePattern = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern.ToLower();shortDatePattern = singleMToDoubleRegex.Replace(shortDatePattern, "mm");shortDatePattern = singleDToDoubleRegex.Replace(shortDatePattern, "dd");
 How about giving the format (mm/dd/yyyy or dd/mm/yyyy) followed by a printout of today's date in the user's culture. MSDN has an article on formatting a DateTime for the person's culture, using the CultureInfo object that might be helpful in doing this. A combination of the format (which most people are familiar with) combined with the current date represented in that format should be enough of a clue to the person on how they should enter the date. (Also include a calendar control for those who still cant figure it out).
 Sounds to me like you're trying to combine things that shouldn't be combined.  If you need to do different processing in your view depending on if it's a User or Group object you're trying to look at then you should use two different view functions.
 
@@ -2055,7 +2055,7 @@ Here's a Ruby solution http://frankschmitt.org/projects/title-case
 
 Here's a Ruby one-liner solution: http://snippets.dzone.com/posts/show/4702
 
-'some string here'.gsub(/\b\w/){$&amp;.upcase}
+'some string here'.gsub(/\b\w/){$&.upcase}
 
 
 What the one-liner is doing is using a regular expression substitution of the first character of each word with the uppercase version of it.
@@ -2107,7 +2107,7 @@ Absolutely, especially dealing with lots of these permutations/combinations I ca
 
 Interesting implementation in python, though I wrote a nice one in C and Ocaml based on "Algorithm 515" (see below). He wrote his in Fortran as it was common back then for all the "Algorithm XX" papers, well, that assembly or c. I had to re-write it and make some small improvements to work with arrays not ranges of numbers. This one does random access, I'm still working on getting some nice implementations of the ones mentioned in Knuth 4th volume fascicle 2. I'll an explanation of how this works to the reader. Though if someone is curious, I wouldn't object to writing something up.
 
-/** [combination c n p x] * get the [x]th lexicographically ordered set of [p] elements in [n] * output is in [c], and should be sizeof(int)*[p] */void combination(int* c,int n,int p, int x){    int i,r,k = 0;    for(i=0;i&lt;p-1;i++){        c[i] = (i != 0) ? c[i-1] : 0;        do {            c[i]++;            r = choose(n-c[i],p-(i+1));            k = k + r;        } while(k &lt; x);        k = k - r;    }    c[p-1] = c[p-2] + x - k;}
+/** [combination c n p x] * get the [x]th lexicographically ordered set of [p] elements in [n] * output is in [c], and should be sizeof(int)*[p] */void combination(int* c,int n,int p, int x){    int i,r,k = 0;    for(i=0;i<p-1;i++){        c[i] = (i != 0) ? c[i-1] : 0;        do {            c[i]++;            r = choose(n-c[i],p-(i+1));            k = k + r;        } while(k < x);        k = k - r;    }    c[p-1] = c[p-2] + x - k;}
 
 ~"Algorithm 515: Generation of a Vector from the Lexicographical Index"; Buckles, B. P., and Lybanon, M. ACM Transactions on Mathematical Software, Vol. 3, No. 2, June 1977.
 I would be wary of automatically upcasing all whitespace-preceded-words in scenarios where I would run the risk of attracting the fury of nitpickers.
@@ -2163,7 +2163,7 @@ That being said, it IS possible to change other users Keys through the HKEY_USER
 
 I have no experience with the Visual Studio 2003 Setup Project, so here is a bit of (totally unrelated) VBScript code that might just give you an idea where to look:
 
-const HKEY_USERS = &amp;H80000003strComputer = "."Set objReg=GetObject("winmgmts:{impersonationLevel=impersonate}!\\" &amp; strComputer &amp; "\root\default:StdRegProv")strKeyPath = ""objReg.EnumKey HKEY_USERS, strKeyPath, arrSubKeysstrKeyPath = "\Software\Microsoft\Windows\CurrentVersion\WinTrust\Trust Providers\Software Publishing"For Each subkey In arrSubKeys    objReg.SetDWORDValue HKEY_USERS, subkey &amp; strKeyPath, "State", 146944Next
+const HKEY_USERS = &H80000003strComputer = "."Set objReg=GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & strComputer & "\root\default:StdRegProv")strKeyPath = ""objReg.EnumKey HKEY_USERS, strKeyPath, arrSubKeysstrKeyPath = "\Software\Microsoft\Windows\CurrentVersion\WinTrust\Trust Providers\Software Publishing"For Each subkey In arrSubKeys    objReg.SetDWORDValue HKEY_USERS, subkey & strKeyPath, "State", 146944Next
 
 (Code Courtesy of Jeroen Ritmeijer)
 I'm guessing that because you want to set it for all users, that you're on some kind of shared computer, which is probably running under a domain?
@@ -2198,7 +2198,7 @@ var collection=
        (
            from h in db.History
            where u.Id == h.Id
-           &amp;&amp; h.dateCol &lt; yesterday
+           && h.dateCol < yesterday
            select h.dateCol 
        ).Max()
     };
@@ -2215,11 +2215,11 @@ The best I could come up with is to produce a matrix of sums of each pair, and t
 
 My algorithm, in Haskell:
 
-matrixOfSums list = [[a+b | b &lt;- list, b &gt;= a] | a &lt;- list]sortedSums = foldl merge [] matrixOfSums--A normal merge, save that we remove duplicatesmerge xs [] = xsmerge [] ys = ysmerge (x:xs) (y:ys) = case compare x y of    LT -&gt; x:(merge xs (y:ys))    EQ -&gt; x:(merge xs (dropWhile (==x) ys))    GT -&gt; y:(merge (x:xs) ys)
+matrixOfSums list = [[a+b | b <- list, b >= a] | a <- list]sortedSums = foldl merge [] matrixOfSums--A normal merge, save that we remove duplicatesmerge xs [] = xsmerge [] ys = ysmerge (x:xs) (y:ys) = case compare x y of    LT -> x:(merge xs (y:ys))    EQ -> x:(merge xs (dropWhile (==x) ys))    GT -> y:(merge (x:xs) ys)
 
 I found a minor improvement, one that's more amenable to lazy stream-based coding.  Instead of merging the columns pair-wise, merge all of them at once.  The advantage being that you start getting elements of the list immediately.
 
--- wide-merge does a standard merge (ala merge-sort) across an arbitrary number of lists-- wideNubMerge does this while eliminating duplicateswideNubMerge :: Ord a =&gt; [[a]] -&gt; [a]wideNubMerge ls = wideNubMerge1 $ filter (/= []) lswideNubMerge1 [] = []wideNubMerge1 ls = mini:(wideNubMerge rest)    where mini = minimum $ map head ls          rest = map (dropWhile (== mini)) lsbetterSortedSums = wideNubMerge matrixOfSums
+-- wide-merge does a standard merge (ala merge-sort) across an arbitrary number of lists-- wideNubMerge does this while eliminating duplicateswideNubMerge :: Ord a => [[a]] -> [a]wideNubMerge ls = wideNubMerge1 $ filter (/= []) lswideNubMerge1 [] = []wideNubMerge1 ls = mini:(wideNubMerge rest)    where mini = minimum $ map head ls          rest = map (dropWhile (== mini)) lsbetterSortedSums = wideNubMerge matrixOfSums
 
 However, if you know you're going to use all of the sums, and there's no advantage to getting some of them earlier, go with 'foldl merge []', as it's faster.
 I've seen it done in a kind of iffy, but pretty reliable way.  Basically, an element is set to use a specific font and a string is set to that element.  If the font set for the element does not exist, it takes the font of the parent element.  So, what they do is measure the width of the rendered string.  If it matches what they expected for the desired font as opposed to the derived font, it's present.
@@ -2293,14 +2293,14 @@ You'll need to compile with the target CPU set to x86 to force your code to use 
 Microsoft has stated that there are no plans on releasing a 64-bit edition of the Visual FoxPro OLE Db provider.  For what's worth, Microsoft has also stated that VFP 9 is the final version of Visual FoxPro and support will end in 2015.  If you need the OLE DB provider for VFP 9, you can get it here.
 
 Depends on the version, 4 is by value, 5 is by reference.
-PHP variables are assigned by value, passed to functions by value, and when containing/representing objects are passed by reference. You can force variables to pass by reference using an &amp;
+PHP variables are assigned by value, passed to functions by value, and when containing/representing objects are passed by reference. You can force variables to pass by reference using an &
 
 Assigned by value/reference example:
 
 $var1 = "test";
 $var2 = $var1;
 $var2 = "new test";
-$var3 = &amp;$var2;
+$var3 = &$var2;
 $var3 = "final test";
 
 print ("var1: $var1, var2: $var2, var3: $var3);
@@ -2317,7 +2317,7 @@ changeThem($var1, $var2);
 
 print "var1: $var1, var2: $var2";
 
-function changeThem($var1, &amp;$var2){
+function changeThem($var1, &$var2){
     $var1 = "FOO";
     $var2 = "BAR";
 }
@@ -2331,11 +2331,11 @@ class Foo{
     public $var1;
 
     function __construct(){
-        $this-&gt;var1 = "foo";
+        $this->var1 = "foo";
     }
 
     public function printFoo(){
-        print $this-&gt;var1;
+        print $this->var1;
     }
 }
 
@@ -2344,10 +2344,10 @@ $foo = new Foo();
 
 changeFoo($foo);
 
-$foo-&gt;printFoo();
+$foo->printFoo();
 
 function changeFoo($foo){
-    $foo-&gt;var1 = "FOO";
+    $foo->var1 = "FOO";
 }
 
 
@@ -2385,11 +2385,11 @@ It's by value according to the PHP Documentation.
 
   By default, function arguments are passed by value (so that if the value of the argument within the function is changed, it does not get changed outside of the function). To allow a function to modify its arguments, they must be passed by reference.
   
-  To have an argument to a function always passed by reference, prepend an ampersand (&amp;) to the argument name in the function definition.
+  To have an argument to a function always passed by reference, prepend an ampersand (&) to the argument name in the function definition.
 
 
-&lt;?php
-function add_some_extra(&amp;$string)
+<?php
+function add_some_extra(&$string)
 {
     $string .= 'and something extra.';
 }
@@ -2397,7 +2397,7 @@ function add_some_extra(&amp;$string)
 $str = 'This is a string, ';
 add_some_extra($str);
 echo $str;    // outputs 'This is a string, and something extra.'
-?&gt;
+?>
 
 
 Git and DVCS in general is great for developers doing a lot of coding independently of each other because everyone has their own branch.  If you need a change from someone else, though, she has to commit to her local repo and then she must push that changeset to you or you must pull it from her.
@@ -2477,10 +2477,10 @@ it lacks a good GUI (such as the great TortoiseSVN)
 
 Replace your hyphens with this:
 
-&amp;shy;
+­
 
 It's called a "soft" hyphen.
-As part of CSS3, it is not yet fully supported, but you can find information on word-wrapping here. Another option is the wbr tag, &amp;shy;, and &amp;#8203; none of which are fully supported either.
+As part of CSS3, it is not yet fully supported, but you can find information on word-wrapping here. Another option is the wbr tag, ­, and ​ none of which are fully supported either.
 
 Some fun things:
 
@@ -2700,22 +2700,22 @@ That's definitely a good way to do it.  But you if you happen to be using a data
 MyDB db = new MyDB("Data Source=...");var q = from db.MyTable        select c;foreach (var c in q)  Console.WriteLine(c.MyField.ToString());
 The CCNetArtifactDirectory is passed to the MSBuild by default, so you dont need to worry about it. MSBuild will place the build output in the "bin location" relevant to the working directory that you have specified.
 
-&lt;executable&gt;c:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe&lt;/executable&gt;
-&lt;workingDirectory&gt;C:\data\projects\FooSolution\&lt;/workingDirectory&gt;
-&lt;projectFile&gt;FooSolution.sln&lt;/projectFile&gt;
-&lt;buildArgs&gt;/noconsolelogger /p:Configuration=Debug &lt;/buildArgs&gt;
+<executable>c:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe</executable>
+<workingDirectory>C:\data\projects\FooSolution\</workingDirectory>
+<projectFile>FooSolution.sln</projectFile>
+<buildArgs>/noconsolelogger /p:Configuration=Debug </buildArgs>
 
 
 So in the above example your build output will be put in C:\data\projects\FooSolution[ProjectName]\bin\Debug. Should you want to output to a different location you may want to look at of the  tag in CCNET.
 
-&lt;publishers&gt;
-  &lt;xmllogger /&gt;
-  &lt;buildpublisher&gt;
-    &lt;sourceDir&gt;C:\data\projects\FooSolution\FooProject\bin\Debug&lt;/sourceDir&gt;
-    &lt;publishDir&gt;C:\published\FooSolution\&lt;/publishDir&gt;
-    &lt;useLabelSubDirectory&gt;false&lt;/useLabelSubDirectory&gt;
-  &lt;/buildpublisher&gt;
-&lt;/publishers&gt;
+<publishers>
+  <xmllogger />
+  <buildpublisher>
+    <sourceDir>C:\data\projects\FooSolution\FooProject\bin\Debug</sourceDir>
+    <publishDir>C:\published\FooSolution\</publishDir>
+    <useLabelSubDirectory>false</useLabelSubDirectory>
+  </buildpublisher>
+</publishers>
 
 
 This will allow you to publish your output to a different location.
@@ -2749,7 +2749,7 @@ This adds the ExceptionNotifier plugins' views folder to the list, so it is allo
 
 The VB code looks something like this:
 
-hMutex = CreateMutex(ByVal 0&amp;, 1, ByVal 0&amp;)
+hMutex = CreateMutex(ByVal 0&, 1, ByVal 0&)
 
 
 The first parameter is a pointer to an SECURITY_ATTRIBUTES structure. If you don't know what it is, you don't need it. Pass NULL (0).
@@ -2772,7 +2772,7 @@ three simple commands are available to interact with the control:
 
 
 AxShockwaveFlash1.Stop()
-AxShockwaveFlash1.Movie = FilePath &amp;
+AxShockwaveFlash1.Movie = FilePath &
 "\FileName.swf"
 AxShockwaveFlash1.Play()
 
@@ -2834,7 +2834,7 @@ If it appears that you really need to delete a file in use by another process, I
 Quoting a much-replicated help page about Indexing Service query language:
 
 
-  To use specially treated characters such as &amp;, |, ^, #, @, $, (, ), in a query, enclose your query in quotation marks (“).
+  To use specially treated characters such as &, |, ^, #, @, $, (, ), in a query, enclose your query in quotation marks (“).
 
 
 As far as I know, full text search in MSSQL is also done by the Indexing Service, so this might help.
@@ -2886,7 +2886,7 @@ Common Lisp: (1+ (exp (complex 0 pi)))
 ⇒ #C(0.0d0 1.2246063538223773d-16) (CMUCL)
 ⇒ #C(0.0d0 1.2246467991473532d-16) (SBCL)
 
-Perl: use Math::Complex; Math::Complex-&gt;emake(1, pi) + 1
+Perl: use Math::Complex; Math::Complex->emake(1, pi) + 1
 
 ⇒ 1.22464679914735e-16i
 
@@ -3014,7 +3014,7 @@ You say you have enough trouble getting one cube to display... so I am not sure 
 
 Basically... put your code for writing a cube in one function, then just call that function 100 times.
 
-void DrawCube(){    //code to draw the cube}void DisplayCubes(){    for(int i = 0; i &lt; 10; ++i)    {            for(int j = 0; j &lt; 10; ++j)         {             glPushMatrix();             //alter these values depending on the size of your cubes.             //This call makes sure that your cubes aren't drawn overtop of each other             glTranslatef(i*5.0, j*5.0, 0);             DrawCube();             glPopMatrix();         }    }              }
+void DrawCube(){    //code to draw the cube}void DisplayCubes(){    for(int i = 0; i < 10; ++i)    {            for(int j = 0; j < 10; ++j)         {             glPushMatrix();             //alter these values depending on the size of your cubes.             //This call makes sure that your cubes aren't drawn overtop of each other             glTranslatef(i*5.0, j*5.0, 0);             DrawCube();             glPopMatrix();         }    }              }
 
 That is the basic outline for how you could go about doing this. If you want something more efficient take a look into Display Lists sometime once you have the basics figured out :)
 No.
@@ -3164,7 +3164,7 @@ Resulting in:
 
 void  strrep(char *input, char *search, char *replace);char* strrepm(char *input, char *search, char *replace);void  strrepmfree(char *input);
 My quick hints.
-Instead of: void strrep(char *input, char *search, char *replace) try: void strrep(char *&amp;input, char *search, char *replace)
+Instead of: void strrep(char *input, char *search, char *replace) try: void strrep(char *&input, char *search, char *replace)
 and than in the body: input = realloc(input, strlen(input) + delta);
 Generally read about passing function arguments as values/reference and realloc() description :).
 The following is SQL92 standard so should be supported by the majority of RDMBS that use SQL:
@@ -3172,7 +3172,7 @@ The following is SQL92 standard so should be supported by the majority of RDMBS 
 CREATE INDEX [index name] ON [table name] ( [column name] )
 This seems to work;
 
-char *strrep(char *string, const char *search, const char *replace) {    char *p = strstr(string, search);    if (p) {        int occurrence = p - string;        int stringlength = strlen(string);        int searchlength = strlen(search);        int replacelength = strlen(replace);        if (replacelength &gt; searchlength) {            string = (char *) realloc(string, strlen(string)                 + replacelength - searchlength + 1);        }        if (replacelength != searchlength) {            memmove(string + occurrence + replacelength,                         string + occurrence + searchlength,                         stringlength - occurrence - searchlength + 1);        }        strncpy(string + occurrence, replace, replacelength);    }    return string;}
+char *strrep(char *string, const char *search, const char *replace) {    char *p = strstr(string, search);    if (p) {        int occurrence = p - string;        int stringlength = strlen(string);        int searchlength = strlen(search);        int replacelength = strlen(replace);        if (replacelength > searchlength) {            string = (char *) realloc(string, strlen(string)                 + replacelength - searchlength + 1);        }        if (replacelength != searchlength) {            memmove(string + occurrence + replacelength,                         string + occurrence + searchlength,                         stringlength - occurrence - searchlength + 1);        }        strncpy(string + occurrence, replace, replacelength);    }    return string;}
 
 Sigh, is there anyway to post code without it sucking?
 I am currently "manually" doing it through a prebuild-exec Task, using my cmdnetsvnrev tool, but if someone knows a better ccnet-integrated way of doing it, i'd be happy to hear :-)
@@ -3283,7 +3283,7 @@ Once it's done, you will only need to parse HOST header on every single http req
 
 Assuming you're using ASP.NET, this is kind of silly example I came up with but works and demonstrates simplicity of this approach:
 
-&lt;%@ Language="C#" %&gt;&lt;%string subDomain = Request.Url.Host.Split('.')[0].ToUpper();if (subDomain == "CLIENTXXX") Response.Write("Hello CLIENTXXX, your secret number is 33");else if (subDomain == "CLIENTYYY") Response.Write("Hello CLIENTYYY, your secret number is 44");else Response.Write(subDomain+" doesn't exist");%&gt;
+<%@ Language="C#" %><%string subDomain = Request.Url.Host.Split('.')[0].ToUpper();if (subDomain == "CLIENTXXX") Response.Write("Hello CLIENTXXX, your secret number is 33");else if (subDomain == "CLIENTYYY") Response.Write("Hello CLIENTYYY, your secret number is 44");else Response.Write(subDomain+" doesn't exist");%>
 I've been doing a little research into this and whilst I'm not entirely sure its the cause I believe it is because Safari is not returning the full result set (hence cropping it).
 
 I have been in dicussion with another developer and found the following post on Channel 9 as well which recommends making use of the SQL State service to store the viewstate avoiding the postback issue and also page size.
@@ -3321,7 +3321,7 @@ Naturally, you're compiling with warnings turned all the way up, right?
 
 And, have you considered compiling with "treat warnings as errors" to take it that one step further?
 
-The downside with using signed numbers is that there's a temptation to overload them so that, for example, the values 0-&gt;n are the menu selection, and -1 means nothing's selected - rather than creating a class that has two variables, one to indicate if something is selected and another to store what that selection is.  Before you know it, you're testing for negative one all over the place and the compiler is complaining about how you're wanting to compare the menu selection against the number of menu selections you have - but that's dangerous because they're different types.  So don't do that.
+The downside with using signed numbers is that there's a temptation to overload them so that, for example, the values 0->n are the menu selection, and -1 means nothing's selected - rather than creating a class that has two variables, one to indicate if something is selected and another to store what that selection is.  Before you know it, you're testing for negative one all over the place and the compiler is complaining about how you're wanting to compare the menu selection against the number of menu selections you have - but that's dangerous because they're different types.  So don't do that.
 The way we do this is to have a 'catch all' for our domain name registered in DNS so that anything.ourdomain.com will point to our server.
 
 With Apache you can set up a similar catch-all for your vhosts.  The ServerName must be a single static name but the ServerAlias directive can contain a pattern.
@@ -3339,7 +3339,7 @@ or a RewriteRule as already suggested that silently maps user.ourdomain.com/foo/
 
 I have written a NAnt build file that handles parsing SVN information and creating properties. I then use those property values for a variety of build tasks, including setting the label on the build. I use this target combined with the SVN Revision Labeller mentioned by lubos hasko with great results.
 
-&lt;target name="svninfo" description="get the svn checkout information"&gt;    &lt;property name="svn.infotempfile" value="${build.directory}\svninfo.txt" /&gt;    &lt;exec program="${svn.executable}" output="${svn.infotempfile}"&gt;        &lt;arg value="info" /&gt;    &lt;/exec&gt;    &lt;loadfile file="${svn.infotempfile}" property="svn.info" /&gt;    &lt;delete file="${svn.infotempfile}" /&gt;    &lt;property name="match" value="" /&gt;    &lt;regex pattern="URL: (?'match'.*)" input="${svn.info}" /&gt;    &lt;property name="svn.info.url" value="${match}"/&gt;    &lt;regex pattern="Repository Root: (?'match'.*)" input="${svn.info}" /&gt;    &lt;property name="svn.info.repositoryroot" value="${match}"/&gt;    &lt;regex pattern="Revision: (?'match'\d+)" input="${svn.info}" /&gt;    &lt;property name="svn.info.revision" value="${match}"/&gt;    &lt;regex pattern="Last Changed Author: (?'match'\w+)" input="${svn.info}" /&gt;    &lt;property name="svn.info.lastchangedauthor" value="${match}"/&gt;    &lt;echo message="URL: ${svn.info.url}" /&gt;    &lt;echo message="Repository Root: ${svn.info.repositoryroot}" /&gt;    &lt;echo message="Revision: ${svn.info.revision}" /&gt;    &lt;echo message="Last Changed Author: ${svn.info.lastchangedauthor}" /&gt;&lt;/target&gt;
+<target name="svninfo" description="get the svn checkout information">    <property name="svn.infotempfile" value="${build.directory}\svninfo.txt" />    <exec program="${svn.executable}" output="${svn.infotempfile}">        <arg value="info" />    </exec>    <loadfile file="${svn.infotempfile}" property="svn.info" />    <delete file="${svn.infotempfile}" />    <property name="match" value="" />    <regex pattern="URL: (?'match'.*)" input="${svn.info}" />    <property name="svn.info.url" value="${match}"/>    <regex pattern="Repository Root: (?'match'.*)" input="${svn.info}" />    <property name="svn.info.repositoryroot" value="${match}"/>    <regex pattern="Revision: (?'match'\d+)" input="${svn.info}" />    <property name="svn.info.revision" value="${match}"/>    <regex pattern="Last Changed Author: (?'match'\w+)" input="${svn.info}" />    <property name="svn.info.lastchangedauthor" value="${match}"/>    <echo message="URL: ${svn.info.url}" />    <echo message="Repository Root: ${svn.info.repositoryroot}" />    <echo message="Revision: ${svn.info.revision}" />    <echo message="Last Changed Author: ${svn.info.lastchangedauthor}" /></target>
 While I second the Channel 9 solution, also be aware that in some hosted environments Safari is not considered an up-level browser. You may need to add it to your application's browscap in order to make use of some ASP.Net features. 
 
 That was the root cause of some headaches we had for a client's site that used the ASP Menu control.
@@ -3365,36 +3365,36 @@ const int MONTH = 30 * DAY;
 var ts = new TimeSpan(DateTime.UtcNow.Ticks - yourDate.Ticks);
 double delta = Math.Abs(ts.TotalSeconds);
 
-if (delta &lt; 1 * MINUTE)
+if (delta < 1 * MINUTE)
   return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
 
-if (delta &lt; 2 * MINUTE)
+if (delta < 2 * MINUTE)
   return "a minute ago";
 
-if (delta &lt; 45 * MINUTE)
+if (delta < 45 * MINUTE)
   return ts.Minutes + " minutes ago";
 
-if (delta &lt; 90 * MINUTE)
+if (delta < 90 * MINUTE)
   return "an hour ago";
 
-if (delta &lt; 24 * HOUR)
+if (delta < 24 * HOUR)
   return ts.Hours + " hours ago";
 
-if (delta &lt; 48 * HOUR)
+if (delta < 48 * HOUR)
   return "yesterday";
 
-if (delta &lt; 30 * DAY)
+if (delta < 30 * DAY)
   return ts.Days + " days ago";
 
-if (delta &lt; 12 * MONTH)
+if (delta < 12 * MONTH)
 {
   int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-  return months &lt;= 1 ? "one month ago" : months + " months ago";
+  return months <= 1 ? "one month ago" : months + " months ago";
 }
 else
 {
   int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-  return years &lt;= 1 ? "one year ago" : years + " years ago";
+  return years <= 1 ? "one year ago" : years + " years ago";
 }
 
 
@@ -3487,12 +3487,12 @@ and adds transactional commit (all or nothing)
 
 You can use the artifact directory variable inside the MSBuild script itself.  Here's an example of how I'm running FxCop right now from my CC.Net MSBuild script (this script is what CC.Net points to - there is also a "Build" target in the script that includes an MSBuild task against the SLN to do the actual compilation):
 
-&lt;Exec
+<Exec
   Command='FxCopCmd.exe /project:"$(MSBuildProjectDirectory)\FXCopRules.FxCop" /out:"$(CCNetArtifactDirectory)\ProjectName.FxCop.xml"'
   WorkingDirectory="C:\Program Files\Microsoft FxCop 1.35"
   ContinueOnError="true"
   IgnoreExitCode="true"
-/&gt;
+/>
 
 
 Wine is actually using gettimeofday() to implement QueryPerformanceCounter() and it is known to make many Windows games work on Linux and Mac.
@@ -3502,7 +3502,7 @@ Starts http://source.winehq.org/source/dlls/kernel32/cpu.c#L312
 leads to http://source.winehq.org/source/dlls/ntdll/time.c#L448
 Why wouldn't you just use an array with a size of 2?  A Queue is supposed to be able to dynamically grow and shrink.
 
-Or create a wrapper class around an instance of Queue&lt;T&gt; instance and each time one enqueues a &lt;T&gt; object, check the size of the queue.  If larger than 2, dequeue the first item.
+Or create a wrapper class around an instance of Queue<T> instance and each time one enqueues a <T> object, check the size of the queue.  If larger than 2, dequeue the first item.
 
 You should create your own class, a ringbuffer would probably fit your needs.
 
@@ -3511,7 +3511,7 @@ The data structures in .NET that allows you to specify capacity, except for arra
 For instance, for a list, capacity is used to size an internal array. When you start adding elements to the list, it'll start filling this array from index 0 and up, and when it reaches your capacity, it increases the capacity to a new higher capacity, and continues filling it up.
 I've knocked up a basic version of what I'm looking for, it's not perfect but it'll do the job until something better comes along.
 
-public class LimitedQueue&lt;T&gt; : Queue&lt;T&gt;{    private int limit = -1;    public int Limit    {        get { return limit; }        set { limit = value; }    }    public LimitedQueue(int limit)        : base(limit)    {        this.Limit = limit;    }    public new void Enqueue(T item)    {        if (this.Count &gt;= this.Limit)        {            this.Dequeue();        }        base.Enqueue(item);    }}
+public class LimitedQueue<T> : Queue<T>{    private int limit = -1;    public int Limit    {        get { return limit; }        set { limit = value; }    }    public LimitedQueue(int limit)        : base(limit)    {        this.Limit = limit;    }    public new void Enqueue(T item)    {        if (this.Count >= this.Limit)        {            this.Dequeue();        }        base.Enqueue(item);    }}
 No, unfortunately, and if you think about it, that information would be worthless anyway since the file could become locked the very next second (read: short timespan).
 
 Why specifically do you need to know if the file is locked anyway? Knowing that might give us some other way of giving you good advice.
@@ -3586,7 +3586,7 @@ you get:
 So start getting used to robocopy :)
 Why not use LINQ:
 
-Dictionary&lt;string, int&gt; myDict = new Dictionary&lt;string, int&gt;();
+Dictionary<string, int> myDict = new Dictionary<string, int>();
 myDict.Add("one", 1);
 myDict.Add("four", 4);
 myDict.Add("two", 2);
@@ -3644,7 +3644,7 @@ xcopy /K /R /E /I /S /C /H /G /X /Y s:\*.* t:\
 
 
 (Edit: Added /G and /X which are new since a few years)
-Do you mean that from a set of N colors, you need to pick M colors, where M &lt; N, such that M is the best representation of the N colors in the M space?
+Do you mean that from a set of N colors, you need to pick M colors, where M < N, such that M is the best representation of the N colors in the M space?
 
 As a better example, reduce a true-color (24 bit color space) to a 8-bit mapped color space (GIF?).
 
@@ -3692,7 +3692,7 @@ Xcopy keeps the Date Modified, only the Date Created and Date Accessed will chan
 
 Edit: You MAY want to redirect the Output though:
 
-xcopy /K /R ....... s:\*.* t:\ &gt;c:\xcopy.log 2&gt;&amp;1
+xcopy /K /R ....... s:\*.* t:\ >c:\xcopy.log 2>&1
 
 That way, if files fail to copy you can check the log (i.e. System Volume Information will generate an error, but that folder does not matter anyway for what you're trying to do)
 Your almost looking at it the wrong way, no 3party tool that is not aware of your application methods/naming/data/domain is going to going to be able to perfectly protect you.
@@ -3735,7 +3735,7 @@ If for some reason you can't get on with the progress bar lib Joey suggested rol
 Here is a solution that works in XP / Vista, but is definitely expandable to OSX, linux, I'd still be interested in another way.
 
 public static function GetCurrentOSUser():String{
-    // XP &amp; Vista only.
+    // XP & Vista only.
     var userDirectory:String = File.userDirectory.resolvePath("").nativePath;
     var startIndex:Number = userDirectory.lastIndexOf("\\") + 1
     var stopIndex:Number = userDirectory.length;
@@ -3833,7 +3833,7 @@ For some reason Jeff's code didn't seem simple enough. To me this seems simpler 
 DateTime today = DateTime.Today;
 int age = today.Year - bday.Year;
 
-if (bday &gt; today.AddYears(-age))
+if (bday > today.AddYears(-age))
     age--;
 
 
@@ -3885,14 +3885,14 @@ Open C:\xampp\apache\conf\extra\httpd-vhosts.conf.
 Un-comment line 19 (NameVirtualHost *:80).
 Add your virtual host (~line 36):
 
-&lt;VirtualHost *:80&gt;
+<VirtualHost *:80>
     DocumentRoot C:\Projects\transitCalculator\trunk
     ServerName transitcalculator.localhost
-    &lt;Directory C:\Projects\transitCalculator\trunk&gt;
+    <Directory C:\Projects\transitCalculator\trunk>
         Order allow,deny
         Allow from all
-    &lt;/Directory&gt;
-&lt;/VirtualHost&gt;
+    </Directory>
+</VirtualHost>
 
 Open your hosts file (C:\Windows\System32\drivers\etc\hosts).
 Add
@@ -3900,7 +3900,7 @@ Add
 127.0.0.1 transitcalculator.localhost #transitCalculator
 
 
-to the end of the file (before the Spybot - Search &amp; Destroy stuff if you have that installed).
+to the end of the file (before the Spybot - Search & Destroy stuff if you have that installed).
 Save (You might have to save it to the desktop, change the permissions on the old hosts file (right click > properties), and copy the new one into the directory over the old one (or rename the old one) if you are using Vista and have trouble).
 Restart Apache.
 
@@ -3912,8 +3912,8 @@ Now you can access that directory by browsing to http://transitcalculator.localh
 Make an Alias
 
 
-Starting ~line 200 of your http.conf file, copy everything between &lt;Directory "C:/xampp/htdocs"&gt; and &lt;/Directory&gt; (~line 232) and paste it immediately below with C:/xampp/htdocs replaced with your desired directory (in this case C:/Projects) to give your server the correct permissions for the new directory.
-Find the &lt;IfModule alias_module&gt;&lt;/IfModule&gt; section (~line 300) and add
+Starting ~line 200 of your http.conf file, copy everything between <Directory "C:/xampp/htdocs"> and </Directory> (~line 232) and paste it immediately below with C:/xampp/htdocs replaced with your desired directory (in this case C:/Projects) to give your server the correct permissions for the new directory.
+Find the <IfModule alias_module></IfModule> section (~line 300) and add
 
 Alias /transitCalculator "C:/Projects/transitCalculator/trunk"
 
@@ -3979,7 +3979,7 @@ For a good reference try this
 
 This isn't much better:
 
-public function createShipment($startZip, $endZip, $weight=null){    $weight = !$weight ? $this-&gt;getDefaultWeight() : $weight;}// or...public function createShipment($startZip, $endZip, $weight=null){    if ( !$weight )        $weight = $this-&gt;getDefaultWeight();}
+public function createShipment($startZip, $endZip, $weight=null){    $weight = !$weight ? $this->getDefaultWeight() : $weight;}// or...public function createShipment($startZip, $endZip, $weight=null){    if ( !$weight )        $weight = $this->getDefaultWeight();}
 The way I typically go about coding permission systems is having 6 tables.
 
 
@@ -4101,18 +4101,18 @@ Personally, I sometimes use a flagged enumeration of permissions. This way you c
 "[Flags]public enum Permission{    VIEWUSERS = 1, // 2^0 // 0000 0001    EDITUSERS = 2, // 2^1 // 0000 0010    VIEWPRODUCTS = 4, // 2^2 // 0000 0100    EDITPRODUCTS = 8, // 2^3 // 0000 1000    VIEWCLIENTS = 16, // 2^4 // 0001 0000    EDITCLIENTS = 32, // 2^5 // 0010 0000    DELETECLIENTS = 64, // 2^6 // 0100 0000}"
 
 Then, you can combine several permissions using the AND bitwise operator. 
-For example, if a user can view &amp; edit users, the binary result of the operation is 0000 0011 which converted to decimal is 3. 
+For example, if a user can view & edit users, the binary result of the operation is 0000 0011 which converted to decimal is 3. 
 You can then store the permission of one user into a single column of your DataBase (in our case it would be 3).
 Inside your application, you just need another bitwise operation (OR) to verify if a user has a particular permission or not. 
-As far as I can tell Python, up through 2.5, only supports hexadecimal &amp; octal literals.  I did find some discussions about adding binary to future versions but nothing definite.
+As far as I can tell Python, up through 2.5, only supports hexadecimal & octal literals.  I did find some discussions about adding binary to future versions but nothing definite.
 I am pretty sure this is one of the things due to change in Python 3.0 with perhaps bin() to go with hex() and oct().
 
 EDIT:
 lbrandy's answer is correct in all cases.
 
-&gt;&gt;&gt; print int('01010101111',2)
+>>> print int('01010101111',2)
 687
-&gt;&gt;&gt; print int('11111111',2)
+>>> print int('11111111',2)
 255
 
 
@@ -4157,7 +4157,7 @@ From the Apple Developer Connection Safari Web Content Guide for iPhone page Spe
   with a webpage-specific icon, add a
   link element to the webpage as in:
   
-  &lt;link rel="apple-touch-icon" href="/custom_icon.png"/&gt;
+  <link rel="apple-touch-icon" href="/custom_icon.png"/>
   
   In the above example, replace
   custom_icon.png with your icon
@@ -4261,7 +4261,7 @@ This has already been answered for Java, here's the C# answer:
 
 "Integer" is not a valid type name in C# and "int" is just an alias for System.Int32. Also, unlike in Java (or C++) there aren't any special primitive types in C#, every instance of a type in C# (including int) is an object. Here's some demonstrative code:
 
-void DoStuff(){    System.Console.WriteLine( SomeMethod((int)5) );    System.Console.WriteLine( GetTypeName&lt;int&gt;() );}string SomeMethod(object someParameter){    return string.Format("Some text {0}", someParameter.ToString());}string GetTypeName&lt;T&gt;(){    return (typeof (T)).FullName;}
+void DoStuff(){    System.Console.WriteLine( SomeMethod((int)5) );    System.Console.WriteLine( GetTypeName<int>() );}string SomeMethod(object someParameter){    return string.Format("Some text {0}", someParameter.ToString());}string GetTypeName<T>(){    return (typeof (T)).FullName;}
 I assume you don't mean cygwin, right?
 
 How about powershell, then?
@@ -4343,7 +4343,7 @@ application/vnd.xfdl;content-encoding="base64-gzip"
 
 are simple base64-encoded gzip files. They can be easily restored to XML by first decoding and then unzipping them. This can be done as follows on Ubuntu:
 
-sudo apt-get install uudeview uudeview -i yourform.xfdl gunzip -S "" &lt; UNKNOWN.001 &gt; yourform-unpacked.xfdl 
+sudo apt-get install uudeview uudeview -i yourform.xfdl gunzip -S "" < UNKNOWN.001 > yourform-unpacked.xfdl 
 
 The first command will install uudeview, a package that can decode base64, among others. You can skip this step once it is installed.
 
@@ -4354,7 +4354,7 @@ The last command gunzips the decoded file into a file named 'yourform-unpacked.x
 
 Another possible solution - here
 
-Side Note: Block quoted &lt; code &gt; doesn't work for long strings of code
+Side Note: Block quoted < code > doesn't work for long strings of code
 I usually do a project for the GUI a project for the business logic a project for data access and a project for unit tests.
 
 But sometimes it is prudent to have separation based upon services (if you are using a service oriented architecture) Such as Authentication, Sales, etc. 
@@ -4572,7 +4572,7 @@ Code Complete (2nd edition) by Steve McConnell
 The Pragmatic Programmer
 Structure and Interpretation of Computer Programs
 The C Programming Language by Kernighan and Ritchie
-Introduction to Algorithms by Cormen, Leiserson, Rivest &amp; Stein
+Introduction to Algorithms by Cormen, Leiserson, Rivest & Stein
 Design Patterns by the Gang of Four
 Refactoring: Improving the Design of Existing Code
 The Mythical Man Month
@@ -4697,7 +4697,7 @@ just some silly example to illustrate:
 public enum DocumentType{  Invoice,  Contract,  WorkOrder,  SignedWorkOrder}[WebMethod]public void UploadDocument(string type, byte[] data){  DocumentType docType = (DocumentType)Enum.Parse(typeof(DocumentType), type);}
 You need to put the match in parentheses, like this:
 
-preg_replace("/([A-Z])/", "&lt;span class=\"initial\"&gt;$1&lt;/span&gt;", $str)
+preg_replace("/([A-Z])/", "<span class=\"initial\">$1</span>", $str)
 
 I thought I'd give this a shot using classes and polymorphism. I had a previous iteration which used sub-classing which ended up having way too much overhead. I've switched to a more flexible delegate / public property object model which is significantly better. My code is very slightly more accurate, I wish I could come up with a better way to generate "months ago" that didn't seem too over-engineered.
 
@@ -4705,21 +4705,21 @@ I think I'd still stick with Jeff's if-then cascade because it's less code and i
 
 For the below code PrintRelativeTime.GetRelativeTimeMessage(TimeSpan ago) returns the relative time message (e.g. "yesterday").
 
-public class RelativeTimeRange : IComparable{    public TimeSpan UpperBound { get; set; }    public delegate string RelativeTimeTextDelegate(TimeSpan timeDelta);    public RelativeTimeTextDelegate MessageCreator { get; set; }    public int CompareTo(object obj)    {        if (!(obj is RelativeTimeRange))        {            return 1;        }        // note that this sorts in reverse order to the way you'd expect,         // this saves having to reverse a list later        return (obj as RelativeTimeRange).UpperBound.CompareTo(UpperBound);    }}public class PrintRelativeTime{    private static List&lt;RelativeTimeRange&gt; timeRanges;    static PrintRelativeTime()    {        timeRanges = new List&lt;RelativeTimeRange&gt;{            new RelativeTimeRange            {                UpperBound = TimeSpan.FromSeconds(1),                MessageCreator = (delta) =&gt;                 { return "one second ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromSeconds(60),                MessageCreator = (delta) =&gt;                 { return delta.Seconds + " seconds ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromMinutes(2),                MessageCreator = (delta) =&gt;                 { return "one minute ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromMinutes(60),                MessageCreator = (delta) =&gt;                 { return delta.Minutes + " minutes ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromHours(2),                MessageCreator = (delta) =&gt;                 { return "one hour ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromHours(24),                MessageCreator = (delta) =&gt;                 { return delta.Hours + " hours ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromDays(2),                MessageCreator = (delta) =&gt;                 { return "yesterday"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddMonths(-1)),                MessageCreator = (delta) =&gt;                 { return delta.Days + " days ago"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddMonths(-2)),                MessageCreator = (delta) =&gt;                 { return "one month ago"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddYears(-1)),                MessageCreator = (delta) =&gt;                 { return (int)Math.Floor(delta.TotalDays / 30) + " months ago"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddYears(-2)),                MessageCreator = (delta) =&gt;                 { return "one year ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.MaxValue,                MessageCreator = (delta) =&gt;                 { return (int)Math.Floor(delta.TotalDays / 365.24D) + " years ago"; }            }        };        timeRanges.Sort();    }    public static string GetRelativeTimeMessage(TimeSpan ago)    {        RelativeTimeRange postRelativeDateRange = timeRanges[0];        foreach (var timeRange in timeRanges)        {            if (ago.CompareTo(timeRange.UpperBound) &lt;= 0)            {                postRelativeDateRange = timeRange;            }        }        return postRelativeDateRange.MessageCreator(ago);    }}
+public class RelativeTimeRange : IComparable{    public TimeSpan UpperBound { get; set; }    public delegate string RelativeTimeTextDelegate(TimeSpan timeDelta);    public RelativeTimeTextDelegate MessageCreator { get; set; }    public int CompareTo(object obj)    {        if (!(obj is RelativeTimeRange))        {            return 1;        }        // note that this sorts in reverse order to the way you'd expect,         // this saves having to reverse a list later        return (obj as RelativeTimeRange).UpperBound.CompareTo(UpperBound);    }}public class PrintRelativeTime{    private static List<RelativeTimeRange> timeRanges;    static PrintRelativeTime()    {        timeRanges = new List<RelativeTimeRange>{            new RelativeTimeRange            {                UpperBound = TimeSpan.FromSeconds(1),                MessageCreator = (delta) =>                 { return "one second ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromSeconds(60),                MessageCreator = (delta) =>                 { return delta.Seconds + " seconds ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromMinutes(2),                MessageCreator = (delta) =>                 { return "one minute ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromMinutes(60),                MessageCreator = (delta) =>                 { return delta.Minutes + " minutes ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromHours(2),                MessageCreator = (delta) =>                 { return "one hour ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromHours(24),                MessageCreator = (delta) =>                 { return delta.Hours + " hours ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.FromDays(2),                MessageCreator = (delta) =>                 { return "yesterday"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddMonths(-1)),                MessageCreator = (delta) =>                 { return delta.Days + " days ago"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddMonths(-2)),                MessageCreator = (delta) =>                 { return "one month ago"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddYears(-1)),                MessageCreator = (delta) =>                 { return (int)Math.Floor(delta.TotalDays / 30) + " months ago"; }            },             new RelativeTimeRange            {                UpperBound = DateTime.Now.Subtract(DateTime.Now.AddYears(-2)),                MessageCreator = (delta) =>                 { return "one year ago"; }            },             new RelativeTimeRange            {                UpperBound = TimeSpan.MaxValue,                MessageCreator = (delta) =>                 { return (int)Math.Floor(delta.TotalDays / 365.24D) + " years ago"; }            }        };        timeRanges.Sort();    }    public static string GetRelativeTimeMessage(TimeSpan ago)    {        RelativeTimeRange postRelativeDateRange = timeRanges[0];        foreach (var timeRange in timeRanges)        {            if (ago.CompareTo(timeRange.UpperBound) <= 0)            {                postRelativeDateRange = timeRange;            }        }        return postRelativeDateRange.MessageCreator(ago);    }}
 +1 for print_r(). Use it to dump out the contents of an object or variable. To make it more readable, do it with a pre tag so you don't need to view source. 
 
-echo '&lt;pre&gt;';print_r($arrayOrObject);
+echo '<pre>';print_r($arrayOrObject);
 
 Also var_dump($thing) - this is very useful to see the type of subthings
 The value of 'false' is true. You need to remove the quotes:
 
-$canMerge = ($condition1 &amp;&amp; $condition2) ? true : false;
+$canMerge = ($condition1 && $condition2) ? true : false;
 I like MbUnit, er, Gallio.  Most importantly to me is having good tools support inside Visual Studio.  For that I use Resharper, which has an MbUnit test runner.  A lot of folks seem to like TestDriven.NET as their test runner as well.
 This is broken because 'false' as a string will evaluate to true as a boolean.
 
 However, this is an unneeded ternary expression, because the resulting values are simple true and false.  This would be equivalent:
 
-$canMerge = ($condition1 &amp;&amp; $condition2);
+$canMerge = ($condition1 && $condition2);
 The exact definitions of "vsize," "rss," "rprvt," "rshrd," and other obscure-looking abbreviations vary from OS to OS.  The manual pages for the "top" and "ps" commands will have some sort of description, but all such descriptions are simplified greatly (or are based on long-extinct kernel implementations).  "Process size" as a concept is fiendishly difficult to pin down in the general case.  Answers in specific instances depend heavily on the actual memory management implementation in the OS, and are rarely as satisfying as the tidy "process size" concept that exists in the minds of most users (and most developers).
 
 For example, none of those numbers (nor, likely, any combination of them) can be used to tell you exactly how many such processes can run at once in a given amount of free memory.  But really, your best bet is to come at it from that end: why do you want this number, and what will you use it for?  Given that information, I think you'll get more useful answers.
@@ -4765,7 +4765,7 @@ To associate a program with the mailto protocol for the current user, change the
 
 The %1 will be replaced with the entire mailto URL. For example, given the link:
 
-&lt;a href="mailto:user@example.com"&gt;Email me&lt;/a&gt;
+<a href="mailto:user@example.com">Email me</a>
 
 
 The following will be executed:
@@ -4827,7 +4827,7 @@ for C# 3.5
 
 without notifyicon therefore you will need to terminate this application in task manager manually
 
-using System;using System.Drawing;using System.Windows.Forms;static class Program{    static void Main()    {        Timer timer = new Timer();        // timer.Interval = 4 minutes        timer.Interval = (int)(TimeSpan.TicksPerMinute * 4 / TimeSpan.TicksPerMillisecond);        timer.Tick += (sender, args) =&gt; { Cursor.Position = new Point(Cursor.Position.X + 1, Cursor.Position.Y + 1); };        timer.Start();        Application.Run();    }}
+using System;using System.Drawing;using System.Windows.Forms;static class Program{    static void Main()    {        Timer timer = new Timer();        // timer.Interval = 4 minutes        timer.Interval = (int)(TimeSpan.TicksPerMinute * 4 / TimeSpan.TicksPerMillisecond);        timer.Tick += (sender, args) => { Cursor.Position = new Point(Cursor.Position.X + 1, Cursor.Position.Y + 1); };        timer.Start();        Application.Run();    }}
 Something like this should work (though, you will want to change the interval).
 
 public Form1()
@@ -4856,13 +4856,13 @@ This is an active area of research. There are literally oodles of academic paper
 "Text detection" is a standard problem in any OCR (optical character recognition) system and consequently there are lots of bits of code on the interwebs that deal with it. 
 
 I could start listing piles of links from google but I suggest you just do a search for "text detection" and start reading :). There is ample example code available as well.
-&gt;&gt;&gt; import os
-&gt;&gt;&gt; print os.name
+>>> import os
+>>> print os.name
 posix
-&gt;&gt;&gt; import platform
-&gt;&gt;&gt; platform.system()
+>>> import platform
+>>> platform.system()
 'Linux'
-&gt;&gt;&gt; platform.release()
+>>> platform.release()
 '2.6.22-15-generic'
 
 
@@ -4879,13 +4879,13 @@ No one try it in IDLE, unless you have Task Manager handy.
 I've already forgotten how I lived with menus that arn't super-instant responsive.
 Dang -- lbrandy beat me to the punch, but that doesn't mean I can't provide you with the system results for Vista!
 
-&gt;&gt;&gt; import os
-&gt;&gt;&gt; os.name
+>>> import os
+>>> os.name
 'nt'
-&gt;&gt;&gt; import platform
-&gt;&gt;&gt; platform.system()
+>>> import platform
+>>> platform.system()
 'Windows'
-&gt;&gt;&gt; platform.release()
+>>> platform.release()
 'Vista'
 
 
@@ -4898,36 +4898,36 @@ Can you do some rudimentary string function to force JavaScript into changing it
 value = value + ""
 For the record here's the results on Mac:
 
-&gt;&gt;&gt; import os
-&gt;&gt;&gt; os.name
+>>> import os
+>>> os.name
 'posix'
-&gt;&gt;&gt; import platform
-&gt;&gt;&gt; platform.system()
+>>> import platform
+>>> platform.system()
 'Darwin'
-&gt;&gt;&gt; platform.release()
+>>> platform.release()
 '8.11.1'
 
 
 Try putting the extra text inside the server-side script block and concatenating.
 
-onclick='&lt;%# "ToggleDisplay(""" &amp;  DataBinder.Eval(Container.DataItem, "JobCode") &amp; """);" %&gt;'
+onclick='<%# "ToggleDisplay(""" &  DataBinder.Eval(Container.DataItem, "JobCode") & """);" %>'
 
 Edit: I'm pretty sure you could just use double quotes outside the script block as well.
 The  reason msvcrt fails in IDLE is because IDLE is not accessing the library that runs msvcrt. Whereas when you run the program natively in cmd.exe it works nicely. For the same reason that your program blows up on Mac and Linux terminals.
 
 But I guess if you're going to be using this specifically for windows, more power to ya.
-I had recently similar problem and the only way to solve it was to use plain old HTML codes for single (&amp;#39;) and double quotes (&amp;#34;).  
+I had recently similar problem and the only way to solve it was to use plain old HTML codes for single (') and double quotes (").  
 
 Source code was total mess of course but it worked.
 
 Try
 
-&lt;a id="aShowHide" onclick='ToggleDisplay(&amp;#34;&lt;%# DataBinder.Eval(Container.DataItem, "JobCode") %&gt;&amp;#34;);'&gt;Show/Hide&lt;/a&gt;
+<a id="aShowHide" onclick='ToggleDisplay("<%# DataBinder.Eval(Container.DataItem, "JobCode") %>");'>Show/Hide</a>
 
 
 or
 
-&lt;a id="aShowHide" onclick='ToggleDisplay(&amp;#39;&lt;%# DataBinder.Eval(Container.DataItem, "JobCode") %&gt;&amp;#39;);'&gt;Show/Hide&lt;/a&gt;
+<a id="aShowHide" onclick='ToggleDisplay('<%# DataBinder.Eval(Container.DataItem, "JobCode") %>');'>Show/Hide</a>
 
 
 I create folders named after the build versions and put upgrade and downgrade scripts in there. For example, you could have the following folders: 1.0.0, 1.0.1 and 1.0.2. Each one contains the script that allows you to upgrade or downgrade your database between versions.
@@ -4963,7 +4963,7 @@ The following definitely isn't the best way to generate these, but it's an inter
 
 Knuth (volume 4, fascicle 2, 7.2.1.3) tells us that (s,t)-combination is equivalent to s+1 things taken t at a time with repetition -- an (s,t)-combination is notation used by Knuth that is equal to . We can figure this out by first generating each (s,t)-combination in binary form (so, of length (s+t)) and counting the number of 0's to the left of each 1.
 
-10001000011101 --&gt; becomes the permutation: {0, 3, 4, 4, 4, 1}
+10001000011101 --> becomes the permutation: {0, 3, 4, 4, 4, 1}
 Brad's list is pretty good. I also listen to:
 
 
@@ -5010,7 +5010,7 @@ For instance:
 public ActionResult Send()
 {
     TempData["form"] = Request.Form;
-    return this.RedirectToAction(a =&gt; a.Form());
+    return this.RedirectToAction(a => a.Form());
 }
 
 
@@ -5084,10 +5084,10 @@ Here is some sample code. I think this is what you are looking for. The followin
   width: 40%;
   background: red;
 }
-&lt;div id="absdiv"&gt;
-    &lt;div id="reldiv"&gt;&lt;/div&gt;
-    &lt;div id="pctchild"&gt;&lt;/div&gt;
-&lt;/div&gt;
+<div id="absdiv">
+    <div id="reldiv"></div>
+    <div id="pctchild"></div>
+</div>
 
 
 
@@ -5181,7 +5181,7 @@ even using 'real' objects will show a similar result:
 public class MyObj {    private String msg;    private int number;    //getters and setters    public String getMsg() {        return this.msg;    }    public void setMsg(String msg) {        this.msg = msg;    }    public int getNumber() {        return this.number;    }    public void setNumber(int number) {        this.number = number;    }    //constructor    public MyObj(String msg, int number) {        setMsg(msg);        setNumber(number);    }}public static void swap(MyObj x, MyObj y){    MyObj tmp = x;    x = y;    y = tmp;}public static void main(String args[]) {    MyObj x = new MyObj("Hello world", 1);    MyObj y = new MyObj("Goodbye Cruel World", -1);     swap(x, y);    System.out.println(x.getMsg() + " -- "+  x.getNumber());    System.out.println(y.getMsg() + " -- "+  y.getNumber());}"Output:Hello world -- 1Goodbye Cruel World -- -1"
 
 thus it is clear that Java passes its parameters by value, as the value for pi and everything and the MyObj objects aren't swapped.
-be aware that "by value" is the only way in java to pass parameters to a method. (for example a language like c++ allows the developer to pass a parameter by reference using '&amp;' after the parameter's type)
+be aware that "by value" is the only way in java to pass parameters to a method. (for example a language like c++ allows the developer to pass a parameter by reference using '&' after the parameter's type)
 
 now the tricky part, or at least the part that will confuse most of the new java developers: (borrowed from javaworld) 
 Original author: Tony Sintes
@@ -5422,7 +5422,7 @@ Technically unit tests of persistance are not Unit tests they are Integration te
 
 With C# using mbUnit, you simply use the SqlRestoreInfo and RollBack attributes
 
-    [TestFixture]    [SqlRestoreInfo(&lt;connectionsting&gt;, &lt;name&gt;,&lt;backupLocation&gt;]    public class Tests    {        [SetUp]        public void Setup()        {        }        [Test]        [RollBack]        public void TEST()        {           //test insert.         }    }
+    [TestFixture]    [SqlRestoreInfo(<connectionsting>, <name>,<backupLocation>]    public class Tests    {        [SetUp]        public void Setup()        {        }        [Test]        [RollBack]        public void TEST()        {           //test insert.         }    }
 
 The same can be done in NUnit, excpet the attribute names differ slighty.
 
@@ -5439,7 +5439,7 @@ I would definitely prefer:
 PS: I know these have been already suggested here and I would have voted on them, if I could.
 If you correctly markup your HTML code, there is no need for javascript. The following code will allow the user to click on the label text to tick the checkbox.
 
-&lt;label for="surname"&gt;Surname&lt;/label&gt;&lt;input type="checkbox" name="surname" id="surname" /&gt;
+<label for="surname">Surname</label><input type="checkbox" name="surname" id="surname" />
 
 The for attribute on the label element links to the id attribute on the input element and the browser does the rest.
 
@@ -5478,7 +5478,7 @@ public static byte[] Decompress(byte[] data)
 
     read = gzip.Read(buff, 0, buff.Length);
 
-    while (read &gt; 0)
+    while (read > 0)
     {
         output.Write(buff, 0, read);
         read = gzip.Read(buff, 0, buff.Length);
@@ -5518,14 +5518,14 @@ As far as I know the LINQ library is only available since the framework 3.0.
 If you want to use something similar in the framework 2.0, you would need to rewritte it yourself :) or find a similar third-party library. I only found a bit of information here but it didn't convinced me either.
 You can wrap your checkbox in the label:
 
-&lt;label style="display: block; padding: 50px 0 0 50px; background-color: pink; width: 80px; height: 80px">  &lt;input type="checkbox" name="surname">&lt;/label>
+<label style="display: block; padding: 50px 0 0 50px; background-color: pink; width: 80px; height: 80px">  <input type="checkbox" name="surname"></label>
 You can accomplish this with Section Handlers. There is a basic overview of how to write one at http://www.codeproject.com/KB/aspnet/ConfigSections.aspx however it refers to app.config which would be pretty much the same as writing one for use in web.config. This will allow you to essentially have your own XML tree in the config file and do some more advanced configuration.
 Assuming you have the correct assemblies and a C# compiler you in theory can use whatever you want to edit the code and then just run the compiler by hand or using a build script. That being said it is a real pain doing .NET development without Visual Studio/SharpEdit/Monodevelop in my opinion.
 Ronnie,
 
 If you wanted to enclose the label text and checkbox inside a wrapper element, you could do the following:
 
-&lt;label for="surname"&gt;    Surname    &lt;input type="checkbox" name="surname" id="surname" /&gt;&lt;/label&gt;
+<label for="surname">    Surname    <input type="checkbox" name="surname" id="surname" /></label>
 I haven't done SWING development since my early CS classes but if it wasn't built in you could just inherit javax.swing.AbstractButton and create your own. Should be pretty simple to wire something together with their existing framework.
 The JITter will sometimes use non-virtual calls to methods in sealed classes since there is no way they can be extended further.
 
@@ -5534,7 +5534,7 @@ There are complex rules regarding calling type, virtual/nonvirtual, and I don't 
 Note that any kind of performance benefit you would obtain from this level of optimization should be regarded as last-resort, always optimize on the algorithmic level before you optimize on the code-level.
 
 Here's one link mentioning this: Rambling on the sealed keyword
-Wrapping with the label still doesn't allow clicking 'anywhere in the box' - still just on the text! This does the job for me:&lt;div onclick="dob.checked=!dob.checked" class="checkbox"&gt;&lt;input onclick="checked=!checked" id="dob" type="checkbox"/&gt;Date of birth entry must be completed&lt;/div&gt;
+Wrapping with the label still doesn't allow clicking 'anywhere in the box' - still just on the text! This does the job for me:<div onclick="dob.checked=!dob.checked" class="checkbox"><input onclick="checked=!checked" id="dob" type="checkbox"/>Date of birth entry must be completed</div>
 
 but unfortunately has lots of javascript that is effectively toggling twice.
 Sealed classes should provide a performance improvement. Since a sealed class cannot be derived, any virtual members can be turned into non-virtual members.
@@ -5569,7 +5569,7 @@ Svnmerge.py
 
 I hear Subversion 1.5 builds more of the merge tracking in, I have no experience with that. My project is on 1.4.x and svnmerge.py is a life saver!
 
-You could always try the Synth look &amp; feel. You provide an xml file that acts as a sort of stylesheet, along with any images you want to use. The code might look like this:
+You could always try the Synth look & feel. You provide an xml file that acts as a sort of stylesheet, along with any images you want to use. The code might look like this:
 
 try {
     SynthLookAndFeel synth = new SynthLookAndFeel();
@@ -5598,20 +5598,20 @@ From there, go on and add your JButton like you normally would. The only change 
 
 The xml file might look like this:
 
-&lt;synth&gt;
-    &lt;style id="button"&gt;
-        &lt;font name="DIALOG" size="12" style="BOLD"/&gt;
-        &lt;state value="MOUSE_OVER"&gt;
-            &lt;imagePainter method="buttonBackground" path="dirt.png" sourceInsets="2 2 2 2"/&gt;
-            &lt;insets top="2" botton="2" right="2" left="2"/&gt;
-        &lt;/state&gt;
-        &lt;state value="ENABLED"&gt;
-            &lt;imagePainter method="buttonBackground" path="dirt.png" sourceInsets="2 2 2 2"/&gt;
-            &lt;insets top="2" botton="2" right="2" left="2"/&gt;
-        &lt;/state&gt;
-    &lt;/style&gt;
-    &lt;bind style="button" type="name" key="dirt"/&gt;
-&lt;/synth&gt;
+<synth>
+    <style id="button">
+        <font name="DIALOG" size="12" style="BOLD"/>
+        <state value="MOUSE_OVER">
+            <imagePainter method="buttonBackground" path="dirt.png" sourceInsets="2 2 2 2"/>
+            <insets top="2" botton="2" right="2" left="2"/>
+        </state>
+        <state value="ENABLED">
+            <imagePainter method="buttonBackground" path="dirt.png" sourceInsets="2 2 2 2"/>
+            <insets top="2" botton="2" right="2" left="2"/>
+        </state>
+    </style>
+    <bind style="button" type="name" key="dirt"/>
+</synth>
 
 
 The bind element there specifies what to map to (in this example, it will apply that styling to any buttons whose name property has been set to "dirt").
@@ -5632,7 +5632,7 @@ This will allow you to pass a weight of 0 and still work properly.  Notice the =
 
 PHP:
 
-public function createShipment($startZip, $endZip, $weight=null){    if ($weight === null)        $weight = $this-&gt;getDefaultWeight();}
+public function createShipment($startZip, $endZip, $weight=null){    if ($weight === null)        $weight = $this->getDefaultWeight();}
 Thxm, Mc! http://asm.objectweb.org/ is another one. Excellent documentation on byte code instrumentation, but nothing "directly" aimed at writing a coverage tool - just some hints or ideas.
 Quick'n Dirty:
 
@@ -5664,7 +5664,7 @@ public class MyStuffElement : ConfigurationElement
 
     public MyStuffElement()
     {
-        _SomeStuff = new ConfigurationProperty("SomeStuff", typeof(string), "&lt;UNDEFINED&gt;");
+        _SomeStuff = new ConfigurationProperty("SomeStuff", typeof(string), "<UNDEFINED>");
 
         this.Properties.Add(_SomeStuff);
     }
@@ -5681,25 +5681,25 @@ public class MyStuffElement : ConfigurationElement
 
 Then let the framework know how to handle your configuration classes in web.config:
 
-&lt;configuration&gt;
-  &lt;configSections&gt;
-    &lt;section name="MyStuffSection" type="MyWeb.Configuration.MyStuffSection" /&gt;
-  &lt;/configSections&gt;
+<configuration>
+  <configSections>
+    <section name="MyStuffSection" type="MyWeb.Configuration.MyStuffSection" />
+  </configSections>
   ...
 
 
 And actually add your own section below:
 
-  &lt;MyStuffSection&gt;
-    &lt;MyStuff SomeStuff="Hey There!" /&gt;
-  &lt;/MyStuffSection&gt;
+  <MyStuffSection>
+    <MyStuff SomeStuff="Hey There!" />
+  </MyStuffSection>
 
 
 Then you can use it in your code thus:
 
 MyWeb.Configuration.MyStuffSection configSection = ConfigurationManager.GetSection("MyStuffSection") as MyWeb.Configuration.MyStuffSection;
 
-if (configSection != null &amp;&amp; configSection.MyStuff != null)
+if (configSection != null && configSection.MyStuff != null)
 {
     Response.Write(configSection.MyStuff.SomeStuff);
 }
@@ -5709,9 +5709,9 @@ Set the CSS "display" property for the label to be a block element and use that 
 
 For example
 
-&lt;label for="test" style="width: 100px; height: 100px; display: block; background-color: #e0e0ff;"&gt;
-    A ticky box! &lt;input type="checkbox" id="test" /&gt;
-&lt;/label&gt;
+<label for="test" style="width: 100px; height: 100px; display: block; background-color: #e0e0ff;">
+    A ticky box! <input type="checkbox" id="test" />
+</label>
 
 
 Yes, this is possible. One of the main pros for using Swing is the ease with which the abstract controls can be created and manipulates.
@@ -5794,11 +5794,11 @@ What I would do for the particular case is:
 
 i. Define the body as a server side control
 
-&lt;body runat="server" id="masterpageBody"&gt;
+<body runat="server" id="masterpageBody">
 
 ii. In your content aspx page, register the MasterPage with the register:
 
-&lt;% MasterPageFile="..." %&gt;
+<% MasterPageFile="..." %>
 
 iii. In the Content Page, you can now simply use 
 
@@ -5876,7 +5876,7 @@ I'm definitely not a Ruby expert, but I'll give it a shot:
 $ irb 
 system "echo Hi"
 Hi
-=&gt; true
+=> true
 
 
 You should also be able to do things like:
@@ -5954,11 +5954,11 @@ If you need to populate each member variable by hand you can generalize it a bit
 
 Here's the code I used to generalize the deserialization from a byte[].
 
-public virtual bool SetMessageBytes(byte[] message)    {        MemberInfo[] members = FormatterServices.GetSerializableMembers(this.GetType());        object[] values = FormatterServices.GetObjectData(this, members);        int j = 0;        for (int i = 0; i &lt; members.Length; i++)        {            string[] var = members[i].ToString().Split(new char[] { ' ' });            switch (var[0])            {                case "UInt32":                    values[i] = (UInt32)((message[j] &lt;&lt; 24) + (message[j + 1] &lt;&lt; 16) + (message[j + 2] &lt;&lt; 8) + message[j + 3]);                    j += 4;                    break;                case "UInt16":                    values[i] = (UInt16)((message[j] &lt;&lt; 8) + message[j + 1]);                    j += 2;                    break;                case "Byte":                    values[i] = (byte)message[j++];                    break;                case "UInt32[]":                    if (values[i] != null)                    {                        int len = ((UInt32[])values[i]).Length;                        byte[] b = new byte[len * 4];                        Array.Copy(message, j, b, 0, len * 4);                        Array.Copy(Utilities.ByteArrayToUInt32Array(b), (UInt32[])values[i], len);                        j += len * 4;                    }                    break;                case "Byte[]":                    if (values[i] != null)                    {                        int len = ((byte[])values[i]).Length;                        Array.Copy(message, j, (byte[])(values[i]), 0, len);                        j += len;                    }                    break;                default:                    throw new Exception("ByteExtractable::SetMessageBytes Unsupported Type: " + var[1] + " is of type " +  var[0]);            }        }        FormatterServices.PopulateObjectMembers(this, members, values);        return true;    }
+public virtual bool SetMessageBytes(byte[] message)    {        MemberInfo[] members = FormatterServices.GetSerializableMembers(this.GetType());        object[] values = FormatterServices.GetObjectData(this, members);        int j = 0;        for (int i = 0; i < members.Length; i++)        {            string[] var = members[i].ToString().Split(new char[] { ' ' });            switch (var[0])            {                case "UInt32":                    values[i] = (UInt32)((message[j] << 24) + (message[j + 1] << 16) + (message[j + 2] << 8) + message[j + 3]);                    j += 4;                    break;                case "UInt16":                    values[i] = (UInt16)((message[j] << 8) + message[j + 1]);                    j += 2;                    break;                case "Byte":                    values[i] = (byte)message[j++];                    break;                case "UInt32[]":                    if (values[i] != null)                    {                        int len = ((UInt32[])values[i]).Length;                        byte[] b = new byte[len * 4];                        Array.Copy(message, j, b, 0, len * 4);                        Array.Copy(Utilities.ByteArrayToUInt32Array(b), (UInt32[])values[i], len);                        j += len * 4;                    }                    break;                case "Byte[]":                    if (values[i] != null)                    {                        int len = ((byte[])values[i]).Length;                        Array.Copy(message, j, (byte[])(values[i]), 0, len);                        j += len;                    }                    break;                default:                    throw new Exception("ByteExtractable::SetMessageBytes Unsupported Type: " + var[1] + " is of type " +  var[0]);            }        }        FormatterServices.PopulateObjectMembers(this, members, values);        return true;    }
 As long as the two databases are on the same physical server (assuming MSSQL) and the username/password being used in the connection string has rights to both DBs, then you should be able to perform a join across the two databases. Example: 
 
 select p.Date,       p.Amount,       d.SoftwareName,       d.DownloadLinkfrom   PurchaseDB.dbo.Purchases as pjoin   ProductDB.dbo.Products as d on d.sku = p.skuwhere  p.UserID = 12345 
-Go to TextWrangler &gt; Preferences.
+Go to TextWrangler > Preferences.
 
 Choose Text Status Display in the category pane, then check the option "Show line numbers"  and close the preferences. This should now be on by default when you open existing documents.
 You can also use the backtick operators (`), similar to Perl:
@@ -5991,15 +5991,15 @@ directorylist.each do |filename|
 end
 
 
-Go to System Preferences &gt; Keyboard and Mouse, then choose Keyboard Shortcuts. At the bottom, ensure Full Keyboard Access is set to "All controls". It's a long time since I turned it on but I think that's all you need to do
-Apple Menu &gt; System Preferences &gt; Keyboard &amp; Mouse &gt; Keyboard Shortcuts:
+Go to System Preferences > Keyboard and Mouse, then choose Keyboard Shortcuts. At the bottom, ensure Full Keyboard Access is set to "All controls". It's a long time since I turned it on but I think that's all you need to do
+Apple Menu > System Preferences > Keyboard & Mouse > Keyboard Shortcuts:
 
 Change the radio button at the bottom from "Text boxes and lists only" to "All controls."
 
 Edit: Dammit. We're a fast group around here aren't we? :-)
 This is an alternative way (DataReader is faster than this one):
 
-string s = "";SqlConnection conn = new SqlConnection("Server=192.168.1.1;Database=master;Connect Timeout=30;User ID=foobar;Password=raboof;");SqlDataAdapter da = new SqlDataAdapter("SELECT TOP 5 name, dbid FROM sysdatabases", conn);DataTable dt = new DataTable();da.Fill(dt);for (int i = 0; i &lt; dt.Rows.Count; i++){    s += dt.Rows[i]["name"].ToString() + " -- " + dt.Rows[i]["dbid"].ToString() + "\n";}MessageBox.Show(s);
+string s = "";SqlConnection conn = new SqlConnection("Server=192.168.1.1;Database=master;Connect Timeout=30;User ID=foobar;Password=raboof;");SqlDataAdapter da = new SqlDataAdapter("SELECT TOP 5 name, dbid FROM sysdatabases", conn);DataTable dt = new DataTable();da.Fill(dt);for (int i = 0; i < dt.Rows.Count; i++){    s += dt.Rows[i]["name"].ToString() + " -- " + dt.Rows[i]["dbid"].ToString() + "\n";}MessageBox.Show(s);
 Step one is to make your "dirty" pieces self contained user controls
 
 Step two is to embed those controls on your consuming page
@@ -6083,7 +6083,7 @@ value = `#{cmd}`
 Built-in syntax, %x( cmd )
 
 Following the x character is a delimiter, which can be any character.
-If the delimiter is one of the characters (, [, {, or &lt;,
+If the delimiter is one of the characters (, [, {, or <,
 the literal consists of the characters up to the matching closing delimiter,
 taking account of nested delimiter pairs. For all other delimiters, the
 literal comprises the characters up to the next occurrence of the
@@ -6173,7 +6173,7 @@ Not comprehensive, but useful nonetheless: http://www.wotsit.org/
 
 Using the example you gave:
 
-&lt;form&gt;&lt;input type="text" name="field1" /&gt;&lt;!-- put your cursor in this field and press Enter --&gt;&lt;input type="submit" name="prev" value="Previous Page" /&gt; &lt;!-- This is the button that will submit --&gt;&lt;input type="submit" name="next" value="Next Page" /&gt; &lt;!-- But this is the button that I WANT to submit --&gt;&lt;/form&gt;
+<form><input type="text" name="field1" /><!-- put your cursor in this field and press Enter --><input type="submit" name="prev" value="Previous Page" /> <!-- This is the button that will submit --><input type="submit" name="next" value="Next Page" /> <!-- But this is the button that I WANT to submit --></form>
 
 If you click on "Previous Page" only the value of "prev" will be submitted. If you click on "Next Page" only the value of "next" will be submitted.
 
@@ -6201,7 +6201,7 @@ A VirtualHost would also work for this and may work better for you as you can ho
 
 httpd.conf (or extra\httpd-vhosts.conf relative to httpd.conf. Trailing slashes "\" might cause it not to work):
 
-NameVirtualHost *:80# ...&lt;VirtualHost *:80&gt;      DocumentRoot C:\projects\transitCalculator\trunk\    ServerName transitcalculator.localhost    &lt;Directory C:\projects\transitCalculator\trunk\&gt;          Order allow,deny          Allow from all      &lt;/Directory&gt;&lt;/VirtualHost&gt; 
+NameVirtualHost *:80# ...<VirtualHost *:80>      DocumentRoot C:\projects\transitCalculator\trunk\    ServerName transitcalculator.localhost    <Directory C:\projects\transitCalculator\trunk\>          Order allow,deny          Allow from all      </Directory></VirtualHost> 
 
 HOSTS file (c:\windows\system32\drivers\etc\hosts usually):
 
@@ -6211,7 +6211,7 @@ Now restart XAMPP and you should be able to access http://transitcalculator.loca
 
 This can be helpful if you're trying to replicate a production environment where you're developing a site that will sit on the root of a domain name.  You can, for example, point to files with absolute paths that will carry over to the server:
 
-&lt;img src="/images/logo.png" alt="My Logo" /&gt;
+<img src="/images/logo.png" alt="My Logo" />
 
 whereas in an environment using aliases or subdirectories, you'd need keep track of exactly where the "images" directory was relative to the current file.
 I don't see any problem with your code.
@@ -6242,7 +6242,7 @@ If your adverts are on a separate server, then I would suggest it's impossible t
 The best way to stop users from blocking adverts, is to have inline text adverts which are generated by the server and dished up inside your html.
 Add the user id to the request for the ad:
 
-&lt;img src="./ads/viagra.jpg?{user.id}"/&gt;
+<img src="./ads/viagra.jpg?{user.id}"/>
 
 that way you can check what ads are seen by which users.
 You need to think about the different ways that ads are blocked. The first thing to look at is whether they are running noscript, so you could add a script that would check for that. 
@@ -6390,17 +6390,17 @@ Firefox 30 ignores autocomplete="off" for passwords, opting to prompt the user i
 
 According to Mozilla developer documentation the form element attribute autocomplete prevents form data from being cached in older browsers.
 
-&lt;input type="text" name="foo" autocomplete="off" /&gt;
+<input type="text" name="foo" autocomplete="off" />
 
 
-&lt;form autocomplete="off" ...
+<form autocomplete="off" ...
 
 was a none standard way to do this (I think mozilla and IE still support it) but messing with the users expectations is normally a bad idea.  
 
 If the user enters their credit card details into a form and then let's someone else use that browser it's not your concern :)
 Use a non-standard name and id for the fields, so rather than "name" have "name_". Browsers will then not see it as being the name field. The best part about it is that you can do this to some but not all fields and it will autocomplete some but not all fields.
-&lt;form name="form1" id="form1" method="post" 
-      autocomplete="off" action="http://www.example.com/form.cgi"&gt;
+<form name="form1" id="form1" method="post" 
+      autocomplete="off" action="http://www.example.com/form.cgi">
 
 
 This will work in IE and FF, the downside is that it is not XHTML standard.

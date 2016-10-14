@@ -14,7 +14,7 @@ When I try to build it, I get this error:
 
 I tried making trans a double, but then the control doesn't work. This code has worked fine for me in VB.NET in the past. 
 
-I have an absolutely positioned div containing several children, one of which is a relatively positioned div. When I use a percentage-based width on the child div, it collapses to '0' width on Internet&nbsp;Explorer&nbsp;7, but not on Firefox or Safari.
+I have an absolutely positioned div containing several children, one of which is a relatively positioned div. When I use a percentage-based width on the child div, it collapses to '0' width on Internet Explorer 7, but not on Firefox or Safari.
 
 If I use pixel width, it works. If the parent is relatively positioned, the percentage width on the child works.
 
@@ -71,18 +71,18 @@ The program below tests the various ways I know of. The inline assembly version 
 
 Here's the main testing program (pitimes.c):
 
-#include &lt;math.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
+#include <math.h>
+#include <stdio.h>
+#include <time.h>
 
 #define ITERS 10000000
 #define TESTWITH(x) {                                                       \
     diff = 0.0;                                                             \
     time1 = clock();                                                        \
-    for (i = 0; i &lt; ITERS; ++i)                                             \
+    for (i = 0; i < ITERS; ++i)                                             \
         diff += (x) - M_PI;                                                 \
     time2 = clock();                                                        \
-    printf("%s\t=&gt; %e, time =&gt; %f\n", #x, diff, diffclock(time2, time1));   \
+    printf("%s\t=> %e, time => %f\n", #x, diff, diffclock(time2, time1));   \
 }
 
 static inline double
@@ -104,7 +104,7 @@ main()
     TESTWITH(4 * atan(1))
     TESTWITH(4 * atan2(1, 1))
 
-#if defined(__GNUC__) &amp;&amp; (defined(__i386__) || defined(__amd64__))
+#if defined(__GNUC__) && (defined(__i386__) || defined(__amd64__))
     extern double fldpi();
     TESTWITH(fldpi())
 #endif
@@ -170,14 +170,14 @@ byteArray = new ByteArray();
 
 And
 
-for ( var i:int=0; i &lt; byteArray.length; i++ ) {
+for ( var i:int=0; i < byteArray.length; i++ ) {
     byteArray[i] = null;
 }
 
 
 How can I monitor an SQL Server database for changes to a table without using triggers or modifying the structure of the database in any way? My preferred programming environment is .NET and C#.
 
-I'd like to be able to support any SQL&nbsp;Server 2000 SP4 or newer. My application is a bolt-on data visualization for another company's product. Our customer base is in the thousands, so I don't want to have to put in requirements that we modify the third-party vendor's table at every installation.
+I'd like to be able to support any SQL Server 2000 SP4 or newer. My application is a bolt-on data visualization for another company's product. Our customer base is in the thousands, so I don't want to have to put in requirements that we modify the third-party vendor's table at every installation.
 
 By "changes to a table" I mean changes to table data, not changes to table structure.
 
@@ -185,7 +185,7 @@ Ultimately, I would like the change to trigger an event in my application, inste
 
 
 
-The best course of action given my requirements (no triggers or schema modification, SQL&nbsp;Server 2000 and 2005) seems to be to use the BINARY_CHECKSUM function in T-SQL. The way I plan to implement is this:
+The best course of action given my requirements (no triggers or schema modification, SQL Server 2000 and 2005) seems to be to use the BINARY_CHECKSUM function in T-SQL. The way I plan to implement is this:
 
 Every X seconds run the following query:
 
@@ -215,12 +215,12 @@ Let's say you create a Wizard in an HTML form. One button goes back and one goes
 
 Example:
 
-&lt;form&gt;
-   &lt;input type="text" name="field1" /&gt; &lt;!-- put your cursor in this field and press Enter --&gt;
+<form>
+   <input type="text" name="field1" /> <!-- put your cursor in this field and press Enter -->
 
-   &lt;input type="submit" name="prev" value="Previous Page" /&gt; &lt;!-- This is the button that will submit --&gt;
-   &lt;input type="submit" name="next" value="Next Page" /&gt; &lt;!-- But this is the button that I WANT to submit --&gt;
-&lt;/form&gt;
+   <input type="submit" name="prev" value="Previous Page" /> <!-- This is the button that will submit -->
+   <input type="submit" name="next" value="Next Page" /> <!-- But this is the button that I WANT to submit -->
+</form>
 
 
 What I would like to do, is get to decide which button is used to submit the form when a user presses Enter. That way, when you press Enter the Wizard will move to the next page, not the previous. Do you have to use tabindex to do this?
@@ -320,10 +320,10 @@ So I find myself porting a game, that was originally written for the Win32 API, 
 
 BOOL QueryPerformanceCounter(LARGE_INTEGER* performanceCount)
 {
-    gettimeofday(&amp;currentTimeVal, NULL);
-    performanceCount-&gt;QuadPart = (currentTimeVal.tv_sec - startTimeVal.tv_sec);
-    performanceCount-&gt;QuadPart *= (1000 * 1000);
-    performanceCount-&gt;QuadPart += (currentTimeVal.tv_usec - startTimeVal.tv_usec);
+    gettimeofday(¤tTimeVal, NULL);
+    performanceCount->QuadPart = (currentTimeVal.tv_sec - startTimeVal.tv_sec);
+    performanceCount->QuadPart *= (1000 * 1000);
+    performanceCount->QuadPart += (currentTimeVal.tv_usec - startTimeVal.tv_usec);
 
     return true;
 }
@@ -366,7 +366,7 @@ DECLARE%20@S%20NVARCHAR(4000);SET%20@S=CAST(0x44004500...06F007200%20AS%20NVARCH
 
 I was able to decode this in SQL, but I was a little wary of doing this since I didn't know exactly what was happening at the time.
 
-I tried to write a simple decode tool, so I could decode this type of text without even touching SQL&nbsp;Server. The main part I need decoded is:
+I tried to write a simple decode tool, so I could decode this type of text without even touching SQL Server. The main part I need decoded is:
 
 CAST(0x44004500...06F007200 AS
 NVARCHAR(4000))
@@ -408,7 +408,7 @@ while (!boolIsDone)
     intParseIndex += 2;
     intURLIndex++;
 
-    if (txtURLText.Text.Length - intParseIndex &lt; 2)
+    if (txtURLText.Text.Length - intParseIndex < 2)
     {
         boolIsDone = true;
     }
@@ -444,7 +444,7 @@ String property = this.property;
 
 PHP:
 
-$property = $this-&gt;property;
+$property = $this->property;
 
 
 or would you do:
@@ -456,7 +456,7 @@ String property = this.getProperty();
 
 PHP:
 
-$property = $this-&gt;getProperty();
+$property = $this->getProperty();
 
 
 Forgive me if my Java is a little off, it's been a year since I programmed in Java...
@@ -583,7 +583,7 @@ Some ideas:
   
   Build your own Flash player (ew?)
   Somehow draw over the YouTube Flash player. Will this work?
-  Reverse engineer &amp; hijack YouTube's annotation system. Either messing with the local files or redirecting its attempt to download
+  Reverse engineer & hijack YouTube's annotation system. Either messing with the local files or redirecting its attempt to download
   the annotations. (using Greasemonkey? Firefox plugin?)
   
 
@@ -596,7 +596,7 @@ Idea that doesn't count:
 
 On one Linux Server running Apache and PHP 5, we got multiple Virtual Hosts with separate logfiles and everything. The only thing we cannot seem to separate between virtual hosts is the php error_log. 
 
-Overriding this setting in the &lt;Location&gt; of the httpd.conf does not seem to do anything.
+Overriding this setting in the <Location> of the httpd.conf does not seem to do anything.
 
 Did I overlook something? Is there a way to have separate php error_logs for each Virtual Host?
 
@@ -694,14 +694,14 @@ int MessageBox(HWND hwnd, const char* text, const char* caption, UINT type)
     GtkWidget *window = NULL;
     GtkWidget *dialog = NULL;
 
-    gtk_init(&amp;gtkArgc, &amp;gtkArgv);
+    gtk_init(>kArgc, >kArgv);
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     g_signal_connect(G_OBJECT(window), "delete_event", G_CALLBACK(delete_event), NULL);
     g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(destroy), NULL);
     // gcallback calls gtk_main_quit()
     gtk_init_add((GtkFunction)gcallback, NULL);
 
-    if (type &amp; MB_YESNO) {
+    if (type & MB_YESNO) {
         dialog = gtk_message_dialog_new(GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, text);
     } else {
         dialog = gtk_message_dialog_new(GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, text);
@@ -714,7 +714,7 @@ int MessageBox(HWND hwnd, const char* text, const char* caption, UINT type)
 
     gtk_widget_destroy(dialog);
 
-    if (type &amp; MB_YESNO) {
+    if (type & MB_YESNO) {
         switch (result) {
         default:
         case GTK_RESPONSE_DELETE_EVENT:
@@ -750,7 +750,7 @@ I develop a lot of DotNetNuke sites and it seems that in a multi-developer envir
 
 The ultimate goal (of course) is to have a new developer checkout the trunk from SVN, restore the DNN database and have it all just 'work'...
 
-I often have to sort a dictionary, consisting of keys &amp; values, by value. For example, I have a hash of words and respective frequencies, that I want to order by frequency.
+I often have to sort a dictionary, consisting of keys & values, by value. For example, I have a hash of words and respective frequencies, that I want to order by frequency.
 
 There is a SortedList which is good for a single value (say frequency), that I want to map it back to the word.
 
@@ -776,7 +776,7 @@ When is it appropriate to use an unsigned variable over a signed one? What about
 
 I hear a lot of opinions about this and I wanted to see if there was anything resembling a consensus. 
 
-for (unsigned int i = 0; i &lt; someThing.length(); i++) {  
+for (unsigned int i = 0; i < someThing.length(); i++) {  
     SomeThing var = someThing.at(i);  
     // You get the idea.  
 }
@@ -811,7 +811,7 @@ What is the meaning of the Java warning?
 I get this warning when I try to cast an Object to a type with generic information, such as in the following code:
 
 Object object = getMyList();
-List&lt;Integer&gt; list = (List&lt;Integer&gt;) object;
+List<Integer> list = (List<Integer>) object;
 
 
 In Lucene if you had multiple indexes that covered only one partition each. Why does the same search on different indexes return results with different scores? The results from different servers match exactly. I.e. if i searched for:
@@ -852,7 +852,7 @@ My Rails-app has a sign in box with a "remember me" checkbox. Users who check th
 
 But sessions are implemented in Rails as session cookies, which are not persistent. I can make them persistent:
 
-    class ApplicationController &lt; ActionController::Base      before_filter :update_session_expiration_date      private      def update_session_expiration_date        options = ActionController::Base.session_options        unless options[:session_expires]          options[:session_expires] = 1.year.from_now        end      end    end
+    class ApplicationController < ActionController::Base      before_filter :update_session_expiration_date      private      def update_session_expiration_date        options = ActionController::Base.session_options        unless options[:session_expires]          options[:session_expires] = 1.year.from_now        end      end    end
 
 But that seems like a hack, which is surprising for such common functionality. Is there a better way?
 
@@ -879,7 +879,7 @@ Ok, I'm a web developer, but I find myself dabbling in windows forms projects ev
 
 Assume you are doing something like the following
 
-List&lt;string&gt; myitems = new List&lt;string&gt;
+List<string> myitems = new List<string>
 {
     "Item 1",
     "Item 2",
@@ -946,7 +946,7 @@ I realize I could do this with hooks in most VCSes, but that requires that the t
 
 Form-based authentication for websites
 
-We believe that Stack&nbsp;Overflow should not just be a resource for very specific technical questions, but also for general guidelines on how to solve variations on common problems. "Form based authentication for websites" should be a fine topic for such an experiment.
+We believe that Stack Overflow should not just be a resource for very specific technical questions, but also for general guidelines on how to solve variations on common problems. "Form based authentication for websites" should be a fine topic for such an experiment.
 
 It should include topics such as:
 
@@ -1055,7 +1055,7 @@ Can anyone give me the most efficient code for this?
 Clarifications:
 
 
-It does not matter if your code is inefficient for n &gt;10000.
+It does not matter if your code is inefficient for n >10000.
 The size of the code does not matter.
 You cannot just hard code the values in any manner.
 
@@ -1195,7 +1195,7 @@ SELECT
 FROM universe u
 LEFT JOIN history h 
    ON u.id=h.id 
-   AND h.dateCol&lt;GETDATE()-1
+   AND h.dateCol<GETDATE()-1
 GROUP BY u.Id, u.name
 
 
@@ -1213,9 +1213,9 @@ According to the Documentation, it passes CCNetArtifactDirectory to MSBuild. But
 
 I tried this:
 
-&lt;buildArgs&gt;
+<buildArgs>
    /noconsolelogger /p:OutputPath=$(CCNetArtifactDirectory)\test
-&lt;/buildArgs&gt;
+</buildArgs>
 
 
 But that does not work. In fact, it kills the service with this error:
@@ -1277,9 +1277,9 @@ Everything I have worked on to date has been for use by a controlled set of US E
 
 Given a relatively simple CSS:
 
-&lt;div style="width:150px;"&gt;
+<div style="width:150px;">
   12333-2333-233-23339392-332332323
-&lt;/div&gt;
+</div>
 
 
 How do I make it so that the string stays constrained to the width of 150, and simply wraps to a newline on the hyphen?
@@ -1342,8 +1342,8 @@ I need to grab the base64-encoded representation of the ViewState. Obviously thi
 
 For example, if the output of the page includes:
 
-&lt;input type="hidden" name="__VIEWSTATE" 
-  id="__VIEWSTATE" value="/wEPDwUJODU0Njc5MD...==" /&gt;
+<input type="hidden" name="__VIEWSTATE" 
+  id="__VIEWSTATE" value="/wEPDwUJODU0Njc5MD...==" />
 
 
 I need a way on the server side to get the value "/wEPDwUJODU0Njc5MD...=="
@@ -1508,7 +1508,7 @@ void strrep(char *input, char *search, char *replace) {
 
     while (find = strstr(find, search)) {
 
-        if (delta &gt; 0) {
+        if (delta > 0) {
             realloc(input, strlen(input) + delta);
             find = strstr(input, search);            
         }
@@ -1523,9 +1523,9 @@ The program works, until I try to realloc() in an instance where the replaced st
 
 If it helps, the calling code looks like:
 
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdlib.h&gt;
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 void strrep(char *input, char *search, char *replace);
 
@@ -1628,7 +1628,7 @@ Ideally, I'm looking for a cross-platform (LAMP/.NET) solution that sits at a hi
 
 Either way, I'd like to hear the community's feedback so that I can see what my options might be with regard to implementation and approach.
 
-I have a Queue&lt;T&gt; object that I have initialised to a capacity of 2, but obviously that is just the capacity and it keeps expanding as I add items.  Is there already an object that automatically dequeues an item when the limit is reached, or is the best solution to create my own inherited class?
+I have a Queue<T> object that I have initialised to a capacity of 2, but obviously that is just the capacity and it keeps expanding as I add items.  Is there already an object that automatically dequeues an item when the limit is reached, or is the best solution to create my own inherited class?
 I am using MSBuild to build my stuff. I want to use CruiseControl.net as by Build Server.
 
 Now, CCNET refers nAnt a lot, but it looks as if ccnet can do most of the stuff nant could do through the project configuration and msbuild. Also, nAnt seems a bit unsupported, with a Beta release that is almost a year old now.
@@ -1652,7 +1652,7 @@ Update
 
 ProgressBar class was incredibly straight-forward, perfectly solved my problem.
 
-How do you specify a callback for rb-&gt;pcm_play_data()?
+How do you specify a callback for rb->pcm_play_data()?
 
 Original Question
 
@@ -1711,13 +1711,13 @@ I've placed the validator code in the ascx file, and I have also tried using Pag
 
 The output in Firefox's error console is "feeAmountCheck is not defined". Here is the function (this was taken directly from firefox->view source)
 
-&lt;script type="text/javascript"&gt;
+<script type="text/javascript">
     function feeAmountCheck(source, arguments)
     {
         var amountDue = document.getElementById('ctl00_footerContentHolder_Fees1_FeeDue');
         var amountPaid = document.getElementById('ctl00_footerContentHolder_Fees1_FeePaid');
 
-        if (amountDue.value &gt; 0 &amp;&amp; amountDue &gt;= amountPaid)
+        if (amountDue.value > 0 && amountDue >= amountPaid)
         {
             arguments.IsValid = true;
         }
@@ -1728,7 +1728,7 @@ The output in Firefox's error console is "feeAmountCheck is not defined". Here i
 
         return arguments;
     }
-&lt;/script&gt;
+</script>
 
 
 Any ideas as to why the function isn't being found? How can I remedy this without having to add the function to my master page or consuming page?
@@ -1796,14 +1796,14 @@ The first example requires less work, but neither of them feel like the best ans
 
 I'm trying to do this (which produces an unexpected T_VARIABLE error):
 
-public function createShipment($startZip, $endZip, $weight = $this-&gt;getDefaultWeight()){}
+public function createShipment($startZip, $endZip, $weight = $this->getDefaultWeight()){}
 
 
 I don't want to put a magic number in there for weight, since the object I am using has a "defaultWeight" parameter that all new shipments get if you don't specify a weight. I can't put the defaultWeight in the shipment itself, because it changes from shipment group to shipment group. Is there a better way to do it than the following?
 
 public function createShipment($startZip, $endZip, weight = 0){
-    if($weight &lt;= 0){
-        $weight = $this-&gt;getDefaultWeight();
+    if($weight <= 0){
+        $weight = $this->getDefaultWeight();
     }
 }
 
@@ -1816,17 +1816,17 @@ How do you express an integer as a binary number with Python literals?
 
 I was easily able to find the answer for hex:
 
-    &gt;&gt;&gt; 0x12AF
+    >>> 0x12AF
     4783
-    &gt;&gt;&gt; 0x100
+    >>> 0x100
     256
 
 
 and octal:
 
-    &gt;&gt;&gt; 01267
+    >>> 01267
     695
-    &gt;&gt;&gt; 0100
+    >>> 0100
     64
 
 
@@ -2111,7 +2111,7 @@ I was just looking through some information about Google's protocol buffers data
 I'm currently using XML in a Python project for structured content created by hand in a text editor, and I was wondering what the general opinion was on Protocol Buffers as a user-facing input format.  The speed and brevity benefits definitely seem to be there, but there are so many factors when it comes to actually generating and processing the data.
 I am trying to grab the capital letters of a couple of words and wrap them in span tags. I am using preg_replace for extract and wrapping purposes, but it's not outputting anything.
 
-preg_replace("/[A-Z]/", "&lt;span class=\"initial\"&gt;$1&lt;/span&gt;", $str)
+preg_replace("/[A-Z]/", "<span class=\"initial\">$1</span>", $str)
 
 
 Getting back into a bit more .NET after a few-years of not using it full-time, and wondering what the good unit testing packages are these days.
@@ -2124,7 +2124,7 @@ Suggestions?
 
 I am trying to set a flag to show or hide a page element, but it always displays even when the expression is false. 
 
-$canMerge = ($condition1 &amp;&amp; $condition2) ? 'true' : 'false';...&lt;?php if ($canMerge) { ?&gt;Stuff&lt;?php } ?&gt;
+$canMerge = ($condition1 && $condition2) ? 'true' : 'false';...<?php if ($canMerge) { ?>Stuff<?php } ?>
 
 What's up?
 Is it possible to create "federated" Subversion servers?
@@ -2137,7 +2137,7 @@ import sys
 print """Menu
 1) Say Foo
 2) Say Bar"""
-answer = raw_input("Make a selection&gt; ")
+answer = raw_input("Make a selection> ")
 
 if "1" in answer: print "foo"
 elif "2" in answer: print "bar"
@@ -2187,12 +2187,12 @@ Cheers in advance for any knowledge you can drop.
 
 The anchor:
 
-&lt;a id="aShowHide" onclick='ToggleDisplay(&lt;%# DataBinder.Eval(Container.DataItem, "JobCode") %&gt;);' &gt;Show/Hide&lt;/a&gt;    
+<a id="aShowHide" onclick='ToggleDisplay(<%# DataBinder.Eval(Container.DataItem, "JobCode") %>);' >Show/Hide</a>    
 
 
 and here is the Javascript:
 
-&lt;script language="JavaScript" type="text/javascript"&gt;
+<script language="JavaScript" type="text/javascript">
 /* Shows/Hides the Jobs Div */
   function ToggleDisplay(jobCode)
   {
@@ -2213,7 +2213,7 @@ and here is the Javascript:
       }
     }
   }
-&lt;/script&gt;
+</script>
 
 
 I realize this is a newbie question, but I'm looking for a simple solution - it seems like there should be one.
@@ -2372,7 +2372,7 @@ AJAXifier.AJAXify(ctlEditForm);
 
 Sadly, I know this is a dream.  How close can I really get to a quick-and-easy AJAXification without causing too much load on the server?
 
-I specifically want to add the style of background-color to the &lt;body&gt; tag of a master page, from the code behind (C#) of a content page that uses that master page.  
+I specifically want to add the style of background-color to the <body> tag of a master page, from the code behind (C#) of a content page that uses that master page.  
 
 I have different content pages that need to make the master page has different colors depending on which content page is loaded, so that the master page matches the content page's theme.
 
@@ -2385,7 +2385,7 @@ I'm looking for something more like:
 Master.Attributes.Add("style", "background-color: 2e6095");
 
 
-Inside of the page load function of the content page.  But I can't get the above line to work. I only need to change the background-color for the &lt;body&gt; tag of the page.
+Inside of the page load function of the content page.  But I can't get the above line to work. I only need to change the background-color for the <body> tag of the page.
 
 I'm looking to add a testing suite to my application, however I can't move to the newer testing frameworks for .NET 3.5. 
 
@@ -2407,10 +2407,10 @@ Is there a way of mapping data collected on a stream or array to a data structur
 In C++ this would simply be a matter of casting a pointer to the stream as a data type I want to use (or vice-versa for the reverse)
 eg: in C++
 
-Mystruct * pMyStrct = (Mystruct*)&amp;SomeDataStream;
-pMyStrct-&gt;Item1 = 25;
+Mystruct * pMyStrct = (Mystruct*)&SomeDataStream;
+pMyStrct->Item1 = 25;
 
-int iReadData = pMyStrct-&gt;Item2;
+int iReadData = pMyStrct->Item2;
 
 
 obviously the C++ way is pretty unsafe unless you are sure of the quality of the stream data when reading incoming data, but for outgoing data is super quick and easy.
@@ -2480,11 +2480,11 @@ I have a grid-like control which has some JavaScript enhancements - namely, the 
 
 ASP.NET AJAX calls, by default, send the entire page as the request. That way the page goes through a complete lifecycle, viewstate is persisted and the state of the control is restored before the RaiseCallbackEvent method is invoked.
 
-However, since the AJAX call does not update the page, the ViewState reflects the original state of the control, even after the column or row has been moved. So the second time a client-side action occurs, the AJAX request goes to the server and the page &amp; control are built back up again to reflect the first state of the control, not the state after the first column or row was moved.
+However, since the AJAX call does not update the page, the ViewState reflects the original state of the control, even after the column or row has been moved. So the second time a client-side action occurs, the AJAX request goes to the server and the page & control are built back up again to reflect the first state of the control, not the state after the first column or row was moved.
 
 This problem extends to many implications. For example if we have a client-side/AJAX action to add a new item to the grid, and then a row is dragged, the grid is built server-side with one less item than on the client-side.
 
-And finally &amp; most seriously for my specific example, the actual data source object we are acting upon is stored in the page ViewState. That was a design decision to allow keeping a stateful copy of the manipulated data which can either be committed to DB after many manipulations or discarded if the user backs out. That is very difficult to change.
+And finally & most seriously for my specific example, the actual data source object we are acting upon is stored in the page ViewState. That was a design decision to allow keeping a stateful copy of the manipulated data which can either be committed to DB after many manipulations or discarded if the user backs out. That is very difficult to change.
 
 So, again, I need a way for the page ViewState to be updated on callback after the AJAX method is fired.
 
@@ -2614,7 +2614,7 @@ I intend to use it to store previously visited game states in a puzzle game, so 
 With the rise of multicore CPUs on the desktop, multithreading skills will become a valuable asset for programmers. Can you recommend some good resources (books, tutorials, websites, etc.) for a programmer who is looking to learn about threaded programming?
 
   Possible Duplicate:
-  Casting vs using the &#39;as&#39; keyword in the CLR  
+  Casting vs using the 'as' keyword in the CLR  
 
 
 
