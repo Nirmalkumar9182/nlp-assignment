@@ -39,7 +39,7 @@ while index < len(posTagList):
     
     # if string matches U tag, just tag a U
     if(u.match(wordList[index]) or (index+1 < len(wordList) and wordList[index+1] == "function" ) ):
-        tag = ('U-API',)
+        annotateList.append(x + ('U-API', ))
     # if string contains an open bracket at the end
     elif(b.match(wordList[index])):
         # start to evaluate for a close bracket
@@ -87,15 +87,14 @@ while index < len(posTagList):
 
             annotateList.append(posTagList[scanner] + ('L-API', ))
             # shift index to scanner + 1
-            index = scanner + 1
+            index = scanner
 
         # skip the next line
         pass
-        
+    else:
+        annotateList.append(x + tag)
     
     # if not related, append O
-    annotateList.append(x + tag)
-
     index += 1
 
 # print(annotateList)
