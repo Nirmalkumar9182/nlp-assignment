@@ -1,0 +1,2550 @@
+Well, here's how we do it on Stack Overflow.
+
+var ts = new TimeSpan(DateTime.UtcNow.Ticks - dt.Ticks);
+double delta = Math.Abs(ts.TotalSeconds);
+
+if (delta < 60)
+{
+  return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
+}
+if (delta < 120)
+{
+  return "a minute ago";
+}
+if (delta < 2700) // 45 * 60
+{
+  return ts.Minutes + " minutes ago";
+}
+if (delta < 5400) // 90 * 60
+{
+  return "an hour ago";
+}
+if (delta < 86400) // 24 * 60 * 60
+{
+  return ts.Hours + " hours ago";
+}
+if (delta < 172800) // 48 * 60 * 60
+{
+  return "yesterday";
+}
+if (delta < 2592000) // 30 * 24 * 60 * 60
+{
+  return ts.Days + " days ago";
+}
+if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
+{
+  int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+  return months <= 1 ? "one month ago" : months + " months ago";
+}
+int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+return years <= 1 ? "one year ago" : years + " years ago";
+
+
+Suggestions? Comments? Ways to improve this algorithm?
+
+What is the difference between Math.Floor() and Math.Truncate() in .NET?
+
+How do you expose a LINQ query as an ASMX web service? Usually, from the business tier, I can return a typed DataSet or DataTable which can be serialized for transport over ASMX.
+
+How can I do the same for a LINQ query? Is there a way to populate a typed DataSet or DataTable via a LINQ query?: 
+
+public static MyDataTable CallMySproc()    
+{    
+    string conn = ...;
+
+    MyDatabaseDataContext db = new MyDatabaseDataContext(conn);    
+    MyDataTable dt = new MyDataTable();
+
+    // execute a sproc via LINQ
+    var query = from dr in db.MySproc().AsEnumerable
+    select dr;
+
+    // copy LINQ query resultset into a DataTable -this does not work !    
+    dt = query.CopyToDataTable();
+
+    return dt;
+}
+
+
+How can I get the resultset of a LINQ query into a DataSet or DataTable? Alternatively, is the LINQ query serializeable so that I can expose it as an ASMX web service?
+
+For a table like this:
+
+CREATE TABLE binary_data (
+    id INT(4) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description CHAR(50),
+    bin_data LONGBLOB,
+    filename CHAR(50),
+    filesize CHAR(50),
+    filetype CHAR(50)
+);
+
+
+Here is a PHP example:
+
+<?php
+    // store.php3 - by Florian Dittmer <dittmer@gmx.net>
+    // Example php script to demonstrate the storing of binary files into
+    // an sql database. More information can be found at http://www.phpbuilder.com/
+?>
+
+<html>
+    <head><title>Store binary data into SQL Database</title></head>
+
+    <body>
+        <?php
+            // Code that will be executed if the form has been submitted:
+
+            if ($submit) {
+                // Connect to the database (you may have to adjust
+                // the hostname, username or password).
+
+                mysql_connect("localhost", "root", "password");
+                mysql_select_db("binary_data");
+
+                $data = mysql_real_escape_string(fread(fopen($form_data, "r"), filesize($form_data)));
+
+                $result = mysql_query("INSERT INTO binary_data (description, bin_data, filename, filesize, filetype) ".
+                                    "VALUES ('$form_description', '$data', '$form_data_name', '$form_data_size', '$form_data_type')");
+
+                $id= mysql_insert_id();
+                print "<p>This file has the following Database ID: <b>$id</b>";
+
+                mysql_close();
+            } else {
+
+                // else show the form to submit new data:
+        ?>
+        <form method="post" action="<?php echo $PHP_SELF; ?>" enctype="multipart/form-data">
+            File Description:<br>
+            <input type="text" name="form_description"  size="40">
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+            <br>File to upload/store in database:<br>
+            <input type="file" name="form_data"  size="40">
+            <p><input type="submit" name="submit" value="submit">
+        </form>
+
+        <?php
+            }
+        ?>
+    </body>
+</html>
+
+
+Solutions are welcome in any language. :-) I'm looking for the fastest way to obtain the value of π, as a personal challenge. More specifically I'm using ways that don't involve using #defined constants like M_PI, or hard-coding the number in.
+
+The program below tests the various ways I know of. The inline assembly version is, in theory, the fastest option, though clearly not portable; I've included it as a baseline to compare the other versions against. In my tests, with built-ins, the 4 * atan(1) version is fastest on GCC 4.2, because it auto-folds the atan(1) into a constant. With -fno-builtin specified, the atan2(0, -1) version is fastest.
+
+Here's the main testing program (pitimes.c):
+
+#include <math.h>
+#include <stdio.h>
+#include <time.h>
+
+#define ITERS 10000000
+#define TESTWITH(x) {                                                       \
+    diff = 0.0;                                                             \
+    time1 = clock();                                                        \
+    for (i = 0; i < ITERS; ++i)                                             \
+        diff += (x) - M_PI;                                                 \
+    time2 = clock();                                                        \
+    printf("%s\t=> %e, time => %f\n", #x, diff, diffclock(time2, time1));   \
+}
+
+static inline double
+diffclock(clock_t time1, clock_t time0)
+{
+    return (double) (time1 - time0) / CLOCKS_PER_SEC;
+}
+
+int
+main()
+{
+    int i;
+    clock_t time1, time2;
+    double diff;
+
+    /* Warmup. The atan2 case catches GCC's atan folding (which would
+     * optimise the ``4 * atan(1) - M_PI'' to a no-op), if -fno-builtin
+     * is not used. */
+    TESTWITH(4 * atan(1))
+    TESTWITH(4 * atan2(1, 1))
+
+#if defined(__GNUC__) && (defined(__i386__) || defined(__amd64__))
+    extern double fldpi();
+    TESTWITH(fldpi())
+#endif
+
+    /* Actual tests start here. */
+    TESTWITH(atan2(0, -1))
+    TESTWITH(acos(-1))
+    TESTWITH(2 * asin(1))
+    TESTWITH(4 * atan2(1, 1))
+    TESTWITH(4 * atan(1))
+
+    return 0;
+}
+
+
+And the inline assembly stuff (fldpi.c), noting that it will only work for x86 and x64 systems:
+
+double
+fldpi()
+{
+    double pi;
+    asm("fldpi" : "=t" (pi));
+    return pi;
+}
+
+
+And a build script that builds all the configurations I'm testing (build.sh):
+
+#!/bin/sh
+gcc -O3 -Wall -c           -m32 -o fldpi-32.o fldpi.c
+gcc -O3 -Wall -c           -m64 -o fldpi-64.o fldpi.c
+
+gcc -O3 -Wall -ffast-math  -m32 -o pitimes1-32 pitimes.c fldpi-32.o
+gcc -O3 -Wall              -m32 -o pitimes2-32 pitimes.c fldpi-32.o -lm
+gcc -O3 -Wall -fno-builtin -m32 -o pitimes3-32 pitimes.c fldpi-32.o -lm
+gcc -O3 -Wall -ffast-math  -m64 -o pitimes1-64 pitimes.c fldpi-64.o -lm
+gcc -O3 -Wall              -m64 -o pitimes2-64 pitimes.c fldpi-64.o -lm
+gcc -O3 -Wall -fno-builtin -m64 -o pitimes3-64 pitimes.c fldpi-64.o -lm
+
+
+Apart from testing between various compiler flags (I've compared 32-bit against 64-bit too, because the optimisations are different), I've also tried switching the order of the tests around. The atan2(0, -1) version still comes out top every time, though.
+
+Many years ago, to provide an age calculator gimmick on my website, I wrote a function to calculate age to a fraction. This is a quick port of that function to C# (from the PHP version). I'm afraid I haven't been able to test the C# version, but hope you enjoy all the same!
+
+(Admittedly this is a bit gimmicky for the purposes of showing user profiles on Stack Overflow, but maybe readers will find some use for it. :-))
+
+double AgeDiff(DateTime date1, DateTime date2) {    double years = date2.Year - date1.Year;    /*     * If date2 and date1 + round(date2 - date1) are on different sides     * of 29 February, then our partial year is considered to have 366     * days total, otherwise it's 365. Note that 59 is the day number     * of 29 Feb.     */    double fraction = 365            + (DateTime.IsLeapYear(date2.Year) && date2.DayOfYear >= 59            && (date1.DayOfYear < 59 || date1.DayOfYear > date2.DayOfYear)            ? 1 : 0);    /*     * The only really nontrivial case is if date1 is in a leap year,     * and date2 is not. So let's handle the others first.     */    if (DateTime.IsLeapYear(date2.Year) == DateTime.IsLeapYear(date1.Year))        return years + (date2.DayOfYear - date1.DayOfYear) / fraction;    /*     * If date2 is in a leap year, but date1 is not and is March or     * beyond, shift up by a day.     */    if (DateTime.IsLeapYear(date2.Year)) {        return years + (date2.DayOfYear - date1.DayOfYear                - (date1.DayOfYear >= 59 ? 1 : 0)) / fraction;    }    /*     * If date1 is not on 29 February, shift down date1 by a day if     * March or later. Proceed normally.     */    if (date1.DayOfYear != 59) {        return years + (date2.DayOfYear - date1.DayOfYear                + (date1.DayOfYear > 59 ? 1 : 0)) / fraction;    }    /*     * Okay, here date1 is on 29 February, and date2 is not on a leap     * year. What to do now? On 28 Feb in date2's year, the ``age''     * should be just shy of a whole number, and on 1 Mar should be     * just over. Perhaps the easiest way is to a point halfway     * between those two: 58.5.     */    return years + (date2.DayOfYear - 58.5) / fraction;}
+The best way that I know of because of leap years and everything is:
+
+DateTime birthDate = new DateTime(2000,3,1);int age = (int)Math.Floor((DateTime.Now - birthDate).TotalDays / 365.25D);
+
+Hope this helps.
+@jeff
+
+IMHO yours seems a little long.  However it does seem a little more robust with support for "yesterday" and "years".  But in my experience when this is used the person is most likely to view the content in the first 30 days.  It is only the really hardcore people that come after that.  So that is why I usually elect to keep this short and simple.
+
+This is the method I am currently using on one of my websites.  This only returns a relative day, hour, time.  And then the user has to slap on "ago" in the output.
+
+public static string ToLongString(this TimeSpan time){    string output = String.Empty;    if (time.Days > 0)        output += time.Days + " days ";    if ((time.Days == 0 || time.Days == 1) && time.Hours > 0)        output += time.Hours + " hr ";    if (time.Days == 0 && time.Minutes > 0)        output += time.Minutes + " min ";    if (output.Length == 0)        output += time.Seconds + " sec";    return output.Trim();}
+I've had no trouble using the BSD sockets API in C++, in GNU/Linux. Here's the sample program I used:
+
+#include <sys/socket.h>intmain(){    return AF_INET;}
+
+So my take on this is that z/OS is probably the complicating factor here, however, because I've never used z/OS before, much less programmed in it, I can't say this definitively. :-P
+How do I forcefully unload a ByteArray from memory in ActionScript 3?
+
+I have tried (without success):
+
+byteArray.length = 0;
+byteArray = new ByteArray();
+
+
+And
+
+for ( var i:int=0; i < byteArray.length; i++ ) {
+    byteArray[i] = null;
+}
+
+
+How can I monitor an SQL Server database for changes to a table without using triggers or modifying the structure of the database in any way? My preferred programming environment is .NET and C#.
+
+I'd like to be able to support any SQL Server 2000 SP4 or newer. My application is a bolt-on data visualization for another company's product. Our customer base is in the thousands, so I don't want to have to put in requirements that we modify the third-party vendor's table at every installation.
+
+By "changes to a table" I mean changes to table data, not changes to table structure.
+
+Ultimately, I would like the change to trigger an event in my application, instead of having to check for changes at an interval.
+
+
+
+The best course of action given my requirements (no triggers or schema modification, SQL Server 2000 and 2005) seems to be to use the BINARY_CHECKSUM function in T-SQL. The way I plan to implement is this:
+
+Every X seconds run the following query:
+
+SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM sample_table WITH (NOLOCK);
+
+
+and compare that against the stored value. If the value has changed, go through the table row by row using the query
+
+select row_id,BINARY_CHECKSUM(*) from sample_table WITH (NOLOCK);
+
+
+and compare the returned checksums against stored values.
+
+Sure I can post a test app.
+
+#include <sys/socket.h>int main(){    return AF_INET;}
+
+Compile/Link Output:
+
+cxx -Wc,xplink -Wl,xplink -o inet_test inet.C
+
+"./inet.C", line 5.16: CCN5274 (S) The name lookup for "AF_INET" did not find a declaration.
+
+CCN0797(I) Compilation failed for file ./inet.C. Object file not created.
+
+A check of sys/sockets.h does include the definition I need, and as far as I can tell, it is not being blocked by any #ifdef statements.
+
+I have however noticed it contains a the following:
+
+#ifdef __cplusplus  extern "C" {#endif
+
+which encapsulates basically the whole file. Not sure if it matters.
+Consider using a ManualResetEvent to block the main thread at the end of its processing, and call Reset() on it once the timer's processing has finished.  If this is something that needs to run constantly, consider moving this into a service process instead of a console app.
+
+You can use something like Console.ReadLine() to block the main thread, so other background threads (like timer threads) will still work. You may also use an AutoResetEvent to block the execution, then (when you need to) you can call Set() method on that AutoResetEvent object to release the main thread. Also ensure that your reference to Timer object doesn't go out of scope and garbage collected.
+
+Have a look at this article
+
+http://www.gskinner.com/blog/archives/2006/06/as3_resource_ma.html
+
+IANA actionscript programmer, however the feeling I'm getting is that, because the garbage collector might not run when you want it to.
+
+Hence
+http://www.craftymind.com/2008/04/09/kick-starting-the-garbage-collector-in-actionscript-3-with-air/
+
+So I'd recommend trying out their collection code and see if it helps
+
+private var gcCount:int;private function startGCCycle():void{    gcCount = 0;    addEventListener(Event.ENTER_FRAME, doGC);}private function doGC(evt:Event):void{    flash.system.System.gc();    if(++gcCount > 1){        removeEventListener(Event.ENTER_FRAME, doGC);        setTimeout(lastGC, 40);    }}private function lastGC():void{    flash.system.System.gc();}
+(I'm not positive about this, but...)
+
+AS3 uses a non-deterministic garbage collection. Which means that unreferenced memory will be freed up whenever the runtime feels like it (typically not unless there's a reason to run, since it's an expensive operation to execute). This is the same approach used by most modern garbage collected languages (like C# and Java as well).
+
+Assuming there are no other references to the memory pointed to by byteArray or the items within the array itself, the memory will be freed at some point after you exit the scope where byteArray is declared.
+
+You can force a garbage collection, though you really shouldn't. If you do, do it only for testing... if you do it in production, you'll hurt performance much more than help it.
+
+To force a GC, try (yes, twice):
+
+flash.system.System.gc();
+flash.system.System.gc();
+
+
+You can read more here.
+
+Give your submit buttons same name like this:
+
+<input type="submit" name="submitButton" value="Previous Page" />
+<input type="submit" name="submitButton" value="Next Page" />
+
+
+When the user presses enter and the Request goes to server, you can check the value for submitButton on your server-side code which contains a collection of form name/value pairs. For example in classic ASP:
+
+If Request.Form("submitButton") = "Previous Page" Then
+    ' Code for Previous Page
+ElseIf Request.Form("submitButton") = "Next Page" Then
+    ' Code for Next Page
+End If
+
+
+Reference: Using multiple submit buttons on a single form
+
+Let's say I have a DataTable with a Name column. I want to have a collection of the unique names ordered alphabetically. The following query ignores the order by clause.
+
+var names =
+    (from DataRow dr in dataTable.Rows
+    orderby (string)dr["Name"]
+    select (string)dr["Name"]).Distinct();
+
+
+Why does the orderby not get enforced?
+
+Unfortunately when it comes to memory management in Flash/actionscript there isn't a whole lot you can do. ActionScript was designed to be easy to use (so they didn't want people to have to worry about memory management)
+
+The following is a workaround, instead of creating a ByteArray variable try this.
+
+var byteObject:Object = new Object();
+
+byteObject.byteArray = new ByteArray();
+
+...
+
+//Then when you are finished delete the variable from byteObject
+delete byteObject.byteArray;
+
+
+Where byteArray is a dynamic property of byteObject, you can free the memory that was allocated for it.
+
+The problem is that the Distinct
+ operator does not grant that it will
+ maintain the original order of
+ values.
+
+So your query will need to work like this
+
+var names = (from DataRow dr in dataTable.Rows
+             select (string)dr["Name"]).Distinct().OrderBy( name => name );
+
+
+It is very simple with the Skip and Take extension methods.
+
+var query = from i in ideas
+            select i;
+
+var paggedCollection = query.Skip(startIndex).Take(count);
+
+
+You could use an Observer pattern.  A simple functional way to accomplish this:
+
+<?php/** Plugin system **/$listeners = array();/* Create an entry point for plugins */function hook(){  global $listeners;  $num_args = func_num_args();  $args = func_get_args();  if($num_args < 2)    trigger_error("Insufficient arguments", E_USER_ERROR);  // Hook name should always be first argument  $hook_name = array_shift($args);  if(!isset($listeners[$hook_name]))    return; // No plugins have registered this hook  foreach($listeners[$hook_name] as $func){    $args = $func($args);   }  return $args;}/* Attach a function to a hook */function add_listener($hook, $function_name){  global $listeners;  $listeners[$hook][] = $function_name;}//////////////////////////** Sample Plugin **/add_listener('a_b', 'my_plugin_func1');add_listener('str', 'my_plugin_func2');function my_plugin_func1($args){  return array(4, 5);}function my_plugin_func2($args){  return str_replace('sample', 'CRAZY', $args[0]);}//////////////////////////** Sample Application **/$a = 1;$b = 2;list($a, $b) = hook('a_b', $a, $b);$str  = "This is my sample application\n";$str .= "$a + $b = ".($a+$b)."\n";$str .= "$a * $b = ".($a*$b)."\n";$str = hook('str', $str);echo $str;?>
+
+Output:
+
+This is my CRAZY application4 + 5 = 94 * 5 = 20
+
+Notes:
+
+For this example source code, you must declare all your plugins before the actual source code that you want to be extendable.  I've included an example of how to handle single or multiple values being passed to the plugin.  The hardest part of this is writing the actual documentation which lists what arguments get passed to each hook.
+
+This is just one method of accomplishing a plugin system in PHP.  There are better alternatives, I suggest you check out the WordPress Documentation for more information.
+
+Sorry, it appears underscore characters are replaced by HTML entities by Markdown?  I can re-post this code when this bug gets fixed.
+
+Edit: Nevermind, it only appears that way when you are editing
+I've written a database generation script in SQL and want to execute it in my Adobe AIR application:
+
+Create Table tRole (
+      roleID integer Primary Key
+      ,roleName varchar(40)
+);
+Create Table tFile (
+    fileID integer Primary Key
+    ,fileName varchar(50)
+    ,fileDescription varchar(500)
+    ,thumbnailID integer
+    ,fileFormatID integer
+    ,categoryID integer
+    ,isFavorite boolean
+    ,dateAdded date
+    ,globalAccessCount integer
+    ,lastAccessTime date
+    ,downloadComplete boolean
+    ,isNew boolean
+    ,isSpotlight boolean
+    ,duration varchar(30)
+);
+Create Table tCategory (
+    categoryID integer Primary Key
+    ,categoryName varchar(50)
+    ,parent_categoryID integer
+);
+...
+
+
+I execute this in Adobe AIR using the following methods:
+
+public static function RunSqlFromFile(fileName:String):void {
+    var file:File = File.applicationDirectory.resolvePath(fileName);
+    var stream:FileStream = new FileStream();
+    stream.open(file, FileMode.READ)
+    var strSql:String = stream.readUTFBytes(stream.bytesAvailable);
+    NonQuery(strSql);
+}
+
+public static function NonQuery(strSQL:String):void
+{
+    var sqlConnection:SQLConnection = new SQLConnection();
+    sqlConnection.open(File.applicationStorageDirectory.resolvePath(DBPATH);
+    var sqlStatement:SQLStatement = new SQLStatement();
+    sqlStatement.text = strSQL;
+    sqlStatement.sqlConnection = sqlConnection;
+    try
+    {
+        sqlStatement.execute();
+    }
+    catch (error:SQLError)
+    {
+        Alert.show(error.toString());
+    }
+}
+
+
+No errors are generated, however only tRole exists. It seems that it only looks at the first query (up to the semicolon- if I remove it, the query fails). Is there a way to call multiple queries in one statement?
+
+One framework I'm considering would be for a blogging platform. Since just about any possible view of data you would want would be sorted by date, I was thinking about this structure:
+
+One directory per content node:
+
+./content/YYYYMMDDHHMMSS/
+
+
+Subdirectories of each node including  
+
+/tags  
+/authors  
+/comments  
+
+
+As well as simple text files in the node directory for pre- and post-rendered content and the like.
+
+This would allow a simple PHP glob() call (and probably a reversal of the result array) to query on just about anything within the content structure:
+
+glob("content/*/tags/funny");  
+
+
+Would return paths including all articles tagged "funny".
+
+So I find myself porting a game, that was originally written for the Win32 API, to Linux (well, porting the OS X port of the Win32 port to Linux). I have implemented QueryPerformanceCounter by giving the uSeconds since the process start up:  
+
+BOOL QueryPerformanceCounter(LARGE_INTEGER* performanceCount)
+{
+    gettimeofday(¤tTimeVal, NULL);
+    performanceCount->QuadPart = (currentTimeVal.tv_sec - startTimeVal.tv_sec);
+    performanceCount->QuadPart *= (1000 * 1000);
+    performanceCount->QuadPart += (currentTimeVal.tv_usec - startTimeVal.tv_usec);
+
+    return true;
+}
+
+
+This, coupled with QueryPerformanceFrequency() giving a constant 1000000 as the frequency, works well on my machine, giving me a 64 bit variable that contains uSeconds since the program's start up. So is this portable? I don't want to discover it works differently if the kernel was compiled in a certain way or anything like that. I am fine with it being non-portable to something other than Linux, however.
+
+One way to store flat-file content would be to save literal arrays to php files.  For example:
+
+$data = array();
+
+if( $_POST ) {
+    $data = $_POST;
+
+    $content = "<?php\n";
+    $content .= '$data=' . var_export($data, true) . "\n";
+    $content .= "?>";
+
+    save_to_file($filename, $content);
+}
+
+// echo form
+
+
+Maybe. But you have bigger problems. gettimeofday() can result in incorrect timings if there are processes on your system that change the timer (ie, ntpd). On a "normal" linux, though, I believe the resolution of gettimeofday() is 10us. It can jump forward and backward and time, consequently, based on the processes running on your system. This effectively makes the answer to your question no.
+
+You should look into clock_gettime(CLOCK_MONOTONIC) for timing intervals. It suffers from several less issues due to things like multi-core systems and external clock settings.
+
+Also, look into the clock_getres() function.
+
+
+  The actual resolution of gettimeofday() depends on the hardware architecture. Intel processors as well as SPARC machines offer high resolution timers that measure microseconds. Other hardware architectures fall back to the system’s timer, which is typically set to 100 Hz. In such cases, the time resolution will be less accurate. 
+
+
+I obtained this answer from High Resolution Time Measurement and Timers, Part I
+That's true.  serialize() can be pretty useful for that as well.
+
+I think the trick to coming up with a viable system is finding some way to index the data nodes without killing yourself with complexity.
+
+Recently our site has been deluged with the resurgence of the Asprox botnet SQL injection attack. Without going into details, the attack attempts to execute SQL code by encoding the T-SQL commands in an ASCII encoded BINARY string. It looks something like this:
+
+DECLARE%20@S%20NVARCHAR(4000);SET%20@S=CAST(0x44004500...06F007200%20AS%20NVARCHAR(4000));EXEC(@S);--
+
+
+I was able to decode this in SQL, but I was a little wary of doing this since I didn't know exactly what was happening at the time.
+
+I tried to write a simple decode tool, so I could decode this type of text without even touching SQL Server. The main part I need decoded is:
+
+CAST(0x44004500...06F007200 AS
+NVARCHAR(4000))
+
+
+I've tried all of the following commands with no luck:
+
+txtDecodedText.Text =
+    System.Web.HttpUtility.UrlDecode(txtURLText.Text);
+txtDecodedText.Text =
+    Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(txtURLText.Text));
+txtDecodedText.Text =
+    Encoding.Unicode.GetString(Encoding.Unicode.GetBytes(txtURLText.Text));
+txtDecodedText.Text =
+    Encoding.ASCII.GetString(Encoding.Unicode.GetBytes(txtURLText.Text));
+txtDecodedText.Text =
+    Encoding.Unicode.GetString(Convert.FromBase64String(txtURLText.Text));
+
+
+What is the proper way to translate this encoding without using SQL Server? Is it possible? I'll take VB.NET code since I'm familiar with that too.
+
+
+
+Okay, I'm sure I'm missing something here, so here's where I'm at.
+
+Since my input is a basic string, I started with just a snippet of the encoded portion - 4445434C41 (which translates to DECLA) - and the first attempt was to do this...
+
+txtDecodedText.Text = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(txtURL.Text));
+
+
+...and all it did was return the exact same thing that I put in, since it converted each character into is byte.
+
+I realized that I need to parse each two characters into a byte manually since I don't know of any methods yet that will do that, so now my little decoder looks something like this:
+
+while (!boolIsDone)
+{
+    bytURLChar = byte.Parse(txtURLText.Text.Substring(intParseIndex, 2));
+    bytURL[intURLIndex] = bytURLChar;
+    intParseIndex += 2;
+    intURLIndex++;
+
+    if (txtURLText.Text.Length - intParseIndex < 2)
+    {
+        boolIsDone = true;
+    }
+}
+
+txtDecodedText.Text = Encoding.UTF8.GetString(bytURL);
+
+
+Things look good for the first couple of pairs, but then the loop balks when it gets to the "4C" pair and says that the string is in the incorrect format.
+
+Interestingly enough, when I step through the debugger and to the GetString method on the byte array that I was able to parse up to that point, I get ",-+" as the result.
+
+How do I figure out what I'm missing - do I need to do a "direct cast" for each byte instead of attempting to parse it?
+
+I wound up using this. It is a kind of a hack, but it actually works pretty well. The only thing is you have to be very careful with your semicolons. : D
+
+var strSql:String = stream.readUTFBytes(stream.bytesAvailable);      
+var i:Number = 0;
+var strSqlSplit:Array = strSql.split(";");
+for (i = 0; i < strSqlSplit.length; i++){
+    NonQuery(strSqlSplit[i].toString());
+}
+
+
+What is the "purist" or "correct" way to access an object's properties from within an object method that is not a getter/setter method?
+
+I know that from outside of the object you should use a getter/setter, but from within would you just do:
+
+Java:
+
+String property = this.property;
+
+
+PHP:
+
+$property = $this->property;
+
+
+or would you do:
+
+Java:
+
+String property = this.getProperty();
+
+
+PHP:
+
+$property = $this->getProperty();
+
+
+Forgive me if my Java is a little off, it's been a year since I programmed in Java...
+
+EDIT:
+
+It seems people are assuming I am talking about private or protected variables/properties only. When I learned OO I was taught to use getters/setters for every single property even if it was public (and actually I was told never to make any variable/property public). So, I may be starting off from a false assumption from the get go. It appears that people answering this question are maybe saying that you should have public properties and that those don't need getters and setters, which goes against what I was taught, and what I was talking about, although maybe that needs to be discussed as well. That's probably a good topic for a different question though...
+
+This may be too basic or limited of a solution, but couldn't you do a String.split() on each line of the file, remembering the result array of the first line to generate the XML, and just spit each line's array data out with the proper XML elements padding each iteration of a loop?
+
+I have a pretty standard table set-up in a current application using the .NET XSD DataSet and TableAdapter features. My contracts table consists of some standard contract information, with a column for the primary department. This column is a foreign key to my Departments table, where I store the basic department name, id, notes. This is all setup and functioning in my SQL Server.
+
+When I use the XSD tool, I can drag both tables in at once and it auto detects/creates the foreign key I have between these two tables. This works great when I'm on my main page and am viewing contract data.
+
+However, when I go to my administrative page to modify the department data. I typically do something like this:
+
+Dim dtDepartment As New DepartmentDataTable()
+Dim taDepartment As New DepartmentTableAdapter()
+
+taDepartment.Fill(dtDepartment)
+
+
+However, at this point an exception is thrown saying to the effect that there is a foreign key reference broken here, I'm guessing since I don't have the Contract DataTable filled. 
+
+How can I fix this problem? I know I can simply remove the foreign key from the XSD to make things work fine, but having the additional integrity check there and having the XSD schema match the SQL schema in the database is nice.
+
+
+  Am I just going overboard here?
+
+
+Perhaps ;)
+
+Another approach would be to utilize a private/protected method to actually do the getting (caching/db/etc), and a public wrapper for it that increments the count:
+
+PHP:
+
+public function getName() {    $this->incrementNameCalled();    return $this->_getName();}protected function _getName() {    return $this->name;}
+
+and then from within the object itself:
+
+PHP:
+
+$name = $this->_getName();
+
+This way you can still use that first argument for something else (like sending a flag for whether or not to used cached data here perhaps). 
+The funny thing is i wrote a php media gallery for all my music 2 days ago. I had a similar problem.  Im using http://musicplayer.sourceforge.net/ for the player. and the playlis are built via php.  all music request go there a script called xfer.php?file=WHATEVER
+
+$filename = base64_url_decode($_REQUEST['file']);
+header("Cache-Control: public");
+header("Content-Description: File Transfer");
+header('Content-disposition: attachment; filename='.basename($filename));
+header("Content-Transfer-Encoding: binary");
+header('Content-Length: '. filesize($filename));
+
+//  Put either file counting code here. either a db or static files
+
+//
+
+readfile($filename);  //and spit the user the file
+
+
+function base64_url_decode($input) {
+    return base64_decode(strtr($input, '-_,', '+/='));
+}
+
+
+And when you call files use something like 
+
+function base64_url_encode($input) {
+     return strtr(base64_encode($input), '+/=', '-_,');
+}
+
+
+http://us.php.net/manual/en/function.base64-encode.php
+
+If you are using some javascript or a flash player (JW player for example) that requires the actual link to be an mp3 file or whatever, you can append the text "&type=.mp3" so the final linke becomes something like "www.example.com/xfer.php?file=34842ffjfjxfh&type=.mp3". That way it looks like it ends with an mp3 extension without affecting the file link.
+
+Well, what is the nature of the flat databases.  Are they large or small.  Is it simple arrays with arrays in them?  if its something simple say userprofiles built as such:
+
+$user = array("name" => "dubayou", 
+              "age" => 20,
+              "websites" => array("dubayou.com","willwharton.com","codecream.com"),
+              "and_one" => "more");
+
+
+and to save or update the db record for that user.
+
+$dir = "../userdata/";  //make sure to put it bellow what the server can reach.
+file_put_contents($dir.$user['name'],serialize($user));
+
+
+and to load the record for the user
+
+function &get_user($name){
+    return unserialize(file_get_contents("../userdata/".$name));
+}
+
+
+but again this implementation will vary on the application and nature of the database you need.
+
+I want to print HTML from a C# web service.  The Web Browser control is overkill, and does not function well in a service environment, nor does it function well on a system with very tight security constraints.  Is there any sort of free .NET library that will support the printing of a basic HTML page?  Here is the code I have so far, which does not run properly.
+
+public void PrintThing(string document)
+{
+    if (Thread.CurrentThread.GetApartmentState() != ApartmentState.STA)
+    {
+        Thread thread =
+            new Thread((ThreadStart) delegate { PrintDocument(document); });
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
+    }
+    else
+    {
+        PrintDocument(document);
+    }
+}
+
+protected void PrintDocument(string document)
+{
+    WebBrowser browser = new WebBrowser();
+    browser.DocumentText = document;
+    while (browser.ReadyState != WebBrowserReadyState.Complete)
+    {
+        Application.DoEvents();
+    }
+    browser.Print();
+}
+
+
+This works fine when called from UI-type threads, but nothing happens when called from a service-type thread.  Changing Print() to ShowPrintPreviewDialog() yields the following IE script error:
+
+
+  Error: 'dialogArguments.___IE_PrintType' is null or not an object
+  URL: res://ieframe.dll/preview.dlg
+
+
+And a small empty print preview dialog appears.
+
+One of the fun parts of multi-cultural programming is number formats.
+
+
+Americans use 10,000.50
+Germans use 10.000,50
+French use 10 000,50
+
+
+My first approach would be to take the string, parse it backwards, until I encounter a separator and use this as my decimal separator. There is an obvious flaw with that: 10.000 would be interpreted as 10.
+
+Another approach: if the string contains 2 different non-numeric characters, use the last one as the decimal separator and discard the others. If I only have one, check if it occurs more than once and discard it if it does. If it only appears once, check if it has 3 digits after it. If yes, discard it, otherwise use it as decimal separator.
+
+The obvious "best solution" would be to detect the User's culture or Browser, but that does not work if you have a Frenchman using an en-US Windows/Browser.
+
+Does the .net Framework contain some mythical black magic floating point parser that is better than Double.(Try)Parse() in trying to auto-detect the number format?
+
+I've read somewhere the human eye can't distinguish between less than 4 values apart. so This is something to keep in mind. The following algorithm does not compensate for this.
+
+I'm not sure this is exactly what you want, but this is one way to randomly generate non-repeating color values:
+
+(beware, inconsistent pseudo-code ahead)
+
+//colors entered as 0-255 [R, G, B]colors = []; //holds final colors to be usedrand = new Random();//assumes n is less than 16,777,216randomGen(int n){   while (len(colors) < n){      //generate a random number between 0,255 for each color      newRed = rand.next(256);      newGreen = rand.next(256);      newBlue = rand.next(256);      temp = [newRed, newGreen, newBlue];      //only adds new colors to the array      if temp not in colors {         colors.append(temp);      }   }}
+
+One way you could optimize this for better visibility would be to compare the distance between each new color and all the colors in the array:
+
+for item in color{   itemSq = (item[0]^2 + item[1]^2 + item[2]^2])^(.5);   tempSq = (temp[0]^2 + temp[1]^2 + temp[2]^2])^(.5);   dist = itemSq - tempSq;   dist = abs(dist);}//NUMBER can be your chosen distance apart.if dist < NUMBER and temp not in colors {   colors.append(temp);}
+
+But this approach would significantly slow down your algorithm.
+
+Another way would be to scrap the randomness and systematically go through every 4 values and add a color to an array in the above example.
+I don't know the ASP.NET side of the problem but .NET has a pretty powerful class: System.Globalization.CultureInfo. You can use the following code to parse a string containing a double value:
+
+double d = double.Parse("100.20", CultureInfo.CurrentCulture);//  -- OR --double d = double.Parse("100.20", CultureInfo.CurrentUICulture);
+
+If ASP.NET somehow (i.e. using HTTP Request headers) passes current user's CultureInfo to either CultureInfo.CurrentCulture or CultureInfo.CurrentUICulture, these will work fine.
+You can't please everyone.  If I enter ten as 10.000, and someone enters ten thousand as 10.000, you cannot handle that without some knowledge of the culture of the input.  Detect the culture somehow (browser, system setting - what is the use case?  ASP?  Internal app, or open to the world?), or provide an example of the expected formatting, and use the most lenient parser you can.  Probably something like:
+
+double d = Double.Parse("5,000.00", NumberStyles.Any, CultureInfo.InvariantCulture);
+I have the following arrays:
+
+$artist = array("the roots", "michael jackson", "billy idol", "more", "and more", "and_YET_MORE");
+$count = array(5, 3, 9, 1, 1, 3);
+
+
+I want to generate a tag cloud that will have artists with a higher number in $count enclosed in h6 tags and the lowest enclosed h1 tags.
+
+From what I've seen, there are a few registry keys that set the default mail client. One of them being:
+
+System Key: [HKEY_CLASSES_ROOT\mailto\shell\open\command]
+
+Value Name: (Default)
+
+Data Type: REG_SZ (String Value)
+
+Value Data: Mail program command-line. 
+
+I'm not familar with Delphi 7, but I'm sure there are some registry editing libraries in there that you could use to modify this value.
+
+Some places list more than this key, others just this key, so you may need to test a little bit to find the proper one(s).
+
+MySQL has this incredibly useful yet properitary REPLACE INTO SQL Command. 
+
+I wonder: Can this easily be emulated in SQL Server 2005?
+
+Starting a new Transaction, doing a Select() and then either UPDATE or INSERT and COMMIT is always a little bit of a pain, especially when doing it in the application and therefore always keeping 2 versions of the statement.
+
+I wonder if there is an easy and universal way to implement such a function into SQL Server 2005?
+
+The default behaviour is for error_log() to output to the Apache error log.  If this isn't happening check your php.ini settings for the error_log directive - leave it unset to use the Apache log file for the current vhost.
+Off the top of my head...
+
+$artist = array("the roots","michael jackson","billy idol","more","and more","and_YET_MORE");$count = array(5,3,9,1,1,3);$highest = max($count);for (int $x = 0; x < count($artist); $x++){    $normalized = $count[$x] / $highest;    $heading = ceil($normalized * 6); // 6 heading types    echo "<h".$heading.">".$artist[$x]."</h".$heading.">";}
+I have a little game written in C#. It uses a database as back-end. It's 
+a trading card game, and I wanted to implement the function of the cards as a script.
+
+What I mean is that I essentially have an interface, ICard, which a card class implements (public class Card056 : ICard) and which contains function that are called by the game.
+
+Now, to make the thing maintainable/moddable, I would like to have the class for each card as source code in the database and essentially compile it on first use. So when I have to add/change a card, I'll just add it to the database and tell my application to refresh, without needing any assembly deployment (especially since we would be talking about 1 assembly per card which means hundreds of assemblies).
+
+Is that possible? Register a class from a source file and then instantiate it, etc.
+
+ICard Cards[current] = new MyGame.CardLibrary.Card056();
+Cards[current].OnEnterPlay(ref currentGameState);
+
+
+The language is C#, but extra bonus if it's possible to write the script in any .NET language.
+
+I have been trying to implement Win32's MessageBox using GTK. The app using SDL/OpenGL, so this isn't a GTK app. 
+
+I handle the initialisation (gtk_init) sort of stuff inside the MessageBox function as follows:
+
+int MessageBox(HWND hwnd, const char* text, const char* caption, UINT type)
+{
+    GtkWidget *window = NULL;
+    GtkWidget *dialog = NULL;
+
+    gtk_init(>kArgc, >kArgv);
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    g_signal_connect(G_OBJECT(window), "delete_event", G_CALLBACK(delete_event), NULL);
+    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(destroy), NULL);
+    // gcallback calls gtk_main_quit()
+    gtk_init_add((GtkFunction)gcallback, NULL);
+
+    if (type & MB_YESNO) {
+        dialog = gtk_message_dialog_new(GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, text);
+    } else {
+        dialog = gtk_message_dialog_new(GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, text);
+    }
+
+    gtk_window_set_title(GTK_WINDOW(dialog), caption);
+    gint result = gtk_dialog_run(GTK_DIALOG(dialog));
+
+    gtk_main();
+
+    gtk_widget_destroy(dialog);
+
+    if (type & MB_YESNO) {
+        switch (result) {
+        default:
+        case GTK_RESPONSE_DELETE_EVENT:
+        case GTK_RESPONSE_NO:
+            return IDNO;
+            break;
+        case GTK_RESPONSE_YES:
+            return IDYES;
+            break;
+        }
+    }
+
+    return IDOK;
+} 
+
+
+Now, I am by no means an experienced GTK programmer, and I realise that I'm probably doing something(s) horribly wrong.
+
+However, my problem is that the last dialog popped up with this function stays around until the process exits. Any ideas?
+
+@Ryan
+
+That's correct but it actually makes the tags with the least number, larger.  This code has been tested:
+
+$artist = array("the roots","michael jackson","billy idol","more","and more","and_YET_MORE");$count = array(5,3,9,1,1,3);$highest = max($count);for ($x = 0; $x < count($artist); $x++) {    $normalized =  ($highest - $count[$x]+1) / $highest;    $heading = ceil($normalized * 6); // 6 heading types    echo "<h$heading>{$artist[$x]}</h$heading>";}
+On a high level, you have no other choice then to walk through the whole Dictionary and look at each value.
+
+Maybe this helps:
+http://bytes.com/forum/thread563638.html
+Copy/Pasting from John Timney:
+
+Dictionary<string, string> s = new Dictionary<string, string>();
+s.Add("1", "a Item");
+s.Add("2", "c Item");
+s.Add("3", "b Item");
+
+List<KeyValuePair<string, string>> myList = new List<KeyValuePair<string, string>>(s);
+myList.Sort(
+    delegate(KeyValuePair<string, string> firstPair,
+    KeyValuePair<string, string> nextPair)
+    {
+        return firstPair.Value.CompareTo(nextPair.Value);
+    }
+);
+
+
+using System.Linq.Enumerable;
+...
+List<KeyValuePair<string, string>> myList = aDictionary.ToList();
+
+myList.Sort(
+    delegate(KeyValuePair<string, string> pair1,
+    KeyValuePair<string, string> pair2)
+    {
+        return pair1.Value.CompareTo(pair2.Value);
+    }
+);
+
+
+Since you're targeting .net 2.0 or above, you can simplify this into lambda syntax -- it's equivalent but shorter. If you're targeting .net 2.0 you can only use this syntax if you're using the compiler from vs2008 (or above).
+
+var myList = aDictionary.ToList();
+
+myList.Sort((pair1,pair2) => pair1.Value.CompareTo(pair2.Value));
+
+
+I am working on a collection of classes used for video playback and recording. I have one main class which acts like the public interface, with methods like play(), stop(), pause(), record() etc... Then I have workhorse classes which do the video decoding and video encoding. 
+
+I just learned about the existence of nested classes in C++, and I'm curious to know what programmers think about using them. I am a little wary and not really sure what the benefits/drawbacks are, but they seem (according to the book I'm reading) to be used in cases such as mine.
+
+The book suggests that in a scenario like mine, a good solution would be to nest the workhorse classes inside the interface class, so there are no separate files for classes the client is not meant to use, and to avoid any possible naming conflicts? I don't know about these justifications. Nested classes are a new concept to me. Just want to see what programmers think about the issue.
+
+I think one of the major problems (which is being addressed in PHP 6) is register_globals. Right now one of the standard methods used to avoid register_globals is to use the $_REQUEST, $_GET or $_POST arrays.
+
+The "correct" way to do it (as of 5.2, although it's a little buggy there, but stable as of 6, which is coming soon) is through filters.
+
+So instead of:
+
+$username = $_POST["username"];
+
+
+you would do:
+
+$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+
+
+or even just:
+
+$username = filter_input(INPUT_POST, 'username');
+
+
+This is pretty trivial and obvious, but be sure to session_destroy after every use. This can be difficult to implement if the user does not log out explicitly, so a timer can be set to do this.
+
+Here is a good tutorial on setTimer() and clearTimer().
+When is it appropriate to use an unsigned variable over a signed one? What about in a for loop?
+
+I hear a lot of opinions about this and I wanted to see if there was anything resembling a consensus. 
+
+for (unsigned int i = 0; i < someThing.length(); i++) {  
+    SomeThing var = someThing.at(i);  
+    // You get the idea.  
+}
+
+
+I know Java doesn't have unsigned values, and that must have been a concious decision on Sun Microsystems' part. 
+
+Personally, I've played with several of the built-in options on an XML-heavy project and have settled on pulldom as the best choice for less complex documents.
+
+Especially for small simple stuff, I like the event-driven theory of parsing rather than setting up a whole slew of callbacks for a relatively simple structure.  Here is a good quick discussion of how to use the API.
+
+What I like: you can handle the parsing in a for loop rather than using callbacks.  You also delay full parsing (the "pull" part) and only get additional detail when you call expandNode().  This satisfies my general requirement for "responsible" efficiency without sacrificing ease of use and simplicity.
+Take a look at the CHECKSUM command:
+
+SELECT CHECKSUM_AGG(BINARY_CHECKSUM(*)) FROM sample_table WITH (NOLOCK);
+
+
+That will return the same number each time it's run as long as the table contents haven't changed. See my post on this for more information:
+
+CHECKSUM
+
+Here's how I used it to rebuild cache dependencies when tables changed:
+ASP.NET 1.1 database cache dependency (without triggers)
+
+timezone.js:
+
+function ajaxpage() {
+    var url = "timezone.php";
+    var visitortime = new Date();
+    var time = visitortime.getTimezoneOffset()/60;
+    var page_request = false;
+
+    if (window.XMLHttpRequest) {
+        page_request = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) { 
+        try {
+            page_request = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e) {
+            try{
+                page_request = new ActiveXObject("Microsoft.XMLHTTP");
+            } 
+            catch (e) {
+            }
+        }
+    }
+    else {
+        return false;
+    }
+
+    page_request.onreadystatechange = function() {
+            loadpage(page_request, containerid);
+    }
+
+    if (bustcachevar) {
+        bustcacheparameter=(url.indexOf("?")!=-1) ? "&"+new Date().getTime() : "?"+new Date().getTime();
+    }
+
+    page_request.open('GET', url+bustcacheparameter+"&time="+time, true);
+    page_request.send(null);
+}
+
+function loadpage(page_request, containerid) {
+    if (page_request.readyState == 4 && (page_request.status==200 || window.location.href.indexOf("http")==-1)) {
+        document.write('<meta http-equiv="refresh" content="0;url=http://example.com/"/>');
+    }
+}
+
+
+
+
+timezone.php:
+
+<?php
+session_start();
+$_SESSION['time'] = $_GET['time'];
+?>
+
+
+
+
+When you want to use it add onLoad="ajaxpage(); to the body tag and it should cause the timezone to be stored in the PHP session variable $_SESSION['time']
+
+Edit: P.S. This is untested.
+
+There are several ways to do this. Common methods use recursion, memoization, or dynamic programming. The basic idea is that you produce a list of all strings of length 1, then in each iteration, for all strings produced in the last iteration, add that string concatenated with each character in the string individually. (the variable index in the code below keeps track of the start of the last and the next iteration)
+
+Some pseudocode:
+
+list = originalString.split('')
+index = (0,0)
+list = [""]
+for iteration n in 1 to y:
+  index = (index[1], len(list))
+  for string s in list.subset(index[0] to end):
+    for character c in originalString:
+      list.add(s + c)
+
+
+you'd then need to remove all strings less than x in length, they'll be the first (x-1) * len(originalString) entries in the list.
+
+I just whipped this up quick in Ruby:
+
+def perms(x, y, possible_characters)  all = [""]  current_array = all.clone  1.upto(y) { |iteration|    next_array = []    current_array.each { |string|      possible_characters.each { |c|        value = string + c        next_array.insert next_array.length, value        all.insert all.length, value      }    }    current_array = next_array  }  all.delete_if { |string| string.length < x }end
+
+You might look into language API for built in permutation type functions, and you might be able to write more optimized code, but if the numbers are all that high, I'm not sure there is much of a way around having a lot of results.
+
+Anyways, the idea behind the code is start with string of length 0, then keep track of all the strings of length Z where Z is the current size in the iteration.  Then, go through each string and append each character onto each string.  Finally at the end, remove any that were below the x threshold and return the result.
+
+I didn't test it with potentially meaningless input (null character list, weird values of x and y, etc).
+High Resolution, Low Overhead Timing for Intel Processors
+
+If you're on Intel hardware, here's how to read the CPU real-time instruction counter.  It will tell you the number of CPU cycles executed since the processor was booted.  This is probably the finest-grained counter you can get for performance measurement.
+
+Note that this is the number of CPU cycles.  On linux you can get the CPU speed from /proc/cpuinfo and divide to get the number of seconds.  Converting this to a double is quite handy.
+
+When I run this on my box, I get
+
+11867927879484732
+11867927879692217
+it took this long to call printf: 207485
+
+
+Here's the Intel developer's guide that  gives tons of detail.
+
+#include <stdio.h>
+#include <stdint.h>
+
+inline uint64_t rdtsc() {
+    uint32_t lo, hi;
+    __asm__ __volatile__ (
+      "xorl %%eax, %%eax\n"
+      "cpuid\n"
+      "rdtsc\n"
+      : "=a" (lo), "=d" (hi)
+      :
+      : "%ebx", "%ecx");
+    return (uint64_t)hi << 32 | lo;
+}
+
+main()
+{
+    unsigned long long x;
+    unsigned long long y;
+    x = rdtsc();
+    printf("%lld\n",x);
+    y = rdtsc();
+    printf("%lld\n",y);
+    printf("it took this long to call printf: %lld\n",y-x);
+}
+
+
+Personally I would do something like this:
+
+<?php
+    $data = array($rating[0] => array('word0', 'word1', 'word2'), $rating[1] => array('word3', 'word4', 'word8',...));
+    //assums that $rating is an array with the weight of each word so the more popular words would have a higher value in rating
+    usort($data); //sort the $data variable, this should give us the most popular words first
+    $size = '1';
+    foreach($data as $rank)
+    {
+        $i=0;
+        while($i<$count($rank))
+        {
+            echo "<h" . $size . ">" . $rank[$i] . "</h" . $size . ">";
+            $i++;
+        }
+
+        $size++;
+    }
+?>
+
+
+Assuming I'm not a complete idiot this should work. But it is untested.
+
+What is the meaning of the Java warning?
+
+
+  Type safety: The cast from Object to List is actually checking against the erased type List
+
+
+I get this warning when I try to cast an Object to a type with generic information, such as in the following code:
+
+Object object = getMyList();
+List<Integer> list = (List<Integer>) object;
+
+
+I'm not sure why you would want to do this in the first place. The resulting set for any moderately large values of x and y will be huge, and will grow exponentially as x and/or y get bigger. 
+
+Lets say your set of possible characters is the 26 lowercase letters of the alphabet, and you ask your application to generate all permutations where length = 5. Assuming you don't run out of memory you'll get 11,881,376 (i.e. 26 to the power of 5) strings back. Bump that length up to 6, and you'll get 308,915,776 strings back. These numbers get painfully large, very quickly.
+
+Here's a solution I put together in Java. You'll need to provide two runtime arguments (corresponding to x and y). Have fun.
+
+public class GeneratePermutations {    public static void main(String[] args) {        int lower = Integer.parseInt(args[0]);        int upper = Integer.parseInt(args[1]);        if (upper < lower || upper == 0 || lower == 0) {            System.exit(0);        }        for (int length = lower; length <= upper; length++) {            generate(length, "");        }    }    private static void generate(int length, String partial) {        if (length <= 0) {            System.out.println(partial);        } else {            for (char c = 'a'; c <= 'z'; c++) {                generate(length - 1, partial + c);            }        }    }}
+The scoring contains the Inverse Document Frequency(IDF). If the term "John Smith" is in one partition, 0, 100 times and in partition 1, once. The score for searching for John Smith would be higher search in partition 1 as the term is more scarce.
+
+To get round this you would wither have to have your index being over all partitions, or you would need to override the IDF.
+
+Part of my everyday work is maintaining and extending legacy VB6 applications. A common engine is written in C/C++ and VB6 uses these functions in order to improve performance. 
+
+When it comes to asynchronous programming, a C interface is not enough and we rely on COM controls to fire events to VB6.
+
+My problem is that when I register the control in VB6, VB loads this control in memory and does not unload it until I quit the VB6 IDE. As the control is loaded the whole time, I am unable to recompile it in VC6, because the DLL file is locked.
+
+A solution I found is not to enable the control in VB but use the CreateObject() with the full name of my control. The problem then is that I must declare my control as an Object because VB6 knows nothing of the interface I am using and I do not have access to IntelliSense, which is a pain.
+
+Any idea how I can tell VB6 to unload controls after quitting the application? Or directly in the IDE?
+
+Ok, I'm a web developer, but I find myself dabbling in windows forms projects every now and then. One thing that confounds me to this day is the following.
+
+Assume you are doing something like the following
+
+List<string> myitems = new List<string>
+{
+    "Item 1",
+    "Item 2",
+    "Item 3"
+};
+
+ComboBox box = new ComboBox();
+box.DataSource = myitems;
+
+ComboBox box2 = new ComboBox();
+box2.DataSource = myitems
+
+
+So now we have 2 combo boxes bound to that array, and everything works fine. But when you change the value of one combo box, it changes BOTH combo boxes to the one you just selected.
+
+Now, I know that Arrays are always passed by reference (learned that when i learned C :D), but why on earth would the combo boxes change together? I don't believe the combo box control is modifying the collection at all. 
+
+As a work around, don't this would achieve the funcionality that is expected / desired
+
+ComboBox box = new ComboBox();
+box.DataSource = myitems.ToArray();
+
+
+
+  So it says microseconds explicitly, but says the resolution of the system clock is unspecified. I suppose resolution in this context means how the smallest amount it will ever be incremented?
+
+
+The data structure is defined as having microseconds as a unit of measurement, but that doesn't mean that the clock or operating system is actually capable of measuring that finely.
+
+Like other people have suggested, gettimeofday() is bad because setting the time can cause clock skew and throw off your calculation.  clock_gettime(CLOCK_MONOTONIC) is what you want, and clock_getres() will tell you the precision of your clock.
+
+The Monte Carlo method, as mentioned, applies some great concepts but it is, clearly, not the fastest --not by a long shot, not by any reasonable usefulness. Also, it all depends on what kind of accuracy you are looking for. The fastest pi I know of is the digits hard coded. Looking at Pi and Pi[PDF], there are a lot of formulas.
+
+Here is a method that converges quickly (~14digits per iteration). The current fastest application, PiFast, uses this formula with the FFT. I'll just write the formula, since the code is straight forward. This formula was almost found by Ramanujan and discovered by Chudnovsky. It is actually how he calculated several billion digits of the number --so it isn't a method to disregard. The formula will overflow quickly since we are dividing factorials, it would be advantageous then to delay such calculating to remove terms.
+
+
+
+
+
+where,
+
+
+
+Below is the Brent–Salamin algorithm. Wikipedia mentions that when a and b are 'close enough' then (a+b)^2/4t will be an approximation of pi. I'm not sure what 'close enough' means, but from my tests, one iteration got 2digits, two got 7, and three had 15, of course this is with doubles, so it might have error based on its representation and the 'true' calculation could be more accurate.
+
+let pi_2 iters =
+    let rec loop_ a b t p i =
+        if i = 0 then a,b,t,p
+        else
+            let a_n = (a +. b) /. 2.0 
+            and b_n = sqrt (a*.b)
+            and p_n = 2.0 *. p in
+            let t_n = t -. (p *. (a -. a_n) *. (a -. a_n)) in
+            loop_ a_n b_n t_n p_n (i - 1)
+    in 
+    let a,b,t,p = loop_ (1.0) (1.0 /. (sqrt 2.0)) (1.0/.4.0) (1.0) iters in
+    (a +. b) *. (a +. b) /. (4.0 *. t)
+
+
+Lastly, how about some pi golf (800 digits)? 160 characters!
+
+int a=10000,b,c=2800,d,e,f[2801],g;main(){for(;b-c;)f[b++]=a/5;for(;d=0,g=c*2;c-=14,printf("%.4d",e+d/a),e=d%a)for(b=c;d+=f[b]*a,f[b]=d%--g,d/=g--,--b;d*=b);}
+
+
+A few things:
+
+You are creating (and not using) an unnecessary toplevel window, named window.  You can just delete these lines:
+
+window = gtk_window_new(GTK_WINDOW_TOPLEVEL);g_signal_connect(G_OBJECT(window), "delete_event", G_CALLBACK(delete_event), NULL);g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(destroy), NULL);
+
+Also, the flow doesn't seem quite right.  gtk_main() starts the GTK main loop, which blocks until something exits it.  gtk_dialog_run() also starts a main loop, but it exits as soon as one of the buttons is clicked.
+
+I think it might be enough for you to remove the gtk_init_add() and gtk_main() calls, and simply deal with the return value.  Also the gtk_widget_destroy() call is unnecessary, as the dialog window is automatically destroyed when gtk_dialog_run() returns.
+You may also be interested in the output of the explain() method, and the resulting Explanation object, which will give you an idea of how things are scored the way they are.
+
+Well, in Java an int is a primitive while an Integer is an Object. Meaning, if you made a new Integer:
+
+Integer i = new Integer(6);
+
+
+You could call some method on i:
+
+String s = i.toString();//sets s the string representation of i
+
+
+Whereas with an int:
+
+int i = 6;
+
+
+You cannot call any methods on it, because it is simply a primitive. So:
+
+String s = i.toString();//will not work!!!
+
+
+would produce an error, because int is not an object.
+
+int is one of the few primitives in Java (along with char and some others). I'm not 100% sure, but I'm thinking that the Integer object more or less just has an int property and a whole bunch of methods to interact with that property (like the toString() method for example). So Integer is a fancy way to work with an int (Just as perhaps String is a fancy way to work with a group of chars).
+
+I know that Java isn't C, but since I've never programmed in C this is the closest I could come to the answer. Hope this helps!
+
+Integer object javadoc
+
+Integer Ojbect vs. int primitive comparison
+
+Interesting question!
+
+I would do this by picking combinations, something like the following in python.  The hardest part is probably first pass verification, i.e. if f(1,2,3) returns true, is that a correct result?  Once you have verified that, then this is a good basis for regression testing.
+
+Probably it's a good idea to make a set of test cases that you know will be all true (e.g. 3,4,5 for this triangle case), and a set of test cases that you know will be all false (e.g. 0,1,inf).  Then you can more easily verify the tests are correct.
+
+
+# xpermutations from http://code.activestate.com/recipes/190465
+from xpermutations import *
+
+lengths=[-1,0,1,5,10,0,1000,'inf']
+for c in xselections(lengths,3):        # or xuniqueselections
+    print c
+
+
+
+(-1,-1,-1);
+(-1,-1,0);
+(-1,-1,1);
+(-1,-1,5);
+(-1,-1,10);
+(-1,-1,0);
+(-1,-1,1000);
+(-1,-1,inf);
+(-1,0,-1);
+(-1,0,0);
+...
+
+
+There are three ways to iterate over a result set.  The best way in terms of both
+readability and performance is usually to use the built-in cursor iterator.
+
+curs.execute('select * from people')
+for row in curs:
+    print row
+
+
+You can fetch all the rows into a list, but this can have some bad
+side effects if the result set is large.
+
+
+You have to wait for the entire result set to be returned to
+your client process.
+You may eat up a lot of memory in your client to hold
+the built-up list.
+It may take a while for Python to construct and deconstruct the
+list which you are going to immediately discard anyways.
+
+
+for row in curs.fetchall():
+    print row
+
+
+Finally, you can loop over the result set fetching one row at 
+a time.  In general, there's no particular advantage in doing this over
+using the iterator.  If there is something in your programming logic
+that seems to indicate there is an advantage in doing this, perhaps
+you should reconsider your programming logic.
+
+row = curs.fetchone()
+while row:
+    print row
+    row = curs.fetchone()
+I'm looking for a performant, reasonably robust RNG using no special hardware. It can use mathematical methods (Mersenne Twister, etc), it can "collect entropy" from the machine, whatever. On Linux/etc we have a drand48() which generates 48 random bits. I'd like a similar function/class for C++ or C# which can generate more than 32 bits of randomness and which low-order bits are equally as random as high-order bits.
+
+It doesn't have to be cryptographically secure but it must not use or be based on the C-language rand() or .NET System.Random.
+
+Any source code, links to source, etc. would be appreciated! Failing that, what TYPE of RNG should I be looking for?
+
+Hmm, ok.  I'd suggest code like this, then:
+
+typedef struct {    int type;    int result;} DialogData;static gbooleandisplay_dialog(gpointer user_data){    DialogData *dialog_data = user_data;    GtkWidget *dialog;    if (dialog_data->type & MB_YESNO)        dialog = gtk_message_dialog_new(...);    else        dialog = gtk_message_dialog_new(...);    // Set title, etc.    dialog_data->result = gtk_dialog_run(...);    gtk_main_quit();  // Quits the main loop run in MessageBox()    return FALSE;}int MessageBox(...){    DialogData dialog_data;    dialog_data.type = type;    gtk_idle_add(display_dialog, &dialog_data);    gtk_main();    // Do stuff based on dialog_data.result}
+
+The struct is because you need to pass around a couple pieces of data.  The gtk_idle_add() call adds a method to be run when the main loop is running and idle, and the FALSE return value from the display_dialog() call means that it's only run once.  After we get the result from the dialog, we quit the main loop.  That'll cause the gtk_main() in your main MessageBox() method to return, and you'll be able to access the result from there.
+
+Hope this helps!
+I'll add to the excellent answers given above, and talk about boxing and unboxing, and how this applies to Java (although C# has it too). I'll use just Java terminology, because I am more au fait with that.
+
+As the answers mentioned, int is just a number (called the unboxed type), whereas Integer is an object (which contains the number, hence a boxed type). In Java terms, that means (apart from not being able to call methods on int), you cannot store int or other non-object types in collections (List, Map, etc.). In order to store them, you must first box them up in its corresponding boxed type.
+
+Java 5 onwards have something called auto-boxing and auto-unboxing which allow the boxing/unboxing to be done behind the scenes. Compare and contrast: Java 5 version:
+
+Deque<Integer> queue;void add(int n) {    queue.add(n);}int remove() {    return queue.remove();}
+
+Java 1.4 or earlier (no generics either):
+
+Deque queue;void add(int n) {    queue.add(Integer.valueOf(n));}int remove() {    return ((Integer) queue.remove()).intValue();}
+
+It must be noted that despite the brevity in the Java 5 version, both versions generate identical bytecode. Thus, although auto-boxing and auto-unboxing is very convenient because you write less code, these operations do happen behind the scenes, with the same runtime costs, so you still have to be aware of their existence.
+
+Hope this helps!
+I'm not a PHP dev but Google says that PHP 5+ can instantiate COM components. If you can install Outlook on a box you could write a PHP web service around the COM component to handle the requests you need. 
+
+$outlook = COM("Outlook.Application")
+
+Outlook API referance
+I found this page which shows what the difference between Proc.new and lambda are.  According to the page, the only difference is that a lambda is strict about the number of arguments it accepts, whereas Proc.new converts missing arguments to nil.  Here is an example IRB session illustrating the difference:
+
+irb(main):001:0> l = lambda { |x, y| x + y }
+=> #<Proc:0x00007fc605ec0748@(irb):1>
+irb(main):002:0> p = Proc.new { |x, y| x + y }
+=> #<Proc:0x00007fc605ea8698@(irb):2>
+irb(main):003:0> l.call "hello", "world"
+=> "helloworld"
+irb(main):004:0> p.call "hello", "world"
+=> "helloworld"
+irb(main):005:0> l.call "hello"
+ArgumentError: wrong number of arguments (1 for 2)
+    from (irb):1
+    from (irb):5:in `call'
+    from (irb):5
+    from :0
+irb(main):006:0> p.call "hello"
+TypeError: can't convert nil into String
+    from (irb):2:in `+'
+    from (irb):2
+    from (irb):6:in `call'
+    from (irb):6
+    from :0
+
+The page also recommends using lambda unless you specifically want the error tolerant behavior.  I agree with this sentiment.  Using a lambda seems a tad more concise, and with such an insignificant difference, it seems the better choice in the average situation.
+
+As for Ruby 1.9, sorry, I haven't looked into 1.9 yet, but I don't imagine they would change it all that much (don't take my word for it though, it seems you have heard of some changes, so I am probably wrong there).
+
+With the "Built in" stuff, you can't, as using 1.0.* or 1.0.0.* will replace the revision and build numbers with a coded date/timestamp, which is usually also a good way. 
+
+For more info, see the Assembly Linker Documentation in the /v tag.
+
+As for automatically incrementing numbers, use the AssemblyInfo Task:
+
+AssemblyInfo Task
+
+This can be configured to automatically increment the build number.
+
+There are 2 Gotchas:
+
+
+Each of the 4 numbers in the Version string is limited to 65535. This is a Windows Limitation and unlikely to get fixed.
+
+Why are build numbers limited to 65535?
+
+Using with with Subversion requires a small change:
+
+Using MSBuild to generate assembly version info at build time (including SubVersion fix)
+
+
+
+Retrieving the Version number is then quite easy:
+
+Version v = Assembly.GetExecutingAssembly().GetName().Version;
+string About = string.Format(CultureInfo.InvariantCulture, @"YourApp Version {0}.{1}.{2} (r{3})", v.Major, v.Minor, v.Build, v.Revision);
+
+
+
+
+And, to clarify: In .net or at least in C#, the build is actually the THIRD number, not the fourth one as some people (for example Delphi Developers who are used to Major.Minor.Release.Build) might expect.
+
+In .net, it's Major.Minor.Build.Revision.
+
+I would use Javascript to submit the form. The function would be triggered by the OnKeyPress event of the form element, and would detect whether the Enter key was selected. If this is the case, it will submit the form.
+
+Here are two pages that give techniques on how to do this: 1, 2. Based on these, here is an example of usage (based on here):
+
+<SCRIPT TYPE="text/javascript"><!--function submitenter(myfield,e) {  var keycode;  if (window.event) {    keycode = window.event.keyCode;  } else if (e) {     keycode = e.which;  } else {    return true;  }  if (keycode == 13) {    myfield.form.submit();    return false;  } else {    return true;  }}//--></SCRIPT><INPUT NAME="MyText" TYPE="Text" onKeyPress="return submitenter(this,event)" />
+How often do you need to check for changes and how large (in terms of row size) are the tables in the database?  If you use the CHECKSUM_AGG(BINARY_CHECKSUM(*)) method suggested by John, it will scan every row of the specified table.  The NOLOCK hint helps, but on a large database, you are still hitting every row.  You will also need to store the checksum for every row so that you tell one has changed.
+
+Have you considered going at this from a different angle?  If you do not want to modify the schema to add triggers, (which makes a sense, it's not your database), have you considered working with the application vendor that does make the database?  
+
+They could implement an API that provides a mechanism for notifying accessory apps that data has changed.  It could be as simple as writing to a notification table that lists what table and which row were modified.  That could be implemented through triggers or application code.  From your side, ti wouldn't matter, your only concern would be scanning the notification table on a periodic basis.  The performance hit on the database would be far less than scanning every row for changes.
+
+The hard part would be convincing the application vendor to implement this feature.  Since this can be handles entirely through SQL via triggers, you could do the bulk of the work for them by writing and testing the triggers and then bringing the code to the application vendor.  By having the vendor support the triggers, it prevent the situation where your adding a trigger inadvertently replaces a trigger supplied by the vendor.
+
+No, you were not dreaming.  Python has a pretty excellent list comprehension system that lets you manipulate lists pretty elegantly, and depending on exactly what you want to accomplish, this can be done a couple of ways.  In essence, what you're doing is saying "For item in list if criteria.matches", and from that you can just iterate through the results or dump the results into a new list.
+
+I'm going to crib an example from Dive Into Python here, because it's pretty elegant and they're smarter than I am.  Here they're getting a list of files in a directory, then filtering the list for all files that match a regular expression criteria.
+
+
+    files = os.listdir(path)                               
+    test = re.compile("test\.py$", re.IGNORECASE)          
+    files = [f for f in files if test.search(f)]
+
+
+
+You could do this without regular expressions, for your example, for anything where your expression at the end returns true for a match.  There are other options like using the filter() function, but if I were going to choose, I'd go with this.
+
+Eric Sipple
+
+I think:
+
+#!/bin/pythonbar in dict(Foo)
+
+Is what you are thinking of.  When trying to see if a certain key exists within a dictionary in python (python's version of a hash table) there are two ways to check.  First is the has_key() method attached to the dictionary and second is the example given above.  It will return a boolean value.
+
+That should answer your question.
+
+And now a little off topic to tie this in to the list comprehension answer previously given (for a bit more clarity).  List Comprehensions construct a list from a basic for loop with modifiers.  As an example (to clarify slightly), a way to use the in dict language construct in a _list comprehension_:
+
+Say you have a two dimensional dictionary foo and you only want the second dimension dictionaries which contain the key bar.  A relatively straightforward way to do so would be to use a list comprehension with a conditional as follows:
+
+#!/bin/pythonbaz = dict([(key, value) for key, value in foo if bar in value])
+
+Note the if bar in value at the end of the statement, this is a modifying clause which tells the list comprehension to only keep those key-value pairs which meet the conditional.  In this case baz is a new dictionary which contains only the dictionaries from foo which contain bar (Hopefully I didn't miss anything in that code example... you may have to take a look at the list comprehension documentation found in docs.python.org tutorials and at secnetix.de, both sites are good references if you have questions in the future.).
+Are you looking to get a list of objects that have a certain attribute? If so, a list comprehension is the right way to do this.
+
+result = [obj for obj in listOfObjs if hasattr(obj, 'attributeName')]
+Here is a simple static method to do this in C#:
+
+public static string ToTitleCaseInvariant(string targetString){    return System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(targetString);}
+In what language?
+
+In PHP it is:
+
+ucwords()
+
+example:
+
+$HelloWorld = ucwords('hello world');
+
+
+What I was thinking of can be achieved using list comprehensions, but I thought that there was a function that did this in a slightly neater way.
+
+i.e. 'bar' is a list of objects, all of which have the attribute 'id'
+
+The mythical functional way:
+
+foo = 12foo in iter_attr(bar, 'id')
+
+The list comprehension way:
+
+foo = 12foo in [obj.id for obj in bar]
+
+In retrospect the list comprehension way is pretty neat anyway.
+One implementation of this problem is to attempt to call the parameter-less constructor of the Type:
+
+public static object GetNewObject(Type t)
+{
+    try
+    {
+        return t.GetConstructor(new Type[] { }).Invoke(new object[] { });
+    }
+    catch
+    {
+        return null;
+    }
+}
+
+
+Here is the same approach, contained in a generic method:
+
+public static T GetNewObject<T>()
+{
+    try
+    {
+        return (T)typeof(T).GetConstructor(new Type[] { }).Invoke(new object[] { });
+    }
+    catch
+    {
+        return default(T);
+    }
+}
+
+
+The Activator class within the root System namespace is pretty powerful.
+
+There are a lot of overloads for passing parameters to the constructor and such. Check out the documentation at: 
+
+
+  http://msdn.microsoft.com/en-us/library/system.activator.createinstance.aspx
+
+
+Here are some simple examples:
+
+ObjectType instance = (ObjectType)Activator.CreateInstance(objectType);
+
+ObjectType instance = (ObjectType)Activator.CreateInstance("MyAssembly","MyNamespace.ObjectType");
+
+
+Here is my current method. Any suggestions?
+
+Regex singleMToDoubleRegex = new Regex("(?<!m)m(?!m)");Regex singleDToDoubleRegex = new Regex("(?<!d)d(?!d)");CultureInfo currentCulture = CultureInfo.CurrentUICulture;// If the culture is netural there is no date pattern to use, so use the default.if (currentCulture.IsNeutralCulture){    currentCulture = CultureInfo.InvariantCulture;}// Massage the format into a more general user friendly form.string shortDatePattern = CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern.ToLower();shortDatePattern = singleMToDoubleRegex.Replace(shortDatePattern, "mm");shortDatePattern = singleDToDoubleRegex.Replace(shortDatePattern, "dd");
+You can print from the command line using the following:
+
+
+  rundll32.exe
+  %WINDIR%\System32\mshtml.dll,PrintHTML
+  "%1"
+
+
+Where %1 is the file path of the html file to be printed.
+
+If you don't need to print from memory (or can afford to write to the disk in a temp file) you can use:
+
+using (Process printProcess = new Process()){    string systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);    printProcess.StartInfo.FileName = systemPath + @"\rundll32.exe";    printProcess.StartInfo.Arguments = systemPath + @"\mshtml.dll,PrintHTML """ + fileToPrint + @"""";    printProcess.Start();}
+
+N.B. This only works on Windows 2000 and above I think.
+Here's a Perl solution http://daringfireball.net/2008/05/title_case
+
+Here's a Ruby solution http://frankschmitt.org/projects/title-case
+
+Here's a Ruby one-liner solution: http://snippets.dzone.com/posts/show/4702
+
+'some string here'.gsub(/\b\w/){$&.upcase}
+
+
+What the one-liner is doing is using a regular expression substitution of the first character of each word with the uppercase version of it.
+
+I haven't been able to find an understandable explanation of how to actually use Python's itertools.groupby() function.  What I'm trying to do is this:
+
+
+Take a list - in this case, the children of an objectified lxml element
+Divide it into groups based on some criteria
+Then later iterate over each of these groups separately.
+
+
+I've reviewed the documentation, and the examples, but I've had trouble trying to apply them beyond a simple list of numbers. 
+
+So, how do I use of itertools.groupby()?  Is there another technique I should be using?  Pointers to good "prerequisite" reading would also be appreciated.
+
+I don't have any experience with http://www.SiteGround.com as a web host personally.  
+
+This is just a guess, but it's common for a shared host to support Python and MySQL with the MySQLdb module (e.g., GoDaddy does this).  Try the following CGI script to see if MySQLdb is installed.
+
+#!/usr/bin/pythonmodule_name = 'MySQLdb'head = '''Content-Type: text/html%s is ''' % module_nametry:    __import__(module_name)    print head + 'installed'except ImportError:    print head + 'not installed'
+Can you show us your code?
+
+The example on the Python docs is quite straightforward:
+
+groups = []
+uniquekeys = []
+for k, g in groupby(data, keyfunc):
+    groups.append(list(g))      # Store group iterator as a list
+    uniquekeys.append(k)
+
+
+So in your case, data is a list of nodes, keyfunc is where the logic of your criteria function goes and then groupby() groups the data.
+
+You must be careful to sort the data by the criteria before you call groupby or it won't work. groupby method actually just iterates through a list and whenever the key changes it creates a new group.
+
+Absolutely, especially dealing with lots of these permutations/combinations I can definitely see that the first pass would be an issue.
+
+Interesting implementation in python, though I wrote a nice one in C and Ocaml based on "Algorithm 515" (see below). He wrote his in Fortran as it was common back then for all the "Algorithm XX" papers, well, that assembly or c. I had to re-write it and make some small improvements to work with arrays not ranges of numbers. This one does random access, I'm still working on getting some nice implementations of the ones mentioned in Knuth 4th volume fascicle 2. I'll an explanation of how this works to the reader. Though if someone is curious, I wouldn't object to writing something up.
+
+/** [combination c n p x] * get the [x]th lexicographically ordered set of [p] elements in [n] * output is in [c], and should be sizeof(int)*[p] */void combination(int* c,int n,int p, int x){    int i,r,k = 0;    for(i=0;i<p-1;i++){        c[i] = (i != 0) ? c[i-1] : 0;        do {            c[i]++;            r = choose(n-c[i],p-(i+1));            k = k + r;        } while(k < x);        k = k - r;    }    c[p-1] = c[p-2] + x - k;}
+
+~"Algorithm 515: Generation of a Vector from the Lexicographical Index"; Buckles, B. P., and Lybanon, M. ACM Transactions on Mathematical Software, Vol. 3, No. 2, June 1977.
+I uploaded it and got an internal error
+
+Premature end of script headers
+
+After much playing around, I found that if I had
+
+import cgiimport cgitb; cgitb.enable()import MySQLdb
+
+It would give me a much more useful answer and say that it was not installed, you can see it yourself -> http://woarl.com/db.py
+
+Oddly enough, this would produce an error
+
+import MySQLdbimport cgiimport cgitb; cgitb.enable()
+
+I looked at some of the other files I had up there and it seems that library was one of the ones I had already tried.
+The magic all seems to be in 
+
+visitortime.getTimezoneOffset()
+
+That's cool, I didn't know about that. Does it work in IE, etc?
+From there you should be able to use JS to ajax, set cookies, whatever. I'd probably go the cookie route myself.
+
+You'll need to allow the user to change it though. We tried to use geolocation (via maxmind) to do this a while ago, and it was wrong reasonably often - enough to make it not worth doing, so we just let the user set it in their profile, and show a notice to users who haven't set theirs yet.
+SQL:
+
+SELECT
+   u.id,
+   u.name,
+   isnull(MAX(h.dateCol), '1900-01-01') dateColWithDefault
+FROM universe u
+LEFT JOIN history h 
+   ON u.id=h.id 
+   AND h.dateCol<GETDATE()-1
+GROUP BY u.Id, u.name
+
+
+A solution, albeit one that defers handling of the null value to the code, could be:
+
+
+  DateTime yesterday = DateTime.Now.Date.AddDays(-1);
+
+
+var collection=
+    from u in db.Universe
+    select new
+    {
+        u.id,
+        u.name,
+        MaxDate =(DateTime?)
+       (
+           from h in db.History
+           where u.Id == h.Id
+           && h.dateCol < yesterday
+           select h.dateCol 
+       ).Max()
+    };
+
+
+This does not produce exactly the same SQL, but does provide the same logical result. Translating "complex" SQL queries to LINQ is not always straightforward.
+
+PHP variables are assigned by value, passed to functions by value, and when containing/representing objects are passed by reference. You can force variables to pass by reference using an &
+
+Assigned by value/reference example:
+
+$var1 = "test";
+$var2 = $var1;
+$var2 = "new test";
+$var3 = &$var2;
+$var3 = "final test";
+
+print ("var1: $var1, var2: $var2, var3: $var3);
+
+
+would output "var1: test, var2: final test, var3: final test".
+
+Passed by value/reference exampe:
+
+$var1 = "foo";
+$var2 = "bar";
+
+changeThem($var1, $var2);
+
+print "var1: $var1, var2: $var2";
+
+function changeThem($var1, &$var2){
+    $var1 = "FOO";
+    $var2 = "BAR";
+}
+
+
+would output: "var1: foo, var2 BAR".
+
+Object variables passed by reference exampe:
+
+class Foo{
+    public $var1;
+
+    function __construct(){
+        $this->var1 = "foo";
+    }
+
+    public function printFoo(){
+        print $this->var1;
+    }
+}
+
+
+$foo = new Foo();
+
+changeFoo($foo);
+
+$foo->printFoo();
+
+function changeFoo($foo){
+    $foo->var1 = "FOO";
+}
+
+
+Would output: "FOO"
+
+(that last example could be better probably...)
+
+Rather than coding this out, I figure I'll pseudo-code it in steps and explain my logic, so that better programmers can poke holes in my logic if necessary. 
+
+On the first step we start out with a list of numbers length n. For each number we need to create a list of length n-1 becuase we aren't adding a number to itself. By the end we have a list of about n sorted lists that was generated in O(n^2) time.
+
+step 1 (startinglist) 
+for each number num1 in startinglist
+   for each number num2 in startinglist
+      add num1 plus num2 into templist
+   add templist to sumlist
+return sumlist 
+
+
+In step 2 because the lists were sorted by design (add a number to each element in a sorted list and the list will still be sorted) we can simply do a mergesort by merging each list together rather than mergesorting the whole lot.  In the end this should take O(n^2) time.
+
+step 2 (sumlist) 
+create an empty list mergedlist
+for each list templist in sumlist
+   set mergelist equal to: merge(mergedlist,templist)
+return mergedlist
+
+
+The merge method would be then the normal merge step with a check to make sure that there are no duplicate sums.  I won't write this out because anyone can look up mergesort.
+
+So there's my solution.  The entire algorithm is O(n^2) time.  Feel free to point out any mistakes or improvements.
+
+It's by value according to the PHP Documentation.
+
+
+  By default, function arguments are passed by value (so that if the value of the argument within the function is changed, it does not get changed outside of the function). To allow a function to modify its arguments, they must be passed by reference.
+  
+  To have an argument to a function always passed by reference, prepend an ampersand (&) to the argument name in the function definition.
+
+
+<?php
+function add_some_extra(&$string)
+{
+    $string .= 'and something extra.';
+}
+
+$str = 'This is a string, ';
+add_some_extra($str);
+echo $str;    // outputs 'This is a string, and something extra.'
+?>
+
+
+Try Eclipse PDT to setup an Eclipse environment that has debugging features like you mentioned. The ability to step into the code is a much better way to debug then the old method of var_dump and print at various points to see where your flow goes wrong. When all else fails though and all I have is SSH and vim I still var_dump()/die() to find where the code goes south.
+
+print_r( debug_backtrace() );
+
+or something like that :-)
+Attempting to insert an escape character into a table results in a warning. 
+
+For example:
+
+create table EscapeTest (text varchar(50));
+
+insert into EscapeTest (text) values ('This is the first part \n And this is the second');
+
+
+Produces the warning:
+
+WARNING:  nonstandard use of escape in a string literal
+
+
+(Using PSQL 8.2)
+
+Anyone know how to get around this?
+
+Very roughly and from memory since I don't have code on this laptop:
+
+using (OleDBConnection conn = new OleDbConnection())
+{
+  conn.ConnectionString = "Whatever connection string";
+
+  using (OleDbCommand cmd = new OleDbCommand())
+  {
+    cmd.Connection = conn;
+    cmd.CommandText = "Select * from CoolTable";
+
+    using (OleDbDataReader dr = cmd.ExecuteReader())
+    {
+      while (dr.Read())
+      {
+        // do something like Console.WriteLine(dr["column name"] as String);
+      }
+    }
+  }
+}
+
+
+Cool.
+
+I also found the documentation regarding the E:
+
+http://www.postgresql.org/docs/8.3/interactive/sql-syntax-lexical.html#SQL-SYNTAX-STRINGS
+
+
+  PostgreSQL also accepts "escape" string constants, which are an extension to the SQL standard. An escape string constant is specified by writing the letter E (upper or lower case) just before the opening single quote, e.g. E'foo'. (When continuing an escape string constant across lines, write E only before the first opening quote.) Within an escape string, a backslash character (\) begins a C-like backslash escape sequence, in which the combination of backslash and following character(s) represents a special byte value. \b is a backspace, \f is a form feed, \n is a newline, \r is a carriage return, \t is a tab. Also supported are \digits, where digits represents an octal byte value, and \xhexdigits, where hexdigits represents a hexadecimal byte value. (It is your responsibility that the byte sequences you create are valid characters in the server character set encoding.) Any other character following a backslash is taken literally. Thus, to include a backslash character, write two backslashes (\\). Also, a single quote can be included in an escape string by writing \', in addition to the normal way of ''.
+
+@Goyuix -- that's excellent for something written from memory.
+tested it here -- found the connection wasn't opened. Otherwise very nice.
+
+using System.Data.OleDb;
+...
+
+using (OleDbConnection conn = new OleDbConnection())
+{
+    conn.ConnectionString = "Provider=sqloledb;Data Source=yourServername\\yourInstance;Initial Catalog=databaseName;Integrated Security=SSPI;";
+
+    using (OleDbCommand cmd = new OleDbCommand())
+    {
+        conn.Open();
+        cmd.Connection = conn;
+        cmd.CommandText = "Select * from yourTable";
+
+        using (OleDbDataReader dr = cmd.ExecuteReader())
+        {
+            while (dr.Read())
+            {
+                Console.WriteLine(dr["columnName"]);
+            }
+        }
+    }
+}
+
+
+I've read that it is possible to add a method to an existing object (e.g. not in the class definition) in Python, I think this is called Monkey Patching (or in some cases Duck Punching). I understand that it's not always a good decision to do so. But, how might one do this?
+
+UPDATE 8/04/2008 00:21:01 EST:
+
+That looks like a good answer John Downey, I tried it but it appears that it ends up being not a true method.
+
+Your example defines the new patch function with an argument of self, but if you write actual code that way, the now patched class method asks for an argument named self (it doesn't automagically recognize it as the object to which it is supposed to bind, which is what would happen if defined within the class definition), meaning you have to call class.patch(obj) instead of just class.patch() if you want the same functionality as a true method.
+
+It looks like Python isn't really treating it as a method, but more just as a variable which happens to be a function (and as such is callable).  Is there any way to attach an actual method to a class?
+
+Oh, and Ryan, that isn't exactly what I was looking for (it isn't a builtin functionality), but it is quite cool nonetheless.
+
+In Python monkey patching generally works by overwriting a class or functions signature with your own. Below is an example from the Zope Wiki:
+
+from SomeOtherProduct.SomeModule import SomeClassdef speak(self):   return "ook ook eee eee eee!"SomeClass.speak = speak
+
+That code will overwrite/create a method called speak on the class. In Jeff Atwood's recent post on monkey patching. He shows an example in C# 3.0 which is the current language I use for work.
+That's definitely a good way to do it.  But you if you happen to be using a database that supports LINQ to SQL, it can be a lot more fun.  It can look something like this:
+
+MyDB db = new MyDB("Data Source=...");var q = from db.MyTable        select c;foreach (var c in q)  Console.WriteLine(c.MyField.ToString());
+This was caused by a change in rails 2.1 which prevents rails from loading views from any arbitrary path for security reasons.
+
+There is now an updated version of the plugin on github, so the solution is to use that.
+
+
+
+The old solution here for posterity
+
+To work around it, edit init.rb under your vendor/plugins/exception_notification directory, and add the following code to the end
+
+ActionController::Base.class_eval do
+  append_view_path File.dirname(__FILE__) + '/lib/../views'
+end
+
+
+This adds the ExceptionNotifier plugins' views folder to the list, so it is allowed to load them.
+
+While I haven't used a flash object inside a windows form application myself, I do know that it's possible.
+In Visual studio on your toolbox, choose to add a new component.
+Then in the new window that appears choose the "COM Components" tab to get a list in which you can find the "Shockwave Flash Object"
+
+Once added to the toolbox, simply use the control as you would use any other "standard" control from visual studio.
+
+three simple commands are available to interact with the control:
+
+
+AxShockwaveFlash1.Stop()
+AxShockwaveFlash1.Movie = FilePath &
+"\FileName.swf"
+AxShockwaveFlash1.Play()
+
+
+which, I think, are all self explanatory.
+
+
+  It would be great to be able to load
+  the flash content from a stream of
+  sorts rather than a file on disk.
+
+
+I just saw you are also looking for a means to load the content from a stream,
+and because I'm not really sure that is possible with the shockwave flash object I will give you another option (two actually).
+
+the first is the one I would advise you to use only when necessary, as it uses the full blown "webbrowser component" (also available as an extra toolbox item), which is like trying to shoot a fly with a bazooka.
+of course it will work, as the control will act as a real browser window (actually the internet explorer browser), but its not really meant to be used in the way you need it.
+
+the second option is to use something I just discovered while looking for more information about playing flash content inside a windows form. F-IN-BOX is a commercial solution that will also play content from a given website URL. (The link provided will direct you to the .NET code you have to use).
+I'm looking for a way to delete a file which is locked by another process using C#. I suspect the method must be able to find which process is locking the file (perhaps by tracking the handles, although I'm not sure how to do this in C#) then close that process before being able to complete the file delete using File.Delete().
+
+For instance, my query is like the following using SQL Server 2005:
+
+SELECT * FROM Table WHERE FREETEXT(SearchField, 'c#')
+
+
+I have a full text index defined to use the column SearchField which returns results when using:
+
+SELECT * FROM Table WHERE SearchField LIKE '%c#%'
+
+
+I believe # is a special letter, so how do I allow FREETEXT to work correctly for the query above?
+
+If you want to do it programatically. I'm not sure... and I'd really recommend against it.
+If you're just troubleshooting stuff on your own machine, SysInternals Process Explorer can help you
+
+Run it, use the Find Handle command (I think it's either in the find or handle menu), and search for the name of your file. Once the handle(s) is found, you can forcibly close them.
+
+You can then delete the file and so on.
+
+Beware, doing this may cause the program which owns the handles to behave strangely, as you've just pulled the proverbial rug out from under it, but it works well when you are debugging your own errant code, or when visual studio / windows explorer is being crap and not releasing file handles even though you told them to close the file ages ago... sigh :-)
+The typical method is as follows. You've said you want to do this in C# so here goes...
+
+If you don't know which process has the file locked, you'll need to examine each process's handle list, and query each handle to determine if it identifies the locked file. Doing this in C# will likely require P/Invoke or an intermediary C++/CLI to call the native APIs you'll need.
+Once you've figured out which process(es) have the file locked, you'll need to safely inject a small native DLL into the process (you can also inject a managed DLL, but this is messier, as you then have to start or attach to the .NET runtime).
+That bootstrap DLL then closes the handle using CloseHandle etc.
+Essentially: the way to unlock a "locked" file is to inject a DLL into the offending process's address space and close it yourself. You can do this using native or managed code. No matter what, you're going to need a small amount of native code or at least P/Invoke into the same.
+Helpful links:
+
+http://www.codeproject.com/KB/threads/winspy.aspx
+http://damianblog.com/2008/07/02/net-code-injection/
+Good luck!
+Here's a short list of implementations and languages I've tried. It's sorted by closeness to zero:
+
+
+Scheme: (+ 1 (make-polar 1 (atan 0 -1)))
+
+⇒ 0.0+1.2246063538223773e-16i (Chez Scheme, MIT Scheme)
+⇒ 0.0+1.22460635382238e-16i (Guile)
+⇒ 0.0+1.22464679914735e-16i (Chicken with numbers egg)
+⇒ 0.0+1.2246467991473532e-16i (MzScheme, SISC, Gauche, Gambit)
+⇒ 0.0+1.2246467991473533e-16i (SCM)
+
+Common Lisp: (1+ (exp (complex 0 pi)))
+
+⇒ #C(0.0L0 -5.0165576136843360246L-20) (CLISP)
+⇒ #C(0.0d0 1.2246063538223773d-16) (CMUCL)
+⇒ #C(0.0d0 1.2246467991473532d-16) (SBCL)
+
+Perl: use Math::Complex; Math::Complex->emake(1, pi) + 1
+
+⇒ 1.22464679914735e-16i
+
+Python: from cmath import exp, pi; exp(complex(0, pi)) + 1
+
+⇒ 1.2246467991473532e-16j (CPython)
+
+Ruby: require 'complex'; Complex::polar(1, Math::PI) + 1
+
+⇒ Complex(0.0, 1.22464679914735e-16) (MRI)
+⇒ Complex(0.0, 1.2246467991473532e-16) (JRuby)
+
+R: complex(argument = pi) + 1
+
+⇒ 0+1.224606353822377e-16i
+
+
+
+Is it possible to settle this dispute?
+
+My first thought is to look to a symbolic language, like Maple. I don't think that counts as floating point though.
+
+In fact, how does one represent i (or j for the engineers) in a conventional programming language?
+
+Perhaps a better example is sin(π) = 0? (Or have I missed the point again?)
+
+I'm working on a multithreaded C++ application that is corrupting the heap.  The usual tools to locate this corruption seem to be inapplicable.  Old builds (18 months old) of the source code exhibit the same behaviour as the most recent release, so this has been around for a long time and just wasn't noticed; on the downside, source deltas can't be used to identify when the bug was introduced - there are a lot of code changes in the repository.
+
+The prompt for crashing behaviuor is to generate throughput in this system - socket transfer of data which is munged into an internal representation.  I have a set of test data that will periodically cause the app to exception (various places, various causes - including heap alloc failing, thus: heap corruption).
+
+The behaviour seems related to CPU power or memory bandwidth; the more of each the machine has, the easier it is to crash.  Disabling a hyper-threading core or a dual-core core reduces the rate of (but does not eliminate) corruption.  This suggests a timing related issue.
+
+Now here's the rub:
+When it's run under a lightweight debug environment (say Visual Studio 98 / AKA MSVC6) the heap corruption is reasonably easy to reproduce - ten or fifteen minutes pass before something fails horrendously and exceptions, like an alloc; when running under a sophisticated debug environment (Rational Purify, VS2008/MSVC9 or even Microsoft Application Verifier) the system becomes memory-speed bound and doesn't crash (Memory-bound: CPU is not getting above 50%, disk light is not on, the program's going as fast it can, box consuming 1.3G of 2G of RAM).  So, I've got a choice between being able to reproduce the problem (but not identify the cause) or being able to idenify the cause or a problem I can't reproduce.
+
+My current best guesses as to where to next is:
+
+
+Get an insanely grunty box (to replace the current dev box: 2Gb RAM in an E6550 Core2 Duo); this will make it possible to repro the crash causing mis-behaviour when running under a powerful debug environment; or
+Rewrite operators new and delete to use VirtualAlloc and VirtualProtect to mark memory as read-only as soon as it's done with.  Run under MSVC6 and have the OS catch the bad-guy who's writing to freed memory.  Yes, this is a sign of desperation: who the hell rewrites new and delete?!  I wonder if this is going to make it as slow as under Purify et al.
+
+
+And, no: Shipping with Purify instrumentation built in is not an option.
+
+A colleague just walked past and asked "Stack Overflow?  Are we getting stack overflows now?!?"
+
+And now, the question: How do I locate the heap corruptor?
+
+
+
+Update: balancing new[] and delete[] seems to have gotten a long way towards solving the problem.  Instead of 15mins, the app now goes about two hours before crashing.  Not there yet.  Any further suggestions? The heap corruption persists.
+
+Update: a release build under Visual Studio 2008 seems dramatically better; current suspicion rests on the STL implementation that ships with VS98.
+
+
+
+
+  
+  Reproduce the problem. Dr Watson will produce a dump that might be helpful in further analysis. 
+  
+
+
+I'll take a note of that, but I'm concerned that Dr Watson will only be tripped up after the fact, not when the heap is getting stomped on.
+
+
+  Another try might be using WinDebug as a debugging tool which is quite powerful being at the same time also lightweight.
+
+
+Got that going at the moment, again: not much help until something goes wrong.  I want to catch the vandal in the act.
+
+
+  Maybe these tools will allow you at least to narrow the problem to certain component.
+
+
+I don't hold much hope, but desperate times call for...
+
+
+  And are you sure that all the components of the project have correct runtime library settings (C/C++ tab, Code Generation category in VS 6.0 project settings)?
+
+
+No I'm not, and I'll spend a couple of hours tomorrow going through the workspace (58 projects in it) and checking they're all compiling and linking with the appropriate flags.
+
+Update: This took 30 seconds.  Select all projects in the Settings dialog, unselect until you find the project(s) that don't have the right settings (they all had the right settings).
+
+You say you have enough trouble getting one cube to display... so I am not sure if you have got one to display or not.
+
+Basically... put your code for writing a cube in one function, then just call that function 100 times.
+
+void DrawCube(){    //code to draw the cube}void DisplayCubes(){    for(int i = 0; i < 10; ++i)    {            for(int j = 0; j < 10; ++j)         {             glPushMatrix();             //alter these values depending on the size of your cubes.             //This call makes sure that your cubes aren't drawn overtop of each other             glTranslatef(i*5.0, j*5.0, 0);             DrawCube();             glPopMatrix();         }    }              }
+
+That is the basic outline for how you could go about doing this. If you want something more efficient take a look into Display Lists sometime once you have the basics figured out :)
+Why is it needed?
+
+When data is stored on disk based storage devices, it is stored as blocks of data. These blocks are accessed in their entirety, making them the atomic disk access operation. Disk blocks are structured in much the same way as linked lists; both contain a section for data, a pointer to the location of the next node (or block), and both need not be stored contiguously.
+
+Due to the fact that a number of records can only be sorted on one field, we can state that searching on a field that isn’t sorted requires a Linear Search which requires N/2 block accesses (on average), where N is the number of blocks that the table spans. If that field is a non-key field (i.e. doesn’t contain unique entries) then the entire table space must be searched at N block accesses.
+
+Whereas with a sorted field, a Binary Search may be used, this has log2 N block accesses. Also since the data is sorted given a non-key field, the rest of the table doesn’t need to be searched for duplicate values, once a higher value is found. Thus the performance increase is substantial.
+
+What is indexing?
+
+Indexing is a way of sorting a number of records on multiple fields. Creating an index on a field in a table creates another data structure which holds the field value, and pointer to the record it relates to. This index structure is then sorted, allowing Binary Searches to be performed on it.
+
+The downside to indexing is that these indexes require additional space on the disk, since the indexes are stored together in a table using the MyISAM engine, this file can quickly reach the size limits of the underlying file system if many fields within the same table are indexed.
+
+How does it work?
+
+Firstly, let’s outline a sample database table schema; 
+
+
+Field name       Data type      Size on disk
+id (Primary key) Unsigned INT   4 bytes
+firstName        Char(50)       50 bytes
+lastName         Char(50)       50 bytes
+emailAddress     Char(100)      100 bytes
+
+
+Note: char was used in place of varchar to allow for an accurate size on disk value. 
+This sample database contains five million rows, and is unindexed. The performance of several queries will now be analyzed. These are a query using the id (a sorted key field) and one using the firstName (a non-key unsorted field).
+
+Example 1
+
+Given our sample database of r = 5,000,000 records of a fixed size giving a record length of R = 204 bytes and they are stored in a table using the MyISAM engine which is using the default block size B = 1,024 bytes. The blocking factor of the table would be bfr = (B/R) = 1024/204 = 5 records per disk block. The total number of blocks required to hold the table is N = (r/bfr) = 5000000/5 = 1,000,000 blocks. 
+
+A linear search on the id field would require an average of N/2 = 500,000 block accesses to find a value given that the id field is a key field. But since the id field is also sorted a binary search can be conducted requiring an average of log2 1000000 = 19.93 = 20 block accesses. Instantly we can see this is a drastic improvement.
+
+Now the firstName field is neither sorted nor a key field, so a binary search is impossible, nor are the values unique, and thus the table will require searching to the end for an exact N = 1,000,000 block accesses. It is this situation that indexing aims to correct.
+
+Given that an index record contains only the indexed field and a pointer to the original record, it stands to reason that it will be smaller than the multi-field record that it points to. So the index itself requires fewer disk blocks than the original table, which therefore requires fewer block accesses to iterate through. The schema for an index on the firstName field is outlined below; 
+
+
+Field name       Data type      Size on disk
+firstName        Char(50)       50 bytes
+(record pointer) Special        4 bytes
+
+
+Note: Pointers in MySQL are 2, 3, 4 or 5 bytes in length depending on the size of the table.
+
+Example 2
+
+Given our sample database of r = 5,000,000 records with an index record length of R = 54 bytes and using the default block size B = 1,024 bytes. The blocking factor of the index would be bfr = (B/R) = 1024/54 = 18 records per disk block. The total number of blocks required to hold the table is N = (r/bfr) = 5000000/18 = 277,778 blocks. 
+
+Now a search using the firstName field can utilise the index to increase performance. This allows for a binary search of the index with an average of log2 277778 = 18.08 = 19 block accesses. To find the address of the actual record, which requires a further block access to read, bringing the total to 19 + 1 = 20 block accesses, a far cry from the 277,778 block accesses required by the non-indexed table.
+
+When should it be used?
+
+Given that creating an index requires additional disk space (277,778 blocks extra from the above example), and that too many indexes can cause issues arising from the file systems size limits, careful thought must be used to select the correct fields to index.
+
+Since indexes are only used to speed up the searching for a matching field within the records, it stands to reason that indexing fields used only for output would be simply a waste of disk space and processing time when doing an insert or delete operation, and thus should be avoided. Also given the nature of a binary search, the cardinality or uniqueness of the data is important. Indexing on a field with a cardinality of 2 would split the data in half, whereas a cardinality of 1,000 would return approximately 1,000 records. With such a low cardinality the effectiveness is reduced to a linear sort, and the query optimizer will avoid using the index if the cardinality is less than 30% of the record number, effectively making the index a waste of space.
+
+I've tried to write a string replace function in C, which works on a char *, which has been allocated using malloc().  It's a little different in that it will find and replace strings, rather than characters in the starting string.
+
+It's trivial to do if the search and replace strings are the same length (or the replace string is shorter than the search string), since I have enough space allocated.  If I try to use realloc(), I get an error that tells me I am doing a double free - which I don't see how I am, since I am only using realloc().
+
+Perhaps a little code will help:
+
+void strrep(char *input, char *search, char *replace) {
+    int searchLen = strlen(search);
+    int replaceLen = strlen(replace);
+    int delta = replaceLen - searchLen;
+    char *find = input;
+
+    while (find = strstr(find, search)) {
+
+        if (delta > 0) {
+            realloc(input, strlen(input) + delta);
+            find = strstr(input, search);            
+        }
+
+        memmove(find + replaceLen, find + searchLen, strlen(input) - (find - input));
+        memmove(find, replace, replaceLen);
+    }
+}
+
+
+The program works, until I try to realloc() in an instance where the replaced string will be longer than the initial string.  (It still kind of works, it just spits out errors as well as the result).
+
+If it helps, the calling code looks like:
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void strrep(char *input, char *search, char *replace);
+
+int main(void) {
+    char *input = malloc(81);
+
+    while ((fgets(input, 81, stdin)) != NULL) {
+        strrep(input, "Noel", "Christmas");
+    }
+}
+
+
+Just a shot in the dark because I haven't tried it yet but when you realloc it returns the pointer much like malloc. Because realloc can move the pointer if needed you are most likely operating on an invalid pointer if you don't do the following:
+
+input = realloc(input, strlen(input) + delta);
+My quick hints.
+Instead of: void strrep(char *input, char *search, char *replace) try: void strrep(char *&input, char *search, char *replace)
+and than in the body: input = realloc(input, strlen(input) + delta);
+Generally read about passing function arguments as values/reference and realloc() description :).
+This seems to work;
+
+char *strrep(char *string, const char *search, const char *replace) {    char *p = strstr(string, search);    if (p) {        int occurrence = p - string;        int stringlength = strlen(string);        int searchlength = strlen(search);        int replacelength = strlen(replace);        if (replacelength > searchlength) {            string = (char *) realloc(string, strlen(string)                 + replacelength - searchlength + 1);        }        if (replacelength != searchlength) {            memmove(string + occurrence + replacelength,                         string + occurrence + searchlength,                         stringlength - occurrence - searchlength + 1);        }        strncpy(string + occurrence, replace, replacelength);    }    return string;}
+
+Sigh, is there anyway to post code without it sucking?
+You have basically two options. Either you write a simple script that will start and parse output from
+
+svn.exe info --revision HEAD
+
+to obtain revision number (then generating AssemblyInfo.cs is pretty much straight forward) or just use plugin for CCNET. Here it is:
+
+
+  SVN Revision Labeller is a plugin for
+  CruiseControl.NET that allows you to
+  generate CruiseControl labels for your
+  builds, based upon the revision number
+  of your Subversion working copy. This
+  can be customised with a prefix and/or
+  major/minor version numbers.
+  
+  http://code.google.com/p/svnrevisionlabeller/
+
+
+I prefer the first option because it's only roughly 20 lines of code:
+
+using System;
+using System.Diagnostics;
+
+namespace SvnRevisionNumberParserSample
+{
+    class Program
+    {
+        static void Main()
+        {
+            Process p = Process.Start(new ProcessStartInfo()
+                {
+                    FileName = @"C:\Program Files\SlikSvn\bin\svn.exe", // path to your svn.exe
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    Arguments = "info --revision HEAD",
+                    WorkingDirectory = @"C:\MyProject" // path to your svn working copy
+                });
+
+            // command "svn.exe info --revision HEAD" will produce a few lines of output
+            p.WaitForExit();
+
+            // our line starts with "Revision: "
+            while (!p.StandardOutput.EndOfStream)
+            {
+                string line = p.StandardOutput.ReadLine();
+                if (line.StartsWith("Revision: "))
+                {
+                    string revision = line.Substring("Revision: ".Length);
+                    Console.WriteLine(revision); // show revision number on screen                       
+                    break;
+                }
+            }
+
+            Console.Read();
+        }
+    }
+}
+
+
+The GNU C library regular expressions facility (regcomp(), regexec() and friends) is broken. Use libetre instead; the function signatures match the ones provided by glibc.
+http://laurikari.net/tre/
+Don't worry about DNS and URL rewriting
+
+Your DNS record will be static, something like:
+
+*.YOURDOMAIN.COM A 123.123.123.123
+
+Ask your DNS provider to do it for you (if it's not done already) or do it by yourself if you have control over your DNS records. This will automatically point all your subdomains (current and future ones) into the same HTTP server.
+
+Once it's done, you will only need to parse HOST header on every single http request to detect what hostname was used to access your server-side scripts on your http server.
+
+Assuming you're using ASP.NET, this is kind of silly example I came up with but works and demonstrates simplicity of this approach:
+
+<%@ Language="C#" %><%string subDomain = Request.Url.Host.Split('.')[0].ToUpper();if (subDomain == "CLIENTXXX") Response.Write("Hello CLIENTXXX, your secret number is 33");else if (subDomain == "CLIENTYYY") Response.Write("Hello CLIENTYYY, your secret number is 44");else Response.Write(subDomain+" doesn't exist");%>
+I have a client-server app where the client is on a Windows Mobile 6 device, written in C++ and the server is on full Windows and written in C#. 
+
+Originally, I only needed it to send messages from the client to the server, with the server only ever sending back an acknowledgment that it received the message.  Now, I would like to update it so that the server can actually send a message to the client to request data.  As I currently have it set up so the client is only in receive mode after it sends data to the server, this doesn't allow for the server to send a request at any time.  I would have to wait for client data.  My first thought would be to create another thread on the client with a separate open socket, listening for server requests...just like the server already has in respect the the client.  Is there a way, within the same thread and using the same socket, to all the server to send requests at any time?
+
+Can you use something to the affect of WaitForMultipleObjects() and pass it a receive buffer and an event that tells it there is data to be sent?
+
+Jeff, your code is nice but could be clearer with constants (as suggested in Code Complete).
+
+const int SECOND = 1;
+const int MINUTE = 60 * SECOND;
+const int HOUR = 60 * MINUTE;
+const int DAY = 24 * HOUR;
+const int MONTH = 30 * DAY;
+
+var ts = new TimeSpan(DateTime.UtcNow.Ticks - yourDate.Ticks);
+double delta = Math.Abs(ts.TotalSeconds);
+
+if (delta < 1 * MINUTE)
+  return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
+
+if (delta < 2 * MINUTE)
+  return "a minute ago";
+
+if (delta < 45 * MINUTE)
+  return ts.Minutes + " minutes ago";
+
+if (delta < 90 * MINUTE)
+  return "an hour ago";
+
+if (delta < 24 * HOUR)
+  return ts.Hours + " hours ago";
+
+if (delta < 48 * HOUR)
+  return "yesterday";
+
+if (delta < 30 * DAY)
+  return ts.Days + " days ago";
+
+if (delta < 12 * MONTH)
+{
+  int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+  return months <= 1 ? "one month ago" : months + " months ago";
+}
+else
+{
+  int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+  return years <= 1 ? "one year ago" : years + " years ago";
+}
+
+
+Wine is actually using gettimeofday() to implement QueryPerformanceCounter() and it is known to make many Windows games work on Linux and Mac.
+
+Starts http://source.winehq.org/source/dlls/kernel32/cpu.c#L312
+
+leads to http://source.winehq.org/source/dlls/ntdll/time.c#L448
+I've knocked up a basic version of what I'm looking for, it's not perfect but it'll do the job until something better comes along.
+
+public class LimitedQueue<T> : Queue<T>{    private int limit = -1;    public int Limit    {        get { return limit; }        set { limit = value; }    }    public LimitedQueue(int limit)        : base(limit)    {        this.Limit = limit;    }    public new void Enqueue(T item)    {        if (this.Count >= this.Limit)        {            this.Dequeue();        }        base.Enqueue(item);    }}
+How do you specify a callback for rb->pcm_play_data()?
+
+Why not use LINQ:
+
+Dictionary<string, int> myDict = new Dictionary<string, int>();
+myDict.Add("one", 1);
+myDict.Add("four", 4);
+myDict.Add("two", 2);
+myDict.Add("three", 3);
+
+var sortedDict = from entry in myDict orderby entry.Value ascending select entry;
+
+
+This would also allow for great flexibility in that you can select the top 10, 20 10% etc. Or if you are using your word frequency index for type-ahead, you could also include StartsWith clause as well.
+
+Here is a solution that works in XP / Vista, but is definitely expandable to OSX, linux, I'd still be interested in another way.
+
+public static function GetCurrentOSUser():String{
+    // XP & Vista only.
+    var userDirectory:String = File.userDirectory.resolvePath("").nativePath;
+    var startIndex:Number = userDirectory.lastIndexOf("\\") + 1
+    var stopIndex:Number = userDirectory.length;
+    var user = userDirectory.substring(startIndex, stopIndex);
+
+    return user;
+}
+
+
+I have a custom validation function in JavaScript in a user control on a .Net 2.0 web site which checks to see that the fee paid is not in excess of the fee amount due. 
+
+I've placed the validator code in the ascx file, and I have also tried using Page.ClientScript.RegisterClientScriptBlock() and in both cases the validation fires, but cannot find the JavaScript function.
+
+The output in Firefox's error console is "feeAmountCheck is not defined". Here is the function (this was taken directly from firefox->view source)
+
+<script type="text/javascript">
+    function feeAmountCheck(source, arguments)
+    {
+        var amountDue = document.getElementById('ctl00_footerContentHolder_Fees1_FeeDue');
+        var amountPaid = document.getElementById('ctl00_footerContentHolder_Fees1_FeePaid');
+
+        if (amountDue.value > 0 && amountDue >= amountPaid)
+        {
+            arguments.IsValid = true;
+        }
+        else
+        {
+            arguments.IsValid = false;
+        }
+
+        return arguments;
+    }
+</script>
+
+
+Any ideas as to why the function isn't being found? How can I remedy this without having to add the function to my master page or consuming page?
+
+For some reason Jeff's code didn't seem simple enough. To me this seems simpler and easier to understand:
+
+DateTime today = DateTime.Today;
+int age = today.Year - bday.Year;
+
+if (bday > today.AddYears(-age))
+    age--;
+
+
+However, this assumes you are looking for the western idea of age and not using East Asian reckoning.
+
+I often encounter the following scenario where I need to offer many different types of permissions. I primarily use ASP.NET / VB.NET with SQL Server 2000.
+
+Scenario
+
+I want to offer a dynamic permission system that can work on different parameters. Let's say that I want to give either a department or just a specific person access to an application. And pretend that we have a number of applications that keeps growing.
+
+In the past, I have chosen one of the following two ways that I know to do this.
+
+1) Use a single permission table with special columns that are used for determining a how to apply the parameters. The special columns in this example are TypeID and TypeAuxID. The SQL would look something like this.
+
+SELECT COUNT(PermissionID)
+FROM application_permissions
+WHERE
+(TypeID = 1 AND TypeAuxID = @UserID) OR
+(TypeID = 2 AND TypeAuxID = @DepartmentID)
+AND ApplicationID = 1
+
+
+2) Use a mapping table for each type of permission, then joining them all together.
+
+SELECT COUNT(perm.PermissionID)
+FROM application_permissions perm
+LEFT JOIN application_UserPermissions emp
+ON perm.ApplicationID = emp.ApplicationID
+LEFT JOIN application_DepartmentPermissions dept
+ON perm.ApplicationID = dept.ApplicationID
+WHERE q.SectionID=@SectionID
+  AND (emp.UserID=@UserID OR dept.DeptID=@DeptID OR
+ (emp.UserID IS NULL AND dept.DeptID IS NULL)) AND ApplicationID = 1
+ORDER BY q.QID ASC
+
+
+My Thoughts
+
+I hope that the examples make sense. I cobbled them together.
+
+The first example requires less work, but neither of them feel like the best answer. Is there a better way to handle this?
+
+I'm trying to do this (which produces an unexpected T_VARIABLE error):
+
+public function createShipment($startZip, $endZip, $weight = $this->getDefaultWeight()){}
+
+
+I don't want to put a magic number in there for weight, since the object I am using has a "defaultWeight" parameter that all new shipments get if you don't specify a weight. I can't put the defaultWeight in the shipment itself, because it changes from shipment group to shipment group. Is there a better way to do it than the following?
+
+public function createShipment($startZip, $endZip, weight = 0){
+    if($weight <= 0){
+        $weight = $this->getDefaultWeight();
+    }
+}
+
+
+This isn't much better:
+
+public function createShipment($startZip, $endZip, $weight=null){    $weight = !$weight ? $this->getDefaultWeight() : $weight;}// or...public function createShipment($startZip, $endZip, $weight=null){    if ( !$weight )        $weight = $this->getDefaultWeight();}
+This is similar to what Kevin said.  You can have your client state as some javascript object, and when you want to save the state, you serialize the object (using JSON and base64 encoding).  You can then set the fragment of the href to this string.
+
+var encodedState = base64(json(state));var newLocation = oldLocationWithoutFragment + "#" + encodedState;document.location = newLocation; // adds new entry in browser historydocument.location.replace(newLocation); // replaces current entry in browser history
+
+The first way will treat the new state as a new location (so the back button will take them to the previous location).  The latter does not.
+An approach I've used in various applications is to have a generic PermissionToken class which has a changeable Value property.  Then you query the requested application, it tells you which PermissionTokens are needed in order to use it.
+
+For example, the Shipping application might tell you it needs:
+
+new PermissionToken(){    Target = PermissionTokenTarget.Application,    Action = PermissionTokenAction.View,    Value = "ShippingApp"};
+
+This can obviously be extended to Create, Edit, Delete etc and, because of the custom Value property, any application, module or widget can define its own required permissions.  YMMV, but this has always been an efficient method for me which I have found to scale well.
+How do you express an integer as a binary number with Python literals?
+
+I was easily able to find the answer for hex:
+
+    >>> 0x12AF
+    4783
+    >>> 0x100
+    256
+
+
+and octal:
+
+    >>> 01267
+    695
+    >>> 0100
+    64
+
+
+How do you use literals to express binary in Python?
+
+
+
+Summary of Answers
+
+
+Python 2.5 and earlier: can express binary using int('01010101111',2) but not with a literal.
+Python 2.5 and earlier: there is no way to express binary literals.
+Python 2.6 beta: You can do like so: 0b1100111 or 0B1100111.
+Python 2.6 beta: will also allow 0o27 or 0O27 (second character is the letter O) to represent an octal.
+Python 3.0 beta: Same as 2.6, but will no longer allow the older 027 syntax for octals.
+
+
+I am pretty sure this is one of the things due to change in Python 3.0 with perhaps bin() to go with hex() and oct().
+
+EDIT:
+lbrandy's answer is correct in all cases.
+
+>>> print int('01010101111',2)
+687
+>>> print int('11111111',2)
+255
+
+
+Another way.
+
+While you cannot prevent usage of those inherited members to my knowledge, you should be able to hide them from IntelliSense using the EditorBrowsableAttribute:
+
+Using System.ComponentModel;
+
+[EditorBrowsable(EditorBrowsableState.Never)]
+private string MyHiddenString = "Muahahahahahahahaha";
+
+
+Edit: Just saw this in the documentation comments, which makes it kinda useless for this purpose:
+
+
+  There is a prominent note that states that this attribute "does not suppress members from a class in the same assembly". That is true but not complete. Actually, the attribute does not suppress members from a class in the same solution.
+
+
