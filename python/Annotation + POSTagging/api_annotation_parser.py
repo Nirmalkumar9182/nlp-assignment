@@ -15,9 +15,12 @@ p = re.compile(r"(((\w+)((\.)\w+)*\(\)?)|,|\w+(?:[-']\w+)+|'|[-.(]+|\S\w*)")
 wordList = []
 annotateList = []
 
+
+filetext = open('50_posts_api_mentions.txt', 'r', encoding='utf8').read()
+
 # only using finditer was i able to obtain the results without greedy search
 # the function returns an iteratable so we have to use a for loop on it
-for x in re.finditer(p, "this is a string(asd), told function ya the other day("):
+for x in re.finditer(p, filetext):
     # x.group(0) contains the regex matched expression
     wordList.append(x.group(1))
 
@@ -78,7 +81,7 @@ while index < len(posTagList):
             annotateList.append(x + ('B-API', ))
             # tag everything here
             for i in range(anchor+1, scanner):
-                print(i)
+                #print(i)
                 pos_i = posTagList[i]
                 annotateList.append(pos_i + ('I-API', ))
 
@@ -95,4 +98,10 @@ while index < len(posTagList):
 
     index += 1
 
-print(annotateList)
+# print(annotateList)
+print("done")
+
+with open("annotation.txt", "wb") as myfile:
+    for x in annotateList:
+        string = x[0] + " " + x[1] + " " + x[2] + "\n"
+        myfile.write(string.encode('utf8'))
