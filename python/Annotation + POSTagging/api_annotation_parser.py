@@ -15,11 +15,12 @@ p = re.compile(r"(((\w+)((\.)\w+)*\(\)?)|,|\w+(?:[-']\w+)+|'|[-.(]+|\S\w*)")
 wordList = []
 annotateList = []
 
+annotate = True
 
 #filetext = open('50_posts_api_mentions.txt', 'r', encoding='utf8').read()
 
 
-with open('50_posts_api_mentions.txt', 'r', encoding='utf8') as fp:
+with open('52_posts_api_mentions_test.txt', 'r', encoding='utf8') as fp:
     for line in fp:
         # only using finditer was i able to obtain the results without greedy search
         # the function returns an iteratable so we have to use a for loop on it
@@ -37,8 +38,11 @@ b = re.compile(r"((\w+)((\.)\w+)*\()")
 
 index = 0
 
+if not annotate:
+    annotateList = posTagList
+
 # annotation loop
-while index < len(posTagList):
+while index < len(posTagList) and annotate:
     x = posTagList[index]
     tag = ('O', )
     
@@ -103,13 +107,18 @@ while index < len(posTagList):
     index += 1
 
 # print(annotateList)
-print("done")
+name = input("Annotation complete. What do you want to name the file? ")
 
-with open("annotation.txt", "wb") as myfile:
+with open(name + ".txt", "wb") as myfile:
     for x in annotateList:
         #print(x)
         if(x[0] == "\n"):
             myfile.write("\t\t\n".encode('utf8'))
-        else:
+        elif(annotate):
             string = x[0] + "\t" + x[1] + "\t" + x[2] + "\n"
             myfile.write(string.encode('utf8'))
+        else:
+            string = x[0] + "\t" + x[1] + "\n"
+            myfile.write(string.encode('utf8'))
+
+print("done")
