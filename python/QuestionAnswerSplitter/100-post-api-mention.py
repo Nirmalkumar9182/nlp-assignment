@@ -31,13 +31,16 @@ itemlist = xmldoc.getElementsByTagName('row')
 # this will PROBABLY help us pull posts with API mentions ONLY
 api_mention_regex = re.compile(r'(\w+)((\.)\w+)*\(([^\s]*)(\s?,\s?[^\s]*)*\)')
 
+
 api_count = 0
 with open("50_posts_api_mentions.txt", "wb") as myfile:
     for s in itemlist :
-            text = str(s.attributes['Body'].value) + "\r\n"
+            text = str(s.attributes['Body'].value)
             text = strip_tags(text)
             text = html.unescape(text)
             if api_mention_regex.search(text) is not None:
+                # split a single post so that all new lines are removed from the post
+                text = " ".join(text.split()) + "\r\n"
                 myfile.write(text.encode('utf8'))
                 api_count += 1
 

@@ -16,13 +16,18 @@ wordList = []
 annotateList = []
 
 
-filetext = open('50_posts_api_mentions.txt', 'r', encoding='utf8').read()
+#filetext = open('50_posts_api_mentions.txt', 'r', encoding='utf8').read()
 
-# only using finditer was i able to obtain the results without greedy search
-# the function returns an iteratable so we have to use a for loop on it
-for x in re.finditer(p, filetext):
-    # x.group(0) contains the regex matched expression
-    wordList.append(x.group(1))
+
+with open('50_posts_api_mentions.txt', 'r', encoding='utf8') as fp:
+    for line in fp:
+        # only using finditer was i able to obtain the results without greedy search
+        # the function returns an iteratable so we have to use a for loop on it
+        for x in re.finditer(p, line):
+            # x.group(0) contains the regex matched expression
+            wordList.append(x.group(0))
+        wordList.append('\n')
+
 
 posTagList = nltk.pos_tag(wordList)
 # print(nltk.pos_tag(wordList))
@@ -102,5 +107,9 @@ print("done")
 
 with open("annotation.txt", "wb") as myfile:
     for x in annotateList:
-        string = x[0] + " " + x[1] + " " + x[2] + "\n"
-        myfile.write(string.encode('utf8'))
+        #print(x)
+        if(x[0] == "\n"):
+            myfile.write("\t\t\n".encode('utf8'))
+        else:
+            string = x[0] + "\t" + x[1] + "\t" + x[2] + "\n"
+            myfile.write(string.encode('utf8'))
