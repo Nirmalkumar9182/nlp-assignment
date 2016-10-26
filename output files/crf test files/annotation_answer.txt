@@ -49,7 +49,6 @@ setTimer()	NN	U-API
 and	CC	O
 clearTimer()	NN	U-API
 .	.	O
-		
 When	WRB	O
 is	VBZ	O
 it	PRP	O
@@ -146,7 +145,6 @@ Microsystems	NNPS	O
 '	POS	O
 part	NN	O
 .	.	O
-		
 Personally	RB	O
 ,	,	O
 I've	NNP	O
@@ -272,8 +270,7 @@ use	NN	O
 and	CC	O
 simplicity	NN	O
 .	.	O
-		
-Take	VBP	O
+Take	VB	O
 a	DT	O
 look	NN	O
 at	IN	O
@@ -349,7 +346,6 @@ dependency	NN	O
 without	IN	O
 triggers	NNS	O
 )	)	O
-		
 timezone	NN	O
 .	.	O
 js	NN	O
@@ -652,7 +648,6 @@ This	DT	O
 is	VBZ	O
 untested	JJ	O
 .	.	O
-		
 There	EX	O
 are	VBP	O
 several	JJ	O
@@ -828,7 +823,6 @@ in	IN	O
 the	DT	O
 list	NN	O
 .	.	O
-		
 I	PRP	O
 just	RB	O
 whipped	VBD	O
@@ -1057,8 +1051,7 @@ y	NN	O
 etc	NN	O
 )	)	O
 .	.	O
-		
-High	NNP	O
+High	JJ	O
 Resolution	NNP	O
 ,	,	O
 Low	NNP	O
@@ -1310,8 +1303,7 @@ y-x	NN	I-API
 )	)	L-API
 ;	:	O
 }	)	O
-		
-Personally	RB	O
+Personally	NNP	O
 I	PRP	O
 would	MD	O
 do	VB	O
@@ -1487,7 +1479,6 @@ it	PRP	O
 is	VBZ	O
 untested	JJ	O
 .	.	O
-		
 What	WP	O
 is	VBZ	O
 the	DT	O
@@ -1556,7 +1547,6 @@ List	NNP	O
 )	)	O
 object	VBP	O
 ;	:	O
-		
 I'm	NNP	O
 not	RB	O
 sure	JJ	O
@@ -1856,7 +1846,6 @@ c	NN	I-API
 }	)	O
 }	)	O
 }	)	O
-		
 The	DT	O
 scoring	NN	O
 contains	VBZ	O
@@ -1936,8 +1925,7 @@ override	VB	O
 the	DT	O
 IDF	NNP	O
 .	.	O
-		
-Part	NNP	O
+Part	NN	O
 of	IN	O
 my	PRP$	O
 everyday	JJ	O
@@ -2133,7 +2121,6 @@ in	IN	O
 the	DT	O
 IDE	NNP	O
 ?	.	O
-		
 Ok	NNP	O
 ,	,	O
 I'm	NNP	O
@@ -2335,8 +2322,7 @@ DataSource	NNP	O
 =	NNP	O
 myitems.ToArray()	NN	U-API
 ;	:	O
-		
-So	IN	O
+So	CC	O
 it	PRP	O
 says	VBZ	O
 microseconds	VBZ	O
@@ -2444,7 +2430,6 @@ of	IN	O
 your	PRP$	O
 clock	NN	O
 .	.	O
-		
 The	DT	O
 Monte	NNP	O
 Carlo	NNP	O
@@ -2980,8 +2965,7 @@ b	SYM	O
 )	)	O
 ;	:	O
 }	)	O
-		
-A	DT	O
+A	NNP	O
 few	JJ	O
 things	NNS	O
 :	:	O
@@ -3129,7 +3113,6 @@ when	WRB	O
 gtk_dialog_run()	JJ	U-API
 returns	NNS	O
 .	.	O
-		
 You	PRP	O
 may	MD	O
 also	RB	O
@@ -3165,7 +3148,6 @@ way	NN	O
 they	PRP	O
 are	VBP	O
 .	.	O
-		
 Well	NNP	O
 ,	,	O
 in	IN	O
@@ -3398,7 +3380,6 @@ vs	NN	O
 int	NN	O
 primitive	JJ	O
 comparison	NN	O
-		
 Interesting	NNP	O
 question	NN	O
 !	.	O
@@ -3678,7 +3659,6 @@ inf	NN	O
 )	)	O
 ;	:	O
 ...	:	O
-		
 There	EX	O
 are	VBP	O
 three	CD	O
@@ -3882,7 +3862,6 @@ row	NN	O
 row	NN	O
 =	NNP	O
 curs.fetchone()	NN	U-API
-		
 I'm	NNP	O
 looking	VBG	O
 for	IN	O
@@ -4020,7 +3999,6 @@ be	VB	O
 looking	VBG	O
 for	IN	O
 ?	.	O
-		
 Hmm	NNP	O
 ,	,	O
 ok	NN	O
@@ -4231,9 +4209,8 @@ Hope	VB	O
 this	DT	O
 helps	NN	O
 !	.	O
-		
 I'll	NNP	O
-add	NN	O
+add	VB	O
 to	TO	O
 the	DT	O
 excellent	JJ	O
@@ -4521,7 +4498,6 @@ Hope	VBP	O
 this	DT	O
 helps	NN	O
 !	.	O
-		
 I'm	NNP	O
 not	RB	O
 a	DT	O
@@ -4576,7 +4552,6 @@ Application	NNP	I-API
 Outlook	NNP	O
 API	NNP	O
 referance	NN	O
-		
 I	PRP	O
 found	VBD	O
 this	DT	O
@@ -4923,7 +4898,6 @@ wrong	JJ	O
 there	RB	O
 )	)	O
 .	.	O
-		
 With	IN	O
 the	DT	O
 "Built	NN	O
@@ -5194,7 +5168,6 @@ Build	NNP	O
 .	.	O
 Revision	NNP	O
 .	.	O
-		
 I	PRP	O
 would	MD	O
 use	VB	O
@@ -5376,7 +5349,6 @@ event	NN	I-API
 "	NN	O
 /	NNP	O
 >	NNP	O
-		
 How	NNP	O
 often	RB	O
 do	VBP	O
@@ -5679,8 +5651,7 @@ by	IN	O
 the	DT	O
 vendor	NN	O
 .	.	O
-		
-No	NNP	O
+No	UH	O
 ,	,	O
 you	PRP	O
 were	VBD	O
@@ -5889,7 +5860,6 @@ this	DT	O
 .	.	O
 Eric	JJ	O
 Sipple	NNP	O
-		
 I	PRP	O
 think	VBP	O
 :	:	O
@@ -6198,8 +6168,7 @@ future	NN	O
 .	.	O
 )	)	O
 .	.	O
-		
-Are	NNP	O
+Are	VBP	O
 you	PRP	O
 looking	VBG	O
 to	TO	O
@@ -6243,8 +6212,7 @@ obj	NN	I-API
 attributeName	NN	I-API
 '	''	I-API
 )	)	L-API
-]	FW	O
-		
+]	NN	O
 Here	RB	O
 is	VBZ	O
 a	DT	O
@@ -6272,7 +6240,6 @@ targetString	NN	I-API
 )	)	L-API
 ;	:	O
 }	)	O
-		
 In	IN	O
 what	WP	O
 language	NN	O
@@ -6294,7 +6261,6 @@ world	NN	I-API
 '	''	I-API
 )	)	L-API
 ;	:	O
-		
 What	WP	O
 I	PRP	O
 was	VBD	O
@@ -6390,7 +6356,6 @@ pretty	JJ	O
 neat	JJ	O
 anyway	RB	O
 .	.	O
-		
 One	CD	O
 implementation	NN	O
 of	IN	O
@@ -6504,7 +6469,6 @@ T	NNP	I-API
 ;	:	O
 }	)	O
 }	)	O
-		
 The	DT	O
 Activator	NNP	O
 class	NN	O
@@ -6591,7 +6555,6 @@ ObjectType	NNP	I-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-		
 Here	RB	O
 is	VBZ	O
 my	PRP$	O
@@ -6710,7 +6673,6 @@ shortDatePattern	NN	I-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-		
 You	PRP	O
 can	MD	O
 print	VB	O
@@ -6856,8 +6818,7 @@ above	IN	O
 I	PRP	O
 think	VBP	O
 .	.	O
-		
-Here's	NNP	O
+Here's	VB	O
 a	DT	O
 Perl	NNP	O
 solution	NN	O
@@ -6944,7 +6905,6 @@ version	NN	O
 of	IN	O
 it	PRP	O
 .	.	O
-		
 I	PRP	O
 haven't	VBP	O
 been	VBN	O
@@ -7057,7 +7017,6 @@ also	RB	O
 be	VB	O
 appreciated	VBN	O
 .	.	O
-		
 I	PRP	O
 don't	VBP	O
 have	VB	O
@@ -7164,7 +7123,6 @@ head	NN	O
 not	RB	O
 installed	VBN	O
 '	''	O
-		
 Can	MD	O
 you	PRP	O
 show	VB	O
@@ -7284,7 +7242,6 @@ a	DT	O
 new	JJ	O
 group	NN	O
 .	.	O
-		
 Absolutely	RB	O
 ,	,	O
 especially	RB	O
@@ -7627,7 +7584,6 @@ No	NNP	O
 June	NNP	O
 1977	CD	O
 .	.	O
-		
 I	PRP	O
 uploaded	VBD	O
 it	PRP	O
@@ -7733,7 +7689,6 @@ had	VBD	O
 already	RB	O
 tried	VBN	O
 .	.	O
-		
 The	DT	O
 magic	NN	O
 all	DT	O
@@ -7850,7 +7805,6 @@ set	VBN	O
 theirs	JJ	O
 yet	RB	O
 .	.	O
-		
 SQL	NN	O
 :	:	O
 SELECT	NNP	O
@@ -7906,7 +7860,6 @@ Id	NNP	O
 u	NN	O
 .	.	O
 name	NN	O
-		
 A	DT	O
 solution	NN	O
 ,	,	O
@@ -8021,7 +7974,6 @@ not	RB	O
 always	RB	O
 straightforward	RB	O
 .	.	O
-		
 PHP	NNP	O
 variables	NNS	O
 are	VBP	O
@@ -8260,7 +8212,6 @@ better	JJR	O
 probably	RB	O
 ...	:	O
 )	)	O
-		
 Rather	JJR	O
 than	IN	O
 coding	VBG	O
@@ -8526,7 +8477,6 @@ mistakes	NNS	O
 or	CC	O
 improvements	NNS	O
 .	.	O
-		
 It's	NNP	O
 by	IN	O
 value	NN	O
@@ -8665,8 +8615,7 @@ extra	JJ	O
 .	.	O
 '	''	O
 ?	.	O
->	FW	O
-		
+>	JJ	O
 Try	NNP	O
 Eclipse	NNP	O
 PDT	NNP	O
@@ -8743,4 +8692,3 @@ code	NN	O
 goes	VBZ	O
 south	RB	O
 .	.	O
-		

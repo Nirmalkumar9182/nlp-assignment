@@ -9,6 +9,8 @@ on	IN	O
 Stack	NNP	O
 Overflow	NNP	O
 .	.	O
+		
+		
 var	NN	O
 ts	NN	O
 =	NNP	O
@@ -25,6 +27,7 @@ dt	NN	I-API
 Ticks	NNP	I-API
 )	)	L-API
 ;	:	O
+		
 double	JJ	O
 delta	NN	O
 =	NNP	O
@@ -34,13 +37,17 @@ ts	NN	I-API
 TotalSeconds	NNP	I-API
 )	)	L-API
 ;	:	O
+		
+		
 if	IN	O
 (	(	O
 delta	JJ	O
 <	VBP	O
 60	CD	O
 )	)	O
+		
 {	(	O
+		
 return	NN	O
 ts	NN	O
 .	.	O
@@ -63,21 +70,27 @@ seconds	NNS	O
 ago	RB	O
 "	VBP	O
 ;	:	O
+		
 }	)	O
+		
 if	IN	O
 (	(	O
 delta	JJ	O
 <	VBP	O
 120	CD	O
 )	)	O
+		
 {	(	O
+		
 return	NN	O
 "a	NNP	O
 minute	NN	O
 ago	RB	O
 "	NNP	O
 ;	:	O
+		
 }	)	O
+		
 if	IN	O
 (	(	O
 delta	NN	O
@@ -87,9 +100,11 @@ delta	NN	O
 /	VBD	O
 /	$	O
 45	CD	O
-*	NNP	O
+*	$	O
 60	CD	O
+		
 {	(	O
+		
 return	NN	O
 ts	NN	O
 .	.	O
@@ -100,7 +115,9 @@ minutes	NNS	O
 ago	RB	O
 "	VBP	O
 ;	:	O
+		
 }	)	O
+		
 if	IN	O
 (	(	O
 delta	NN	O
@@ -110,16 +127,20 @@ delta	NN	O
 /	VBD	O
 /	$	O
 90	CD	O
-*	NNP	O
+*	$	O
 60	CD	O
+		
 {	(	O
+		
 return	NN	O
 "an	FW	O
 hour	NN	O
 ago	IN	O
 "	NN	O
 ;	:	O
+		
 }	)	O
+		
 if	IN	O
 (	(	O
 delta	JJ	O
@@ -131,9 +152,11 @@ delta	JJ	O
 24	CD	O
 *	$	O
 60	CD	O
-*	NNP	O
+*	$	O
 60	CD	O
+		
 {	(	O
+		
 return	NN	O
 ts	NN	O
 .	.	O
@@ -144,7 +167,9 @@ hours	NNS	O
 ago	RB	O
 "	VBP	O
 ;	:	O
+		
 }	)	O
+		
 if	IN	O
 (	(	O
 delta	JJ	O
@@ -156,14 +181,18 @@ delta	JJ	O
 48	CD	O
 *	$	O
 60	CD	O
-*	NNP	O
+*	$	O
 60	CD	O
+		
 {	(	O
+		
 return	NN	O
-"yesterday	NNP	O
+"yesterday	JJ	O
 "	NNP	O
 ;	:	O
+		
 }	)	O
+		
 if	IN	O
 (	(	O
 delta	JJ	O
@@ -177,9 +206,11 @@ delta	JJ	O
 24	CD	O
 *	$	O
 60	CD	O
-*	NNP	O
+*	$	O
 60	CD	O
+		
 {	(	O
+		
 return	NN	O
 ts	NN	O
 .	.	O
@@ -190,7 +221,9 @@ days	NNS	O
 ago	RB	O
 "	VBP	O
 ;	:	O
+		
 }	)	O
+		
 if	IN	O
 (	(	O
 delta	JJ	O
@@ -206,9 +239,11 @@ delta	JJ	O
 24	CD	O
 *	$	O
 60	CD	O
-*	NNP	O
+*	$	O
 60	CD	O
+		
 {	(	O
+		
 int	JJ	O
 months	NNS	O
 =	IN	O
@@ -224,6 +259,7 @@ Days	VBZ	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
 return	VB	O
 months	NNS	O
 <	NNP	O
@@ -240,10 +276,12 @@ months	NNS	O
 "	JJ	O
 months	NNS	O
 ago	IN	O
-"	NN	O
+"	NNP	O
 ;	:	O
+		
 }	)	O
-int	NN	O
+		
+int	JJ	O
 years	NNS	O
 =	VBP	O
 Convert.ToInt32(	NNP	B-API
@@ -258,10 +296,11 @@ Days	VBZ	I-API
 )	)	L-API
 )	)	O
 ;	:	O
-return	VB	O
+		
+return	NN	O
 years	NNS	O
-<	NNP	O
-=	VBD	O
+<	VBP	O
+=	$	O
 1	CD	O
 ?	.	O
 "one	CD	O
@@ -276,6 +315,9 @@ years	NNS	O
 ago	RB	O
 "	VBD	O
 ;	:	O
+		
+		
+		
 Suggestions	NNP	O
 ?	.	O
 Comments	NNS	O
@@ -286,6 +328,7 @@ improve	VB	O
 this	DT	O
 algorithm	NN	O
 ?	.	O
+		
 		
 What	WP	O
 is	VBZ	O
@@ -300,8 +343,9 @@ in	IN	O
 NET	NN	O
 ?	.	O
 		
-How	WRB	O
-do	VB	O
+		
+How	NNP	O
+do	VBP	O
 you	PRP	O
 expose	VB	O
 a	DT	O
@@ -337,7 +381,9 @@ transport	NN	O
 over	IN	O
 ASMX	NNP	O
 .	.	O
-How	WRB	O
+		
+		
+How	NNP	O
 can	MD	O
 I	PRP	O
 do	VBP	O
@@ -365,30 +411,39 @@ LINQ	NNP	O
 query	NN	O
 ?	.	O
 :	:	O
+		
+		
 public	JJ	O
 static	JJ	O
 MyDataTable	NNP	O
 CallMySproc()	NNP	U-API
+		
 {	(	O
-string	VBG	O
+		
+string	NN	O
 conn	NN	O
 =	NN	O
 ...	:	O
 ;	:	O
+		
+		
 MyDatabaseDataContext	NNP	O
-db	VBZ	O
+db	NN	O
 =	NNP	O
 new	JJ	O
 MyDatabaseDataContext(	NNP	B-API
 conn	NN	I-API
 )	)	L-API
 ;	:	O
+		
 MyDataTable	JJ	O
 dt	NN	O
 =	NNP	O
 new	JJ	O
 MyDataTable()	NNP	U-API
 ;	:	O
+		
+		
 /	NNP	O
 /	NNP	O
 execute	VB	O
@@ -396,7 +451,8 @@ a	DT	O
 sproc	NN	O
 via	IN	O
 LINQ	NNP	O
-var	FW	O
+		
+var	NN	O
 query	NN	O
 =	NN	O
 from	IN	O
@@ -405,11 +461,14 @@ in	IN	O
 db.MySproc()	NN	U-API
 .	.	O
 AsEnumerable	JJ	O
-select	JJ	O
+		
+select	NN	O
 dr	NN	O
 ;	:	O
-/	CC	O
-/	VB	O
+		
+		
+/	JJ	O
+/	NNP	O
 copy	NN	O
 LINQ	NNP	O
 query	NN	O
@@ -423,15 +482,22 @@ does	VBZ	O
 not	RB	O
 work	VB	O
 !	.	O
-dt	JJ	O
+		
+dt	NN	O
 =	NNP	O
 query.CopyToDataTable()	NN	U-API
 ;	:	O
-return	VB	O
+		
+		
+return	NN	O
 dt	NN	O
 ;	:	O
+		
 }	)	O
-How	WRB	O
+		
+		
+		
+How	NNP	O
 can	MD	O
 I	PRP	O
 get	VB	O
@@ -467,17 +533,21 @@ web	NN	O
 service	NN	O
 ?	.	O
 		
+		
 For	IN	O
 a	DT	O
 table	NN	O
 like	IN	O
 this	DT	O
 :	:	O
-CREATE	NN	O
+		
+		
+CREATE	NNP	O
 TABLE	NNP	O
 binary_data	NN	O
 (	(	O
-id	JJ	O
+		
+id	NN	O
 INT(	NNP	B-API
 4	CD	I-API
 )	)	L-API
@@ -487,38 +557,50 @@ AUTO_INCREMENT	NNP	O
 PRIMARY	NNP	O
 KEY	NNP	O
 ,	,	O
+		
 description	NN	O
 CHAR(	NNP	B-API
 50	CD	I-API
 )	)	L-API
 ,	,	O
-bin_data	JJ	O
+		
+bin_data	NN	O
 LONGBLOB	NNP	O
 ,	,	O
+		
 filename	NN	O
 CHAR(	NNP	B-API
 50	CD	I-API
 )	)	L-API
 ,	,	O
-filesize	VB	O
+		
+filesize	VBP	O
 CHAR(	NNP	B-API
 50	CD	I-API
 )	)	L-API
 ,	,	O
-filetype	JJ	O
+		
+filetype	NN	O
 CHAR(	NNP	B-API
 50	CD	I-API
 )	)	L-API
+		
 )	)	O
 ;	:	O
+		
+		
+		
 Here	RB	O
 is	VBZ	O
 a	DT	O
 PHP	JJ	O
 example	NN	O
 :	:	O
-<	NN	O
+		
+		
+<	NNP	O
 ?php	NNP	O
+		
 /	NNP	O
 /	NNP	O
 store	NN	O
@@ -533,6 +615,7 @@ Dittmer	NNP	O
 .	.	O
 net	JJ	O
 >	NN	O
+		
 /	NNP	O
 /	NNP	O
 Example	NNP	O
@@ -546,6 +629,7 @@ of	IN	O
 binary	JJ	O
 files	NNS	O
 into	IN	O
+		
 /	NNP	O
 /	NNP	O
 an	DT	O
@@ -567,10 +651,14 @@ phpbuilder	NN	O
 .	.	O
 com	NN	O
 /	NN	O
+		
 ?	.	O
->	JJ	O
-<html	NN	O
 >	NNP	O
+		
+		
+<html	NNP	O
+>	NNP	O
+		
 <head	NNP	O
 >	NNP	O
 <title	NNP	O
@@ -586,10 +674,14 @@ Database	NNP	O
 <	NNP	O
 /head	NNP	O
 >	NNP	O
+		
+		
 <body	NN	O
 >	NNP	O
+		
 <	NNP	O
 ?php	NNP	O
+		
 /	NNP	O
 /	NNP	O
 Code	NNP	O
@@ -604,13 +696,16 @@ has	VBZ	O
 been	VBN	O
 submitted	VBN	O
 :	:	O
+		
+		
 if	IN	O
 (	(	O
 $submit	NN	O
 )	)	O
 {	(	O
-/	JJ	O
-/	NN	O
+		
+/	NNP	O
+/	NNP	O
 Connect	NNP	O
 to	TO	O
 the	DT	O
@@ -621,8 +716,9 @@ may	MD	O
 have	VB	O
 to	TO	O
 adjust	VB	O
+		
 /	NNP	O
-/	NNP	O
+/	VBD	O
 the	DT	O
 hostname	NN	O
 ,	,	O
@@ -631,8 +727,10 @@ or	CC	O
 password	NN	O
 )	)	O
 .	.	O
+		
+		
 mysql_connect(	NN	B-API
-"localhost	NN	I-API
+"localhost	NNP	I-API
 "	NNP	I-API
 ,	,	I-API
 "root	NNP	I-API
@@ -642,13 +740,16 @@ mysql_connect(	NN	B-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-mysql_select_db(	CC	B-API
+		
+mysql_select_db(	VB	B-API
 "binary_data	NNP	I-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-$data	CC	O
-=	VB	O
+		
+		
+$data	NNP	O
+=	NNP	O
 mysql_real_escape_string(	NN	B-API
 fread(	NN	I-API
 fopen(	NN	I-API
@@ -664,8 +765,10 @@ $form_data	NNP	I-API
 )	)	O
 )	)	O
 ;	:	O
-$result	CC	O
-=	VB	O
+		
+		
+$result	NN	O
+=	NNP	O
 mysql_query(	NN	B-API
 "INSERT	NNP	I-API
 INTO	NNP	I-API
@@ -683,6 +786,7 @@ filetype	NN	I-API
 )	)	L-API
 "	NN	O
 .	.	O
+		
 "VALUES	NN	O
 (	(	O
 '	POS	O
@@ -708,12 +812,15 @@ $form_data_type	NNP	O
 "	NN	O
 )	)	O
 ;	:	O
-$id	CC	O
+		
+		
+$id	JJ	O
 =	NNP	O
 mysql_insert_id()	NN	U-API
 ;	:	O
-print	NN	O
-"	NN	O
+		
+print	VB	O
+"	JJ	O
 <p	NNP	O
 >This	NNP	O
 file	NN	O
@@ -731,13 +838,18 @@ $id	NNP	O
 >	NNP	O
 "	NNP	O
 ;	:	O
+		
+		
 mysql_close()	NN	U-API
 ;	:	O
+		
 }	)	O
 else	RB	O
 {	(	O
-/	JJ	O
-/	NN	O
+		
+		
+/	NNP	O
+/	NNP	O
 else	RB	O
 show	VBP	O
 the	DT	O
@@ -747,8 +859,10 @@ submit	VB	O
 new	JJ	O
 data	NNS	O
 :	:	O
+		
 ?	.	O
->	VB	O
+>	JJ	O
+		
 <form	NN	O
 method	NN	O
 =	NNP	O
@@ -772,12 +886,14 @@ enctype	FW	O
 -	:	O
 data	NNS	O
 "	VBP	O
->	NNP	O
+>	JJ	O
+		
 File	NNP	O
 Description	NNP	O
 :	:	O
 <br	NN	O
 >	NNP	O
+		
 <input	NNP	O
 type	NN	O
 =	NNP	O
@@ -792,6 +908,7 @@ size	NN	O
 "40	NNP	O
 "	NNP	O
 >	NNP	O
+		
 <input	NNP	O
 type	NN	O
 =	NNP	O
@@ -806,6 +923,7 @@ value	NN	O
 "1000000	NNP	O
 "	NNP	O
 >	NNP	O
+		
 <br	NNP	O
 >File	NNP	O
 to	TO	O
@@ -816,6 +934,7 @@ database	NN	O
 :	:	O
 <br	JJ	O
 >	NNP	O
+		
 <input	NNP	O
 type	NN	O
 =	NN	O
@@ -830,6 +949,7 @@ size	NN	O
 "40	NNP	O
 "	NNP	O
 >	NNP	O
+		
 <p	NNP	O
 >	NNP	O
 <input	NNP	O
@@ -846,20 +966,29 @@ value	NN	O
 "submit	NNP	O
 "	NNP	O
 >	NNP	O
+		
 <	NNP	O
 /form	NNP	O
 >	NNP	O
+		
+		
 <	NNP	O
 ?php	NNP	O
+		
 }	)	O
+		
 ?	.	O
->	JJ	O
-<	NN	O
+>	NNP	O
+		
+<	NNP	O
 /body	NN	O
 >	NNP	O
+		
 <	NNP	O
 /html	NNP	O
 >	NNP	O
+		
+		
 		
 Solutions	NNP	O
 are	VBP	O
@@ -909,6 +1038,8 @@ the	DT	O
 number	NN	O
 in	IN	O
 .	.	O
+		
+		
 The	DT	O
 program	NN	O
 below	IN	O
@@ -1000,6 +1131,8 @@ version	NN	O
 is	VBZ	O
 fastest	JJS	O
 .	.	O
+		
+		
 Here's	NNP	O
 the	DT	O
 main	JJ	O
@@ -1011,30 +1144,38 @@ pitimes	NNS	O
 c	NN	O
 )	)	O
 :	:	O
-#include	JJ	O
-<math	NN	O
+		
+		
+#include	NNP	O
+<math	NNP	O
 .	.	O
 h	NN	O
 >	JJ	O
-#include	NN	O
+		
+#include	NNP	O
 <stdio	NNP	O
 .	.	O
 h	NN	O
 >	JJ	O
-#include	NN	O
+		
+#include	NNP	O
 <time	NNP	O
 .	.	O
 h	NN	O
 >	JJ	O
-#define	NN	O
+		
+		
+#define	NNP	O
 ITERS	NNP	O
 10000000	CD	O
+		
 #define	NNP	O
 TESTWITH(	NNP	B-API
 x	NNP	I-API
 )	)	L-API
 {	(	O
 \	JJ	O
+		
 diff	NN	O
 =	VBD	O
 0	CD	O
@@ -1042,11 +1183,13 @@ diff	NN	O
 0	CD	O
 ;	:	O
 \	NNP	O
-time1	VBZ	O
+		
+time1	NN	O
 =	NNP	O
 clock()	NN	U-API
 ;	:	O
 \	CC	O
+		
 for	IN	O
 (	(	O
 i	JJ	O
@@ -1061,7 +1204,8 @@ ITERS	NNPS	O
 +i	NNP	O
 )	)	O
 \	VBP	O
-diff	JJ	O
+		
+diff	NN	O
 +	NNP	O
 =	NNP	O
 (	(	O
@@ -1071,13 +1215,15 @@ x	NNP	O
 M_PI	NN	O
 ;	:	O
 \	CC	O
-time2	VB	O
+		
+time2	JJ	O
 =	NNP	O
 clock()	NN	U-API
 ;	:	O
 \	CC	O
-printf(	VB	B-API
-"	JJ	I-API
+		
+printf(	JJ	B-API
+"	NNP	I-API
 %s	NNP	I-API
 \t	NNP	I-API
 =	NNP	I-API
@@ -1103,10 +1249,14 @@ time1	NN	I-API
 )	)	O
 ;	:	O
 \	CC	O
+		
 }	)	O
+		
+		
 static	JJ	O
 inline	NN	O
 double	JJ	O
+		
 diffclock(	NN	B-API
 clock_t	NN	I-API
 time1	NN	I-API
@@ -1114,7 +1264,9 @@ time1	NN	I-API
 clock_t	VB	I-API
 time0	NN	I-API
 )	)	L-API
+		
 {	(	O
+		
 return	NN	O
 (	(	O
 double	JJ	O
@@ -1127,23 +1279,33 @@ time0	NN	O
 /	VBZ	O
 CLOCKS_PER_SEC	NNP	O
 ;	:	O
+		
 }	)	O
+		
+		
 int	NN	O
-main()	NNS	U-API
+		
+main()	NN	U-API
+		
 {	(	O
+		
 int	NN	O
 i	NN	O
 ;	:	O
-clock_t	NN	O
+		
+clock_t	VB	O
 time1	NN	O
 ,	,	O
 time2	NN	O
 ;	:	O
+		
 double	JJ	O
 diff	NN	O
 ;	:	O
-/	CC	O
-*	VB	O
+		
+		
+/	JJ	O
+*	NNP	O
 Warmup	NNP	O
 .	.	O
 The	DT	O
@@ -1156,7 +1318,8 @@ folding	NN	O
 (	(	O
 which	WDT	O
 would	MD	O
-*	VB	O
+		
+*	NNP	O
 optimise	VB	O
 the	DT	O
 `	``	O
@@ -1177,6 +1340,7 @@ no-op	JJ	O
 if	IN	O
 -	:	O
 fno-builtin	JJ	O
+		
 *	NN	O
 is	VBZ	O
 not	RB	O
@@ -1184,6 +1348,7 @@ used	VBN	O
 .	.	O
 *	JJ	O
 /	JJ	O
+		
 TESTWITH(	NNP	B-API
 4	CD	I-API
 *	NNP	I-API
@@ -1191,6 +1356,7 @@ atan(	RB	I-API
 1	CD	I-API
 )	)	L-API
 )	)	O
+		
 TESTWITH(	$	B-API
 4	CD	I-API
 *	NNP	I-API
@@ -1200,8 +1366,10 @@ atan2(	NN	I-API
 1	CD	I-API
 )	)	L-API
 )	)	O
-#if	VBP	O
-defined(	JJ	B-API
+		
+		
+#if	NNP	O
+defined(	NN	B-API
 __GNUC__	NNP	I-API
 )	)	L-API
 &	CC	O
@@ -1216,15 +1384,20 @@ defined(	NN	B-API
 __amd64__	NNP	I-API
 )	)	L-API
 )	)	O
-extern	VBP	O
+		
+extern	JJ	O
 double	JJ	O
 fldpi()	NN	U-API
 ;	:	O
+		
 TESTWITH(	NNP	B-API
 fldpi()	NN	I-API
 )	)	L-API
-#endif	VBZ	O
-/	JJ	O
+		
+#endif	JJ	O
+		
+		
+/	NNP	O
 *	NNP	O
 Actual	NNP	O
 tests	NNS	O
@@ -1233,20 +1406,23 @@ here	RB	O
 .	.	O
 *	JJ	O
 /	JJ	O
+		
 TESTWITH(	NNP	B-API
-atan2(	NN	I-API
+atan2(	VBZ	I-API
 0	CD	I-API
 ,	,	I-API
 -	:	I-API
 1	CD	I-API
 )	)	L-API
 )	)	O
+		
 TESTWITH(	NNP	B-API
 acos(	SYM	I-API
 -	:	I-API
 1	CD	I-API
 )	)	L-API
 )	)	O
+		
 TESTWITH(	$	B-API
 2	CD	I-API
 *	NNP	I-API
@@ -1254,6 +1430,7 @@ asin(	RB	I-API
 1	CD	I-API
 )	)	L-API
 )	)	O
+		
 TESTWITH(	$	B-API
 4	CD	I-API
 *	NNP	I-API
@@ -1263,6 +1440,7 @@ atan2(	NN	I-API
 1	CD	I-API
 )	)	L-API
 )	)	O
+		
 TESTWITH(	$	B-API
 4	CD	I-API
 *	NNP	I-API
@@ -1270,10 +1448,16 @@ atan(	RB	I-API
 1	CD	I-API
 )	)	L-API
 )	)	O
-return	VBP	O
+		
+		
+return	NN	O
 0	CD	O
 ;	:	O
+		
 }	)	O
+		
+		
+		
 And	CC	O
 the	DT	O
 inline	NN	O
@@ -1297,13 +1481,19 @@ and	CC	O
 x64	JJ	O
 systems	NNS	O
 :	:	O
+		
+		
 double	JJ	O
+		
 fldpi()	NN	U-API
+		
 {	(	O
-double	JJ	O
+		
+double	RB	O
 pi	NN	O
 ;	:	O
-asm(	CC	B-API
+		
+asm(	VB	B-API
 "fldpi	JJ	I-API
 "	NN	I-API
 :	:	I-API
@@ -1315,10 +1505,15 @@ pi	NN	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
 return	VB	O
 pi	NN	O
 ;	:	O
+		
 }	)	O
+		
+		
+		
 And	CC	O
 a	DT	O
 build	JJ	O
@@ -1336,11 +1531,14 @@ build	VB	O
 sh	NN	O
 )	)	O
 :	:	O
+		
+		
 #	#	O
 !	.	O
 /bin	NN	O
 /sh	NNP	O
-gcc	NN	O
+		
+gcc	SYM	O
 -	:	O
 O3	NNP	O
 -	:	O
@@ -1357,7 +1555,8 @@ o	JJ	O
 fldpi	NN	O
 .	.	O
 c	VB	O
-gcc	JJ	O
+		
+gcc	NN	O
 -	:	O
 O3	NNP	O
 -	:	O
@@ -1374,7 +1573,9 @@ o	JJ	O
 fldpi	NN	O
 .	.	O
 c	VB	O
-gcc	JJ	O
+		
+		
+gcc	NN	O
 -	:	O
 O3	NNP	O
 -	:	O
@@ -1391,7 +1592,8 @@ pitimes	NNS	O
 c	VB	O
 fldpi-32	JJ	O
 .	.	O
-o	NN	O
+o	JJ	O
+		
 gcc	SYM	O
 -	:	O
 O3	NNP	O
@@ -1410,6 +1612,7 @@ fldpi-32	JJ	O
 o	SYM	O
 -	:	O
 lm	NN	O
+		
 gcc	SYM	O
 -	:	O
 O3	NNP	O
@@ -1430,6 +1633,7 @@ fldpi-32	JJ	O
 o	SYM	O
 -	:	O
 lm	NN	O
+		
 gcc	SYM	O
 -	:	O
 O3	NNP	O
@@ -1450,6 +1654,7 @@ fldpi-64	JJ	O
 o	SYM	O
 -	:	O
 lm	NN	O
+		
 gcc	SYM	O
 -	:	O
 O3	NNP	O
@@ -1468,6 +1673,7 @@ fldpi-64	JJ	O
 o	SYM	O
 -	:	O
 lm	NN	O
+		
 gcc	SYM	O
 -	:	O
 O3	NNP	O
@@ -1487,7 +1693,10 @@ fldpi-64	JJ	O
 .	.	O
 o	SYM	O
 -	:	O
-lm	JJ	O
+lm	NN	O
+		
+		
+		
 Apart	NNP	O
 from	IN	O
 testing	VBG	O
@@ -1538,6 +1747,7 @@ time	NN	O
 ,	,	O
 though	RB	O
 .	.	O
+		
 		
 Many	JJ	O
 years	NNS	O
@@ -1603,6 +1813,8 @@ all	PDT	O
 the	DT	O
 same	JJ	O
 !	.	O
+		
+		
 (	(	O
 Admittedly	RB	O
 this	DT	O
@@ -1635,6 +1847,8 @@ it	PRP	O
 -	:	O
 )	)	O
 )	)	O
+		
+		
 double	JJ	O
 AgeDiff(	NNP	B-API
 DateTime	NNP	I-API
@@ -2058,7 +2272,9 @@ and	CC	O
 everything	NN	O
 is	VBZ	O
 :	:	O
-DateTime	JJ	O
+		
+		
+DateTime	NNP	O
 birthDate	NN	O
 =	NNP	O
 new	JJ	O
@@ -2092,14 +2308,18 @@ TotalDays	NNP	O
 25D	CD	O
 )	)	O
 ;	:	O
+		
+		
 Hope	NNP	O
 this	DT	O
 helps	VBZ	O
 .	.	O
 		
 @jeff	JJ	O
+		
+		
 IMHO	NNP	O
-yours	NN	O
+yours	VBZ	O
 seems	VBZ	O
 a	DT	O
 little	JJ	O
@@ -2171,6 +2391,8 @@ short	JJ	O
 and	CC	O
 simple	JJ	O
 .	.	O
+		
+		
 This	DT	O
 is	VBZ	O
 the	DT	O
@@ -2210,6 +2432,8 @@ in	IN	O
 the	DT	O
 output	NN	O
 .	.	O
+		
+		
 public	JJ	O
 static	JJ	O
 string	NN	O
@@ -2358,9 +2582,11 @@ program	NN	O
 I	PRP	O
 used	VBD	O
 :	:	O
-#include	NN	O
-<sys	NN	O
-/socket	NN	O
+		
+		
+#include	NNP	O
+<sys	NNP	O
+/socket	NNP	O
 .	.	O
 h	NN	O
 >intmain	NNP	O
@@ -2371,6 +2597,8 @@ return	JJ	O
 AF_INET	NNP	O
 ;	:	O
 }	)	O
+		
+		
 So	IN	O
 my	PRP$	O
 take	NN	O
@@ -2426,6 +2654,8 @@ in	IN	O
 ActionScript	NNP	O
 3	CD	O
 ?	.	O
+		
+		
 I	PRP	O
 have	VBP	O
 tried	VBN	O
@@ -2434,18 +2664,26 @@ without	IN	O
 success	NN	O
 )	)	O
 :	:	O
+		
+		
 byteArray	NN	O
 .	.	O
 length	NN	O
 =	VBD	O
 0	CD	O
 ;	:	O
+		
 byteArray	NN	O
-=	VBD	O
+=	NNP	O
 new	JJ	O
 ByteArray()	NNP	U-API
 ;	:	O
+		
+		
+		
 And	CC	O
+		
+		
 for	IN	O
 (	(	O
 var	NN	O
@@ -2464,13 +2702,17 @@ i	CC	O
 +	NNP	O
 )	)	O
 {	(	O
+		
 byteArray	NN	O
 [i	NNP	O
 ]	NNP	O
 =	NNP	O
 null	NN	O
 ;	:	O
+		
 }	)	O
+		
+		
 		
 How	NNP	O
 can	MD	O
@@ -2510,6 +2752,8 @@ and	CC	O
 C	NNP	O
 #	#	O
 .	.	O
+		
+		
 I'd	NNP	O
 like	IN	O
 to	TO	O
@@ -2566,6 +2810,8 @@ at	IN	O
 every	DT	O
 installation	NN	O
 .	.	O
+		
+		
 By	IN	O
 "changes	NNS	O
 to	TO	O
@@ -2585,7 +2831,9 @@ to	TO	O
 table	JJ	O
 structure	NN	O
 .	.	O
-Ultimately	RB	O
+		
+		
+Ultimately	NNP	O
 ,	,	O
 I	PRP	O
 would	MD	O
@@ -2611,6 +2859,10 @@ at	IN	O
 an	DT	O
 interval	NN	O
 .	.	O
+		
+		
+		
+		
 The	DT	O
 best	JJS	O
 course	NN	O
@@ -2652,14 +2904,18 @@ implement	VB	O
 is	VBZ	O
 this	DT	O
 :	:	O
-Every	DT	O
-X	NN	O
+		
+		
+Every	NNP	O
+X	NNP	O
 seconds	VBZ	O
-run	VBP	O
+run	VB	O
 the	DT	O
 following	JJ	O
 query	NN	O
 :	:	O
+		
+		
 SELECT	NNP	O
 CHECKSUM_AGG(	NNP	B-API
 BINARY_CHECKSUM(	NNP	I-API
@@ -2673,9 +2929,12 @@ WITH	NNP	O
 NOLOCK	NNP	O
 )	)	O
 ;	:	O
+		
+		
+		
 and	CC	O
-compare	VB	O
-that	DT	O
+compare	NN	O
+that	WDT	O
 against	IN	O
 the	DT	O
 stored	JJ	O
@@ -2697,6 +2956,8 @@ row	NN	O
 using	VBG	O
 the	DT	O
 query	NN	O
+		
+		
 select	NN	O
 row_id	NN	O
 ,	,	O
@@ -2710,6 +2971,9 @@ WITH	NNP	O
 NOLOCK	NNP	O
 )	)	O
 ;	:	O
+		
+		
+		
 and	CC	O
 compare	VB	O
 the	DT	O
@@ -2720,7 +2984,8 @@ stored	VBN	O
 values	NNS	O
 .	.	O
 		
-Sure	JJ	O
+		
+Sure	NNP	O
 I	PRP	O
 can	MD	O
 post	VB	O
@@ -2728,11 +2993,13 @@ a	DT	O
 test	NN	O
 app	NN	O
 .	.	O
-#include	VB	O
-<sys	JJ	O
-/socket	NN	O
+		
+		
+#include	NNP	O
+<sys	NNP	O
+/socket	NNP	O
 .	.	O
-h	JJ	O
+h	NN	O
 >int	NN	O
 main()	NN	U-API
 {	(	O
@@ -2740,10 +3007,14 @@ return	JJ	O
 AF_INET	NNP	O
 ;	:	O
 }	)	O
+		
+		
 Compile	NNP	O
-/Link	NNP	O
+/Link	VBP	O
 Output	NNP	O
 :	:	O
+		
+		
 cxx	NN	O
 -	:	O
 Wc	NNP	O
@@ -2759,6 +3030,8 @@ inet_test	JJ	O
 inet	NN	O
 .	.	O
 C	NNP	O
+		
+		
 "	NNP	O
 .	.	O
 /inet	NN	O
@@ -2787,6 +3060,8 @@ find	VB	O
 a	DT	O
 declaration	NN	O
 .	.	O
+		
+		
 CCN0797(	NNP	B-API
 I	PRP	I-API
 )	)	L-API
@@ -2804,6 +3079,8 @@ file	NN	O
 not	RB	O
 created	VBN	O
 .	.	O
+		
+		
 A	DT	O
 check	NN	O
 of	IN	O
@@ -2836,6 +3113,8 @@ any	DT	O
 #ifdef	JJ	O
 statements	NNS	O
 .	.	O
+		
+		
 I	PRP	O
 have	VBP	O
 however	RB	O
@@ -2846,13 +3125,17 @@ a	DT	O
 the	DT	O
 following	JJ	O
 :	:	O
-#ifdef	JJ	O
-__cplusplus	CC	O
+		
+		
+#ifdef	NNP	O
+__cplusplus	NNP	O
 extern	JJ	O
 "C	NNP	O
 "	NNP	O
 {	(	O
 #endif	NNP	O
+		
+		
 which	WDT	O
 encapsulates	VBZ	O
 basically	RB	O
@@ -2918,6 +3201,7 @@ a	DT	O
 console	JJ	O
 app	NN	O
 .	.	O
+		
 		
 You	PRP	O
 can	MD	O
@@ -2995,12 +3279,15 @@ garbage	NN	O
 collected	VBN	O
 .	.	O
 		
+		
 Have	VBP	O
 a	DT	O
 look	NN	O
 at	IN	O
 this	DT	O
 article	NN	O
+		
+		
 http	NN	O
 :	:	O
 /	JJ	O
@@ -3016,6 +3303,8 @@ com	NN	O
 /as3_resource_ma	NNP	O
 .	.	O
 html	NN	O
+		
+		
 IANA	NNP	O
 actionscript	NN	O
 programmer	NN	O
@@ -3041,7 +3330,10 @@ want	VBP	O
 it	PRP	O
 to	TO	O
 .	.	O
+		
+		
 Hence	NNP	O
+		
 http	NN	O
 :	:	O
 /	JJ	O
@@ -3056,8 +3348,10 @@ com	NN	O
 /kick	NNP	O
 -	:	O
 starting-the-garbage-collector-in-actionscript-3-with-air	JJ	O
-/	NNS	O
-So	RB	O
+/	NN	O
+		
+		
+So	NNP	O
 I'd	NNP	O
 recommend	VB	O
 trying	VBG	O
@@ -3070,6 +3364,8 @@ see	VB	O
 if	IN	O
 it	PRP	O
 helps	VBZ	O
+		
+		
 private	JJ	O
 var	NN	O
 gcCount	NN	O
@@ -3142,7 +3438,9 @@ this	DT	O
 but	CC	O
 ...	:	O
 )	)	O
-AS3	VBP	O
+		
+		
+AS3	NNP	O
 uses	VBZ	O
 a	DT	O
 non-deterministic	JJ	O
@@ -3205,7 +3503,9 @@ as	RB	O
 well	RB	O
 )	)	O
 .	.	O
-Assuming	VBG	O
+		
+		
+Assuming	NNP	O
 there	EX	O
 are	VBP	O
 no	DT	O
@@ -3244,6 +3544,8 @@ byteArray	NN	O
 is	VBZ	O
 declared	VBN	O
 .	.	O
+		
+		
 You	PRP	O
 can	MD	O
 force	VB	O
@@ -3282,6 +3584,8 @@ than	IN	O
 help	NN	O
 it	PRP	O
 .	.	O
+		
+		
 To	TO	O
 force	VB	O
 a	DT	O
@@ -3294,10 +3598,16 @@ yes	UH	O
 twice	RB	O
 )	)	O
 :	:	O
+		
+		
 flash.system.System.gc()	NN	U-API
 ;	:	O
-flash.system.System.gc()	CC	U-API
+		
+flash.system.System.gc()	NN	U-API
 ;	:	O
+		
+		
+		
 You	PRP	O
 can	MD	O
 read	VB	O
@@ -3305,7 +3615,8 @@ more	JJR	O
 here	RB	O
 .	.	O
 		
-Give	NNP	O
+		
+Give	VB	O
 your	PRP$	O
 submit	NN	O
 buttons	NNS	O
@@ -3314,7 +3625,9 @@ name	NN	O
 like	IN	O
 this	DT	O
 :	:	O
-<input	NN	O
+		
+		
+<input	NNP	O
 type	NN	O
 =	NNP	O
 "submit	NNP	O
@@ -3330,6 +3643,7 @@ Page	NNP	O
 "	NNP	O
 /	NNP	O
 >	NNP	O
+		
 <input	NNP	O
 type	NN	O
 =	NNP	O
@@ -3345,7 +3659,10 @@ value	NN	O
 Page	NNP	O
 "	NNP	O
 /	NNP	O
->	NN	O
+>	NNP	O
+		
+		
+		
 When	WRB	O
 the	DT	O
 user	NN	O
@@ -3385,6 +3702,8 @@ in	IN	O
 classic	JJ	O
 ASP	NN	O
 :	:	O
+		
+		
 If	IN	O
 Request.Form(	NNP	B-API
 "submitButton	NNP	I-API
@@ -3395,11 +3714,13 @@ Request.Form(	NNP	B-API
 Page	NNP	O
 "	NNP	O
 Then	RB	O
+		
 '	POS	O
 Code	NNP	O
 for	IN	O
 Previous	NNP	O
 Page	NNP	O
+		
 ElseIf	NNP	O
 Request.Form(	NNP	B-API
 "submitButton	NNP	I-API
@@ -3410,13 +3731,18 @@ Request.Form(	NNP	B-API
 Page	NNP	O
 "	NNP	O
 Then	RB	O
+		
 '	POS	O
 Code	NNP	O
 for	IN	O
 Next	NNP	O
 Page	NNP	O
-End	NNP	O
+		
+End	NN	O
 If	IN	O
+		
+		
+		
 Reference	NNP	O
 :	:	O
 Using	VBG	O
@@ -3427,6 +3753,7 @@ on	IN	O
 a	DT	O
 single	JJ	O
 form	NN	O
+		
 		
 Let's	NNP	O
 say	VBP	O
@@ -3461,9 +3788,12 @@ order	NN	O
 by	IN	O
 clause	NN	O
 .	.	O
-var	JJ	O
+		
+		
+var	NN	O
 names	NNS	O
 =	VBP	O
+		
 (	(	O
 from	IN	O
 DataRow	NNP	O
@@ -3472,7 +3802,8 @@ in	IN	O
 dataTable	JJ	O
 .	.	O
 Rows	NNP	O
-orderby	NN	O
+		
+orderby	FW	O
 (	(	O
 string	VBG	O
 )dr	NNP	O
@@ -3480,6 +3811,7 @@ string	VBG	O
 "Name	NNP	O
 "	NNP	O
 ]	NNP	O
+		
 select	NN	O
 (	(	O
 string	VBG	O
@@ -3492,6 +3824,9 @@ string	VBG	O
 .	.	O
 Distinct()	NNP	U-API
 ;	:	O
+		
+		
+		
 Why	WRB	O
 does	VBZ	O
 the	DT	O
@@ -3500,6 +3835,7 @@ not	RB	O
 get	VB	O
 enforced	VBN	O
 ?	.	O
+		
 		
 Unfortunately	RB	O
 when	WRB	O
@@ -3542,6 +3878,8 @@ about	IN	O
 memory	NN	O
 management	NN	O
 )	)	O
+		
+		
 The	DT	O
 following	NN	O
 is	VBZ	O
@@ -3557,6 +3895,8 @@ variable	JJ	O
 try	NN	O
 this	DT	O
 .	.	O
+		
+		
 var	NN	O
 byteObject	NN	O
 :Object	NNP	O
@@ -3564,6 +3904,8 @@ byteObject	NN	O
 new	JJ	O
 Object()	NNP	U-API
 ;	:	O
+		
+		
 byteObject	NN	O
 .	.	O
 byteArray	NN	O
@@ -3571,9 +3913,13 @@ byteArray	NN	O
 new	JJ	O
 ByteArray()	NNP	U-API
 ;	:	O
+		
+		
 ...	:	O
-/	VBP	O
-/Then	VB	O
+		
+		
+/	NNP	O
+/Then	NNP	O
 when	WRB	O
 you	PRP	O
 are	VBP	O
@@ -3583,11 +3929,15 @@ the	DT	O
 variable	JJ	O
 from	IN	O
 byteObject	JJ	O
-delete	JJ	O
+		
+delete	NN	O
 byteObject	NN	O
 .	.	O
 byteArray	NN	O
 ;	:	O
+		
+		
+		
 Where	NNP	O
 byteArray	NN	O
 is	VBZ	O
@@ -3609,12 +3959,14 @@ for	IN	O
 it	PRP	O
 .	.	O
 		
+		
 The	DT	O
 problem	NN	O
 is	VBZ	O
 that	IN	O
 the	DT	O
 Distinct	NNP	O
+		
 operator	NN	O
 does	VBZ	O
 not	RB	O
@@ -3622,14 +3974,18 @@ grant	VB	O
 that	IN	O
 it	PRP	O
 will	MD	O
+		
 maintain	VB	O
 the	DT	O
 original	JJ	O
 order	NN	O
 of	IN	O
+		
 values	NNS	O
 .	.	O
-So	RB	O
+		
+		
+So	NNP	O
 your	PRP$	O
 query	NN	O
 will	MD	O
@@ -3638,9 +3994,11 @@ to	TO	O
 work	VB	O
 like	IN	O
 this	DT	O
+		
+		
 var	NN	O
-names	VBZ	O
-=	NNP	O
+names	NNS	O
+=	VBP	O
 (	(	O
 from	IN	O
 DataRow	NNP	O
@@ -3648,8 +4006,9 @@ dr	NN	O
 in	IN	O
 dataTable	JJ	O
 .	.	O
-Rows	NNS	O
-select	VBP	O
+Rows	NNP	O
+		
+select	NN	O
 (	(	O
 string	VBG	O
 )dr	NNP	O
@@ -3669,6 +4028,8 @@ name	NN	I-API
 )	)	L-API
 ;	:	O
 		
+		
+		
 It	PRP	O
 is	VBZ	O
 very	RB	O
@@ -3681,17 +4042,22 @@ Take	NNP	O
 extension	NN	O
 methods	NNS	O
 .	.	O
-var	JJ	O
+		
+		
+var	NN	O
 query	NN	O
 =	NN	O
 from	IN	O
 i	NN	O
 in	IN	O
 ideas	NNS	O
-select	VBP	O
+		
+select	JJ	O
 i	NN	O
 ;	:	O
-var	CC	O
+		
+		
+var	JJ	O
 paggedCollection	NN	O
 =	NNP	O
 query.Skip(	NNP	B-API
@@ -3702,6 +4068,8 @@ Take(	NNP	B-API
 count	NN	I-API
 )	)	L-API
 ;	:	O
+		
+		
 		
 You	PRP	O
 could	MD	O
@@ -3718,7 +4086,9 @@ to	TO	O
 accomplish	VB	O
 this	DT	O
 :	:	O
-<	NN	O
+		
+		
+<	NNP	O
 ?php	NNP	O
 /	NNP	O
 *	NNP	O
@@ -4056,8 +4426,12 @@ $str	NN	O
 ;	:	O
 ?	.	O
 >	FW	O
+		
+		
 Output	NN	O
 :	:	O
+		
+		
 This	DT	O
 is	VBZ	O
 my	PRP$	O
@@ -4071,8 +4445,12 @@ application4	NN	O
 5	CD	O
 =	JJ	O
 20	CD	O
+		
+		
 Notes	NNS	O
 :	:	O
+		
+		
 For	IN	O
 this	DT	O
 example	NN	O
@@ -4135,6 +4513,8 @@ to	TO	O
 each	DT	O
 hook	NN	O
 .	.	O
+		
+		
 This	DT	O
 is	VBZ	O
 just	RB	O
@@ -4165,6 +4545,8 @@ for	IN	O
 more	JJR	O
 information	NN	O
 .	.	O
+		
+		
 Sorry	NNP	O
 ,	,	O
 it	PRP	O
@@ -4190,6 +4572,8 @@ bug	NN	O
 gets	VBZ	O
 fixed	VBN	O
 .	.	O
+		
+		
 Edit	NN	O
 :	:	O
 Nevermind	NN	O
@@ -4223,95 +4607,125 @@ Adobe	NNP	O
 AIR	NNP	O
 application	NN	O
 :	:	O
+		
+		
 Create	NNP	O
 Table	NNP	O
 tRole	NN	O
 (	(	O
-roleID	JJ	O
+		
+roleID	NN	O
 integer	NN	O
 Primary	NNP	O
 Key	NNP	O
+		
 ,	,	O
 roleName	NN	O
 varchar(	RB	B-API
 40	CD	I-API
 )	)	L-API
+		
 )	)	O
 ;	:	O
+		
 Create	NNP	O
 Table	NNP	O
 tFile	NN	O
 (	(	O
-fileID	JJ	O
+		
+fileID	NN	O
 integer	NN	O
 Primary	NNP	O
 Key	NNP	O
+		
 ,	,	O
 fileName	NN	O
 varchar(	RB	B-API
 50	CD	I-API
 )	)	L-API
+		
 ,	,	O
 fileDescription	NN	O
 varchar(	FW	B-API
 500	CD	I-API
 )	)	L-API
+		
 ,	,	O
 thumbnailID	JJ	O
 integer	NN	O
+		
 ,	,	O
 fileFormatID	JJ	O
 integer	NN	O
+		
 ,	,	O
 categoryID	NN	O
 integer	NN	O
+		
 ,	,	O
 isFavorite	JJ	O
 boolean	NN	O
+		
 ,	,	O
 dateAdded	VBD	O
 date	NN	O
+		
 ,	,	O
 globalAccessCount	NN	O
 integer	NN	O
+		
 ,	,	O
-lastAccessTime	JJ	O
+lastAccessTime	NN	O
 date	NN	O
+		
 ,	,	O
 downloadComplete	JJ	O
 boolean	NN	O
+		
 ,	,	O
 isNew	JJ	O
 boolean	NN	O
+		
 ,	,	O
 isSpotlight	JJ	O
 boolean	NN	O
+		
 ,	,	O
 duration	NN	O
 varchar(	FW	B-API
 30	CD	I-API
 )	)	L-API
+		
 )	)	O
 ;	:	O
+		
 Create	NNP	O
 Table	NNP	O
 tCategory	NN	O
 (	(	O
-categoryID	JJ	O
+		
+categoryID	NN	O
 integer	NN	O
 Primary	NNP	O
 Key	NNP	O
+		
 ,	,	O
 categoryName	NN	O
 varchar(	RB	B-API
 50	CD	I-API
 )	)	L-API
+		
 ,	,	O
-parent_categoryID	RB	O
+parent_categoryID	JJ	O
 integer	NN	O
+		
 )	)	O
 ;	:	O
+		
 ...	:	O
+		
+		
+		
 I	PRP	O
 execute	VBP	O
 this	DT	O
@@ -4323,6 +4737,8 @@ the	DT	O
 following	JJ	O
 methods	NNS	O
 :	:	O
+		
+		
 public	JJ	O
 static	JJ	U-API
 function	NN	O
@@ -4332,6 +4748,7 @@ fileName	NN	I-API
 )	)	L-API
 :void	FW	O
 {	(	O
+		
 var	NN	O
 file	NN	O
 :File	NNP	O
@@ -4340,13 +4757,15 @@ File.applicationDirectory.resolvePath(	NNP	B-API
 fileName	NN	I-API
 )	)	L-API
 ;	:	O
-var	JJ	O
+		
+var	FW	O
 stream	NN	O
 :FileStream	NN	O
 =	NNP	O
 new	JJ	O
 FileStream()	NNP	U-API
 ;	:	O
+		
 stream.open(	NN	B-API
 file	NN	I-API
 ,	,	I-API
@@ -4354,21 +4773,26 @@ FileMode	NNP	I-API
 .	.	I-API
 READ	NNP	I-API
 )	)	L-API
-var	FW	O
-strSql	JJ	O
+		
+var	JJ	O
+strSql	NN	O
 :String	VBG	O
-=	JJ	O
-stream.readUTFBytes(	JJ	B-API
+=	NNP	O
+stream.readUTFBytes(	NN	B-API
 stream	NN	I-API
 .	.	I-API
 bytesAvailable	JJ	I-API
 )	)	L-API
 ;	:	O
+		
 NonQuery(	NNP	B-API
 strSql	NN	I-API
 )	)	L-API
 ;	:	O
+		
 }	)	O
+		
+		
 public	JJ	O
 static	JJ	U-API
 function	NN	O
@@ -4377,19 +4801,23 @@ strSQL	NN	I-API
 :String	VBG	I-API
 )	)	L-API
 :void	FW	O
+		
 {	(	O
-var	JJ	O
+		
+var	NN	O
 sqlConnection	NN	O
-:SQLConnection	NN	O
+:SQLConnection	NNP	O
 =	NNP	O
 new	JJ	O
 SQLConnection()	NNP	U-API
 ;	:	O
-sqlConnection.open(	JJ	B-API
+		
+sqlConnection.open(	VBD	B-API
 File.applicationStorageDirectory.resolvePath(	NNP	I-API
 DBPATH	NNP	I-API
 )	)	L-API
 ;	:	O
+		
 var	FW	O
 sqlStatement	JJ	O
 :SQLStatement	NN	O
@@ -4397,36 +4825,50 @@ sqlStatement	JJ	O
 new	JJ	O
 SQLStatement()	NNP	U-API
 ;	:	O
+		
 sqlStatement	NN	O
 .	.	O
 text	JJ	O
 =	JJ	O
 strSQL	NN	O
 ;	:	O
+		
 sqlStatement	NN	O
 .	.	O
 sqlConnection	NN	O
 =	JJ	O
 sqlConnection	NN	O
 ;	:	O
+		
 try	VB	O
+		
 {	(	O
+		
 sqlStatement.execute()	NN	U-API
 ;	:	O
+		
 }	)	O
+		
 catch	NN	O
 (	(	O
 error	JJ	O
 :SQLError	NN	O
 )	)	O
+		
 {	(	O
+		
 Alert.show(	NNP	B-API
 error.toString()	NN	I-API
 )	)	L-API
 ;	:	O
+		
 }	)	O
+		
 }	)	O
-No	DT	O
+		
+		
+		
+No	NNP	O
 errors	NNS	O
 are	VBP	O
 generated	VBN	O
@@ -4475,6 +4917,7 @@ one	CD	O
 statement	NN	O
 ?	.	O
 		
+		
 One	CD	O
 framework	NN	O
 I'm	NNP	O
@@ -4510,24 +4953,38 @@ about	IN	O
 this	DT	O
 structure	NN	O
 :	:	O
+		
+		
 One	CD	O
 directory	NN	O
 per	IN	O
 content	NN	O
 node	NN	O
 :	:	O
+		
+		
 .	.	O
 /content	JJ	O
 /YYYYMMDDHHMMSS	JJ	O
-/	NNP	O
+/	NN	O
+		
+		
+		
 Subdirectories	NNP	O
 of	IN	O
 each	DT	O
 node	NN	O
 including	VBG	O
-/tags	JJ	O
+		
+		
+/tags	NNP	O
+		
 /authors	NNS	O
+		
 /comments	NNS	O
+		
+		
+		
 As	RB	O
 well	RB	O
 as	IN	O
@@ -4548,6 +5005,8 @@ and	CC	O
 the	DT	O
 like	JJ	O
 .	.	O
+		
+		
 This	DT	O
 would	MD	O
 allow	VB	O
@@ -4577,7 +5036,9 @@ the	DT	O
 content	JJ	O
 structure	NN	O
 :	:	O
-glob(	JJ	B-API
+		
+		
+glob(	NN	B-API
 "content	NN	I-API
 /	NNP	I-API
 *	NNP	I-API
@@ -4586,7 +5047,10 @@ glob(	JJ	B-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-Would	MD	O
+		
+		
+		
+Would	NNP	O
 return	VB	O
 paths	NNS	O
 including	VBG	O
@@ -4597,7 +5061,8 @@ tagged	VBN	O
 "	NN	O
 .	.	O
 		
-So	RB	O
+		
+So	NNP	O
 I	PRP	O
 find	VBP	O
 myself	PRP	O
@@ -4646,20 +5111,25 @@ process	NN	O
 start	VB	O
 up	IN	O
 :	:	O
+		
+		
 BOOL	NNP	O
 QueryPerformanceCounter(	NNP	B-API
 LARGE_INTEGER	NNP	I-API
 *	NNP	I-API
 performanceCount	NN	I-API
 )	)	L-API
+		
 {	(	O
-gettimeofday(	JJ	B-API
+		
+gettimeofday(	NN	B-API
 ¤tTimeVal	NN	I-API
 ,	,	I-API
 NULL	NNP	I-API
 )	)	L-API
 ;	:	O
-performanceCount	CC	O
+		
+performanceCount	VB	O
 -	:	O
 >QuadPart	NN	O
 =	NN	O
@@ -4673,7 +5143,8 @@ startTimeVal	NN	O
 tv_sec	NN	O
 )	)	O
 ;	:	O
-performanceCount	CC	O
+		
+performanceCount	VB	O
 -	:	O
 >QuadPart	NN	O
 *	NN	O
@@ -4684,7 +5155,8 @@ performanceCount	CC	O
 1000	CD	O
 )	)	O
 ;	:	O
-performanceCount	CC	O
+		
+performanceCount	VB	O
 -	:	O
 >QuadPart	NN	O
 +	NN	O
@@ -4699,10 +5171,16 @@ startTimeVal	NN	O
 tv_usec	NN	O
 )	)	O
 ;	:	O
-return	VB	O
+		
+		
+return	NN	O
 true	JJ	O
 ;	:	O
+		
 }	)	O
+		
+		
+		
 This	DT	O
 ,	,	O
 coupled	VBN	O
@@ -4780,6 +5258,7 @@ Linux	NNP	O
 however	RB	O
 .	.	O
 		
+		
 One	CD	O
 way	NN	O
 to	TO	O
@@ -4799,19 +5278,26 @@ files	NNS	O
 For	IN	O
 example	NN	O
 :	:	O
-$data	NN	O
+		
+		
+$data	NNP	O
 =	NNP	O
 array()	NN	U-API
 ;	:	O
-if(	CC	B-API
+		
+		
+if(	JJ	B-API
 $_POST	NNP	I-API
 )	)	L-API
 {	(	O
-$data	JJ	O
-=	NN	O
-$_POST	NN	O
+		
+$data	NNP	O
+=	NNP	O
+$_POST	NNP	O
 ;	:	O
-$content	JJ	O
+		
+		
+$content	NNP	O
 =	NNP	O
 "	NNP	O
 <	NNP	O
@@ -4819,7 +5305,8 @@ $content	JJ	O
 \n	NNP	O
 "	NNP	O
 ;	:	O
-$content	NN	O
+		
+$content	NNP	O
 .	.	O
 =	NN	O
 '	''	O
@@ -4837,6 +5324,7 @@ true	JJ	I-API
 \n	JJ	O
 "	NN	O
 ;	:	O
+		
 $content	NN	O
 .	.	O
 =	VB	O
@@ -4845,17 +5333,24 @@ $content	NN	O
 >	JJ	O
 "	NN	O
 ;	:	O
-save_to_file(	CC	B-API
-$filename	VB	I-API
+		
+		
+save_to_file(	JJ	B-API
+$filename	NN	I-API
 ,	,	I-API
 $content	NN	I-API
 )	)	L-API
 ;	:	O
+		
 }	)	O
-/	FW	O
-/	JJ	O
+		
+		
+/	NNP	O
+/	NNP	O
 echo	JJ	O
 form	NN	O
+		
+		
 		
 Maybe	NNP	O
 .	.	O
@@ -4935,6 +5430,8 @@ your	PRP$	O
 question	NN	O
 no	DT	O
 .	.	O
+		
+		
 You	PRP	O
 should	MD	O
 look	VB	O
@@ -4963,6 +5460,8 @@ external	JJ	O
 clock	NN	O
 settings	NNS	O
 .	.	O
+		
+		
 Also	RB	O
 ,	,	O
 look	VB	O
@@ -4971,6 +5470,8 @@ the	DT	O
 clock_getres()	NN	U-API
 function	NN	O
 .	.	O
+		
+		
 		
 The	DT	O
 actual	JJ	O
@@ -5029,6 +5530,9 @@ be	VB	O
 less	JJR	O
 accurate	JJ	O
 .	.	O
+		
+		
+		
 I	PRP	O
 obtained	VBD	O
 this	DT	O
@@ -5057,6 +5561,8 @@ that	DT	O
 as	RB	O
 well	RB	O
 .	.	O
+		
+		
 I	PRP	O
 think	VBP	O
 the	DT	O
@@ -5083,6 +5589,7 @@ yourself	PRP	O
 with	IN	O
 complexity	NN	O
 .	.	O
+		
 		
 Recently	RB	O
 our	PRP$	O
@@ -5131,6 +5638,8 @@ something	NN	O
 like	IN	O
 this	DT	O
 :	:	O
+		
+		
 DECLARE	NNP	O
 %20	NNP	O
 @S	NNP	O
@@ -5158,6 +5667,9 @@ DECLARE	NNP	O
 )	)	O
 ;	:	O
 --	:	O
+		
+		
+		
 I	PRP	O
 was	VBD	O
 able	JJ	O
@@ -5188,6 +5700,8 @@ at	IN	O
 the	DT	O
 time	NN	O
 .	.	O
+		
+		
 I	PRP	O
 tried	VBD	O
 to	TO	O
@@ -5219,15 +5733,21 @@ need	VBP	O
 decoded	VBN	O
 is	VBZ	O
 :	:	O
-CAST(	JJ	B-API
+		
+		
+CAST(	NNP	B-API
 0x44004500	CD	I-API
 ...	:	I-API
 06F007200	CD	I-API
 AS	IN	I-API
+		
 NVARCHAR(	NNP	I-API
 4000	CD	I-API
 )	)	L-API
 )	)	O
+		
+		
+		
 I've	NNP	O
 tried	VBD	O
 all	DT	O
@@ -5239,20 +5759,25 @@ with	IN	O
 no	DT	O
 luck	NN	O
 :	:	O
+		
+		
 txtDecodedText	NN	O
 .	.	O
 Text	NNP	O
 =	NNP	O
+		
 System.Web.HttpUtility.UrlDecode(	NNP	B-API
 txtURLText	NN	I-API
 .	.	I-API
 Text	NNP	I-API
 )	)	L-API
 ;	:	O
+		
 txtDecodedText	NN	O
 .	.	O
 Text	NNP	O
 =	NNP	O
+		
 Encoding.ASCII.GetString(	NNP	B-API
 Encoding.ASCII.GetBytes(	NNP	I-API
 txtURLText	NN	I-API
@@ -5261,10 +5786,12 @@ Text	NNP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
 txtDecodedText	NN	O
 .	.	O
 Text	NNP	O
 =	NNP	O
+		
 Encoding.Unicode.GetString(	NNP	B-API
 Encoding.Unicode.GetBytes(	NNP	I-API
 txtURLText	NN	I-API
@@ -5273,10 +5800,12 @@ Text	NNP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
 txtDecodedText	NN	O
 .	.	O
 Text	NNP	O
 =	NNP	O
+		
 Encoding.ASCII.GetString(	NNP	B-API
 Encoding.Unicode.GetBytes(	NNP	I-API
 txtURLText	NN	I-API
@@ -5285,10 +5814,12 @@ Text	NNP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
 txtDecodedText	NN	O
 .	.	O
 Text	NNP	O
 =	NNP	O
+		
 Encoding.Unicode.GetString(	NNP	B-API
 Convert.FromBase64String(	NNP	I-API
 txtURLText	NN	I-API
@@ -5297,6 +5828,9 @@ Text	NNP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
+		
+		
 What	WP	O
 is	VBZ	O
 the	DT	O
@@ -5328,6 +5862,10 @@ with	IN	O
 that	DT	O
 too	RB	O
 .	.	O
+		
+		
+		
+		
 Okay	NNP	O
 ,	,	O
 I'm	NNP	O
@@ -5343,6 +5881,8 @@ where	WRB	O
 I'm	NNP	O
 at	IN	O
 .	.	O
+		
+		
 Since	IN	O
 my	PRP$	O
 input	NN	O
@@ -5379,6 +5919,8 @@ to	TO	O
 do	VB	O
 this	DT	O
 ...	:	O
+		
+		
 txtDecodedText	NN	O
 .	.	O
 Text	NNP	O
@@ -5391,6 +5933,9 @@ Text	NNP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
+		
+		
 ...	:	O
 and	CC	O
 all	DT	O
@@ -5416,6 +5961,8 @@ into	IN	O
 is	VBZ	O
 byte	JJ	O
 .	.	O
+		
+		
 I	PRP	O
 realized	VBD	O
 that	IN	O
@@ -5453,12 +6000,16 @@ something	NN	O
 like	IN	O
 this	DT	O
 :	:	O
-while	NN	O
+		
+		
+while	IN	O
 (	(	O
-!boolIsDone	CD	O
+!boolIsDone	NN	O
 )	)	O
+		
 {	(	O
-bytURLChar	JJ	O
+		
+bytURLChar	NN	O
 =	NNP	O
 byte.Parse(	NN	B-API
 txtURLText.Text.Substring(	NN	I-API
@@ -5468,21 +6019,26 @@ intParseIndex	NN	I-API
 )	)	L-API
 )	)	O
 ;	:	O
-bytURL	CC	O
-[intURLIndex	VB	O
+		
+bytURL	VB	O
+[intURLIndex	NN	O
 ]	NNP	O
 =	NNP	O
 bytURLChar	NN	O
 ;	:	O
+		
 intParseIndex	NN	O
-+	VBD	O
-=	JJ	O
++	NNP	O
+=	NNP	O
 2	CD	O
 ;	:	O
+		
 intURLIndex	NN	O
 +	NNP	O
 +	NNP	O
 ;	:	O
+		
+		
 if	IN	O
 (	(	O
 txtURLText	NN	O
@@ -5495,14 +6051,20 @@ intParseIndex	NN	O
 <	$	O
 2	CD	O
 )	)	O
+		
 {	(	O
+		
 boolIsDone	NN	O
 =	NNP	O
 true	JJ	O
 ;	:	O
+		
 }	)	O
+		
 }	)	O
-txtDecodedText	JJ	O
+		
+		
+txtDecodedText	NN	O
 .	.	O
 Text	NNP	O
 =	NNP	O
@@ -5510,6 +6072,9 @@ Encoding.UTF8.GetString(	NNP	B-API
 bytURL	NN	I-API
 )	)	L-API
 ;	:	O
+		
+		
+		
 Things	NNS	O
 look	VBP	O
 good	JJ	O
@@ -5544,6 +6109,8 @@ the	DT	O
 incorrect	JJ	O
 format	NN	O
 .	.	O
+		
+		
 Interestingly	NNP	O
 enough	RB	O
 ,	,	O
@@ -5584,7 +6151,9 @@ as	IN	O
 the	DT	O
 result	NN	O
 .	.	O
-How	WRB	O
+		
+		
+How	NNP	O
 do	VBP	O
 I	PRP	O
 figure	VB	O
@@ -5612,6 +6181,7 @@ to	TO	O
 parse	VB	O
 it	PRP	O
 ?	.	O
+		
 		
 I	PRP	O
 wound	VBD	O
@@ -5650,7 +6220,9 @@ semicolons	NNS	O
 .	.	O
 :	:	O
 D	NNP	O
-var	FW	O
+		
+		
+var	NN	O
 strSql	NN	O
 :String	VBG	O
 =	NNP	O
@@ -5660,15 +6232,17 @@ stream	NN	I-API
 bytesAvailable	JJ	I-API
 )	)	L-API
 ;	:	O
-var	NN	O
-i	VBZ	O
+		
+var	IN	O
+i	JJ	O
 :Number	NNP	O
 =	NNP	O
 0	CD	O
 ;	:	O
-var	NN	O
+		
+var	FW	O
 strSqlSplit	NN	O
-:Array	NNP	O
+:Array	NN	O
 =	NNP	O
 strSql.split(	NN	B-API
 "	NN	I-API
@@ -5676,6 +6250,7 @@ strSql.split(	NN	B-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
+		
 for	IN	O
 (	(	O
 i	JJ	O
@@ -5693,15 +6268,19 @@ i	CC	O
 +	NNP	O
 )	)	O
 {	(	O
+		
 NonQuery(	NNP	B-API
-strSqlSplit	VBD	I-API
+strSqlSplit	NN	I-API
 [i	NNP	I-API
 ]	NNP	I-API
 .	.	I-API
 toString()	NN	I-API
 )	)	L-API
 ;	:	O
+		
 }	)	O
+		
+		
 		
 What	WP	O
 is	VBZ	O
@@ -5730,6 +6309,8 @@ getter	NN	O
 /setter	NN	O
 method	NN	O
 ?	.	O
+		
+		
 I	PRP	O
 know	VBP	O
 that	IN	O
@@ -5753,8 +6334,12 @@ you	PRP	O
 just	RB	O
 do	VBP	O
 :	:	O
-Java	NN	O
+		
+		
+Java	NNP	O
 :	:	O
+		
+		
 String	NNP	O
 property	NN	O
 =	NN	O
@@ -5762,37 +6347,57 @@ this	DT	O
 .	.	O
 property	NN	O
 ;	:	O
+		
+		
+		
 PHP	NNP	O
 :	:	O
-$property	NN	O
-=	NN	O
+		
+		
+$property	NNP	O
+=	NNP	O
 $this	NNP	O
 -	:	O
 >property	NN	O
 ;	:	O
+		
+		
+		
 or	CC	O
 would	MD	O
 you	PRP	O
 do	VB	O
 :	:	O
-Java	VB	O
+		
+		
+Java	NNP	O
 :	:	O
+		
+		
 String	NNP	O
 property	NN	O
 =	NNP	O
 this.getProperty()	NN	U-API
 ;	:	O
+		
+		
+		
 PHP	NNP	O
 :	:	O
-$property	NN	O
-=	NN	O
+		
+		
+$property	NNP	O
+=	NNP	O
 $this	NNP	O
 -	:	O
 >getProperty	NN	O
 (	(	O
 )	)	O
 ;	:	O
-Forgive	CD	O
+		
+		
+		
+Forgive	NNP	O
 me	PRP	O
 if	IN	O
 my	PRP$	O
@@ -5812,8 +6417,12 @@ programmed	VBD	O
 in	IN	O
 Java	NNP	O
 ...	:	O
-EDIT	NN	O
+		
+		
+EDIT	NNP	O
 :	:	O
+		
+		
 It	PRP	O
 seems	VBZ	O
 people	NNS	O
@@ -5943,6 +6552,7 @@ question	NN	O
 though	IN	O
 ...	:	O
 		
+		
 This	DT	O
 may	MD	O
 be	VB	O
@@ -6000,6 +6610,7 @@ of	IN	O
 a	DT	O
 loop	NN	O
 ?	.	O
+		
 		
 I	PRP	O
 have	VBP	O
@@ -6074,6 +6685,8 @@ my	PRP$	O
 SQL	NNP	O
 Server	NNP	O
 .	.	O
+		
+		
 When	WRB	O
 I	PRP	O
 use	VBP	O
@@ -6119,6 +6732,8 @@ viewing	VBG	O
 contract	NN	O
 data	NNS	O
 .	.	O
+		
+		
 However	RB	O
 ,	,	O
 when	WRB	O
@@ -6141,19 +6756,27 @@ something	NN	O
 like	IN	O
 this	DT	O
 :	:	O
+		
+		
 Dim	NNP	O
 dtDepartment	NN	O
 As	IN	O
 New	NNP	O
 DepartmentDataTable()	NNP	U-API
+		
 Dim	NNP	O
 taDepartment	NN	O
 As	IN	O
 New	NNP	O
 DepartmentTableAdapter()	NNP	U-API
+		
+		
 taDepartment.Fill(	NNP	B-API
 dtDepartment	NN	I-API
 )	)	L-API
+		
+		
+		
 However	RB	O
 ,	,	O
 at	IN	O
@@ -6186,9 +6809,11 @@ have	VB	O
 the	DT	O
 Contract	NNP	O
 DataTable	NNP	O
-filled	VBN	O
+filled	VBD	O
 .	.	O
-How	WRB	O
+		
+		
+How	NNP	O
 can	MD	O
 I	PRP	O
 fix	VB	O
@@ -6236,6 +6861,8 @@ is	VBZ	O
 nice	JJ	O
 .	.	O
 		
+		
+		
 Am	NNP	O
 I	PRP	O
 just	RB	O
@@ -6243,9 +6870,14 @@ going	VBG	O
 overboard	RB	O
 here	RB	O
 ?	.	O
+		
+		
+		
 Perhaps	RB	O
 ;	:	O
 )	)	O
+		
+		
 Another	DT	O
 approach	NN	O
 would	MD	O
@@ -6278,8 +6910,12 @@ increments	VBZ	O
 the	DT	O
 count	NN	O
 :	:	O
+		
+		
 PHP	NN	O
 :	:	O
+		
+		
 public	JJ	U-API
 function	NN	O
 getName()	NN	U-API
@@ -6307,6 +6943,8 @@ $this	SYM	O
 >name	NN	O
 ;	:	O
 }	)	O
+		
+		
 and	CC	O
 then	RB	O
 from	IN	O
@@ -6315,16 +6953,22 @@ the	DT	O
 object	JJ	O
 itself	PRP	O
 :	:	O
-PHP	NN	O
+		
+		
+PHP	NNP	O
 :	:	O
+		
+		
 $name	NN	O
-=	VBZ	O
-$this	SYM	O
+=	NNP	O
+$this	NNP	O
 -	:	O
 >_getName	NN	O
 (	(	O
 )	)	O
 ;	:	O
+		
+		
 This	DT	O
 way	NN	O
 you	PRP	O
@@ -6414,8 +7058,10 @@ xfer	NN	O
 .	.	O
 php	NN	O
 ?file	IN	O
-=WHATEVER	JJ	O
-$filename	NN	O
+=WHATEVER	NNP	O
+		
+		
+$filename	NNP	O
 =	NNP	O
 base64_url_decode(	NN	B-API
 $_REQUEST	NNP	I-API
@@ -6426,7 +7072,8 @@ file	NN	I-API
 ]	NN	I-API
 )	)	L-API
 ;	:	O
-header(	PRP$	B-API
+		
+header(	VB	B-API
 "Cache	NNP	I-API
 -	:	I-API
 Control	NN	I-API
@@ -6435,7 +7082,8 @@ public	JJ	I-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-header(	PRP$	B-API
+		
+header(	VB	B-API
 "Content	JJ	I-API
 -	:	I-API
 Description	NN	I-API
@@ -6445,7 +7093,8 @@ Transfer	NNP	I-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-header(	VBN	B-API
+		
+header(	VB	B-API
 '	POS	I-API
 Content-disposition	NN	I-API
 :	:	I-API
@@ -6460,7 +7109,8 @@ $filename	VBP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
-header(	PRP$	B-API
+		
+header(	VB	B-API
 "Content	JJ	I-API
 -	:	I-API
 Transfer-Encoding	NN	I-API
@@ -6469,7 +7119,8 @@ binary	JJ	I-API
 "	NN	I-API
 )	)	L-API
 ;	:	O
-header(	VBN	B-API
+		
+header(	VB	B-API
 '	POS	I-API
 Content-Length	JJ	I-API
 :	:	I-API
@@ -6480,7 +7131,9 @@ $filename	VBP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
-/	CC	O
+		
+		
+/	JJ	O
 /	NNP	O
 Put	NNP	O
 either	CC	O
@@ -6495,8 +7148,12 @@ db	NN	O
 or	CC	O
 static	JJ	O
 files	NNS	O
-/	VBP	O
-/	JJ	O
+		
+		
+/	NNP	O
+/	NNP	O
+		
+		
 readfile(	NN	B-API
 $filename	NN	I-API
 )	)	L-API
@@ -6507,12 +7164,16 @@ spit	VBZ	O
 the	DT	O
 user	NN	O
 the	DT	O
-file	NN	U-API
+file	NN	O
+		
+		
+		
 function	NN	O
-base64_url_decode(	IN	B-API
+base64_url_decode(	NN	B-API
 $input	NNP	I-API
 )	)	L-API
 {	(	O
+		
 return	NN	O
 base64_decode(	NN	B-API
 strtr(	NN	I-API
@@ -6532,7 +7193,11 @@ _	NN	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
 }	)	O
+		
+		
+		
 And	CC	O
 when	WRB	O
 you	PRP	O
@@ -6540,12 +7205,15 @@ call	VBP	O
 files	NNS	O
 use	VBP	O
 something	NN	O
-like	IN	U-API
+like	IN	O
+		
+		
 function	NN	O
-base64_url_encode(	IN	B-API
+base64_url_encode(	NN	B-API
 $input	NNP	I-API
 )	)	L-API
 {	(	O
+		
 return	NN	O
 strtr(	NN	B-API
 base64_encode(	IN	I-API
@@ -6565,7 +7233,11 @@ _	NN	O
 '	''	O
 )	)	O
 ;	:	O
+		
 }	)	O
+		
+		
+		
 http	NN	O
 :	:	O
 /	JJ	O
@@ -6580,7 +7252,9 @@ net	JJ	O
 .	.	O
 base64-encode	NN	O
 .	.	O
-php	VB	O
+php	NN	O
+		
+		
 If	IN	O
 you	PRP	O
 are	VBP	O
@@ -6662,6 +7336,7 @@ file	NN	O
 link	NN	O
 .	.	O
 		
+		
 Well	NNP	O
 ,	,	O
 what	WP	O
@@ -6698,8 +7373,10 @@ built	VBN	O
 as	IN	O
 such	JJ	O
 :	:	O
-$user	NN	O
-=	NN	O
+		
+		
+$user	NNP	O
+=	NNP	O
 array(	NN	B-API
 "name	NN	I-API
 "	NNP	I-API
@@ -6708,14 +7385,16 @@ array(	NN	B-API
 "dubayou	NNP	I-API
 "	NNP	I-API
 ,	,	I-API
-"age	NN	I-API
+		
+"age	NNP	I-API
 "	NNP	I-API
 =	NNP	I-API
 >	NNP	I-API
 20	CD	I-API
 ,	,	I-API
+		
 "websites	VBZ	I-API
-"	NNP	I-API
+"	JJ	I-API
 =	NNP	I-API
 >	NNP	I-API
 array(	NN	I-API
@@ -6735,14 +7414,18 @@ com	VB	I-API
 "	NN	I-API
 )	)	L-API
 ,	,	O
-"and_one	CD	O
-"	NN	O
+		
+"and_one	NNP	O
+"	NNP	O
 =	NNP	O
 >	NNP	O
 "more	NNP	O
 "	NNP	O
 )	)	O
 ;	:	O
+		
+		
+		
 and	CC	O
 to	TO	O
 save	VB	O
@@ -6755,8 +7438,10 @@ for	IN	O
 that	DT	O
 user	NN	O
 .	.	O
-$dir	CC	O
-=	JJ	O
+		
+		
+$dir	NNP	O
+=	NNP	O
 "	NNP	O
 ..	NNP	O
 /userdata	NNP	O
@@ -6776,10 +7461,11 @@ server	NN	O
 can	MD	O
 reach	VB	O
 .	.	O
+		
 file_put_contents(	JJ	B-API
-$dir	NN	I-API
+$dir	NNP	I-API
 .	.	I-API
-$user	CC	I-API
+$user	NNP	I-API
 [	NNP	I-API
 '	POS	I-API
 name	NN	I-API
@@ -6791,6 +7477,9 @@ $user	NNP	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
+		
+		
 and	CC	O
 to	TO	O
 load	VB	O
@@ -6798,13 +7487,16 @@ the	DT	O
 record	NN	O
 for	IN	O
 the	DT	O
-user	NN	U-API
+user	NN	O
+		
+		
 function	NN	O
 &get_user	NNP	O
 (	(	O
 $name	NN	O
 )	)	O
 {	(	O
+		
 return	NN	O
 unserialize(	JJ	B-API
 file_get_contents(	NN	I-API
@@ -6818,7 +7510,11 @@ $name	NN	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
 }	)	O
+		
+		
+		
 but	CC	O
 again	RB	O
 this	DT	O
@@ -6836,6 +7532,7 @@ database	NN	O
 you	PRP	O
 need	VBP	O
 .	.	O
+		
 		
 I	PRP	O
 want	VBP	O
@@ -6915,13 +7612,17 @@ not	RB	O
 run	VB	O
 properly	RB	O
 .	.	O
+		
+		
 public	JJ	O
 void	NN	O
 PrintThing(	NNP	B-API
 string	NN	I-API
 document	NN	I-API
 )	)	L-API
+		
 {	(	O
+		
 if	IN	O
 (	(	O
 Thread.CurrentThread.GetApartmentState()	NNP	U-API
@@ -6931,10 +7632,13 @@ ApartmentState	NNP	O
 .	.	O
 STA	NNP	O
 )	)	O
+		
 {	(	O
-Thread	JJ	O
+		
+Thread	NNP	O
 thread	NN	O
-=	VBD	O
+=	NNP	O
+		
 new	JJ	O
 Thread(	NNP	B-API
 (	(	I-API
@@ -6949,42 +7653,56 @@ document	NN	I-API
 }	)	O
 )	)	O
 ;	:	O
-thread.SetApartmentState(	JJ	B-API
+		
+thread.SetApartmentState(	VB	B-API
 ApartmentState	NNP	I-API
 .	.	I-API
 STA	NNP	I-API
 )	)	L-API
 ;	:	O
+		
 thread.Start()	NN	U-API
 ;	:	O
+		
 }	)	O
+		
 else	RB	O
+		
 {	(	O
+		
 PrintDocument(	NNP	B-API
 document	NN	I-API
 )	)	L-API
 ;	:	O
+		
 }	)	O
+		
 }	)	O
-protected	VBN	O
+		
+		
+protected	VBD	O
 void	JJ	O
 PrintDocument(	NNP	B-API
 string	NN	I-API
 document	NN	I-API
 )	)	L-API
+		
 {	(	O
+		
 WebBrowser	NNP	O
-browser	RB	O
-=	VBD	O
+browser	NN	O
+=	NNP	O
 new	JJ	O
 WebBrowser()	NNP	U-API
 ;	:	O
+		
 browser	NN	O
 .	.	O
 DocumentText	NNP	O
 =	NNP	O
 document	NN	O
 ;	:	O
+		
 while	IN	O
 (	(	O
 browser	NN	O
@@ -6996,13 +7714,21 @@ WebBrowserReadyState	NNP	O
 .	.	O
 Complete	NNP	O
 )	)	O
+		
 {	(	O
+		
 Application.DoEvents()	NNP	U-API
 ;	:	O
+		
 }	)	O
+		
 browser.Print()	NN	U-API
 ;	:	O
+		
 }	)	O
+		
+		
+		
 This	DT	O
 works	VBZ	O
 fine	JJ	O
@@ -7033,7 +7759,10 @@ IE	NNP	O
 script	NN	O
 error	NN	O
 :	:	O
-Error	NN	O
+		
+		
+		
+Error	NNP	O
 :	:	O
 '	POS	O
 dialogArguments	NNS	O
@@ -7046,7 +7775,8 @@ or	CC	O
 not	RB	O
 an	DT	O
 object	JJ	O
-URL	NN	O
+		
+URL	NNP	O
 :	:	O
 res	NNS	O
 :	:	O
@@ -7057,6 +7787,9 @@ dll	JJ	O
 /preview	NN	O
 .	.	O
 dlg	NN	O
+		
+		
+		
 And	CC	O
 a	DT	O
 small	JJ	O
@@ -7066,6 +7799,7 @@ preview	NN	O
 dialog	NN	O
 appears	VBZ	O
 .	.	O
+		
 		
 One	CD	O
 of	IN	O
@@ -7079,6 +7813,9 @@ is	VBZ	O
 number	NN	O
 formats	NNS	O
 .	.	O
+		
+		
+		
 Americans	NNPS	O
 use	VBP	O
 10	CD	O
@@ -7086,6 +7823,7 @@ use	VBP	O
 000	CD	O
 .	.	O
 50	CD	O
+		
 Germans	NNPS	O
 use	VBP	O
 10	CD	O
@@ -7093,12 +7831,16 @@ use	VBP	O
 000	CD	O
 ,	,	O
 50	CD	O
-French	JJ	O
-use	NN	O
+		
+French	NNP	O
+use	VBP	O
 10	CD	O
 000	CD	O
 ,	,	O
 50	CD	O
+		
+		
+		
 My	NNP	O
 first	JJ	O
 approach	NN	O
@@ -7143,6 +7885,8 @@ interpreted	VBN	O
 as	IN	O
 10	CD	O
 .	.	O
+		
+		
 Another	DT	O
 approach	NN	O
 :	:	O
@@ -7216,6 +7960,8 @@ as	IN	O
 decimal	JJ	O
 separator	NN	O
 .	.	O
+		
+		
 The	DT	O
 obvious	JJ	O
 "best	JJS	O
@@ -7247,6 +7993,8 @@ en-US	JJ	O
 Windows	NNP	O
 /Browser	NNP	O
 .	.	O
+		
+		
 Does	VBZ	O
 the	DT	O
 .	.	O
@@ -7278,6 +8026,7 @@ the	DT	O
 number	NN	O
 format	NN	O
 ?	.	O
+		
 		
 I've	NNP	O
 read	NN	O
@@ -7312,6 +8061,8 @@ compensate	VB	O
 for	IN	O
 this	DT	O
 .	.	O
+		
+		
 I'm	NNP	O
 not	RB	O
 sure	JJ	O
@@ -7334,6 +8085,8 @@ non-repeating	JJ	O
 color	NN	O
 values	NNS	O
 :	:	O
+		
+		
 (	(	O
 beware	NN	O
 ,	,	O
@@ -7341,7 +8094,9 @@ inconsistent	JJ	O
 pseudo-code	JJ	O
 ahead	RB	O
 )	)	O
-/	NN	O
+		
+		
+/	FW	O
 /colors	NNS	O
 entered	VBD	O
 as	IN	O
@@ -7451,6 +8206,8 @@ temp	NN	I-API
 }	)	O
 }	)	O
 }	)	O
+		
+		
 One	CD	O
 way	NN	O
 you	PRP	O
@@ -7478,6 +8235,8 @@ in	IN	O
 the	DT	O
 array	NN	O
 :	:	O
+		
+		
 for	IN	O
 item	NN	O
 in	IN	O
@@ -7568,6 +8327,8 @@ temp	NN	I-API
 )	)	L-API
 ;	:	O
 }	)	O
+		
+		
 But	CC	O
 this	DT	O
 approach	NN	O
@@ -7578,6 +8339,8 @@ down	RP	O
 your	PRP$	O
 algorithm	NN	O
 .	.	O
+		
+		
 Another	DT	O
 way	NN	O
 would	MD	O
@@ -7647,6 +8410,8 @@ a	DT	O
 double	JJ	O
 value	NN	O
 :	:	O
+		
+		
 double	JJ	O
 d	NN	O
 =	NNP	O
@@ -7680,6 +8445,8 @@ CultureInfo	NNP	I-API
 CurrentUICulture	NN	I-API
 )	)	L-API
 ;	:	O
+		
+		
 If	IN	O
 ASP	NNP	O
 .	.	O
@@ -7804,6 +8571,8 @@ Probably	RB	O
 something	NN	O
 like	IN	O
 :	:	O
+		
+		
 double	JJ	O
 d	NN	O
 =	NNP	O
@@ -7831,7 +8600,9 @@ the	DT	O
 following	JJ	O
 arrays	NNS	O
 :	:	O
-$artist	NN	O
+		
+		
+$artist	NNP	O
 =	NNP	O
 array(	VBZ	B-API
 "the	JJ	I-API
@@ -7857,9 +8628,10 @@ more	RBR	I-API
 "	NNP	I-API
 )	)	L-API
 ;	:	O
-$count	NNP	O
+		
+$count	VB	O
 =	NNP	O
-array(	VBD	B-API
+array(	NN	B-API
 5	CD	I-API
 ,	,	I-API
 3	CD	I-API
@@ -7873,6 +8645,9 @@ array(	VBD	B-API
 3	CD	I-API
 )	)	L-API
 ;	:	O
+		
+		
+		
 I	PRP	O
 want	VBP	O
 to	TO	O
@@ -7902,6 +8677,7 @@ h1	NN	O
 tags	NNS	O
 .	.	O
 		
+		
 From	IN	O
 what	WP	O
 I've	NNP	O
@@ -7925,7 +8701,9 @@ of	IN	O
 them	PRP	O
 being	VBG	O
 :	:	O
-System	NN	O
+		
+		
+System	NNP	O
 Key	NNP	O
 :	:	O
 [HKEY_CLASSES_ROOT	NN	O
@@ -7934,12 +8712,16 @@ Key	NNP	O
 \open	NNP	O
 \command	NNP	O
 ]	NNP	O
+		
+		
 Value	NNP	O
 Name	NN	O
 :	:	O
 (	(	O
 Default	NNP	O
 )	)	O
+		
+		
 Data	NNP	O
 Type	NN	O
 :	:	O
@@ -7948,6 +8730,8 @@ REG_SZ	NNP	O
 String	NNP	O
 Value	NNP	O
 )	)	O
+		
+		
 Value	NNP	O
 Data	NNP	O
 :	:	O
@@ -7955,6 +8739,8 @@ Mail	NN	O
 program	NN	O
 command-line	NN	O
 .	.	O
+		
+		
 I'm	NNP	O
 not	RB	O
 familar	JJ	O
@@ -7982,6 +8768,8 @@ modify	VB	O
 this	DT	O
 value	NN	O
 .	.	O
+		
+		
 Some	DT	O
 places	NNS	O
 list	VBD	O
@@ -8013,6 +8801,7 @@ s	NN	I-API
 )	)	L-API
 .	.	O
 		
+		
 MySQL	NNP	O
 has	VBZ	O
 this	DT	O
@@ -8025,6 +8814,8 @@ INTO	NNP	O
 SQL	NNP	O
 Command	NNP	O
 .	.	O
+		
+		
 I	PRP	O
 wonder	VBP	O
 :	:	O
@@ -8038,6 +8829,8 @@ SQL	NNP	O
 Server	NNP	O
 2005	CD	O
 ?	.	O
+		
+		
 Starting	VBG	O
 a	DT	O
 new	JJ	O
@@ -8080,6 +8873,8 @@ of	IN	O
 the	DT	O
 statement	NN	O
 .	.	O
+		
+		
 I	PRP	O
 wonder	VBP	O
 if	IN	O
@@ -8100,6 +8895,7 @@ SQL	NNP	O
 Server	NNP	O
 2005	CD	O
 ?	.	O
+		
 		
 The	DT	O
 default	NN	O
@@ -8152,12 +8948,14 @@ of	IN	O
 my	PRP$	O
 head	NN	O
 ...	:	O
-$artist	JJ	O
+		
+		
+$artist	NN	O
 =	NNP	O
-array(	NN	B-API
-"the	NNP	I-API
+array(	VBZ	B-API
+"the	JJ	I-API
 roots	NNS	I-API
-"	NNP	I-API
+"	VBP	I-API
 ,	,	I-API
 "michael	NNP	I-API
 jackson	NNP	I-API
@@ -8285,7 +9083,8 @@ database	NN	O
 as	IN	O
 back-end	NN	O
 .	.	O
-It's	VB	O
+It's	NNP	O
+		
 a	DT	O
 trading	NN	O
 card	NN	O
@@ -8305,6 +9104,8 @@ as	IN	O
 a	DT	O
 script	NN	O
 .	.	O
+		
+		
 What	WP	O
 I	PRP	O
 mean	VBP	O
@@ -8341,6 +9142,8 @@ by	IN	O
 the	DT	O
 game	NN	O
 .	.	O
+		
+		
 Now	RB	O
 ,	,	O
 to	TO	O
@@ -8422,6 +9225,8 @@ of	IN	O
 assemblies	NNS	O
 )	)	O
 .	.	O
+		
+		
 Is	VBZ	O
 that	IN	O
 possible	JJ	O
@@ -8440,6 +9245,8 @@ it	PRP	O
 ,	,	O
 etc	FW	O
 .	.	O
+		
+		
 ICard	NNP	O
 Cards	NNP	O
 [current	NNP	O
@@ -8448,6 +9255,7 @@ Cards	NNP	O
 new	JJ	O
 MyGame.CardLibrary.Card056()	NNP	U-API
 ;	:	O
+		
 Cards	NNP	O
 [current	NNP	O
 ]	NNP	O
@@ -8457,6 +9265,9 @@ ref	JJ	I-API
 currentGameState	NN	I-API
 )	)	L-API
 ;	:	O
+		
+		
+		
 The	DT	O
 language	NN	O
 is	VBZ	O
@@ -8479,6 +9290,7 @@ any	DT	O
 NET	JJ	O
 language	NN	O
 .	.	O
+		
 		
 I	PRP	O
 have	VBP	O
@@ -8504,6 +9316,8 @@ a	DT	O
 GTK	NNP	O
 app	NN	O
 .	.	O
+		
+		
 I	PRP	O
 handle	VBP	O
 the	DT	O
@@ -8521,7 +9335,9 @@ function	NN	O
 as	IN	O
 follows	VBZ	O
 :	:	O
-int	NN	O
+		
+		
+int	JJ	O
 MessageBox(	NNP	B-API
 HWND	NNP	I-API
 hwnd	NN	I-API
@@ -8539,30 +9355,37 @@ caption	NN	I-API
 UINT	NNP	I-API
 type	NN	I-API
 )	)	L-API
+		
 {	(	O
+		
 GtkWidget	NNP	O
 *window	NNP	O
 =	NNP	O
 NULL	NNP	O
 ;	:	O
+		
 GtkWidget	NNP	O
 *dialog	NNP	O
 =	NNP	O
 NULL	NNP	O
 ;	:	O
+		
+		
 gtk_init(	NN	B-API
->kArgc	NN	I-API
+>kArgc	NNP	I-API
 ,	,	I-API
 >kArgv	NNP	I-API
 )	)	L-API
 ;	:	O
-window	CC	O
-=	VB	O
-gtk_window_new(	JJ	B-API
+		
+window	VB	O
+=	JJ	O
+gtk_window_new(	NNS	B-API
 GTK_WINDOW_TOPLEVEL	NNP	I-API
 )	)	L-API
 ;	:	O
-g_signal_connect(	CC	B-API
+		
+g_signal_connect(	VB	B-API
 G_OBJECT(	NNP	I-API
 window	NN	I-API
 )	)	L-API
@@ -8577,7 +9400,8 @@ delete_event	NN	I-API
 NULL	NNP	O
 )	)	O
 ;	:	O
-g_signal_connect(	CC	B-API
+		
+g_signal_connect(	VB	B-API
 G_OBJECT(	NNP	I-API
 window	NN	I-API
 )	)	L-API
@@ -8592,11 +9416,13 @@ destroy	NN	I-API
 NULL	NNP	O
 )	)	O
 ;	:	O
-/	CC	O
+		
 /	VB	O
+/	JJ	O
 gcallback	NN	O
 calls	VBZ	O
 gtk_main_quit()	JJ	U-API
+		
 gtk_init_add(	NN	B-API
 (	(	I-API
 GtkFunction	NNP	I-API
@@ -8605,6 +9431,8 @@ GtkFunction	NNP	I-API
 NULL	NNP	I-API
 )	)	L-API
 ;	:	O
+		
+		
 if	IN	O
 (	(	O
 type	NN	O
@@ -8612,6 +9440,7 @@ type	NN	O
 MB_YESNO	NNP	O
 )	)	O
 {	(	O
+		
 dialog	NN	O
 =	NNP	O
 gtk_message_dialog_new(	NN	B-API
@@ -8628,9 +9457,11 @@ GTK_BUTTONS_YES_NO	NNP	O
 text	NN	O
 )	)	O
 ;	:	O
+		
 }	)	O
 else	RB	O
 {	(	O
+		
 dialog	NN	O
 =	NNP	O
 gtk_message_dialog_new(	NN	B-API
@@ -8647,8 +9478,11 @@ GTK_BUTTONS_OK	NNP	O
 text	NN	O
 )	)	O
 ;	:	O
+		
 }	)	O
-gtk_window_set_title(	VBP	B-API
+		
+		
+gtk_window_set_title(	NN	B-API
 GTK_WINDOW(	NNP	I-API
 dialog	NN	I-API
 )	)	L-API
@@ -8656,7 +9490,8 @@ dialog	NN	I-API
 caption	NN	O
 )	)	O
 ;	:	O
-gint	NN	O
+		
+gint	VB	O
 result	NN	O
 =	NNP	O
 gtk_dialog_run(	NN	B-API
@@ -8665,12 +9500,18 @@ dialog	NN	I-API
 )	)	L-API
 )	)	O
 ;	:	O
+		
+		
 gtk_main()	NN	U-API
 ;	:	O
-gtk_widget_destroy(	CC	B-API
+		
+		
+gtk_widget_destroy(	JJ	B-API
 dialog	NN	I-API
 )	)	L-API
 ;	:	O
+		
+		
 if	IN	O
 (	(	O
 type	NN	O
@@ -8678,38 +9519,55 @@ type	NN	O
 MB_YESNO	NNP	O
 )	)	O
 {	(	O
+		
 switch	NN	O
 (	(	O
 result	NN	O
 )	)	O
 {	(	O
+		
 default	NN	O
 :	:	O
+		
 case	NN	O
 GTK_RESPONSE_DELETE_EVENT	NNP	O
 :	:	O
+		
 case	NN	O
 GTK_RESPONSE_NO	NNP	O
 :	:	O
+		
 return	NN	O
 IDNO	NNP	O
 ;	:	O
+		
 break	NN	O
 ;	:	O
+		
 case	NN	O
 GTK_RESPONSE_YES	NNP	O
 :	:	O
+		
 return	NN	O
 IDYES	NNP	O
 ;	:	O
+		
 break	NN	O
 ;	:	O
+		
 }	)	O
+		
 }	)	O
-return	VBP	O
+		
+		
+return	NN	O
 IDOK	NNP	O
 ;	:	O
+		
 }	)	O
+		
+		
+		
 Now	RB	O
 ,	,	O
 I	PRP	O
@@ -8735,6 +9593,8 @@ s	NN	I-API
 horribly	RB	O
 wrong	JJ	O
 .	.	O
+		
+		
 However	RB	O
 ,	,	O
 my	PRP$	O
@@ -8760,9 +9620,12 @@ Any	DT	O
 ideas	NNS	O
 ?	.	O
 		
-@Ryan	JJ	O
+		
+@Ryan	NNP	O
+		
+		
 That's	NNP	O
-correct	NN	O
+correct	VBP	O
 but	CC	O
 it	PRP	O
 actually	RB	O
@@ -8782,12 +9645,14 @@ has	VBZ	O
 been	VBN	O
 tested	VBN	O
 :	:	O
-$artist	JJ	O
+		
+		
+$artist	NN	O
 =	NNP	O
-array(	NN	B-API
-"the	NNP	I-API
+array(	VBZ	B-API
+"the	JJ	I-API
 roots	NNS	I-API
-"	NNP	I-API
+"	VBP	I-API
 ,	,	I-API
 "michael	NNP	I-API
 jackson	NNP	I-API
