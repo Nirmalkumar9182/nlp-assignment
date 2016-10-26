@@ -44,7 +44,7 @@ public class Main {
 
                     // we set the current time and the end time for running our code
                     long t= System.currentTimeMillis();
-                    long end = t+1000;
+                    long end = t+2000;
 
                     // run the code for 1 millisecond
                     while(System.currentTimeMillis() < end) {
