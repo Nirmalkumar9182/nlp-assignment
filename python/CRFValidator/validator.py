@@ -16,12 +16,46 @@ with open( name + '.txt', 'r', encoding='utf8') as fp:
             answer.append(line.split())
 
 correct = 0
+truePositive = 0;
+falsePositive = 0;
+trueNegative = 0;
+falseNegative = 0;
 
 if(len(answer) == len(output)):
     for i in range(0, len(answer)):
-        if(len(answer[i]) > 0 and answer[i][2] == output[i][2]):
-            correct += 1
-
-    print("Total number of items: " + str(len(answer)) + ", total number of correct items: " + str(correct))
+        # False positive: detects as U or BIL when it is supposed to be O
+        # True positive: detects as U or BIL when it is
+        # False negative: detects as O but it is actually BIL or U
+        # True negative: detects as O when it is
+        if(len(answer[i]) > 0):
+            if(answer[i][2] == output[i][2] and answer[i][2] == "O"):
+                trueNegative += 1
+            elif(answer[i][2] == output[i][2]):
+                truePositive += 1
+            else:
+                 if(output[i][2] == "O"):
+                     falseNegative += 1
+                 else:
+                     falsePositive += 1
+                     
+    print("Total number of items: " + str(len(answer)))
+    print("Stats:")
+    print("True Positive - " + str(truePositive))
+    print("False Positive - " + str(falsePositive))
+    print("True Negative - " + str(trueNegative))
+    print("False Negative - " + str(falseNegative))
+    print()
+    '''
+    Precision = True Positive/ (True Positive + False Positive)
+    Recall = True Positive/ (True Positive  + False Negative)
+    F1 score = 2 * ((Precision * recall) / (Precision + recall))
+    '''
+    precision = truePositive / (truePositive + falsePositive)
+    recall = truePositive / (truePositive + falseNegative)
+    f1 = 2 * ((precision * recall) / (precision + recall))
+    print("Precision - " + str(precision))
+    print("Recall - " + str(recall))
+    print("F1 score - " + str(f1))
+    
 else:
     print("The output files and answer files are different")
