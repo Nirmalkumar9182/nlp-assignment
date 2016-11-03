@@ -1,2943 +1,6 @@
-I	PRP	O
-would	MD	O
-use	VB	O
-Javascript	NNP	O
-to	TO	O
-submit	VB	O
-the	DT	O
-form	NN	O
-.	.	O
-The	DT	U-API
-function	NN	O
-
-would	MD	O
-be	VB	O
-triggered	VBN	O
-by	IN	O
-the	DT	O
-OnKeyPress	NNP	O
-event	NN	O
-of	IN	O
-the	DT	O
-form	NN	O
-element	NN	O
-
-,	,	O
-and	CC	O
-would	MD	O
-detect	VB	O
-whether	IN	O
-the	DT	O
-Enter	NNP	O
-key	NN	O
-was	VBD	O
-selected	VBN	O
-.	.	O
-
-If	IN	O
-this	DT	O
-is	VBZ	O
-the	DT	O
-case	NN	O
-,	,	O
-it	PRP	O
-will	MD	O
-submit	VB	O
-the	DT	O
-form	NN	O
-
-.	.	O
-Here	RB	O
-are	VBP	O
-two	CD	O
-pages	NNS	O
-that	WDT	O
-give	VBP	O
-techniques	NNS	O
-on	IN	O
-how	WRB	O
-to	TO	O
-
-do	VB	O
-this	DT	O
-:	:	O
-1	CD	O
-,	,	O
-2	CD	O
-.	.	O
-Based	VBN	O
-on	IN	O
-these	DT	O
-,	,	O
-
-here	RB	O
-is	VBZ	O
-an	DT	O
-example	NN	O
-of	IN	O
-usage	NN	O
-(	(	O
-based	VBN	O
-on	IN	O
-here	RB	O
-)	)	O
-
-:	:	O
-<SCRIPT	JJ	O
-TYPE	NNP	O
-=	NNP	O
-"text	NNP	O
-/javascript	NNP	O
-"	NNP	O
->	NNP	O
-<	NN	O
-!	.	O
---	:	O
-
-function	NN	O
-submitenter(	JJ	B-API
-myfield	NN	I-API
-,	,	I-API
-e	NN	I-API
-)	)	L-API
-{	(	O
-var	JJ	O
-keycode	NN	O
-;	:	O
-if	IN	O
-
-(	(	O
-window	NN	O
-.	.	O
-event	NN	O
-)	)	O
-{	(	O
-keycode	NN	O
-=	NN	O
-window	NN	O
-.	.	O
-event	NN	O
-
-.	.	O
-keyCode	NN	O
-;	:	O
-}	)	O
-else	RB	O
-if	IN	O
-(	(	O
-e	NN	O
-)	)	O
-{	(	O
-keycode	VB	O
-
-=	NNP	O
-e	NN	O
-.	.	O
-which	WDT	O
-;	:	O
-}	)	O
-else	RB	O
-{	(	O
-return	NN	O
-true	JJ	O
-;	:	O
-
-}	)	O
-if	IN	O
-(	(	O
-keycode	FW	O
-=	NNP	O
-=	NNP	O
-13	CD	O
-)	)	O
-{	(	O
-myfield.form.submit()	NN	U-API
-;	:	O
-
-return	NN	O
-false	JJ	O
-;	:	O
-}	)	O
-else	RB	O
-{	(	O
-return	NN	O
-true	JJ	O
-;	:	O
-}	)	O
-}	)	O
-
-/	JJ	O
-/	NNP	O
---	:	O
->	JJ	O
-<	JJ	O
-/SCRIPT	NN	O
->	NNP	O
-<INPUT	NNP	O
-NAME	NNP	O
-=	NNP	O
-"MyText	NNP	O
-
-"	NNP	O
-TYPE	NNP	O
-=	NNP	O
-"Text	NNP	O
-"	NNP	O
-onKeyPress	NN	O
-=	NNP	O
-"return	NNP	O
-submitenter(	NN	O
-this	DT	O
-,	,	O
-
-event	NN	O
-)	)	O
-"	NN	O
-/	NNP	O
->	NNP	O
-How	NNP	O
-often	RB	O
-do	VBP	O
-you	PRP	O
-need	VB	O
-to	TO	O
-
-check	VB	O
-for	IN	O
-changes	NNS	O
-and	CC	O
-how	WRB	O
-large	JJ	O
-(	(	O
-in	IN	O
-terms	NNS	O
-of	IN	O
-row	NN	O
-
-size	NN	O
-)	)	O
-are	VBP	O
-the	DT	O
-tables	NNS	O
-in	IN	O
-the	DT	O
-database	NN	O
-?	.	O
-If	IN	O
-you	PRP	O
-
-use	VBP	O
-the	DT	O
-CHECKSUM_AGG(	NNP	B-API
-BINARY_CHECKSUM(	NNP	I-API
-*	NNP	I-API
-)	)	L-API
-)	)	O
-method	NN	O
-suggested	VBN	O
-by	IN	O
-John	NNP	O
-
-,	,	O
-it	PRP	O
-will	MD	O
-scan	VB	O
-every	DT	O
-row	NN	O
-of	IN	O
-the	DT	O
-specified	VBN	O
-table	NN	O
-.	.	O
-
-The	DT	O
-NOLOCK	NNP	O
-hint	NN	O
-helps	VBZ	O
-,	,	O
-but	CC	O
-on	IN	O
-a	DT	O
-large	JJ	O
-database	NN	O
-,	,	O
-
-you	PRP	O
-are	VBP	O
-still	RB	O
-hitting	VBG	O
-every	DT	O
-row	NN	O
-.	.	O
-You	PRP	O
-will	MD	O
-also	RB	O
-need	VB	O
-
-to	TO	O
-store	VB	O
-the	DT	O
-checksum	NN	O
-for	IN	O
-every	DT	O
-row	NN	O
-so	IN	O
-that	IN	O
-you	PRP	O
-tell	VBP	O
-
-one	CD	O
-has	VBZ	O
-changed	VBN	O
-.	.	O
-Have	VBP	O
-you	PRP	O
-considered	VBN	O
-going	VBG	O
-at	IN	O
-this	DT	O
-from	IN	O
-
-a	DT	O
-different	JJ	O
-angle	NN	O
-?	.	O
-If	IN	O
-you	PRP	O
-do	VBP	O
-not	RB	O
-want	VB	O
-to	TO	O
-modify	VB	O
-
-the	DT	O
-schema	NN	O
-to	TO	O
-add	VB	O
-triggers	NNS	O
-,	,	O
-(	(	O
-which	WDT	O
-makes	VBZ	O
-a	DT	O
-sense	NN	O
-
-,	,	O
-it's	VBZ	O
-not	RB	O
-your	PRP$	O
-database	NN	O
-)	)	O
-,	,	O
-have	VBP	O
-you	PRP	O
-considered	VBN	O
-working	VBG	O
-
-with	IN	O
-the	DT	O
-application	NN	O
-vendor	NN	O
-that	WDT	O
-does	VBZ	O
-make	VB	O
-the	DT	O
-database	NN	O
-?	.	O
-They	PRP	O
-
-could	MD	O
-implement	VB	O
-an	DT	O
-API	NNP	O
-that	WDT	O
-provides	VBZ	O
-a	DT	O
-mechanism	NN	O
-for	IN	O
-notifying	VBG	O
-accessory	JJ	O
-
-apps	NN	O
-that	WDT	O
-data	NN	O
-has	VBZ	O
-changed	VBN	O
-.	.	O
-It	PRP	O
-could	MD	O
-be	VB	O
-as	RB	O
-simple	JJ	O
-
-as	IN	O
-writing	VBG	O
-to	TO	O
-a	DT	O
-notification	NN	O
-table	NN	O
-that	WDT	O
-lists	VBZ	O
-what	WP	O
-table	NN	O
-and	CC	O
-
-which	WDT	O
-row	VBP	O
-were	VBD	O
-modified	VBN	O
-.	.	O
-That	DT	O
-could	MD	O
-be	VB	O
-implemented	VBN	O
-through	IN	O
-triggers	NNS	O
-
-or	CC	O
-application	NN	O
-code	NN	O
-.	.	O
-From	IN	O
-your	PRP$	O
-side	NN	O
-,	,	O
-ti	VBP	O
-wouldn't	JJ	O
-matter	NN	O
-
-,	,	O
-your	PRP$	O
-only	JJ	O
-concern	NN	O
-would	MD	O
-be	VB	O
-scanning	VBG	O
-the	DT	O
-notification	NN	O
-table	NN	O
-on	IN	O
-
-a	DT	O
-periodic	JJ	O
-basis	NN	O
-.	.	O
-The	DT	O
-performance	NN	O
-hit	VBD	O
-on	IN	O
-the	DT	O
-database	NN	O
-would	MD	O
-
-be	VB	O
-far	RB	O
-less	JJR	O
-than	IN	O
-scanning	VBG	O
-every	DT	O
-row	NN	O
-for	IN	O
-changes	NNS	O
-.	.	O
-The	DT	O
-
-hard	JJ	O
-part	NN	O
-would	MD	O
-be	VB	O
-convincing	VBG	O
-the	DT	O
-application	NN	O
-vendor	NN	O
-to	TO	O
-implement	VB	O
-this	DT	O
-
-feature	NN	O
-.	.	O
-Since	IN	O
-this	DT	O
-can	MD	O
-be	VB	O
-handles	NNS	O
-entirely	RB	O
-through	IN	O
-SQL	NNP	O
-via	IN	O
-
-triggers	NNS	O
-,	,	O
-you	PRP	O
-could	MD	O
-do	VB	O
-the	DT	O
-bulk	NN	O
-of	IN	O
-the	DT	O
-work	NN	O
-for	IN	O
-
-them	PRP	O
-by	IN	O
-writing	VBG	O
-and	CC	O
-testing	VBG	O
-the	DT	O
-triggers	NNS	O
-and	CC	O
-then	RB	O
-bringing	VBG	O
-the	DT	O
-
-code	NN	O
-to	TO	O
-the	DT	O
-application	NN	O
-vendor	NN	O
-.	.	O
-By	IN	O
-having	VBG	O
-the	DT	O
-vendor	NN	O
-support	NN	O
-
-the	DT	O
-triggers	NNS	O
-,	,	O
-it	PRP	O
-prevent	VBD	O
-the	DT	O
-situation	NN	O
-where	WRB	O
-your	PRP$	O
-adding	VBG	O
-a	DT	O
-
-trigger	NN	O
-inadvertently	RB	O
-replaces	VBZ	O
-a	DT	O
-trigger	NN	O
-supplied	VBN	O
-by	IN	O
-the	DT	O
-vendor	NN	O
-.	.	O
-No	UH	O
-
-,	,	O
-you	PRP	O
-were	VBD	O
-not	RB	O
-dreaming	VBG	O
-.	.	O
-Python	NNP	O
-has	VBZ	O
-a	DT	O
-pretty	RB	O
-excellent	JJ	O
-
-list	NN	O
-comprehension	NN	O
-system	NN	O
-that	WDT	O
-lets	VBZ	O
-you	PRP	O
-manipulate	VBP	O
-lists	NNS	O
-pretty	RB	O
-elegantly	RB	O
-,	,	O
-
-and	CC	O
-depending	VBG	O
-on	IN	O
-exactly	RB	O
-what	WP	O
-you	PRP	O
-want	VBP	O
-to	TO	O
-accomplish	VB	O
-,	,	O
-this	DT	O
-
-can	MD	O
-be	VB	O
-done	VBN	O
-a	DT	O
-couple	NN	O
-of	IN	O
-ways	NNS	O
-.	.	O
-In	IN	O
-essence	NN	O
-,	,	O
-
-what	WP	O
-you're	NN	O
-doing	VBG	O
-is	VBZ	O
-saying	VBG	O
-"For	JJ	O
-item	NN	O
-in	IN	O
-list	NN	O
-if	IN	O
-criteria	NNS	O
-
-.	.	O
-matches	NNS	O
-"	VBP	O
-,	,	O
-and	CC	O
-from	IN	O
-that	IN	O
-you	PRP	O
-can	MD	O
-just	RB	O
-iterate	VB	O
-
-through	IN	O
-the	DT	O
-results	NNS	O
-or	CC	O
-dump	VB	O
-the	DT	O
-results	NNS	O
-into	IN	O
-a	DT	O
-new	JJ	O
-list	NN	O
-
-.	.	O
-I'm	NNP	O
-going	VBG	O
-to	TO	O
-crib	VB	O
-an	DT	O
-example	NN	O
-from	IN	O
-Dive	NNP	O
-Into	NNP	O
-Python	NNP	O
-
-here	RB	O
-,	,	O
-because	IN	O
-it's	JJ	O
-pretty	JJ	O
-elegant	JJ	O
-and	CC	O
-they're	JJ	O
-smarter	NN	O
-than	IN	O
-I	PRP	O
-
-am	VBP	O
-.	.	O
-Here	RB	O
-they're	VBZ	O
-getting	VBG	O
-a	DT	O
-list	NN	O
-of	IN	O
-files	NNS	O
-in	IN	O
-a	DT	O
-
-directory	NN	O
-,	,	O
-then	RB	O
-filtering	VBG	O
-the	DT	O
-list	NN	O
-for	IN	O
-all	DT	O
-files	NNS	O
-that	WDT	O
-match	VBP	O
-
-a	DT	O
-regular	JJ	O
-expression	NN	O
-criteria	NNS	O
-.	.	O
-files	NNS	O
-=	VBP	O
-os.listdir(	JJ	B-API
-path	NN	I-API
-)	)	L-API
-test	NN	O
-
-=	NN	O
-re.compile(	NN	O
-"test	NNP	O
-\	NNP	O
-.	.	O
-py	VB	O
-$	$	O
-"	CD	O
-,	,	O
-re	NN	O
-.	.	O
-
-IGNORECASE	NNP	I-API
-)	)	L-API
-files	VBZ	O
-=	JJ	O
-[f	NN	O
-for	IN	O
-f	NN	O
-in	IN	O
-files	NNS	O
-if	IN	O
-test.search(	JJ	O
-
-f	NN	O
-)	)	O
-]	NN	O
-You	PRP	O
-could	MD	O
-do	VB	O
-this	DT	O
-without	IN	O
-regular	JJ	O
-expressions	NNS	O
-,	,	O
-
-for	IN	O
-your	PRP$	O
-example	NN	O
-,	,	O
-for	IN	O
-anything	NN	O
-where	WRB	O
-your	PRP$	O
-expression	NN	O
-at	IN	O
-the	DT	O
-
-end	NN	O
-returns	VBZ	O
-true	JJ	O
-for	IN	O
-a	DT	O
-match	NN	O
-.	.	O
-There	EX	O
-are	VBP	O
-other	JJ	O
-options	NNS	O
-
-like	IN	O
-using	VBG	O
-the	DT	O
-filter()	NN	U-API
-function	NN	O
-,	,	O
-but	CC	O
-if	IN	O
-I	PRP	O
-were	VBD	O
-going	VBG	O
-
-to	TO	O
-choose	VB	O
-,	,	O
-I'd	NNP	O
-go	VBP	O
-with	IN	O
-this	DT	O
-.	.	O
-Eric	JJ	O
-Sipple	NNP	O
-I	PRP	O
-
-think	VBP	O
-:	:	O
-#	#	O
-!	.	O
-/bin	JJ	O
-/pythonbar	NN	O
-in	IN	O
-dict(	JJ	B-API
-Foo	NNP	I-API
-)	)	L-API
-Is	VBZ	O
-
-what	WP	O
-you	PRP	O
-are	VBP	O
-thinking	VBG	O
-of	IN	O
-.	.	O
-When	WRB	O
-trying	VBG	O
-to	TO	O
-see	VB	O
-if	IN	O
-
-a	DT	O
-certain	JJ	O
-key	JJ	O
-exists	NNS	O
-within	IN	O
-a	DT	O
-dictionary	JJ	O
-in	IN	O
-python	NN	O
-(	(	O
-python's	JJ	O
-
-version	NN	O
-of	IN	O
-a	DT	O
-hash	NN	O
-table	NN	O
-)	)	O
-there	EX	O
-are	VBP	O
-two	CD	O
-ways	NNS	O
-to	TO	O
-
-check	VB	O
-.	.	O
-First	NNP	O
-is	VBZ	O
-the	DT	O
-has_key()	NN	O
-method	NN	O
-attached	VBN	O
-to	TO	O
-the	DT	O
-dictionary	JJ	O
-
-and	CC	O
-second	JJ	O
-is	VBZ	O
-the	DT	O
-example	NN	O
-given	VBN	O
-above	IN	O
-.	.	O
-It	PRP	O
-will	MD	O
-return	VB	O
-
-a	DT	O
-boolean	JJ	O
-value	NN	O
-.	.	O
-That	DT	O
-should	MD	O
-answer	VB	O
-your	PRP$	O
-question	NN	O
-.	.	O
-And	CC	O
-
-now	RB	O
-a	DT	O
-little	JJ	O
-off	RP	O
-topic	NN	O
-to	TO	O
-tie	VB	O
-this	DT	O
-in	IN	O
-to	TO	O
-the	DT	O
-
-list	NN	O
-comprehension	NN	O
-answer	VBZ	O
-previously	RB	O
-given	VBN	O
-(	(	O
-for	IN	O
-a	DT	O
-bit	NN	O
-more	JJR	O
-clarity	NN	O
-
-)	)	O
-.	.	O
-List	JJ	O
-Comprehensions	NNP	O
-construct	NN	O
-a	DT	O
-list	NN	O
-from	IN	O
-a	DT	O
-basic	JJ	O
-for	IN	O
-
-loop	NN	O
-with	IN	O
-modifiers	NNS	O
-.	.	O
-As	IN	O
-an	DT	O
-example	NN	O
-(	(	O
-to	TO	O
-clarify	VB	O
-slightly	RB	O
-
-)	)	L-API
-,	,	O
-a	DT	O
-way	NN	O
-to	TO	O
-use	VB	O
-the	DT	O
-in	IN	O
-dict	JJ	O
-language	NN	O
-construct	NN	O
-
-in	IN	O
-a	DT	O
-_list	JJ	O
-comprehension_	NN	O
-:	:	O
-Say	NNP	O
-you	PRP	O
-have	VBP	O
-a	DT	O
-two	CD	O
-dimensional	JJ	O
-
-dictionary	JJ	O
-foo	NN	O
-and	CC	O
-you	PRP	O
-only	RB	O
-want	VBP	O
-the	DT	O
-second	JJ	O
-dimension	NN	O
-dictionaries	NNS	O
-which	WDT	O
-
-contain	VBP	O
-the	DT	O
-key	JJ	O
-bar	NN	O
-.	.	O
-A	DT	O
-relatively	RB	O
-straightforward	JJ	O
-way	NN	O
-to	TO	O
-do	VB	O
-
-so	RB	O
-would	MD	O
-be	VB	O
-to	TO	O
-use	VB	O
-a	DT	O
-list	NN	O
-comprehension	NN	O
-with	IN	O
-a	DT	O
-conditional	JJ	O
-
-as	IN	O
-follows	VBZ	O
-:	:	O
-#	#	O
-!	.	O
-/bin	NN	O
-/pythonbaz	NNP	O
-=	NNP	O
-dict(	NN	O
-[	NNP	O
-(	(	O
-
-key	JJ	O
-,	,	O
-value	NN	O
-)	)	O
-for	IN	O
-key	NN	O
-,	,	O
-value	NN	O
-in	IN	O
-foo	NN	O
-if	IN	O
-
-bar	NN	O
-in	IN	O
-value	NN	B-API
-]	NN	I-API
-)	)	L-API
-Note	VBP	O
-the	DT	O
-if	IN	O
-bar	NN	O
-in	IN	O
-value	NN	O
-
-at	IN	O
-the	DT	O
-end	NN	O
-of	IN	O
-the	DT	O
-statement	NN	O
-,	,	O
-this	DT	O
-is	VBZ	O
-a	DT	O
-modifying	NN	O
-
-clause	NN	O
-which	WDT	O
-tells	VBZ	O
-the	DT	O
-list	NN	O
-comprehension	NN	O
-to	TO	O
-only	RB	O
-keep	VB	O
-those	DT	O
-key-value	JJ	O
-
-pairs	NNS	O
-which	WDT	O
-meet	VBP	O
-the	DT	O
-conditional	NN	O
-.	.	O
-In	IN	O
-this	DT	O
-case	NN	O
-baz	NN	O
-is	VBZ	O
-
-a	DT	O
-new	JJ	O
-dictionary	NN	O
-which	WDT	O
-contains	VBZ	O
-only	RB	O
-the	DT	O
-dictionaries	NNS	O
-from	IN	O
-foo	NN	O
-which	WDT	O
-
-contain	VBP	O
-bar	NN	O
-(	(	O
-Hopefully	NNP	O
-I	PRP	O
-didn't	VBP	O
-miss	JJ	O
-anything	NN	O
-in	IN	O
-that	DT	O
-code	NN	O
-
-example	NN	O
-...	:	O
-you	PRP	O
-may	MD	O
-have	VB	O
-to	TO	O
-take	VB	O
-a	DT	O
-look	NN	O
-at	IN	O
-the	DT	O
-
-list	NN	O
-comprehension	NN	O
-documentation	NN	O
-found	VBD	O
-in	IN	O
-docs	NN	O
-.	.	O
-python	NN	O
-.	.	O
-org	JJ	O
-tutorials	NNS	O
-
-and	CC	O
-at	IN	O
-secnetix	NN	O
-.	.	O
-de	NN	O
-,	,	O
-both	DT	O
-sites	NNS	O
-are	VBP	O
-good	JJ	O
-references	NNS	O
-
-if	IN	O
-you	PRP	O
-have	VBP	O
-questions	NNS	O
-in	IN	O
-the	DT	O
-future	NN	O
-.	.	O
-)	)	O
-.	.	O
-Are	VBP	O
-
-you	PRP	O
-looking	VBG	O
-to	TO	O
-get	VB	O
-a	DT	O
-list	NN	O
-of	IN	O
-objects	NNS	O
-that	WDT	O
-have	VBP	O
-a	DT	O
-
-certain	JJ	O
-attribute	NN	O
-?	.	O
-If	IN	O
-so	RB	O
-,	,	O
-a	DT	O
-list	NN	O
-comprehension	NN	O
-is	VBZ	O
-the	DT	O
-
-right	JJ	O
-way	NN	O
-to	TO	O
-do	VB	O
-this	DT	O
-.	.	O
-result	NN	O
-=	JJ	O
-[obj	NN	O
-for	IN	O
-obj	NN	O
-
-in	IN	O
-listOfObjs	NN	O
-if	IN	O
-hasattr(	JJ	B-API
-obj	NN	I-API
-,	,	I-API
-'	''	I-API
-attributeName	NN	I-API
-'	''	I-API
-)	)	L-API
-]	NN	O
-
-Here	RB	O
-is	VBZ	O
-a	DT	O
-simple	JJ	O
-static	JJ	O
-method	NN	O
-to	TO	O
-do	VB	O
-this	DT	O
-in	IN	O
-C	NNP	O
-
-#	#	O
-:	:	O
-public	JJ	O
-static	JJ	O
-string	NN	O
-ToTitleCaseInvariant(	NNP	O
-string	VBG	O
-targetString	VBG	O
-)	)	O
-{	(	O
-return	NN	O
-
-System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(	NNP	I-API
-targetString	NN	I-API
-)	)	L-API
-;	:	O
-}	)	O
-In	IN	O
-what	WP	O
-language	NN	O
-?	.	O
-In	IN	O
-PHP	NNP	O
-
-it	PRP	O
-is	VBZ	O
-:	:	O
-ucwords()	JJ	O
-example	NN	O
-:	:	O
-$HelloWorld	NN	O
-=	VBZ	O
-ucwords(	JJ	O
-'	''	O
-hello	JJ	O
-
-world	NN	B-API
-'	''	I-API
-)	)	L-API
-;	:	O
-What	WP	O
-I	PRP	O
-was	VBD	O
-thinking	VBG	O
-of	IN	O
-can	MD	O
-be	VB	O
-
-achieved	VBN	O
-using	VBG	O
-list	NN	O
-comprehensions	NNS	O
-,	,	O
-but	CC	O
-I	PRP	O
-thought	VBD	O
-that	IN	O
-there	EX	O
-was	VBD	O
-
-a	DT	U-API
-function	NN	O
-that	WDT	O
-did	VBD	O
-this	DT	O
-in	IN	O
-a	DT	O
-slightly	RB	O
-neater	JJ	O
-way	NN	O
-.	.	O
-
-i	NN	O
-.	.	O
-e	NN	O
-.	.	O
-'	''	O
-bar	NN	O
-'	''	O
-is	VBZ	O
-a	DT	O
-list	NN	O
-of	IN	O
-
-objects	NNS	O
-,	,	O
-all	DT	O
-of	IN	O
-which	WDT	O
-have	VBP	O
-the	DT	O
-attribute	NN	O
-'	POS	O
-id	NN	O
-'	''	O
-
-The	DT	O
-mythical	JJ	O
-functional	JJ	O
-way	NN	O
-:	:	O
-foo	NN	O
-=	VBZ	O
-12foo	CD	O
-in	IN	O
-iter_attr(	JJ	O
-bar	NN	O
-
-,	,	O
-'	''	O
-id	NN	O
-'	''	O
-)	)	O
-The	DT	O
-list	NN	O
-comprehension	NN	O
-way	NN	O
-:	:	O
-foo	NN	O
-
-=	VBZ	O
-12foo	CD	O
-in	IN	O
-[obj	NN	O
-.	.	O
-id	NN	O
-for	IN	O
-obj	NN	O
-in	IN	O
-bar	NN	O
-]	NN	O
-
-In	IN	O
-retrospect	NN	O
-the	DT	O
-list	NN	O
-comprehension	NN	O
-way	NN	O
-is	VBZ	O
-pretty	JJ	O
-neat	JJ	O
-anyway	RB	O
-.	.	O
-
-One	CD	O
-implementation	NN	O
-of	IN	O
-this	DT	O
-problem	NN	O
-is	VBZ	O
-to	TO	O
-attempt	VB	O
-to	TO	O
-call	VB	O
-the	DT	O
-
-parameter-less	JJ	O
-constructor	NN	O
-of	IN	O
-the	DT	O
-Type	NN	O
-:	:	O
-public	JJ	O
-static	JJ	O
-object	NN	O
-GetNewObject(	NNP	O
-Type	NNP	O
-
-t	NN	O
-)	)	O
-{	(	O
-try	VB	O
-{	(	O
-return	VB	O
-t.GetConstructor(	RP	O
-new	JJ	O
-Type	NNP	O
-[	NNP	O
-]	NNP	O
-
-{	(	O
-}	)	O
-)	)	O
-.	.	O
-Invoke(	NNP	O
-new	JJ	O
-object	JJ	O
-[	NNP	O
-]	NNP	O
-{	(	O
-}	)	O
-
-)	)	L-API
-;	:	O
-}	)	O
-catch	VB	O
-{	(	O
-return	VB	O
-null	NN	O
-;	:	O
-}	)	O
-}	)	O
-Here	RB	O
-
-is	VBZ	O
-the	DT	O
-same	JJ	O
-approach	NN	O
-,	,	O
-contained	VBN	O
-in	IN	O
-a	DT	O
-generic	JJ	O
-method	NN	O
-:	:	O
-
-public	JJ	O
-static	JJ	O
-T	NNP	O
-GetNewObject	NNP	O
-<T	NNP	O
->	NNP	O
-(	(	O
-)	)	O
-{	(	O
-try	VB	O
-{	(	O
-
-return	NN	O
-(	(	O
-T	NNP	O
-)typeof	NNP	O
-(	(	O
-T	NNP	O
-)	)	O
-.	.	O
-GetConstructor(	NNP	O
-new	JJ	O
-Type	NNP	O
-
-[	NNP	O
-]	NNP	O
-{	(	O
-}	)	O
-)	)	O
-.	.	O
-Invoke(	NNP	O
-new	JJ	O
-object	JJ	O
-[	NNP	O
-]	NNP	O
-
-{	(	O
-}	)	O
-)	)	O
-;	:	O
-}	)	O
-catch	VB	O
-{	(	O
-return	VB	O
-default(	JJ	B-API
-T	NNP	I-API
-)	)	L-API
-
-;	:	O
-}	)	O
-}	)	O
-The	DT	O
-Activator	NNP	O
-class	NN	O
-within	IN	O
-the	DT	O
-root	NN	O
-System	NNP	O
-namespace	NN	O
-
-is	VBZ	O
-pretty	RB	O
-powerful	JJ	O
-.	.	O
-There	EX	O
-are	VBP	O
-a	DT	O
-lot	NN	O
-of	IN	O
-overloads	NNS	O
-for	IN	O
-
-passing	VBG	O
-parameters	NNS	O
-to	TO	O
-the	DT	O
-constructor	NN	O
-and	CC	O
-such	JJ	O
-.	.	O
-Check	VB	O
-out	IN	O
-the	DT	O
-
-documentation	NN	O
-at	IN	O
-:	:	O
-http	NN	O
-:	:	O
-/	JJ	O
-/msdn	NN	O
-.	.	O
-microsoft	NN	O
-.	.	O
-com	NN	O
-
-/en	SYM	O
--	:	O
-us	PRP	O
-/library	JJ	O
-/system	NN	O
-.	.	O
-activator	NN	O
-.	.	O
-createinstance	NN	O
-.	.	O
-aspx	NN	O
-
-Here	RB	O
-are	VBP	O
-some	DT	O
-simple	JJ	O
-examples	NNS	O
-:	:	O
-ObjectType	NNP	O
-instance	NN	O
-=	NNP	O
-(	(	O
-ObjectType	NNP	O
-
-)Activator	NNP	I-API
-.	.	I-API
-CreateInstance(	NNP	I-API
-objectType	NN	I-API
-)	)	L-API
-;	:	O
-ObjectType	NNP	O
-instance	NN	O
-=	NNP	O
-(	(	O
-ObjectType	NNP	O
-
-)Activator	NNP	I-API
-.	.	I-API
-CreateInstance(	NNP	I-API
-"MyAssembly	RB	I-API
-"	NNP	I-API
-,	,	I-API
-"MyNamespace	NNP	I-API
-.	.	I-API
-ObjectType	NNP	I-API
-"	NNP	I-API
-)	)	L-API
-
-;	:	O
-Here	RB	O
-is	VBZ	O
-my	PRP$	O
-current	JJ	O
-method	NN	O
-.	.	O
-Any	DT	O
-suggestions	NNS	O
-?	.	O
-Regex	NNP	O
-
-singleMToDoubleRegex	VBD	O
-=	NNP	O
-new	JJ	O
-Regex(	NNP	O
-"	NNP	O
-(	(	O
-?	.	O
-<	''	O
-!m	JJ	O
-)m	NN	O
-(	(	O
-
-?	.	O
-!m	NN	O
-)	)	O
-"	NN	O
-)	)	O
-;Regex	VBZ	O
-singleDToDoubleRegex	JJ	O
-=	NNP	O
-new	JJ	O
-Regex(	NNP	O
-"	NNP	O
-
-(	(	O
-?	.	O
-<	''	O
-!d	JJ	O
-)d	NN	O
-(	(	O
-?	.	O
-!d	NN	O
-)	)	O
-"	NN	O
-)	)	O
-
-;CultureInfo	VBZ	O
-currentCulture	NN	O
-=	NNP	O
-CultureInfo	NNP	O
-.	.	O
-CurrentUICulture	NN	O
-;	:	O
-/	CC	O
-/	VB	O
-If	IN	O
-the	DT	O
-
-culture	NN	O
-is	VBZ	O
-netural	JJ	O
-there	EX	O
-is	VBZ	O
-no	DT	O
-date	NN	O
-pattern	NN	O
-to	TO	O
-use	VB	O
-,	,	O
-
-so	RB	O
-use	IN	O
-the	DT	O
-default	NN	O
-.	.	O
-if	IN	O
-(	(	O
-currentCulture	NN	O
-.	.	O
-IsNeutralCulture	NN	O
-)	)	O
-
-{	(	O
-currentCulture	NN	O
-=	VBZ	O
-CultureInfo	NNP	O
-.	.	O
-InvariantCulture	NN	O
-;	:	O
-}	)	O
-/	FW	O
-/	JJ	O
-Massage	NNP	O
-
-the	DT	O
-format	NN	O
-into	IN	O
-a	DT	O
-more	RBR	O
-general	JJ	O
-user	NN	O
-friendly	JJ	O
-form	NN	O
-.	.	O
-string	VBG	O
-
-shortDatePattern	JJ	O
-=	NNP	O
-CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern.ToLower()	NNP	O
-;shortDatePattern	NNP	O
-=	NNP	O
-singleMToDoubleRegex.Replace(	NN	B-API
-shortDatePattern	NN	I-API
-,	,	I-API
-"mm	NNP	I-API
-"	NNP	I-API
-)	)	L-API
-
-;shortDatePattern	VBP	O
-=	JJ	O
-singleDToDoubleRegex.Replace(	NN	B-API
-shortDatePattern	NN	I-API
-,	,	I-API
-"dd	NNP	I-API
-"	NNP	I-API
-)	)	L-API
-;	:	O
-You	PRP	O
-can	MD	O
-
-print	VB	O
-from	IN	O
-the	DT	O
-command	NN	O
-line	NN	O
-using	VBG	O
-the	DT	O
-following	NN	O
-:	:	O
-rundll32	NN	O
-.	.	O
-
-exe	VB	O
-%WINDIR	CD	O
-%	NN	O
-\System32	JJ	O
-\mshtml	NNP	O
-.	.	O
-dll	NN	O
-,	,	O
-PrintHTML	NNP	O
-"	NNP	O
-%1	NNP	O
-
-"	NNP	O
-Where	NNP	O
-%1	NNP	O
-is	VBZ	O
-the	DT	O
-file	JJ	O
-path	NN	O
-of	IN	O
-the	DT	O
-html	NN	O
-file	NN	O
-
-to	TO	O
-be	VB	O
-printed	VBN	O
-.	.	O
-If	IN	O
-you	PRP	O
-don't	VBP	O
-need	VB	O
-to	TO	O
-print	VB	O
-from	IN	O
-
-memory	NN	O
-(	(	O
-or	CC	O
-can	MD	O
-afford	VB	O
-to	TO	O
-write	VB	O
-to	TO	O
-the	DT	O
-disk	NN	O
-in	IN	O
-
-a	DT	O
-temp	NN	O
-file	NN	O
-)	)	O
-you	PRP	O
-can	MD	O
-use	VB	O
-:	:	O
-using	VBG	O
-(	(	O
-Process	NNP	O
-
-printProcess	RB	O
-=	VBD	O
-new	JJ	O
-Process()	NNP	O
-)	)	O
-{	(	O
-string	VBG	O
-systemPath	NN	O
-=	NNP	O
-Environment.GetFolderPath(	NNP	O
-Environment	NNP	O
-
-.	.	O
-SpecialFolder	NNP	O
-.	.	O
-System	NNP	O
-)	)	O
-;	:	O
-printProcess	NN	O
-.	.	O
-StartInfo	NNP	O
-.	.	O
-FileName	NNP	O
-
-=	NNP	O
-systemPath	NN	O
-+	NNP	O
-@	NNP	O
-"	NNP	O
-\rundll32	NNP	O
-.	.	O
-exe	NN	O
-"	NN	O
-;	:	O
-printProcess	NN	O
-
-.	.	O
-StartInfo	NNP	O
-.	.	O
-Arguments	NNS	O
-=	JJ	O
-systemPath	NN	O
-+	NNP	O
-@	NNP	O
-"	NNP	O
-\mshtml	NNP	O
-.	.	O
-
-dll	NN	O
-,	,	O
-PrintHTML	NNP	O
-"	NNP	O
-"	NNP	O
-"	NNP	O
-+	NNP	O
-fileToPrint	NN	O
-+	NNP	O
-@	NNP	O
-"	NNP	O
-
-"	NNP	O
-"	NNP	O
-"	NNP	O
-;	:	O
-printProcess.Start()	NN	U-API
-;	:	O
-}	)	O
-N	NNP	O
-.	.	O
-B	NNP	O
-.	.	O
-
-This	DT	O
-only	JJ	O
-works	VBZ	O
-on	IN	O
-Windows	NNP	O
-2000	CD	O
-and	CC	O
-above	IN	O
-I	PRP	O
-think	VBP	O
-.	.	O
-
-Here's	VB	O
-a	DT	O
-Perl	NNP	O
-solution	NN	O
-http	NN	O
-:	:	O
-/	NN	O
-/daringfireball	NN	O
-.	.	O
-net	JJ	O
-/2008	NN	O
-
-/05	NNP	O
-/title_case	NNP	O
-Here's	NNP	O
-a	DT	O
-Ruby	NNP	O
-solution	NN	O
-http	NN	O
-:	:	O
-/	JJ	O
-/frankschmitt	NN	O
-.	.	O
-
-org	JJ	O
-/projects	NNS	O
-/title	SYM	O
--	:	O
-case	NN	O
-Here's	NNP	O
-a	DT	O
-Ruby	NNP	O
-one-liner	JJ	O
-solution	NN	O
-:	:	O
-
-http	NN	O
-:	:	O
-/	JJ	O
-/snippets	NNS	O
-.	.	O
-dzone	NN	O
-.	.	O
-com	NN	O
-/posts	VBZ	O
-/show	VBP	O
-/4702	NNP	O
-
-'	POS	O
-some	DT	O
-string	NN	O
-here	RB	O
-'	POS	O
-.	.	O
-gsub(	NN	O
-/	JJ	O
-\b	NNP	O
-\w	NNP	O
-/	NNP	O
-
-)	)	L-API
-{	(	O
-$	$	O
-&	CC	O
-.	.	O
-upcase	NN	O
-}	)	O
-What	WP	O
-the	DT	O
-one-liner	NN	O
-is	VBZ	O
-
-doing	VBG	O
-is	VBZ	O
-using	VBG	O
-a	DT	O
-regular	JJ	O
-expression	NN	O
-substitution	NN	O
-of	IN	O
-the	DT	O
-first	JJ	O
-character	NN	O
-
-of	IN	O
-each	DT	O
-word	NN	O
-with	IN	O
-the	DT	O
-uppercase	JJ	O
-version	NN	O
-of	IN	O
-it	PRP	O
-.	.	O
-I	PRP	O
-
-haven't	VBP	O
-been	VBN	O
-able	JJ	O
-to	TO	O
-find	VB	O
-an	DT	O
-understandable	JJ	O
-explanation	NN	O
-of	IN	O
-how	WRB	O
-to	TO	O
-
-actually	RB	O
-use	VB	O
-Python's	NNP	O
-itertools.groupby()	JJ	U-API
-function	NN	O
-.	.	O
-What	WP	O
-I'm	NNP	O
-trying	VBG	O
-to	TO	O
-do	VB	O
-
-is	VBZ	O
-this	DT	O
-:	:	O
-Take	VB	O
-a	DT	O
-list	NN	O
--	:	O
-in	IN	O
-this	DT	O
-case	NN	O
-,	,	O
-
-the	DT	O
-children	NNS	O
-of	IN	O
-an	DT	O
-objectified	JJ	O
-lxml	NN	O
-element	NN	O
-Divide	NNP	O
-it	PRP	O
-into	IN	O
-groups	NNS	O
-
-based	VBN	O
-on	IN	O
-some	DT	O
-criteria	NNS	O
-Then	RB	O
-later	RB	O
-iterate	VB	O
-over	IN	O
-each	DT	O
-of	IN	O
-these	DT	O
-
-groups	NNS	O
-separately	RB	O
-.	.	O
-I've	NNP	O
-reviewed	VBD	O
-the	DT	O
-documentation	NN	O
-,	,	O
-and	CC	O
-the	DT	O
-examples	NNS	O
-
-,	,	O
-but	CC	O
-I've	NNP	O
-had	VBD	O
-trouble	NN	O
-trying	VBG	O
-to	TO	O
-apply	VB	O
-them	PRP	O
-beyond	IN	O
-a	DT	O
-
-simple	JJ	O
-list	NN	O
-of	IN	O
-numbers	NNS	O
-.	.	O
-So	RB	O
-,	,	O
-how	WRB	O
-do	VBP	O
-I	PRP	O
-use	NN	O
-
-of	IN	O
-itertools.groupby()	NN	O
-?	.	O
-Is	VBZ	O
-there	RB	O
-another	DT	O
-technique	NN	O
-I	PRP	O
-should	MD	O
-be	VB	O
-using	VBG	O
-
-?	.	O
-Pointers	NNS	O
-to	TO	O
-good	JJ	O
-"prerequisite	NNP	O
-"	NN	O
-reading	NN	O
-would	MD	O
-also	RB	O
-be	VB	O
-appreciated	VBN	O
-
-.	.	O
-I	PRP	O
-don't	VBP	O
-have	VB	O
-any	DT	O
-experience	NN	O
-with	IN	O
-http	NN	O
-:	:	O
-/	JJ	O
-/www	NN	O
-
-.	.	O
-SiteGround	NNP	O
-.	.	O
-com	NN	O
-as	IN	O
-a	DT	O
-web	NN	O
-host	NN	O
-personally	RB	O
-.	.	O
-This	DT	O
-
-is	VBZ	O
-just	RB	O
-a	DT	O
-guess	NN	O
-,	,	O
-but	CC	O
-it's	JJ	O
-common	JJ	O
-for	IN	O
-a	DT	O
-shared	VBN	O
-
-host	NN	O
-to	TO	O
-support	VB	O
-Python	NNP	O
-and	CC	O
-MySQL	NNP	U-API
-with	IN	O
-the	DT	O
-MySQLdb	NNP	O
-module	NN	O
-(	(	O
-
-e	NN	O
-.	.	O
-g	NN	O
-.	.	O
-,	,	O
-GoDaddy	NNP	O
-does	VBZ	O
-this	DT	O
-)	)	O
-.	.	O
-Try	VB	O
-
-the	DT	O
-following	JJ	O
-CGI	NNP	O
-script	NN	O
-to	TO	O
-see	VB	O
-if	IN	O
-MySQLdb	NNP	O
-is	VBZ	O
-installed	VBN	O
-.	.	O
-
-#	#	O
-!	.	O
-/usr	JJ	O
-/bin	JJ	O
-/pythonmodule_name	NN	O
-=	NNP	O
-'	POS	O
-MySQLdb'head	NNP	O
-=	NNP	O
-'	POS	O
-'	''	O
-
-'	POS	O
-Content-Type	JJ	O
-:	:	O
-text	NN	O
-/html	NN	O
-%s	NNP	O
-is	VBZ	O
-'	POS	O
-'	''	O
-'	POS	O
-%	NN	O
-
-module_nametry	NN	O
-:	:	O
-__import__(	JJ	B-API
-module_name	NN	I-API
-)	)	L-API
-print	NN	O
-head	NN	O
-+	NNP	O
-'	POS	O
-installed'except	JJ	O
-ImportError	NN	O
-
-:	:	O
-print	NN	O
-head	NN	O
-+	NNP	O
-'	''	O
-not	RB	O
-installed	VBN	O
-'	''	O
-Can	MD	O
-you	PRP	O
-show	VB	O
-
-us	PRP	O
-your	PRP$	O
-code	NN	O
-?	.	O
-The	DT	O
-example	NN	O
-on	IN	O
-the	DT	O
-Python	NNP	O
-docs	NN	O
-is	VBZ	O
-
-quite	RB	O
-straightforward	JJ	O
-:	:	O
-groups	NNS	O
-=	VBP	O
-[	JJ	O
-]	NNP	O
-uniquekeys	NNS	O
-=	VBP	O
-[	JJ	O
-]	NN	O
-
-for	IN	O
-k	NN	O
-,	,	O
-g	NN	O
-in	IN	O
-groupby(	NN	O
-data	NNS	O
-,	,	O
-keyfunc	NN	O
-)	)	O
-:	:	O
-
-groups.append(	NN	I-API
-list(	VBZ	I-API
-g	NN	I-API
-)	)	L-API
-)	)	O
-#	#	O
-Store	NNP	O
-group	NN	O
-iterator	NN	O
-as	IN	O
-a	DT	O
-
-list	NN	O
-uniquekeys.append(	JJ	O
-k	NN	O
-)	)	O
-So	RB	O
-in	IN	O
-your	PRP$	O
-case	NN	O
-,	,	O
-data	NN	O
-is	VBZ	O
-
-a	DT	O
-list	NN	O
-of	IN	O
-nodes	NNS	O
-,	,	O
-keyfunc	NN	O
-is	VBZ	O
-where	WRB	O
-the	DT	O
-logic	NN	O
-of	IN	O
-
-your	PRP$	O
-criteria	NNS	U-API
-function	NN	O
-goes	VBZ	O
-and	CC	O
-then	RB	O
-groupby()	VB	O
-groups	NNS	O
-the	DT	O
-data	NNS	O
-.	.	O
-
-You	PRP	O
-must	MD	O
-be	VB	O
-careful	JJ	O
-to	TO	O
-sort	VB	O
-the	DT	O
-data	NN	O
-by	IN	O
-the	DT	O
-criteria	NNS	O
-
-before	IN	O
-you	PRP	O
-call	VBP	O
-groupby	NNS	O
-or	CC	O
-it	PRP	O
-won't	JJ	O
-work	NN	O
-.	.	O
-groupby	VB	O
-method	JJ	O
-
-actually	RB	O
-just	RB	O
-iterates	VBZ	O
-through	IN	O
-a	DT	O
-list	NN	O
-and	CC	O
-whenever	VB	O
-the	DT	O
-key	NN	O
-changes	VBZ	O
-
-it	PRP	O
-creates	VBZ	O
-a	DT	O
-new	JJ	O
-group	NN	O
-.	.	O
-Absolutely	RB	O
-,	,	O
-especially	RB	O
-dealing	VBG	O
-with	IN	O
-
-lots	NNS	O
-of	IN	O
-these	DT	O
-permutations	NNS	O
-/combinations	NNS	O
-I	PRP	O
-can	MD	O
-definitely	RB	O
-see	VB	O
-that	IN	O
-the	DT	O
-
-first	JJ	O
-pass	NN	O
-would	MD	O
-be	VB	O
-an	DT	O
-issue	NN	O
-.	.	O
-Interesting	VBG	O
-implementation	NN	O
-in	IN	O
-python	NN	O
-
-,	,	O
-though	IN	O
-I	PRP	O
-wrote	VBD	O
-a	DT	O
-nice	JJ	O
-one	CD	O
-in	IN	O
-C	NNP	O
-and	CC	O
-Ocaml	NNP	O
-
-based	VBN	O
-on	IN	O
-"Algorithm	JJ	O
-515	CD	O
-"	NN	O
-(	(	O
-see	VB	O
-below	IN	O
-)	)	O
-.	.	O
-He	PRP	O
-
-wrote	VBD	O
-his	PRP$	O
-in	IN	O
-Fortran	NNP	O
-as	IN	O
-it	PRP	O
-was	VBD	O
-common	JJ	O
-back	RB	O
-then	RB	O
-for	IN	O
-
-all	PDT	O
-the	DT	O
-"Algorithm	NNP	O
-XX	NNP	O
-"	NNP	O
-papers	NNS	O
-,	,	O
-well	RB	O
-,	,	O
-that	DT	O
-assembly	NN	O
-
-or	CC	O
-c	NN	O
-.	.	O
-I	PRP	O
-had	VBD	O
-to	TO	O
-re-write	VB	O
-it	PRP	O
-and	CC	O
-make	VB	O
-some	DT	O
-
-small	JJ	O
-improvements	NNS	O
-to	TO	O
-work	VB	O
-with	IN	O
-arrays	NNS	O
-not	RB	O
-ranges	NNS	O
-of	IN	O
-numbers	NNS	O
-.	.	O
-
-This	DT	O
-one	NN	O
-does	VBZ	O
-random	VB	O
-access	NN	O
-,	,	O
-I'm	NNP	O
-still	RB	O
-working	VBG	O
-on	IN	O
-getting	VBG	O
-
-some	DT	O
-nice	JJ	O
-implementations	NNS	O
-of	IN	O
-the	DT	O
-ones	NNS	O
-mentioned	VBN	O
-in	IN	O
-Knuth	NNP	O
-4th	CD	O
-volume	NN	O
-
-fascicle	NN	O
-2	CD	O
-.	.	O
-I'll	NNP	O
-an	DT	O
-explanation	NN	O
-of	IN	O
-how	WRB	O
-this	DT	O
-works	VBZ	O
-to	TO	O
-
-the	DT	O
-reader	NN	O
-.	.	O
-Though	IN	O
-if	IN	O
-someone	NN	O
-is	VBZ	O
-curious	JJ	O
-,	,	O
-I	PRP	O
-wouldn't	VBP	O
-
-object	JJ	O
-to	TO	O
-writing	VBG	O
-something	NN	O
-up	RB	O
-.	.	O
-/	VB	O
-*	JJ	O
-*	NNP	O
-[combination	NNP	O
-c	VBZ	O
-
-n	JJ	O
-p	NN	O
-x	NNP	O
-]	NNP	O
-*	NNP	O
-get	VB	O
-the	DT	O
-[x	NNP	O
-]th	NNP	O
-lexicographically	RB	O
-ordered	VBD	O
-
-set	NN	O
-of	IN	O
-[p	NNP	O
-]	NNP	O
-elements	NNS	O
-in	IN	O
-[n	NNP	O
-]	NNP	O
-*	NNP	O
-output	NN	O
-is	VBZ	O
-
-in	IN	O
-[c	NNP	O
-]	NNP	O
-,	,	O
-and	CC	O
-should	MD	O
-be	VB	O
-sizeof(	JJ	O
-int	NN	O
-)	)	O
-*	VBZ	O
-
-[p	JJ	O
-]	NNP	O
-*	NNP	O
-/void	NNP	O
-combination(	NN	B-API
-int	NN	I-API
-*	NNP	I-API
-c	NN	I-API
-,	,	I-API
-int	NN	I-API
-n	NN	I-API
-
-,	,	I-API
-int	NN	I-API
-p	NN	I-API
-,	,	I-API
-int	NN	I-API
-x	NN	I-API
-)	)	L-API
-{	(	O
-int	NN	O
-i	NN	O
-,	,	O
-
-r	NN	O
-,	,	O
-k	VB	O
-=	NNP	O
-0	CD	O
-;	:	O
-for(	NN	O
-i	NN	O
-=0	VBP	O
-;i	NN	O
-<p	NNP	O
-
--	:	O
-1	CD	O
-;i	JJ	O
-+	NNP	O
-+	NNP	O
-)	)	O
-{	(	O
-c	JJ	O
-[i	NNP	O
-]	NNP	O
-=	NNP	O
-
-(	(	O
-i	NN	O
-!	.	O
-=	$	O
-0	CD	O
-)	)	O
-?	.	O
-c	JJ	O
-[i	NNP	O
--	:	O
-1	CD	O
-
-]	NN	O
-:	:	O
-0	CD	O
-;	:	O
-do	VB	O
-{	(	O
-c	VB	O
-[i	NNP	O
-]	NNP	O
-+	NNP	O
-+	NNP	O
-
-;	:	O
-r	NN	O
-=	VBZ	O
-choose(	JJ	O
-n-c	JJ	O
-[i	NN	O
-]	NN	O
-,	,	O
-p	JJ	O
--(	NN	O
-i	NN	O
-
-+1	NNP	I-API
-)	)	L-API
-)	)	O
-;	:	O
-k	CC	O
-=	NNP	O
-k	NNP	O
-+	NNP	O
-r	NN	O
-;	:	O
-}	)	O
-
-while(	VBP	O
-k	JJ	O
-<	NNP	O
-x	NNP	O
-)	)	O
-;	:	O
-k	CC	O
-=	NNP	O
-k	NNP	O
--	:	O
-r	NN	O
-
-;	:	O
-}	)	O
-c	VBP	O
-[p	JJ	O
--	:	O
-1	CD	O
-]	JJ	O
-=	NNP	O
-c	NN	O
-[p	NNP	O
--	:	O
-
-2	CD	O
-]	JJ	O
-+	NNP	O
-x	NNP	O
--	:	O
-k	NN	O
-;	:	O
-}	)	O
-~	VBP	O
-"Algorithm	JJ	O
-515	CD	O
-
-:	:	O
-Generation	NN	O
-of	IN	O
-a	DT	O
-Vector	NN	O
-from	IN	O
-the	DT	O
-Lexicographical	NNP	O
-Index	NNP	O
-"	NNP	O
-;	:	O
-
-Buckles	NNP	O
-,	,	O
-B	NNP	O
-.	.	O
-P	NNP	O
-.	.	O
-,	,	O
-and	CC	O
-Lybanon	NNP	O
-,	,	O
-M	NNP	O
-
-.	.	O
-ACM	NNP	O
-Transactions	NNPS	O
-on	IN	O
-Mathematical	NNP	O
-Software	NNP	O
-,	,	O
-Vol	NNP	O
-.	.	O
-3	CD	O
-,	,	O
-
-No	NNP	O
-.	.	O
-2	CD	O
-,	,	O
-June	NNP	O
-1977	CD	O
-.	.	O
-I	PRP	O
-uploaded	VBD	O
-it	PRP	O
-and	CC	O
-
-got	VBD	O
-an	DT	O
-internal	JJ	O
-error	NN	O
-Premature	NNP	O
-end	NN	O
-of	IN	O
-script	NN	O
-headers	NNS	O
-After	IN	O
-much	JJ	O
-
-playing	NN	O
-around	IN	O
-,	,	O
-I	PRP	O
-found	VBD	O
-that	IN	O
-if	IN	O
-I	PRP	O
-had	VBD	O
-import	NN	O
-cgiimport	NN	O
-
-cgitb	NN	O
-;	:	O
-cgitb.enable()	CC	O
-import	NN	O
-MySQLdb	NNP	O
-It	PRP	O
-would	MD	O
-give	VB	O
-me	PRP	O
-a	DT	O
-much	RB	O
-
-more	RBR	O
-useful	JJ	O
-answer	NN	O
-and	CC	O
-say	VBP	O
-that	IN	O
-it	PRP	O
-was	VBD	O
-not	RB	O
-installed	VBN	O
-,	,	O
-
-you	PRP	O
-can	MD	O
-see	VB	O
-it	PRP	O
-yourself	PRP	O
--	:	O
->	NN	O
-http	NN	O
-:	:	O
-/	JJ	O
-/woarl	NNP	O
-
-.	.	O
-com	NN	O
-/db	NN	O
-.	.	O
-py	NN	O
-Oddly	RB	O
-enough	RB	O
-,	,	O
-this	DT	O
-would	MD	O
-produce	VB	O
-
-an	DT	O
-error	NN	O
-import	NN	O
-MySQLdbimport	NNP	O
-cgiimport	NN	O
-cgitb	NN	O
-;	:	O
-cgitb.enable()	NN	O
-I	PRP	O
-looked	VBD	O
-at	IN	O
-
-some	DT	O
-of	IN	O
-the	DT	O
-other	JJ	O
-files	NNS	O
-I	PRP	O
-had	VBD	O
-up	RP	O
-there	RB	O
-and	CC	O
-it	PRP	O
-
-seems	VBZ	O
-that	IN	O
-library	NN	O
-was	VBD	O
-one	CD	O
-of	IN	O
-the	DT	O
-ones	NNS	O
-I	PRP	O
-had	VBD	O
-already	RB	O
-
-tried	VBN	O
-.	.	O
-The	DT	O
-magic	NN	O
-all	DT	O
-seems	VBZ	O
-to	TO	O
-be	VB	O
-in	IN	O
-visitortime.getTimezoneOffset()	JJ	O
-That's	NNP	O
-
-cool	NN	O
-,	,	O
-I	PRP	O
-didn't	VBP	O
-know	VB	O
-about	IN	O
-that	DT	O
-.	.	O
-Does	VBZ	O
-it	PRP	O
-work	VB	O
-
-in	IN	O
-IE	NNP	O
-,	,	O
-etc	FW	O
-?	.	O
-From	IN	O
-there	EX	O
-you	PRP	O
-should	MD	O
-be	VB	O
-able	JJ	O
-
-to	TO	O
-use	VB	O
-JS	NNP	O
-to	TO	O
-ajax	VB	O
-,	,	O
-set	VB	O
-cookies	NNS	O
-,	,	O
-whatever	WDT	O
-.	.	O
-
-I'd	NNP	O
-probably	RB	O
-go	VBP	O
-the	DT	O
-cookie	NN	O
-route	NN	O
-myself	PRP	O
-.	.	O
-You'll	CC	O
-need	MD	O
-to	TO	O
-
-allow	VB	O
-the	DT	O
-user	NN	O
-to	TO	O
-change	VB	O
-it	PRP	O
-though	IN	O
-.	.	O
-We	PRP	O
-tried	VBD	O
-to	TO	O
-
-use	VB	O
-geolocation	NN	O
-(	(	O
-via	IN	O
-maxmind	NN	O
-)	)	O
-to	TO	O
-do	VB	O
-this	DT	O
-a	DT	O
-while	NN	O
-
-ago	RB	O
-,	,	O
-and	CC	O
-it	PRP	O
-was	VBD	O
-wrong	JJ	O
-reasonably	RB	O
-often	RB	O
--	:	O
-enough	JJ	O
-to	TO	O
-
-make	VB	O
-it	PRP	O
-not	RB	O
-worth	IN	O
-doing	VBG	O
-,	,	O
-so	IN	O
-we	PRP	O
-just	RB	O
-let	VB	O
-the	DT	O
-
-user	NN	O
-set	VBD	O
-it	PRP	O
-in	IN	O
-their	PRP$	O
-profile	NN	O
-,	,	O
-and	CC	O
-show	VB	O
-a	DT	O
-notice	NN	O
-
-to	TO	O
-users	NNS	O
-who	WP	O
-haven't	VBP	O
-set	VBN	O
-theirs	JJ	O
-yet	RB	O
-.	.	O
-SQL	NN	O
-:	:	O
-SELECT	NNP	O
-
-u	NN	O
-.	.	O
-id	NN	O
-,	,	O
-u	JJ	O
-.	.	O
-name	NN	O
-,	,	O
-isnull(	JJ	O
-MAX(	NNP	O
-h	NN	O
-
-.	.	O
-dateCol	NN	O
-)	)	O
-,	,	O
-'	''	O
-1900-01-01	JJ	O
-'	POS	O
-)	)	O
-dateColWithDefault	NN	O
-FROM	NNP	O
-universe	NN	O
-
-u	NN	O
-LEFT	NNP	O
-JOIN	NNP	O
-history	NN	O
-h	NN	O
-ON	NNP	O
-u	NN	O
-.	.	O
-id	JJ	O
-=h	NN	O
-.	.	O
-
-id	NN	O
-AND	CC	O
-h	NN	O
-.	.	O
-dateCol	NN	O
-<GETDATE	NN	O
-(	(	O
-)	)	O
--	:	O
-1	CD	O
-GROUP	NNP	O
-
-BY	NNP	O
-u	NN	O
-.	.	O
-Id	NNP	O
-,	,	O
-u	NN	O
-.	.	O
-name	NN	O
 A	DT	O
 solution	NN	O
 ,	,	O
-
 albeit	IN	O
 one	CD	O
 that	WDT	O
@@ -2946,10 +9,10 @@ handling	NN	O
 of	IN	O
 the	DT	O
 null	JJ	O
+
 value	NN	O
 to	TO	O
 the	DT	O
-
 code	NN	O
 ,	,	O
 could	MD	O
@@ -2958,12 +21,19 @@ be	VB	O
 DateTime	NNP	O
 yesterday	NN	O
 =	NNP	O
-DateTime.Now.Date.AddDays(	NNP	O
--	:	O
-1	CD	O
 
-)	)	L-API
+DateTime	NNP	O
+.	.	O
+Now	RB	O
+.	.	O
+Date	NNP	O
+.	.	O
+AddDays	NNP	O
+(-	JJ	O
+1	CD	O
+)	)	O
 ;	:	O
+
 var	CC	O
 collection	NN	O
 =	NN	O
@@ -2973,9 +43,9 @@ in	IN	O
 db	NN	O
 .	.	O
 Universe	NNP	O
-
 select	JJ	O
 new	JJ	O
+
 {	(	O
 u	JJ	O
 .	.	O
@@ -2985,9 +55,9 @@ u	JJ	O
 .	.	O
 name	NN	O
 ,	,	O
-
 MaxDate	NNP	O
 =	NNP	O
+
 (	(	O
 DateTime	NNP	O
 ?	.	O
@@ -2997,9 +67,9 @@ from	IN	O
 h	NN	O
 in	IN	O
 db	NN	O
-
 .	.	O
 History	NNP	O
+
 where	WRB	O
 u	NN	O
 .	.	O
@@ -3009,9 +79,9 @@ Id	NNP	O
 h	NN	O
 .	.	O
 Id	NNP	O
+&	CC	O
+&	CC	O
 
-&	CC	O
-&	CC	O
 h	NN	O
 .	.	O
 dateCol	NN	O
@@ -3021,10 +91,12 @@ select	VBP	O
 h	NN	O
 .	.	O
 dateCol	NN	O
-
 )	)	O
 .	.	O
-Max()	NNP	O
+
+Max	NNP	U-API
+(	(	U-API
+)	)	U-API
 }	)	O
 ;	:	O
 This	DT	O
@@ -3114,9 +186,9 @@ $var1	NNP	O
 ;	:	O
 $var2	NNP	O
 =	NNP	O
-"new	NNP	B-API
-test	NN	I-API
-"	NN	I-API
+"new	NNP	O
+test	NN	O
+"	NN	O
 
 ;	:	O
 $var3	NNP	O
@@ -3131,16 +203,16 @@ test	NN	O
 "	NN	O
 
 ;	:	O
-print	NN	O
-(	(	O
-"var1	JJ	O
-:	:	O
-$var1	NN	O
-,	,	O
-var2	NN	O
-:	:	O
-$var2	NN	O
-,	,	O
+print	NN	B-API
+(	(	B-API
+"var1	JJ	I-API
+:	:	I-API
+$var1	NN	I-API
+,	,	I-API
+var2	NN	I-API
+:	:	I-API
+$var2	NN	I-API
+,	,	I-API
 
 var3	NN	O
 :	:	O
@@ -3183,13 +255,14 @@ $var2	NNP	O
 "bar	NNP	O
 "	NNP	O
 ;	:	O
-changeThem(	NN	B-API
-$var1	NN	I-API
+changeThem	NN	B-API
+(	(	B-API
+$var1	UH	I-API
 ,	,	I-API
 $var2	NNP	I-API
 )	)	L-API
-;	:	O
 
+;	:	O
 print	NN	O
 "var1	NN	O
 :	:	O
@@ -3200,20 +273,21 @@ var2	NN	O
 $var2	JJ	O
 "	NN	O
 ;	:	O
-function	NN	O
 
-changeThem(	NN	O
-$var1	NNP	O
-,	,	O
-&	CC	O
-$var2	NNP	O
-)	)	O
+function	NN	O
+changeThem	NN	B-API
+(	(	B-API
+$var1	NNP	I-API
+,	,	I-API
+&	CC	I-API
+$var2	NNP	I-API
+)	)	L-API
 {	(	O
 $var1	JJ	O
 =	NNP	O
+
 "FOO	NNP	O
 "	NNP	O
-
 ;	:	O
 $var2	NNP	O
 =	NNP	O
@@ -3223,9 +297,9 @@ $var2	NNP	O
 }	)	O
 would	MD	O
 output	NN	O
+
 :	:	O
 "var1	NN	O
-
 :	:	O
 foo	NN	O
 ,	,	O
@@ -3235,9 +309,9 @@ BAR	NNP	O
 .	.	O
 Object	NNP	O
 variables	NNS	O
+
 passed	VBN	O
 by	IN	O
-
 reference	NN	O
 exampe	NN	O
 :	:	O
@@ -3247,9 +321,11 @@ Foo	NNP	O
 public	JJ	O
 $var1	NNPS	O
 ;	:	O
-function	NN	O
-__construct()	FW	B-API
 
+function	NN	O
+__construct	NN	U-API
+(	(	U-API
+)	)	U-API
 {	(	O
 $this	SYM	O
 -	:	O
@@ -3257,39 +333,46 @@ $this	SYM	O
 =	JJ	O
 "foo	NNP	O
 "	NNP	O
+
 ;	:	O
 }	)	O
-public	JJ	U-API
+public	JJ	O
 function	NN	O
-
-printFoo()	NN	O
+printFoo	NN	U-API
+(	(	U-API
+)	)	U-API
 {	(	O
 print	NN	O
 $this	SYM	O
 -	:	O
+
 >var1	NN	O
 ;	:	O
 }	)	O
 }	)	O
 $foo	NNP	O
 =	NNP	O
-
 new	JJ	O
-Foo()	NNP	U-API
+Foo	NNP	U-API
+(	(	U-API
+)	)	U-API
 ;	:	O
-changeFoo(	VB	B-API
+
+changeFoo	NN	B-API
+(	(	B-API
 $foo	NNP	I-API
 )	)	L-API
 ;	:	O
 $foo	SYM	O
 -	:	O
 >printFoo	NN	O
-(	(	O
-
-)	)	L-API
+(	(	U-API
+)	)	U-API
 ;	:	O
+
 function	NN	O
-changeFoo(	NN	B-API
+changeFoo	NN	B-API
+(	(	B-API
 $foo	NNP	I-API
 )	)	L-API
 {	(	O
@@ -3297,8 +380,8 @@ $foo	SYM	O
 -	:	O
 >var1	NN	O
 =	JJ	O
-
 "FOO	NNP	O
+
 "	NNP	O
 ;	:	O
 }	)	O
@@ -3309,8 +392,8 @@ output	NN	O
 "	NN	O
 (	(	O
 that	IN	O
-
 last	JJ	O
+
 example	NN	O
 could	MD	O
 be	VB	O
@@ -3321,8 +404,8 @@ probably	RB	O
 Rather	JJR	O
 than	IN	O
 coding	VBG	O
-
 this	DT	O
+
 out	IN	O
 ,	,	O
 I	PRP	O
@@ -3333,8 +416,8 @@ it	PRP	O
 in	IN	O
 steps	NNS	O
 and	CC	O
-
 explain	VB	O
+
 my	PRP$	O
 logic	NN	O
 ,	,	O
@@ -3345,8 +428,8 @@ programmers	NNS	O
 can	MD	O
 poke	VB	O
 holes	NNS	O
-
 in	IN	O
+
 my	PRP$	O
 logic	NN	O
 if	IN	O
@@ -3357,8 +440,8 @@ the	DT	O
 first	JJ	O
 step	NN	O
 we	PRP	O
-
 start	VBP	O
+
 out	RP	O
 with	IN	O
 a	DT	O
@@ -3369,8 +452,8 @@ length	VBP	O
 n	RB	O
 .	.	O
 For	IN	O
-
 each	DT	O
+
 number	NN	O
 we	PRP	O
 need	VBP	O
@@ -3381,8 +464,8 @@ list	NN	O
 of	IN	O
 length	JJ	O
 n-1	JJ	O
-
 becuase	NN	O
+
 we	PRP	O
 aren't	VBP	O
 adding	VBG	O
@@ -3393,8 +476,8 @@ itself	PRP	O
 .	.	O
 By	IN	O
 the	DT	O
-
 end	NN	O
+
 we	PRP	O
 have	VBP	O
 a	DT	O
@@ -3405,13 +488,14 @@ n	NN	O
 sorted	VBD	O
 lists	NNS	O
 that	WDT	O
-
 was	VBD	O
+
 generated	VBN	O
 in	IN	O
-O(	NNP	O
-n	FW	O
-^2	NNP	O
+O	NNP	O
+(	(	O
+n	JJ	O
+^2	NN	O
 )	)	O
 time	NN	O
 .	.	O
@@ -3505,15 +589,16 @@ end	NN	O
 this	DT	O
 should	MD	O
 take	VB	O
-O(	NNP	O
-n	NNP	O
-^2	NNP	O
+O	NNP	O
+(	(	O
+n	JJ	O
+^2	NN	O
 )	)	O
 time	NN	O
 .	.	O
 step	VB	O
-2	CD	O
 
+2	CD	O
 (	(	O
 sumlist	NN	O
 )	)	O
@@ -3524,8 +609,8 @@ list	NN	O
 mergedlist	NN	O
 for	IN	O
 each	DT	O
-list	NN	O
 
+list	NN	O
 templist	NN	O
 in	IN	O
 sumlist	NN	O
@@ -3534,11 +619,11 @@ mergelist	JJ	O
 equal	JJ	O
 to	TO	O
 :	:	O
-merge(	NN	O
-mergedlist	NN	O
-,	,	O
+merge	NN	O
+(	(	O
 
-templist	NN	O
+mergedlist	JJ	O
+,templist	NN	O
 )	)	O
 return	NN	O
 mergedlist	VBP	O
@@ -3548,8 +633,8 @@ method	NN	O
 would	MD	O
 be	VB	O
 then	RB	O
-the	DT	O
 
+the	DT	O
 normal	JJ	O
 merge	JJ	O
 step	NN	O
@@ -3560,8 +645,8 @@ to	TO	O
 make	VB	O
 sure	JJ	O
 that	IN	O
-there	EX	O
 
+there	EX	O
 are	VBP	O
 no	DT	O
 duplicate	NN	O
@@ -3572,8 +657,8 @@ won't	VBP	O
 write	VB	O
 this	DT	O
 out	RP	O
-because	IN	O
 
+because	IN	O
 anyone	NN	O
 can	MD	O
 look	VB	O
@@ -3584,20 +669,21 @@ So	RB	O
 there's	JJ	O
 my	PRP$	O
 solution	NN	O
-.	.	O
 
+.	.	O
 The	DT	O
 entire	JJ	O
 algorithm	NN	O
 is	VBZ	O
-O(	NNP	O
-n	RB	O
-^2	NNP	O
+O	NNP	O
+(	(	O
+n	JJ	O
+^2	NN	O
 )	)	O
 time	NN	O
+
 .	.	O
 Feel	NNP	O
-
 free	JJ	O
 to	TO	O
 point	VB	O
@@ -3607,9 +693,9 @@ mistakes	NNS	O
 or	CC	O
 improvements	NNS	O
 .	.	O
+
 It's	NNP	O
 by	IN	O
-
 value	NN	O
 according	VBG	O
 to	TO	O
@@ -3619,9 +705,9 @@ Documentation	NNP	O
 .	.	O
 By	IN	O
 default	NN	O
+
 ,	,	O
 function	NN	O
-
 arguments	NNS	O
 are	VBP	O
 passed	VBN	O
@@ -3631,34 +717,34 @@ value	NN	O
 so	IN	O
 that	IN	O
 if	IN	O
+
 the	DT	O
 value	NN	O
-
 of	IN	O
 the	DT	O
 argument	NN	O
 within	IN	O
-the	DT	U-API
+the	DT	O
 function	NN	O
 is	VBZ	O
 changed	VBN	O
 ,	,	O
+
 it	PRP	O
 does	VBZ	O
-
 not	RB	O
 get	VB	O
 changed	VBN	O
 outside	IN	O
 of	IN	O
-the	DT	U-API
+the	DT	O
 function	NN	O
 )	)	O
 .	.	O
+
 To	TO	O
 allow	VB	O
-
-a	DT	U-API
+a	DT	O
 function	NN	O
 to	TO	O
 modify	VB	O
@@ -3667,9 +753,9 @@ arguments	NNS	O
 ,	,	O
 they	PRP	O
 must	MD	O
+
 be	VB	O
 passed	VBN	O
-
 by	IN	O
 reference	NN	O
 .	.	O
@@ -3678,10 +764,10 @@ have	VB	O
 an	DT	O
 argument	NN	O
 to	TO	O
-a	DT	U-API
+a	DT	O
+
 function	NN	O
 always	RB	O
-
 passed	VBN	O
 by	IN	O
 reference	NN	O
@@ -3691,22 +777,23 @@ an	DT	O
 ampersand	NN	O
 (	(	O
 &	CC	O
-)	)	O
-to	TO	O
 
+)	)	U-API
+to	TO	O
 the	DT	O
 argument	NN	O
 name	NN	O
 in	IN	O
-the	DT	U-API
+the	DT	O
 function	NN	O
 definition	NN	O
 .	.	O
 <	CC	O
-?php	JJ	U-API
-function	NN	O
 
-add_some_extra(	NN	O
+?php	JJ	O
+function	NN	O
+add_some_extra	NN	O
+(	(	O
 &	CC	O
 $string	VBG	O
 )	)	O
@@ -3714,10 +801,10 @@ $string	VBG	O
 $string	VBG	O
 .	.	O
 =	NN	O
+
 '	''	O
 and	CC	O
 something	NN	O
-
 extra	JJ	O
 .	.	O
 '	''	O
@@ -3726,22 +813,23 @@ extra	JJ	O
 $str	FW	O
 =	NNP	O
 '	POS	O
+
 This	DT	O
 is	VBZ	O
 a	DT	O
-
 string	NN	O
 ,	,	O
 '	''	O
 ;	:	O
-add_some_extra(	IN	O
-$str	NNP	O
+add_some_extra	NNS	O
+(	(	O
+$str	NN	O
 )	)	O
+
 ;	:	O
 echo	JJ	O
 $str	NN	O
 ;	:	O
-
 /	CC	O
 /	VB	O
 outputs	NNS	O
@@ -3749,11 +837,11 @@ outputs	NNS	O
 This	DT	O
 is	VBZ	O
 a	DT	O
+
 string	NN	O
 ,	,	O
 and	CC	O
 something	NN	O
-
 extra	JJ	O
 .	.	O
 '	''	O
@@ -3761,11 +849,11 @@ extra	JJ	O
 >	JJ	O
 Try	NNP	O
 Eclipse	NNP	O
+
 PDT	NNP	O
 to	TO	O
 setup	VB	O
 an	DT	O
-
 Eclipse	NNP	O
 environment	NN	O
 that	WDT	O
@@ -3773,11 +861,11 @@ has	VBZ	O
 debugging	VBG	O
 features	NNS	O
 like	IN	O
+
 you	PRP	O
 mentioned	VBD	O
 .	.	O
 The	DT	O
-
 ability	NN	O
 to	TO	O
 step	VB	O
@@ -3785,11 +873,11 @@ into	IN	O
 the	DT	O
 code	NN	O
 is	VBZ	O
+
 a	DT	O
 much	RB	O
 better	JJR	O
 way	NN	O
-
 to	TO	O
 debug	VB	O
 then	RB	O
@@ -3797,11 +885,11 @@ the	DT	O
 old	JJ	O
 method	NN	O
 of	IN	O
+
 var_dump	NN	O
 and	CC	O
 print	NN	O
 at	IN	O
-
 various	JJ	O
 points	NNS	O
 to	TO	O
@@ -3809,11 +897,11 @@ see	VB	O
 where	WRB	O
 your	PRP$	O
 flow	NN	O
+
 goes	VBZ	O
 wrong	JJ	O
 .	.	O
 When	WRB	O
-
 all	DT	O
 else	RB	O
 fails	VBZ	O
@@ -3821,37 +909,43 @@ though	IN	O
 and	CC	O
 all	DT	O
 I	PRP	O
+
 have	VBP	O
 is	VBZ	O
 SSH	NNP	O
 and	CC	O
-
 vim	NN	O
 I	PRP	O
 still	RB	O
-var_dump()	VBP	O
-/die	NNP	O
+var_dump	VBP	O
 (	(	O
 )	)	O
+/die	NNP	O
+
+(	(	U-API
+)	)	U-API
 to	TO	O
 find	VB	O
 where	WRB	O
 the	DT	O
-
 code	NN	O
 goes	VBZ	O
 south	RB	O
 .	.	O
-print_r(	VB	B-API
-debug_backtrace()	NN	I-API
+print_r	NN	O
+
+(	(	B-API
+debug_backtrace	NN	I-API
+(	(	I-API
+)	)	I-API
 )	)	L-API
 ;	:	O
 or	CC	O
 something	NN	O
 like	IN	O
-
 that	DT	O
 :	:	O
+
 -	:	O
 )	)	O
 Attempting	VBG	O
@@ -3861,9 +955,9 @@ an	DT	O
 escape	NN	O
 character	NN	O
 into	IN	O
-
 a	DT	O
 table	JJ	O
+
 results	NNS	O
 in	IN	O
 a	DT	O
@@ -3873,20 +967,21 @@ For	IN	O
 example	NN	O
 :	:	O
 create	NN	O
-
 table	JJ	O
 EscapeTest	NNP	O
+
 (	(	O
 text	JJ	O
-varchar(	NN	B-API
-50	CD	I-API
-)	)	L-API
+varchar	NN	O
+(	(	O
+50	CD	O
+)	)	O
 )	)	O
 ;	:	O
 insert	VB	O
 into	IN	O
-
 EscapeTest	NNP	O
+
 (	(	O
 text	NN	O
 )	)	O
@@ -3897,8 +992,8 @@ This	DT	O
 is	VBZ	O
 the	DT	O
 first	JJ	O
-
 part	NN	O
+
 \n	NN	O
 And	CC	O
 this	DT	O
@@ -3909,8 +1004,8 @@ second	JJ	O
 )	)	O
 ;	:	O
 Produces	VBZ	O
-
 the	DT	O
+
 warning	NN	O
 :	:	O
 WARNING	NN	O
@@ -3921,8 +1016,8 @@ of	IN	O
 escape	NN	O
 in	IN	O
 a	DT	O
-
 string	JJ	O
+
 literal	NN	O
 (	(	O
 Using	VBG	O
@@ -3933,8 +1028,8 @@ PSQL	NNP	O
 )	)	O
 Anyone	NN	O
 know	VB	O
-
 how	WRB	O
+
 to	TO	O
 get	VB	O
 around	IN	O
@@ -3945,8 +1040,8 @@ roughly	RB	O
 and	CC	O
 from	IN	O
 memory	NN	O
-
 since	IN	O
+
 I	PRP	O
 don't	VBP	O
 have	VBP	O
@@ -3957,19 +1052,21 @@ laptop	NN	O
 :	:	O
 using	VBG	O
 (	(	O
-
 OleDBConnection	NNP	O
+
 conn	VBZ	O
 =	NNP	O
-new	JJ	B-API
-OleDbConnection()	NNP	I-API
-)	)	L-API
+new	JJ	O
+OleDbConnection	NNP	U-API
+(	(	U-API
+)	)	U-API
+)	)	O
 {	(	O
 conn	NN	O
 .	.	O
 ConnectionString	VBG	O
-=	JJ	O
 
+=	JJ	O
 "Whatever	JJ	O
 connection	NN	O
 string	VBG	O
@@ -3980,20 +1077,22 @@ using	VBG	O
 OleDbCommand	NNP	O
 cmd	VBZ	O
 =	NNP	O
-new	JJ	O
 
-OleDbCommand()	NNP	I-API
-)	)	L-API
+new	JJ	O
+OleDbCommand	NNP	U-API
+(	(	U-API
+)	)	U-API
+)	)	O
 {	(	O
 cmd	NN	O
 .	.	O
 Connection	NNP	O
 =	NNP	O
-conn	NN	U-API
+conn	NN	O
+
 ;	:	O
 cmd	NN	O
 .	.	O
-
 CommandText	NNP	O
 =	NNP	O
 "Select	NNP	O
@@ -4002,18 +1101,27 @@ from	IN	O
 CoolTable	NNP	O
 "	NNP	O
 ;	:	O
+
 using	VBG	O
 (	(	O
 OleDbDataReader	NNP	O
-
 dr	VBZ	O
 =	NNP	O
-cmd.ExecuteReader()	NN	O
+cmd	NN	U-API
+.	.	U-API
+ExecuteReader	NNP	U-API
+(	(	U-API
+)	)	U-API
 )	)	O
+
 {	(	O
 while	IN	O
 (	(	O
-dr.Read()	NN	O
+dr	NN	U-API
+.	.	U-API
+Read	NNP	U-API
+(	(	U-API
+)	)	U-API
 )	)	O
 {	(	O
 /	JJ	O
@@ -4022,14 +1130,17 @@ dr.Read()	NN	O
 do	VBP	O
 something	NN	O
 like	IN	O
-Console.WriteLine(	NNP	O
-dr	NN	O
+Console	NNP	O
+.	.	O
+WriteLine	NNP	O
+(	(	O
+dr	JJ	O
 [	NNP	O
-"column	NNP	O
+"column	NN	O
+
 name	NN	O
 "	NNP	O
 ]	NNP	O
-
 as	IN	O
 String	NNP	O
 )	)	O
@@ -4038,10 +1149,10 @@ String	NNP	O
 }	)	O
 }	)	O
 }	)	O
+
 Cool	NNP	O
 .	.	O
 I	PRP	O
-
 also	RB	O
 found	VBD	O
 the	DT	O
@@ -4050,10 +1161,10 @@ regarding	VBG	O
 the	DT	O
 E	NN	O
 :	:	O
+
 http	NN	O
 :	:	O
 /	JJ	O
-
 /www	NN	O
 .	.	O
 postgresql	NN	O
@@ -4062,10 +1173,10 @@ org	JJ	O
 /docs	JJ	O
 /8	NN	O
 .	.	O
+
 3	CD	O
 /interactive	JJ	O
 /sql	NNP	O
-
 -	:	O
 syntax-lexical	JJ	O
 .	.	O
@@ -4074,10 +1185,10 @@ html	NN	O
 -	:	O
 SYNTAX-STRINGS	JJ	O
 PostgreSQL	NNP	O
+
 also	RB	O
 accepts	VBZ	O
 "escape	NN	O
-
 "	NN	O
 string	NN	O
 constants	NNS	O
@@ -4086,10 +1197,10 @@ which	WDT	O
 are	VBP	O
 an	DT	O
 extension	NN	O
+
 to	TO	O
 the	DT	O
 SQL	NNP	O
-
 standard	NN	O
 .	.	O
 An	DT	O
@@ -4098,10 +1209,10 @@ string	NN	O
 constant	NN	O
 is	VBZ	O
 specified	VBN	O
+
 by	IN	O
 writing	VBG	O
 the	DT	O
-
 letter	NN	O
 E	NNP	O
 (	(	O
@@ -4110,10 +1221,10 @@ or	CC	O
 lower	JJR	O
 case	NN	O
 )	)	O
+
 just	RB	O
 before	IN	O
 the	DT	O
-
 opening	NN	O
 single	JJ	O
 quote	NN	O
@@ -4122,10 +1233,10 @@ e	NN	O
 .	.	O
 g	NN	O
 .	.	O
+
 E'foo	NNP	O
 '	POS	O
 .	.	O
-
 (	(	O
 When	WRB	O
 continuing	VBG	O
@@ -4134,10 +1245,10 @@ escape	NN	O
 string	NN	O
 constant	JJ	O
 across	IN	O
+
 lines	NNS	O
 ,	,	O
 write	VB	O
-
 E	NNP	O
 only	RB	O
 before	IN	O
@@ -4146,22 +1257,22 @@ first	JJ	O
 opening	NN	O
 quote	NN	O
 .	.	O
+
 )	)	O
 Within	IN	O
 an	DT	O
-
 escape	NN	O
 string	NN	O
 ,	,	O
 a	DT	O
 backslash	NN	O
-character	NN	O
-(	(	O
-\	JJ	O
+character	NN	B-API
+(	(	B-API
+\	JJ	I-API
+
 )	)	O
 begins	VBZ	O
 a	DT	O
-
 C-like	JJ	O
 backslash	NN	O
 escape	NN	O
@@ -4170,22 +1281,23 @@ sequence	NN	O
 in	IN	O
 which	WDT	O
 the	DT	O
+
 combination	NN	O
 of	IN	O
 backslash	NN	O
-
 and	CC	O
 following	VBG	O
-character(	NN	B-API
-s	NN	I-API
-)	)	L-API
+character	NN	O
+(	(	O
+s	PRP	O
+)	)	O
 represents	VBZ	O
 a	DT	O
+
 special	JJ	O
 byte	NN	O
 value	NN	O
 .	.	O
-
 \b	CC	O
 is	VBZ	O
 a	DT	O
@@ -4193,11 +1305,11 @@ backspace	NN	O
 ,	,	O
 \f	NNP	O
 is	VBZ	O
+
 a	DT	O
 form	NN	O
 feed	NN	O
 ,	,	O
-
 \n	NNP	O
 is	VBZ	O
 a	DT	O
@@ -4205,11 +1317,11 @@ newline	NN	O
 ,	,	O
 \r	NNP	O
 is	VBZ	O
+
 a	DT	O
 carriage	NN	O
 return	NN	O
 ,	,	O
-
 \t	NNP	O
 is	VBZ	O
 a	DT	O
@@ -4217,11 +1329,11 @@ tab	NN	O
 .	.	O
 Also	RB	O
 supported	VBN	O
+
 are	VBP	O
 \digits	NNS	O
 ,	,	O
 where	WRB	O
-
 digits	NNS	O
 represents	VBZ	O
 an	DT	O
@@ -4229,11 +1341,11 @@ octal	JJ	O
 byte	NN	O
 value	NN	O
 ,	,	O
+
 and	CC	O
 \xhexdigits	NNS	O
 ,	,	O
 where	WRB	O
-
 hexdigits	NNS	O
 represents	VBZ	O
 a	DT	O
@@ -4241,11 +1353,11 @@ hexadecimal	JJ	O
 byte	NN	O
 value	NN	O
 .	.	O
+
 (	(	O
 It	PRP	O
 is	VBZ	O
 your	PRP$	O
-
 responsibility	NN	O
 that	IN	O
 the	DT	O
@@ -4253,11 +1365,11 @@ byte	NN	O
 sequences	NNS	O
 you	PRP	O
 create	VBP	O
+
 are	VBP	O
 valid	JJ	O
 characters	NNS	O
 in	IN	O
-
 the	DT	O
 server	NN	O
 character	NN	O
@@ -4265,11 +1377,11 @@ set	VBN	O
 encoding	VBG	O
 .	.	O
 )	)	O
+
 Any	IN	O
 other	JJ	O
 character	NN	O
 following	VBG	O
-
 a	DT	O
 backslash	NN	O
 is	VBZ	O
@@ -4277,11 +1389,11 @@ taken	VBN	O
 literally	RB	O
 .	.	O
 Thus	RB	O
+
 ,	,	O
 to	TO	O
 include	VB	O
 a	DT	O
-
 backslash	JJ	O
 character	NN	O
 ,	,	O
@@ -4289,11 +1401,11 @@ write	JJ	O
 two	CD	O
 backslashes	NNS	O
 (	(	O
+
 \	NNP	O
 \	NNP	O
 )	)	O
 .	.	O
-
 Also	RB	O
 ,	,	O
 a	DT	O
@@ -4301,11 +1413,11 @@ single	JJ	O
 quote	NN	O
 can	MD	O
 be	VB	O
+
 included	VBN	O
 in	IN	O
 an	DT	O
 escape	NN	O
-
 string	NN	O
 by	IN	O
 writing	VBG	O
@@ -4313,11 +1425,11 @@ writing	VBG	O
 '	''	O
 ,	,	O
 in	IN	O
+
 addition	NN	O
 to	TO	O
 the	DT	O
 normal	JJ	O
-
 way	NN	O
 of	IN	O
 '	''	O
@@ -4325,11 +1437,11 @@ of	IN	O
 .	.	O
 @Goyuix	NNS	O
 --	:	O
+
 that's	VB	O
 excellent	JJ	O
 for	IN	O
 something	NN	O
-
 written	VBN	O
 from	IN	O
 memory	NN	O
@@ -4337,11 +1449,11 @@ memory	NN	O
 tested	VBD	O
 it	PRP	O
 here	RB	O
+
 --	:	O
 found	VBD	O
 the	DT	O
 connection	NN	O
-
 wasn't	NN	O
 opened	VBD	O
 .	.	O
@@ -4349,11 +1461,11 @@ Otherwise	VB	O
 very	RB	O
 nice	JJ	O
 .	.	O
+
 using	VBG	O
 System	NNP	O
 .	.	O
 Data	NNP	O
-
 .	.	O
 OleDb	NNP	O
 ;	:	O
@@ -4361,59 +1473,68 @@ OleDb	NNP	O
 using	VBG	O
 (	(	O
 OleDbConnection	NNP	O
+
 conn	VBZ	O
 =	NNP	O
 new	JJ	O
-OleDbConnection()	NNP	O
-
-)	)	L-API
+OleDbConnection	NNP	U-API
+(	(	U-API
+)	)	U-API
+)	)	O
 {	(	O
 conn	NN	O
 .	.	O
 ConnectionString	VBG	O
+
 =	JJ	O
 "Provider	NN	O
 =sqloledb	NNP	O
 ;Data	NNP	O
 Source	NNP	O
 =yourServername	NNP	O
-
 \	NNP	O
 \yourInstance	NNP	O
 ;Initial	NNP	O
 Catalog	NNP	O
 =databaseName	NNP	O
+
 ;Integrated	VBD	O
 Security	NNP	O
 =SSPI	NNP	O
 ;	:	O
 "	NNP	O
 ;	:	O
-
 using	VBG	O
 (	(	O
 OleDbCommand	NNP	O
 cmd	VBZ	O
 =	NNP	O
-new	JJ	B-API
-OleDbCommand()	NNP	I-API
-)	)	L-API
-{	(	O
-conn.Open()	NN	U-API
-;	:	O
 
+new	JJ	O
+OleDbCommand	NNP	U-API
+(	(	U-API
+)	)	U-API
+)	)	O
+{	(	O
+conn	NN	U-API
+.	.	U-API
+Open	NNP	U-API
+(	(	U-API
+)	)	U-API
+
+;	:	O
 cmd	NN	O
 .	.	O
 Connection	NNP	O
 =	NNP	O
-conn	NN	U-API
+conn	NN	O
 ;	:	O
 cmd	NN	O
 .	.	O
 CommandText	NNP	O
 =	NNP	O
-"Select	NNP	O
 
+"Select	NNP	O
 *	NNP	O
 from	IN	O
 yourTable	JJ	O
@@ -4424,20 +1545,32 @@ using	VBG	O
 OleDbDataReader	NNP	O
 dr	VBZ	O
 =	NNP	O
-cmd.ExecuteReader()	NN	O
 
-)	)	L-API
+cmd	NN	U-API
+.	.	U-API
+ExecuteReader	NNP	U-API
+(	(	U-API
+)	)	U-API
+)	)	O
 {	(	O
 while	IN	O
 (	(	O
-dr.Read()	NN	O
+dr	NN	O
+.	.	O
+
+Read	NNP	U-API
+(	(	U-API
+)	)	U-API
 )	)	O
 {	(	O
-Console.WriteLine(	NNP	O
-dr	VBZ	O
-[	JJ	O
-"columnName	NNP	O
+Console	NNP	B-API
+.	.	B-API
+WriteLine	NNP	B-API
+(	(	B-API
+dr	JJ	I-API
+[	NN	I-API
 
+"columnName	NN	I-API
 "	NNP	I-API
 ]	NNP	I-API
 )	)	L-API
@@ -4448,8 +1581,8 @@ dr	VBZ	O
 }	)	O
 I've	NNP	O
 read	VBP	O
-that	IN	O
 
+that	IN	O
 it	PRP	O
 is	VBZ	O
 possible	JJ	O
@@ -4460,8 +1593,8 @@ method	NN	O
 to	TO	O
 an	DT	O
 existing	VBG	O
-object	NN	O
 
+object	NN	O
 (	(	O
 e	NN	O
 .	.	O
@@ -4472,8 +1605,8 @@ in	IN	O
 the	DT	O
 class	NN	O
 definition	NN	O
-)	)	O
 
+)	)	O
 in	IN	O
 Python	NNP	O
 ,	,	O
@@ -4484,8 +1617,8 @@ is	VBZ	O
 called	VBN	O
 Monkey	NNP	O
 Patching	NNP	O
-(	(	O
 
+(	(	O
 or	CC	O
 in	IN	O
 some	DT	O
@@ -4496,8 +1629,8 @@ Punching	NNP	O
 .	.	O
 I	PRP	O
 understand	VBP	O
-that	DT	O
 
+that	DT	O
 it's	NN	O
 not	RB	O
 always	RB	O
@@ -4508,8 +1641,8 @@ to	TO	O
 do	VB	O
 so	RB	O
 .	.	O
-But	CC	O
 
+But	CC	O
 ,	,	O
 how	WRB	O
 might	MD	O
@@ -4520,8 +1653,8 @@ this	DT	O
 UPDATE	$	O
 8	CD	O
 /04	NNP	O
-/2008	VBD	O
 
+/2008	VBD	O
 00	CD	O
 :21	NNP	O
 :01	NN	O
@@ -4532,8 +1665,8 @@ looks	VBZ	O
 like	IN	O
 a	DT	O
 good	JJ	O
-answer	NN	O
 
+answer	NN	O
 John	NNP	O
 Downey	NNP	O
 ,	,	O
@@ -4544,8 +1677,8 @@ but	CC	O
 it	PRP	O
 appears	VBZ	O
 that	IN	O
-it	PRP	O
 
+it	PRP	O
 ends	VBZ	O
 up	RP	O
 being	VBG	O
@@ -4556,11 +1689,11 @@ method	NN	O
 .	.	O
 Your	PRP$	O
 example	NN	O
-defines	VBZ	O
 
+defines	VBZ	O
 the	DT	O
 new	JJ	O
-patch	NN	U-API
+patch	NN	O
 function	NN	O
 with	IN	O
 an	DT	O
@@ -4568,8 +1701,8 @@ argument	NN	O
 of	IN	O
 self	NN	O
 ,	,	O
-but	CC	O
 
+but	CC	O
 if	IN	O
 you	PRP	O
 write	VBP	O
@@ -4580,8 +1713,8 @@ way	NN	O
 ,	,	O
 the	DT	O
 now	RB	O
-patched	JJ	O
 
+patched	JJ	O
 class	NN	O
 method	NN	O
 asks	VBZ	O
@@ -4592,8 +1725,8 @@ named	VBN	O
 self	NN	O
 (	(	O
 it	PRP	O
-doesn't	VBZ	O
 
+doesn't	VBZ	O
 automagically	RB	O
 recognize	VB	O
 it	PRP	O
@@ -4604,8 +1737,8 @@ to	TO	O
 which	WDT	O
 it	PRP	O
 is	VBZ	O
-supposed	VBN	O
 
+supposed	VBN	O
 to	TO	O
 bind	VB	O
 ,	,	O
@@ -4616,8 +1749,8 @@ would	MD	O
 happen	VB	O
 if	IN	O
 defined	VBN	O
-within	IN	O
 
+within	IN	O
 the	DT	O
 class	NN	O
 definition	NN	O
@@ -4628,23 +1761,31 @@ you	PRP	O
 have	VBP	O
 to	TO	O
 call	VB	O
-class.patch(	JJ	O
 
-obj	NN	O
+class	NN	O
+.	.	O
+patch	NN	O
+(	(	O
+obj	PRP	O
 )	)	O
 instead	RB	O
 of	IN	O
 just	RB	O
-class.patch()	VB	O
+class	NN	O
+.	.	O
+
+patch	NN	U-API
+(	(	U-API
+)	)	U-API
 if	IN	O
 you	PRP	O
 want	VBP	O
 the	DT	O
 same	JJ	O
-
 functionality	NN	O
 as	IN	O
 a	DT	O
+
 true	JJ	O
 method	NN	O
 .	.	O
@@ -4653,10 +1794,10 @@ looks	VBZ	O
 like	IN	O
 Python	NNP	O
 isn't	VBP	O
-
 really	RB	O
 treating	VBG	O
 it	PRP	O
+
 as	IN	O
 a	DT	O
 method	NN	O
@@ -4665,22 +1806,22 @@ but	CC	O
 more	JJR	O
 just	RB	O
 as	IN	O
-
 a	DT	O
 variable	JJ	O
 which	WDT	O
+
 happens	VBZ	O
 to	TO	O
 be	VB	O
-a	DT	U-API
+a	DT	O
 function	NN	O
 (	(	O
 and	CC	O
 as	IN	O
-
 such	JJ	O
 is	VBZ	O
 callable	JJ	O
+
 )	)	O
 .	.	O
 Is	VBZ	O
@@ -4689,10 +1830,10 @@ any	DT	O
 way	NN	O
 to	TO	O
 attach	VB	O
-
 an	DT	O
 actual	JJ	O
 method	NN	O
+
 to	TO	O
 a	DT	O
 class	NN	O
@@ -4701,10 +1842,10 @@ Oh	UH	O
 ,	,	O
 and	CC	O
 Ryan	NNP	O
-
 ,	,	O
 that	WDT	O
 isn't	VBZ	O
+
 exactly	RB	O
 what	WP	O
 I	PRP	O
@@ -4713,10 +1854,10 @@ looking	VBG	O
 for	IN	O
 (	(	O
 it	PRP	O
-
 isn't	VBZ	O
 a	DT	O
 builtin	JJ	O
+
 functionality	NN	O
 )	)	O
 ,	,	O
@@ -4725,10 +1866,10 @@ it	PRP	O
 is	VBZ	O
 quite	RB	O
 cool	JJ	O
-
 nonetheless	RB	O
 .	.	O
 In	IN	O
+
 Python	NNP	O
 monkey	NN	O
 patching	VBG	O
@@ -4737,10 +1878,10 @@ works	VBN	O
 by	IN	O
 overwriting	VBG	O
 a	DT	O
-
 class	NN	O
 or	CC	O
 functions	NNS	O
+
 signature	VBP	O
 with	IN	O
 your	PRP$	O
@@ -4749,10 +1890,10 @@ own	JJ	O
 Below	NNP	O
 is	VBZ	O
 an	DT	O
-
 example	NN	O
 from	IN	O
 the	DT	O
+
 Zope	NNP	O
 Wiki	NNP	O
 :	:	O
@@ -4761,21 +1902,22 @@ SomeOtherProduct	NNP	O
 .	.	O
 SomeModule	NNP	O
 import	NN	O
-
 SomeClassdef	NNP	O
-speak(	VBZ	O
+speak	NN	O
+(	(	O
+
 self	PRP	O
 )	)	O
 :	:	O
 return	NN	O
-"ook	NN	B-API
-ook	NN	I-API
-eee	NN	I-API
-eee	NN	I-API
-eee	NN	I-API
-
+"ook	NN	O
+ook	NN	O
+eee	NN	O
+eee	NN	O
+eee	NN	O
 !	.	O
 "SomeClass	NN	O
+
 .	.	O
 speak	JJ	O
 =	JJ	O
@@ -4785,9 +1927,9 @@ code	NN	O
 will	MD	O
 overwrite	VB	O
 /create	VB	O
-
 a	DT	O
 method	NN	O
+
 called	VBN	O
 speak	NN	O
 on	IN	O
@@ -4797,9 +1939,9 @@ class	NN	O
 In	IN	O
 Jeff	NNP	O
 Atwood's	NNP	O
-
 recent	JJ	O
 post	NN	O
+
 on	IN	O
 monkey	NN	O
 patching	NN	O
@@ -4809,9 +1951,9 @@ shows	VBZ	O
 an	DT	O
 example	NN	O
 in	IN	O
-
 C	NNP	O
 #	#	O
+
 3	CD	O
 .	.	O
 0	CD	O
@@ -4821,9 +1963,9 @@ the	DT	O
 current	JJ	O
 language	NN	O
 I	PRP	O
-
 use	VBP	O
 for	IN	O
+
 work	NN	O
 .	.	O
 That's	NNP	O
@@ -4833,9 +1975,9 @@ good	JJ	O
 way	NN	O
 to	TO	O
 do	VB	O
-
 it	PRP	O
 .	.	O
+
 But	CC	O
 you	PRP	O
 if	IN	O
@@ -4845,9 +1987,9 @@ to	TO	O
 be	VB	O
 using	VBG	O
 a	DT	O
-
 database	NN	O
 that	WDT	O
+
 supports	VBZ	O
 LINQ	NNP	O
 to	TO	O
@@ -4857,9 +1999,9 @@ it	PRP	O
 can	MD	O
 be	VB	O
 a	DT	O
-
 lot	NN	O
 more	JJR	O
+
 fun	NN	O
 .	.	O
 It	PRP	O
@@ -4869,20 +2011,21 @@ something	NN	O
 like	IN	O
 this	DT	O
 :	:	O
-
 MyDB	NNP	O
 db	VBZ	O
+
 =	NNP	O
 new	JJ	O
-MyDB(	NNP	B-API
-"Data	NNP	I-API
-Source	NNP	I-API
-=	NN	I-API
-...	:	I-API
-"	NN	I-API
-)	)	L-API
-
+MyDB	NNP	O
+(	(	O
+"Data	NNP	O
+Source	NNP	O
+=	NN	O
+...	:	O
+"	NN	O
+)	)	O
 ;var	VBZ	O
+
 q	JJ	O
 =	NN	O
 from	IN	O
@@ -4891,24 +2034,34 @@ db	NN	O
 MyTable	JJ	O
 select	JJ	O
 c	NN	O
-;foreach	NN	O
-(	(	O
+;foreach	NN	B-API
+(	(	B-API
+var	JJ	I-API
 
-var	JJ	O
 c	NN	O
 in	IN	O
 q	NN	O
 )	)	O
-Console.WriteLine(	NNP	O
-c.MyField.ToString()	NN	O
+Console	NNP	O
+.	.	O
+WriteLine	NNP	O
+(	(	O
+c	NN	O
+.	.	O
+MyField	NNP	O
+
+.	.	U-API
+ToString	NNP	U-API
+(	(	U-API
+)	)	U-API
 )	)	O
 ;	:	O
 This	DT	O
 was	VBD	O
-
 caused	VBN	O
 by	IN	O
 a	DT	O
+
 change	NN	O
 in	IN	O
 rails	NNS	O
@@ -4917,10 +2070,10 @@ rails	NNS	O
 1	CD	O
 which	WDT	O
 prevents	NNS	O
-
 rails	VBZ	O
 from	IN	O
 loading	VBG	O
+
 views	NNS	O
 from	IN	O
 any	DT	O
@@ -4929,10 +2082,10 @@ path	NN	O
 for	IN	O
 security	NN	O
 reasons	NNS	O
-
 .	.	O
 There	EX	O
 is	VBZ	O
+
 now	RB	O
 an	DT	O
 updated	JJ	O
@@ -4941,10 +2094,10 @@ of	IN	O
 the	DT	O
 plugin	NN	O
 on	IN	O
-
 github	NN	O
 ,	,	O
 so	IN	O
+
 the	DT	O
 solution	NN	O
 is	VBZ	O
@@ -4953,10 +2106,10 @@ use	VB	O
 that	DT	O
 .	.	O
 The	DT	O
-
 old	JJ	O
 solution	NN	O
 here	RB	O
+
 for	IN	O
 posterity	NN	O
 To	TO	O
@@ -4965,10 +2118,10 @@ around	IN	O
 it	PRP	O
 ,	,	O
 edit	VBZ	O
-
 init	NN	O
 .	.	O
 rb	VB	O
+
 under	IN	O
 your	PRP$	O
 vendor	NN	O
@@ -4977,10 +2130,10 @@ vendor	NN	O
 directory	NN	O
 ,	,	O
 and	CC	O
-
 add	VB	O
 the	DT	O
 following	JJ	O
+
 code	NN	O
 to	TO	O
 the	DT	O
@@ -4989,13 +2142,16 @@ ActionController	NN	O
 :	:	O
 :Base	NN	O
 .	.	O
-
 class_eval	NN	O
 do	VBP	O
 append_view_path	RB	O
-File.dirname(	NNP	O
-__FILE__	NNP	O
-)	)	O
+
+File	NNP	B-API
+.	.	B-API
+dirname	NN	B-API
+(	(	B-API
+__FILE__	NNP	I-API
+)	)	L-API
 +	NNP	O
 '	POS	O
 /lib	NN	O
@@ -5131,9 +2287,13 @@ with	IN	O
 the	DT	O
 control	NN	O
 :	:	O
-AxShockwaveFlash1.Stop()	NNP	O
 AxShockwaveFlash1	NNP	O
+.	.	O
 
+Stop	NNP	U-API
+(	(	U-API
+)	)	U-API
+AxShockwaveFlash1	NNP	O
 .	.	O
 Movie	NNP	O
 =	NNP	O
@@ -5141,14 +2301,19 @@ FilePath	NNP	O
 &	CC	O
 "	NNP	O
 \FileName	NNP	O
+
 .	.	O
 swf	NN	O
-"	NNP	O
-AxShockwaveFlash1.Play()	NNP	O
-
+"	JJ	O
+AxShockwaveFlash1	NNP	U-API
+.	.	U-API
+Play	NNP	U-API
+(	(	U-API
+)	)	U-API
 which	WDT	O
 ,	,	O
 I	PRP	O
+
 think	VBP	O
 ,	,	O
 are	VBP	O
@@ -5157,10 +2322,10 @@ self	JJ	O
 explanatory	NN	O
 .	.	O
 It	PRP	O
-
 would	MD	O
 be	VB	O
 great	JJ	O
+
 to	TO	O
 be	VB	O
 able	JJ	O
@@ -5169,10 +2334,10 @@ load	VB	O
 the	DT	O
 flash	NN	O
 content	NN	O
-
 from	IN	O
 a	DT	O
 stream	NN	O
+
 of	IN	O
 sorts	NNS	O
 rather	RB	O
@@ -5181,10 +2346,10 @@ a	DT	O
 file	NN	O
 on	IN	O
 disk	NN	O
-
 .	.	O
 I	PRP	O
 just	RB	O
+
 saw	VBD	O
 you	PRP	O
 are	VBP	O
@@ -5193,10 +2358,10 @@ looking	VBG	O
 for	IN	O
 a	DT	O
 means	NNS	O
-
 to	TO	O
 load	VB	O
 the	DT	O
+
 content	NN	O
 from	IN	O
 a	DT	O
@@ -5205,10 +2370,10 @@ stream	NN	O
 and	CC	O
 because	RB	O
 I'm	NNP	O
-
 not	RB	O
 really	RB	O
 sure	JJ	O
+
 that	WDT	O
 is	VBZ	O
 possible	JJ	O
@@ -5217,10 +2382,10 @@ the	DT	O
 shockwave	NN	O
 flash	NN	O
 object	NN	O
-
 I	PRP	O
 will	MD	O
 give	VB	O
+
 you	PRP	O
 another	DT	O
 option	NN	O
@@ -5229,10 +2394,10 @@ two	CD	O
 actually	RB	O
 )	)	O
 .	.	O
-
 the	DT	O
 first	JJ	O
 is	VBZ	O
+
 the	DT	O
 one	NN	O
 I	PRP	O
@@ -5241,10 +2406,10 @@ advise	VB	O
 you	PRP	O
 to	TO	O
 use	VB	O
-
 only	RB	O
 when	WRB	O
 necessary	JJ	O
+
 ,	,	O
 as	IN	O
 it	PRP	O
@@ -5253,22 +2418,22 @@ the	DT	O
 full	JJ	O
 blown	NN	O
 "webbrowser	NNP	O
-
 component	NN	O
 "	NN	O
 (	(	O
+
 also	RB	O
 available	JJ	O
 as	IN	O
 an	DT	O
 extra	JJ	O
-toolbox	NN	B-API
-item	NN	I-API
-)	)	L-API
-
+toolbox	NN	O
+item	NN	O
+)	)	O
 ,	,	O
 which	WDT	O
 is	VBZ	O
+
 like	IN	O
 trying	VBG	O
 to	TO	O
@@ -5277,10 +2442,10 @@ a	DT	O
 fly	NN	O
 with	IN	O
 a	DT	O
-
 bazooka	NN	O
 .	.	O
 of	IN	O
+
 course	NN	O
 it	PRP	O
 will	MD	O
@@ -5289,10 +2454,10 @@ work	VB	O
 as	IN	O
 the	DT	O
 control	NN	O
-
 will	MD	O
 act	VB	O
 as	IN	O
+
 a	DT	O
 real	JJ	O
 browser	NN	O
@@ -5301,10 +2466,10 @@ window	NN	O
 actually	RB	O
 the	DT	O
 internet	JJ	O
+explorer	NN	O
+browser	NN	O
+)	)	O
 
-explorer	NN	B-API
-browser	NN	I-API
-)	)	L-API
 ,	,	O
 but	CC	O
 its	PRP$	O
@@ -5313,10 +2478,10 @@ really	RB	O
 meant	VB	O
 to	TO	O
 be	VB	O
-
 used	VBN	O
 in	IN	O
 the	DT	O
+
 way	NN	O
 you	PRP	O
 need	VBP	O
@@ -5325,10 +2490,10 @@ it	PRP	O
 the	DT	O
 second	JJ	O
 option	NN	O
-
 is	VBZ	O
 to	TO	O
 use	VB	O
+
 something	NN	O
 I	PRP	O
 just	RB	O
@@ -5337,10 +2502,10 @@ while	IN	O
 looking	VBG	O
 for	IN	O
 more	JJR	O
-
 information	NN	O
 about	IN	O
 playing	VBG	O
+
 flash	JJ	O
 content	NN	O
 inside	IN	O
@@ -5349,10 +2514,10 @@ windows	JJ	O
 form	NN	O
 .	.	O
 F-IN-BOX	NNP	O
-
 is	VBZ	O
 a	DT	O
 commercial	JJ	O
+
 solution	NN	O
 that	WDT	O
 will	MD	O
@@ -5361,10 +2526,10 @@ play	VB	O
 content	NN	O
 from	IN	O
 a	DT	O
-
 given	VBN	O
 website	NN	O
 URL	NNP	O
+
 .	.	O
 (	(	O
 The	DT	O
@@ -5373,10 +2538,10 @@ provided	VBD	O
 will	MD	O
 direct	VB	O
 you	PRP	O
-
 to	TO	O
 the	DT	O
 .	.	O
+
 NET	JJ	O
 code	NN	O
 you	PRP	O
@@ -5385,10 +2550,10 @@ to	TO	O
 use	VB	O
 )	)	O
 .	.	O
-
 I'm	NNP	O
 looking	VBG	O
 for	IN	O
+
 a	DT	O
 way	NN	O
 to	TO	O
@@ -5397,10 +2562,10 @@ a	DT	O
 file	NN	O
 which	WDT	O
 is	VBZ	O
-
 locked	VBN	O
 by	IN	O
 another	DT	O
+
 process	NN	O
 using	VBG	O
 C	NNP	O
@@ -5409,10 +2574,10 @@ C	NNP	O
 I	PRP	O
 suspect	VBP	O
 the	DT	O
-
 method	NN	O
 must	MD	O
 be	VB	O
+
 able	JJ	O
 to	TO	O
 find	VB	O
@@ -5421,10 +2586,10 @@ process	NN	O
 is	VBZ	O
 locking	VBG	O
 the	DT	O
-
 file	NN	O
 (	(	O
 perhaps	RB	O
+
 by	IN	O
 tracking	VBG	O
 the	DT	O
@@ -5433,10 +2598,10 @@ handles	NNS	O
 although	IN	O
 I'm	NNP	O
 not	RB	O
-
 sure	JJ	O
 how	WRB	O
 to	TO	O
+
 do	VB	O
 this	DT	O
 in	IN	O
@@ -5445,10 +2610,10 @@ C	NNP	O
 )	)	O
 then	RB	O
 close	VB	O
-
 that	IN	O
 process	NN	O
 before	IN	O
+
 being	VBG	O
 able	JJ	O
 to	TO	O
@@ -5457,8 +2622,12 @@ the	DT	O
 file	NN	O
 delete	NN	O
 using	VBG	O
+File	NNP	O
+.	.	O
+Delete	NNP	O
 
-File.Delete()	NNP	O
+(	(	U-API
+)	)	U-API
 .	.	O
 For	IN	O
 instance	NN	O
@@ -5468,8 +2637,8 @@ query	NN	O
 is	VBZ	O
 like	IN	O
 the	DT	O
-following	VBG	O
 
+following	VBG	O
 using	VBG	O
 SQL	NNP	O
 Server	NNP	O
@@ -5480,20 +2649,21 @@ SELECT	NNP	O
 FROM	NNP	O
 Table	NNP	O
 WHERE	NNP	O
-FREETEXT(	NNP	O
 
-SearchField	NNP	O
-,	,	O
-'	''	O
-c	JJ	O
-#	#	O
-'	POS	O
-)	)	O
+FREETEXT	NNP	B-API
+(	(	B-API
+SearchField	NNP	I-API
+,	,	I-API
+'	''	I-API
+c	JJ	I-API
+#	#	I-API
+'	POS	I-API
+)	)	L-API
 I	PRP	O
 have	VBP	O
+
 a	DT	O
 full	JJ	O
-
 text	NN	O
 index	NN	O
 defined	VBD	O
@@ -5503,9 +2673,9 @@ the	DT	O
 column	NN	O
 SearchField	NNP	O
 which	WDT	O
+
 returns	VBZ	O
 results	NNS	O
-
 when	WRB	O
 using	VBG	O
 :	:	O
@@ -5515,9 +2685,9 @@ FROM	NNP	O
 Table	NNP	O
 WHERE	NNP	O
 SearchField	NNP	O
+
 LIKE	NNP	O
 '	POS	O
-
 %c	JJ	O
 #	#	O
 %	NN	O
@@ -5527,9 +2697,9 @@ believe	VBP	O
 #	#	O
 is	VBZ	O
 a	DT	O
+
 special	JJ	O
 letter	NN	O
-
 ,	,	O
 so	IN	O
 how	WRB	O
@@ -5539,9 +2709,9 @@ allow	VB	O
 FREETEXT	NNP	O
 to	TO	O
 work	VB	O
+
 correctly	RB	O
 for	IN	O
-
 the	DT	O
 query	NN	O
 above	IN	O
@@ -5551,9 +2721,9 @@ you	PRP	O
 want	VBP	O
 to	TO	O
 do	VB	O
+
 it	PRP	O
 programatically	RB	O
-
 .	.	O
 I'm	NNP	O
 not	RB	O
@@ -5563,9 +2733,9 @@ and	CC	O
 I'd	NNP	O
 really	RB	O
 recommend	VB	O
+
 against	IN	O
 it	PRP	O
-
 .	.	O
 If	IN	O
 you're	JJ	O
@@ -5575,9 +2745,9 @@ stuff	NN	O
 on	IN	O
 your	PRP$	O
 own	JJ	O
+
 machine	NN	O
 ,	,	O
-
 SysInternals	NNP	O
 Process	NNP	O
 Explorer	NNP	O
@@ -5587,9 +2757,9 @@ you	PRP	O
 Run	VB	O
 it	PRP	O
 ,	,	O
+
 use	VB	O
 the	DT	O
-
 Find	NNP	O
 Handle	NNP	O
 command	NN	O
@@ -5599,33 +2769,34 @@ think	VBP	O
 it's	JJ	O
 either	CC	O
 in	IN	O
+
 the	DT	O
 find	NN	O
-
-or	CC	I-API
-handle	VB	I-API
-menu	NN	I-API
-)	)	L-API
+or	CC	O
+handle	VB	O
+menu	NN	O
+)	)	O
 ,	,	O
 and	CC	O
 search	NN	O
 for	IN	O
 the	DT	O
+
 name	NN	O
 of	IN	O
-
 your	PRP$	O
 file	NN	O
 .	.	O
 Once	IN	O
 the	DT	O
-handle(	NN	B-API
-s	NN	I-API
-)	)	L-API
+handle	NN	O
+(	(	O
+s	NN	O
+)	)	O
+
 is	VBZ	O
 found	VBN	O
 ,	,	O
-
 you	PRP	O
 can	MD	O
 forcibly	RB	O
@@ -5634,10 +2805,10 @@ them	PRP	O
 .	.	O
 You	PRP	O
 can	MD	O
+
 then	RB	O
 delete	VB	O
 the	DT	O
-
 file	NN	O
 and	CC	O
 so	RB	O
@@ -5646,10 +2817,10 @@ on	IN	O
 Beware	NNP	O
 ,	,	O
 doing	VBG	O
+
 this	DT	O
 may	MD	O
 cause	VB	O
-
 the	DT	O
 program	NN	O
 which	WDT	O
@@ -5658,10 +2829,10 @@ the	DT	O
 handles	NNS	O
 to	TO	O
 behave	VB	O
+
 strangely	RB	O
 ,	,	O
 as	IN	O
-
 you've	NN	O
 just	RB	O
 pulled	VBD	O
@@ -5670,10 +2841,10 @@ proverbial	JJ	O
 rug	NN	O
 out	IN	O
 from	IN	O
+
 under	IN	O
 it	PRP	O
 ,	,	O
-
 but	CC	O
 it	PRP	O
 works	VBZ	O
@@ -5682,10 +2853,10 @@ when	WRB	O
 you	PRP	O
 are	VBP	O
 debugging	VBG	O
+
 your	PRP$	O
 own	JJ	O
 errant	JJ	O
-
 code	NN	O
 ,	,	O
 or	CC	O
@@ -5694,10 +2865,10 @@ visual	JJ	O
 studio	NN	O
 /	NN	O
 windows	NNS	O
+
 explorer	NN	O
 is	VBZ	O
 being	VBG	O
-
 crap	NNS	O
 and	CC	O
 not	RB	O
@@ -5706,10 +2877,10 @@ file	NN	O
 handles	NNS	O
 even	RB	O
 though	IN	O
+
 you	PRP	O
 told	VBD	O
 them	PRP	O
-
 to	TO	O
 close	VB	O
 the	DT	O
@@ -5718,10 +2889,10 @@ ages	VBZ	O
 ago	RB	O
 ...	:	O
 sigh	NN	O
+
 :	:	O
 -	:	O
 )	)	O
-
 The	DT	O
 typical	JJ	O
 method	NN	O
@@ -5730,10 +2901,10 @@ as	IN	O
 follows	VBZ	O
 .	.	O
 You've	NNP	O
+
 said	VBD	O
 you	PRP	O
 want	VBP	O
-
 to	TO	O
 do	VB	O
 this	DT	O
@@ -5742,10 +2913,10 @@ C	NNP	O
 #	#	O
 so	RB	O
 here	RB	O
+
 goes	VBZ	O
 ...	:	O
 If	IN	O
-
 you	PRP	O
 don't	VBP	O
 know	VB	O
@@ -5754,10 +2925,10 @@ process	NN	O
 has	VBZ	O
 the	DT	O
 file	NN	O
+
 locked	VBN	O
 ,	,	O
 you'll	RB	O
-
 need	MD	O
 to	TO	O
 examine	VB	O
@@ -5766,10 +2937,10 @@ process's	NN	O
 handle	JJ	O
 list	NN	O
 ,	,	O
+
 and	CC	O
 query	RB	O
 each	DT	O
-
 handle	NN	O
 to	TO	O
 determine	VB	O
@@ -5778,10 +2949,10 @@ it	PRP	O
 identifies	VBZ	O
 the	DT	O
 locked	JJ	O
+
 file	NN	O
 .	.	O
 Doing	VBG	O
-
 this	DT	O
 in	IN	O
 C	NNP	O
@@ -5790,10 +2961,10 @@ will	MD	O
 likely	RB	O
 require	VB	O
 P	NNP	O
+
 /Invoke	NNP	O
 or	CC	O
 an	DT	O
-
 intermediary	JJ	O
 C	NNP	O
 +	NNP	O
@@ -5802,10 +2973,10 @@ C	NNP	O
 to	TO	O
 call	VB	O
 the	DT	O
+
 native	JJ	O
 APIs	NNP	O
 you'll	NN	O
-
 need	NN	O
 .	.	O
 Once	RB	O
@@ -5813,11 +2984,12 @@ you've	RB	O
 figured	VBN	O
 out	RP	O
 which	WDT	O
-process(	VBP	O
+process	NN	O
+
+(	(	O
 es	NN	O
 )	)	O
 have	VBP	O
-
 the	DT	O
 file	NN	O
 locked	VBN	O
@@ -5825,11 +2997,11 @@ locked	VBN	O
 you'll	RB	O
 need	VB	O
 to	TO	O
+
 safely	RB	O
 inject	VB	O
 a	DT	O
 small	JJ	O
-
 native	JJ	O
 DLL	NNP	O
 into	IN	O
@@ -5837,11 +3009,11 @@ the	DT	O
 process	NN	O
 (	(	O
 you	PRP	O
+
 can	MD	O
 also	RB	O
 inject	VB	O
 a	DT	O
-
 managed	JJ	O
 DLL	NNP	O
 ,	,	O
@@ -5849,11 +3021,11 @@ but	CC	O
 this	DT	O
 is	VBZ	O
 messier	JJR	O
+
 ,	,	O
 as	IN	O
 you	PRP	O
 then	RB	O
-
 have	VBP	O
 to	TO	O
 start	VB	O
@@ -5861,11 +3033,11 @@ or	CC	O
 attach	VB	O
 to	TO	O
 the	DT	O
-.	.	O
-NET	NNP	B-API
-runtime	NN	I-API
-)	)	L-API
 
+.	.	O
+NET	NNP	O
+runtime	NN	O
+)	)	O
 .	.	O
 That	DT	O
 bootstrap	NN	O
@@ -5873,11 +3045,11 @@ DLL	NNP	O
 then	RB	O
 closes	VBZ	O
 the	DT	O
+
 handle	NN	O
 using	VBG	O
 CloseHandle	NNP	O
 etc	NN	O
-
 .	.	O
 Essentially	RB	O
 :	:	O
@@ -5885,11 +3057,11 @@ the	DT	O
 way	NN	O
 to	TO	O
 unlock	VB	O
+
 a	DT	O
 "locked	JJ	O
 "	NN	O
 file	NN	O
-
 is	VBZ	O
 to	TO	O
 inject	VB	O
@@ -5897,11 +3069,11 @@ a	DT	O
 DLL	NNP	O
 into	IN	O
 the	DT	O
+
 offending	VBG	O
 process's	NN	O
 address	NN	O
 space	NN	O
-
 and	CC	O
 close	VB	O
 it	PRP	O
@@ -5909,11 +3081,11 @@ yourself	PRP	O
 .	.	O
 You	PRP	O
 can	MD	O
+
 do	VB	O
 this	DT	O
 using	VBG	O
 native	JJ	O
-
 or	CC	O
 managed	VBN	O
 code	NN	O
@@ -5921,11 +3093,11 @@ code	NN	O
 No	DT	O
 matter	NN	O
 what	WP	O
+
 ,	,	O
 you're	RB	O
 going	VBG	O
 to	TO	O
-
 need	VB	O
 a	DT	O
 small	JJ	O
@@ -5933,11 +3105,11 @@ amount	NN	O
 of	IN	O
 native	JJ	O
 code	NN	O
+
 or	CC	O
 at	IN	O
 least	JJS	O
 P	NNP	O
-
 /Invoke	VBD	O
 into	IN	O
 the	DT	O
@@ -5945,11 +3117,11 @@ same	JJ	O
 .	.	O
 Helpful	JJ	O
 links	NNS	O
+
 :	:	O
 http	NN	O
 :	:	O
 /	JJ	O
-
 /www	NN	O
 .	.	O
 codeproject	NN	O
@@ -5957,11 +3129,11 @@ codeproject	NN	O
 com	NN	O
 /KB	JJ	O
 /threads	NNP	O
+
 /winspy	NNP	O
 .	.	O
 aspx	NN	O
 http	NN	O
-
 :	:	O
 /	JJ	O
 /damianblog	NN	O
@@ -5969,13 +3141,301 @@ http	NN	O
 com	NN	O
 /2008	JJ	O
 /07	NNP	O
+
 /02	NNP	O
 /net	NNP	O
 -	:	O
 code-injection	NN	O
-
 /	NN	O
 Good	NNP	O
 luck	NN	O
 !	.	O
+Here's	VBZ	O
+a	DT	O
+short	JJ	O
+
+list	NN	O
+of	IN	O
+implementations	NNS	O
+and	CC	O
+languages	NNS	O
+I've	NNP	O
+tried	VBD	O
+.	.	O
+It's	NNP	O
+sorted	VBN	O
+by	IN	O
+
+closeness	NN	O
+to	TO	O
+zero	CD	O
+:	:	O
+Scheme	NN	O
+:	:	O
+(	(	O
++	VB	O
+1	CD	O
+(	(	O
+make-polar	JJ	O
+
+1	CD	O
+(	(	O
+atan	JJ	O
+0	CD	O
+-	:	O
+1	CD	O
+)	)	O
+)	)	O
+)	)	O
+⇒	$	O
+0	CD	O
+
+.	.	O
+0	CD	O
++1	NN	O
+.	.	O
+2246063538223773e-16i	JJ	O
+(	(	O
+Chez	NNP	O
+Scheme	NNP	O
+,	,	O
+MIT	NNP	O
+Scheme	NNP	O
+
+)	)	O
+⇒	VBD	O
+0	CD	O
+.	.	O
+0	CD	O
++1	NN	O
+.	.	O
+22460635382238e-16i	JJ	O
+(	(	O
+Guile	NNP	O
+)	)	O
+
+⇒	VBD	O
+0	CD	O
+.	.	O
+0	CD	O
++1	NN	O
+.	.	O
+22464679914735e-16i	JJ	O
+(	(	O
+Chicken	NNP	O
+with	IN	O
+numbers	NNS	O
+
+egg	VBP	O
+)	)	O
+⇒	$	O
+0	CD	O
+.	.	O
+0	CD	O
++1	NN	O
+.	.	O
+2246467991473532e-16i	JJ	O
+(	(	O
+MzScheme	NNP	O
+
+,	,	I-API
+SISC	NNP	I-API
+,	,	I-API
+Gauche	NNP	I-API
+,	,	I-API
+Gambit	NNP	I-API
+)	)	L-API
+⇒	VBD	O
+0	CD	O
+.	.	O
+0	CD	O
+
++1	NN	O
+.	.	O
+2246467991473533e-16i	JJ	O
+(	(	O
+SCM	NNP	O
+)	)	O
+Common	NNP	O
+Lisp	NNP	O
+:	:	O
+(	(	O
+1	CD	O
+
++	NN	O
+(	(	O
+exp	JJ	O
+(	(	O
+complex	JJ	O
+0	CD	O
+pi	NN	O
+)	)	O
+)	)	O
+)	)	O
+⇒	FW	O
+
+#C	NNP	O
+(	(	O
+0	CD	O
+.	.	O
+0L0	CD	O
+-	:	O
+5	CD	O
+.	.	O
+0165576136843360246L-20	NN	O
+)	)	O
+(	(	O
+
+CLISP	NNP	O
+)	)	O
+⇒	VBP	O
+#C	NNP	O
+(	(	O
+0	CD	O
+.	.	O
+0d0	CD	O
+1	CD	O
+.	.	O
+2246063538223773d-16	JJ	O
+
+)	)	U-API
+(	(	O
+CMUCL	NNP	O
+)	)	O
+⇒	VBP	O
+#C	NNP	O
+(	(	O
+0	CD	O
+.	.	O
+0d0	CD	O
+1	CD	O
+
+.	.	O
+2246467991473532d-16	JJ	O
+)	)	O
+(	(	O
+SBCL	NNP	O
+)	)	O
+Perl	NN	O
+:	:	O
+use	NN	O
+Math	NN	O
+:	:	O
+
+:Complex	NN	O
+;	:	O
+Math	NNP	O
+:	:	O
+:Complex	JJ	O
+-	:	O
+>emake	NN	O
+(	(	O
+1	CD	O
+,	,	O
+pi	NN	O
+
+)	)	O
++	VBZ	O
+1	CD	O
+⇒	NN	O
+1	CD	O
+.	.	O
+22464679914735e-16i	JJ	O
+Python	NN	O
+:	:	O
+from	IN	O
+cmath	NN	O
+
+import	NN	O
+exp	NN	O
+,	,	O
+pi	NN	O
+;	:	O
+exp	CC	O
+(	(	O
+complex	JJ	O
+(	(	O
+0	CD	O
+,	,	O
+
+pi	NN	O
+)	)	O
+)	)	O
++	$	O
+1	CD	O
+⇒	JJ	O
+1	CD	O
+.	.	O
+2246467991473532e-16j	JJ	O
+(	(	O
+CPython	NNP	O
+
+)	)	O
+Ruby	NN	O
+:	:	O
+require	NN	O
+'	''	O
+complex	JJ	O
+'	POS	O
+;	:	O
+Complex	NNP	O
+:	:	O
+:polar	NN	O
+
+(	(	B-API
+1	CD	I-API
+,	,	I-API
+Math	NN	I-API
+:	:	I-API
+:PI	NN	I-API
+)	)	L-API
++	VBZ	O
+1	CD	O
+⇒	NN	O
+Complex	NNP	O
+
+(	(	B-API
+0	CD	I-API
+.	.	I-API
+0	CD	I-API
+,	,	I-API
+1	CD	I-API
+.	.	I-API
+22464679914735e-16	JJ	I-API
+)	)	L-API
+(	(	O
+MRI	NNP	O
+
+)	)	O
+⇒	NN	O
+Complex	NNP	B-API
+(	(	B-API
+0	CD	I-API
+.	.	I-API
+0	CD	I-API
+,	,	I-API
+1	CD	I-API
+.	.	I-API
+2246467991473532e-16	JJ	I-API
+
+)	)	U-API
+(	(	O
+JRuby	NNP	O
+)	)	O
+R	NN	O
+:	:	O
+complex	NN	O
+(	(	O
+argument	JJ	O
+=	NNP	O
+pi	NN	O
+
+)	)	O
++	VBZ	O
+1	CD	O
+⇒	NN	O
+0	CD	O
++1	NN	O
+.	.	O
+224606353822377e-16i	JJ	O
 
