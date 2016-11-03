@@ -27,40 +27,51 @@ system	NN
 /	NNP
 $listeners	NNS
 =	VBP
-array()	RB
+array	NN
+(	(
+)	)
 ;	:
-/	NNP
-*	NNP
+/	CC
+*	VB
+		
 Create	NNP
 an	DT
-		
 entry	NN
 point	NN
 for	IN
 plugins	NNS
 *	JJ
-/function	NNP
-hook()	NN
+/function	NN
+hook	NN
+(	(
+)	)
+		
 {	(
 global	JJ
 $listeners	NNS
 ;	:
-		
 $num_args	NNP
 =	NNP
-func_num_args()	NN
+func_num_args	NNP
+(	(
+)	)
 ;	:
 $args	CC
-=	NNP
-func_get_args()	VBP
-;	:
-if(	JJ
-$num_args	NNP
-<	NNP
 		
+=	VB
+func_get_args	NN
+(	(
+)	)
+;	:
+if	IN
+(	(
+$num_args	JJ
+<	NNP
 2	CD
 )	)
-trigger_error(	NN
+		
+trigger_error	NN
+(	(
 "Insufficient	JJ
 arguments	NNS
 "	VBP
@@ -69,8 +80,8 @@ E_USER_ERROR	NNP
 )	)
 ;	:
 /	CC
-		
 /	VB
+		
 Hook	NNP
 name	NN
 should	MD
@@ -80,20 +91,22 @@ first	JJ
 argument	NN
 $hook_name	NN
 =	NNP
-array_shift(	VBZ
+array_shift	NN
+(	(
 		
 $args	NNP
 )	)
 ;	:
-if(	JJ
-!isset	NNP
+if	IN
+(	(
+!isset	FW
 (	(
 $listeners	NNS
 [	VBP
 $hook_name	JJ
 ]	NNP
-)	)
 		
+)	)
 )	)
 return	NN
 ;	:
@@ -104,9 +117,10 @@ plugins	NNS
 have	VBP
 registered	VBN
 this	DT
-hook	NN
 		
-foreach(	NN
+hook	NN
+foreach	NN
+(	(
 $listeners	NNS
 [	VBP
 $hook_name	JJ
@@ -115,9 +129,9 @@ as	IN
 $func	NNP
 )	)
 {	(
+		
 $args	JJ
 =	NN
-		
 $func	NNP
 (	(
 $args	NNP
@@ -127,9 +141,9 @@ $args	NNP
 return	VBP
 $args	NNS
 ;	:
+		
 }	)
 /	FW
-		
 *	FW
 Attach	VBP
 a	DT
@@ -139,9 +153,10 @@ a	DT
 hook	NN
 *	JJ
 /function	NN
-add_listener(	NN
-$hook	NN
 		
+add_listener	NN
+(	(
+$hook	UH
 ,	,
 $function_name	NN
 )	)
@@ -150,10 +165,10 @@ global	JJ
 $listeners	NNS
 ;	:
 $listeners	NNS
+		
 [	VBP
 $hook	NNP
 ]	NNP
-		
 [	NNP
 ]	NNP
 =	NNP
@@ -162,9 +177,6 @@ $function_name	NN
 }	)
 /	FW
 /	JJ
-/	NNP
-/	NNP
-/	NNP
 		
 /	NNP
 /	NNP
@@ -186,10 +198,13 @@ $function_name	NN
 /	NNP
 /	NNP
 /	NNP
+/	NNP
+/	NNP
+/	NNP
+		
 /	NNP
 /	NNP
 *	NNP
-		
 *	NNP
 Sample	NNP
 Plugin	NNP
@@ -198,10 +213,10 @@ Plugin	NNP
 /add_listener	NNP
 (	(
 '	''
+		
 a_b	NN
 '	''
 ,	,
-		
 '	''
 my_plugin_func1	NNP
 '	POS
@@ -210,38 +225,43 @@ my_plugin_func1	NNP
 (	(
 '	''
 str	NN
+		
 '	''
 ,	,
 '	''
-		
 my_plugin_func2	NNP
 '	POS
 )	)
 ;function	NN
-my_plugin_func1(	FW
+my_plugin_func1	NN
+(	(
 $args	NNP
 )	)
-{	(
-return	VB
-array(	RB
-4	CD
 		
+{	(
+return	NN
+array	NN
+(	(
+4	CD
 ,	,
 5	CD
 )	)
 ;	:
 }function	NN
-my_plugin_func2(	FW
+my_plugin_func2	NN
+		
+(	(
 $args	NNP
 )	)
 {	(
-return	VB
-str_replace(	NN
-		
+return	NN
+str_replace	NN
+(	(
 '	''
 sample	NN
 '	''
 ,	,
+		
 '	''
 CRAZY	NNP
 '	POS
@@ -249,11 +269,11 @@ CRAZY	NNP
 $args	FW
 [0	NNP
 ]	NNP
-		
 )	)
 ;	:
 }	)
 /	FW
+		
 /	JJ
 /	NNP
 /	NNP
@@ -261,14 +281,6 @@ $args	FW
 /	NNP
 /	NNP
 /	NNP
-		
-/	NNP
-/	NNP
-/	NNP
-/	NNP
-/	NNP
-/	NNP
-/	NNP
 /	NNP
 /	NNP
 /	NNP
@@ -278,6 +290,14 @@ $args	FW
 /	NNP
 /	NNP
 /	NNP
+/	NNP
+/	NNP
+/	NNP
+/	NNP
+/	NNP
+/	NNP
+/	NNP
+		
 /	NNP
 /	NNP
 /	NNP
@@ -285,11 +305,11 @@ $args	FW
 *	NNP
 Sample	NNP
 Application	NNP
-		
 *	NNP
 *	NNP
 /	NNP
 $a	NNP
+		
 =	NNP
 1	CD
 ;	:
@@ -297,22 +317,23 @@ $b	NNP
 =	VBD
 2	CD
 ;list	NN
-		
 (	(
 $a	UH
 ,	,
 $b	NNP
+		
 )	)
 =	VBP
-hook(	NN
+hook	NN
+(	(
 '	''
 a_b	NN
 '	''
 ,	,
-		
 $a	NNP
 ,	,
 $b	NNP
+		
 )	)
 ;	:
 $str	CC
@@ -321,10 +342,10 @@ $str	CC
 is	VBZ
 my	PRP$
 sample	JJ
-		
 application	NN
 \n	NNP
 "	NNP
+		
 ;	:
 $str	NNP
 .	.
@@ -333,10 +354,10 @@ $str	NNP
 $a	NNP
 +	NNP
 $b	NNP
-		
 =	NNP
 "	NNP
 .(	NNP
+		
 $a	NNP
 +	NNP
 $b	NNP
@@ -345,10 +366,10 @@ $b	NNP
 "	JJ
 \n	JJ
 "	NN
-		
 ;	:
 $str	NNP
 .	.
+		
 =	VB
 "	JJ
 $a	NNP
@@ -357,10 +378,10 @@ $b	NNP
 =	NNP
 "	NNP
 .(	NNP
-		
 $a	NNP
 *	NNP
 $b	NNP
+		
 )	)
 .	.
 "	JJ
@@ -369,9 +390,10 @@ $b	NNP
 ;	:
 $str	CC
 =	VB
-		
-hook(	NN
+hook	NN
+(	(
 '	''
+		
 str	NN
 '	''
 ,	,
@@ -381,9 +403,9 @@ $str	NNP
 $str	NN
 ;	:
 ?	.
-		
 >	FW
 Output	NN
+		
 :	:
 This	DT
 is	VBZ
@@ -393,9 +415,9 @@ application4	NN
 +	VBD
 5	CD
 =	JJ
-		
 94	CD
 *	JJ
+		
 5	CD
 =	JJ
 20	CD
@@ -405,9 +427,9 @@ For	IN
 this	DT
 example	NN
 source	NN
-		
 code	NN
 ,	,
+		
 you	PRP
 must	MD
 declare	VB
@@ -417,9 +439,9 @@ plugins	NNS
 before	IN
 the	DT
 actual	JJ
-		
 source	NN
 code	NN
+		
 that	IN
 you	PRP
 want	VBP
@@ -429,9 +451,9 @@ extendable	JJ
 .	.
 I've	NNP
 included	VBD
-		
 an	DT
 example	NN
+		
 of	IN
 how	WRB
 to	TO
@@ -441,9 +463,9 @@ or	CC
 multiple	JJ
 values	NNS
 being	VBG
-		
 passed	VBN
 to	TO
+		
 the	DT
 plugin	NN
 .	.
@@ -453,9 +475,9 @@ part	NN
 of	IN
 this	DT
 is	VBZ
-		
 writing	VBG
 the	DT
+		
 actual	JJ
 documentation	NN
 which	WDT
@@ -465,9 +487,9 @@ arguments	VBZ
 get	VB
 passed	VBN
 to	TO
-		
 each	DT
 hook	NN
+		
 .	.
 This	DT
 is	VBZ
@@ -477,9 +499,9 @@ method	NN
 of	IN
 accomplishing	VBG
 a	DT
-		
 plugin	NN
 system	NN
+		
 in	IN
 PHP	NNP
 .	.
@@ -489,9 +511,9 @@ better	JJR
 alternatives	NNS
 ,	,
 I	PRP
-		
 suggest	VBP
 you	PRP
+		
 check	VB
 out	RP
 the	DT
@@ -501,9 +523,9 @@ for	IN
 more	JJR
 information	NN
 .	.
-		
 Sorry	NNP
 ,	,
+		
 it	PRP
 appears	VBZ
 underscore	JJ
@@ -513,9 +535,9 @@ replaced	VBN
 by	IN
 HTML	NNP
 entities	NNS
-		
 by	IN
 Markdown	NNP
+		
 ?	.
 I	PRP
 can	MD
@@ -525,9 +547,9 @@ code	NN
 when	WRB
 this	DT
 bug	NN
-		
 gets	VBZ
 fixed	VBN
+		
 .	.
 Edit	NN
 :	:
@@ -537,9 +559,9 @@ it	PRP
 only	RB
 appears	VBZ
 that	IN
-		
 way	NN
 when	WRB
+		
 you	PRP
 are	VBP
 editing	VBG
@@ -549,9 +571,9 @@ a	DT
 database	NN
 generation	NN
 script	NN
-		
 in	IN
 SQL	NNP
+		
 and	CC
 want	VBP
 to	TO
@@ -561,9 +583,9 @@ in	IN
 my	PRP$
 Adobe	NNP
 AIR	NNP
-		
 application	NN
 :	:
+		
 Create	NNP
 Table	NNP
 tRole	NN
@@ -572,10 +594,10 @@ roleID	JJ
 integer	NN
 Primary	NNP
 Key	NNP
-,	,
+,roleName	NNP
+varchar	NNP
+(	(
 		
-roleName	NN
-varchar(	RB
 40	CD
 )	)
 )	)
@@ -585,57 +607,46 @@ Table	NNP
 tFile	NN
 (	(
 fileID	JJ
-		
 integer	NN
 Primary	NNP
+		
 Key	NNP
-,	,
-fileName	NN
-varchar(	RB
+,fileName	NNP
+varchar	NNP
+(	(
 50	CD
 )	)
-,	,
-fileDescription	NN
-varchar(	FW
-		
+,fileDescription	NN
+varchar	NN
+(	(
 500	CD
 )	)
-,	,
-thumbnailID	JJ
-integer	NN
-,	,
-fileFormatID	JJ
-integer	NN
-,	,
-categoryID	NN
-integer	NN
 		
-,	,
-isFavorite	JJ
+,thumbnailID	NN
+integer	NN
+,fileFormatID	NNP
+integer	NN
+,categoryID	NNP
+integer	NN
+,isFavorite	JJ
 boolean	NN
-,	,
-dateAdded	VBD
+,dateAdded	VBD
 date	NN
-,	,
-globalAccessCount	NN
+,globalAccessCount	NN
+		
 integer	NN
-,	,
-lastAccessTime	JJ
-		
+,lastAccessTime	NN
 date	NN
-,	,
-downloadComplete	JJ
+,downloadComplete	JJ
+boolean	JJ
+,isNew	JJ
 boolean	NN
-,	,
-isNew	JJ
-boolean	NN
-,	,
-isSpotlight	JJ
-boolean	NN
-,	,
+,isSpotlight	VBD
+boolean	JJ
+,duration	NN
+varchar	NN
 		
-duration	NN
-varchar(	FW
+(	(
 30	CD
 )	)
 )	)
@@ -645,21 +656,20 @@ Table	NNP
 tCategory	NN
 (	(
 categoryID	JJ
-		
 integer	NN
+		
 Primary	NNP
 Key	NNP
-,	,
-categoryName	NN
-varchar(	RB
+,categoryName	NNP
+varchar	NNP
+(	(
 50	CD
 )	)
-,	,
-parent_categoryID	RB
+,parent_categoryID	FW
 integer	NN
-		
 )	)
 ;	:
+		
 ...	:
 I	PRP
 execute	VBP
@@ -669,56 +679,72 @@ Adobe	NNP
 AIR	NNP
 using	VBG
 the	DT
-		
 following	JJ
 methods	NNS
+		
 :	:
 public	JJ
 static	JJ
 function	NN
-RunSqlFromFile(	NNP
-fileName	NN
+RunSqlFromFile	NNP
+(	(
+fileName	JJ
 :String	VBG
 )	)
 :void	FW
-		
 {	(
+		
 var	NN
 file	NN
-:File	NNP
-=	NNP
-File.applicationDirectory.resolvePath(	NNP
+:File	JJ
+=	NN
+File	NNP
+.	.
+applicationDirectory	NN
+.	.
+resolvePath	NN
+(	(
 fileName	NN
+		
 )	)
 ;	:
 var	JJ
 stream	NN
-		
 :FileStream	NN
 =	NNP
 new	JJ
-FileStream()	NNP
+FileStream	NNP
+(	(
+)	)
 ;	:
-stream.open(	NN
+		
+stream	NN
+.	.
+open	JJ
+(	(
 file	NN
 ,	,
 FileMode	NNP
 .	.
 READ	NNP
-		
 )	)
 var	FW
+		
 strSql	JJ
 :String	VBG
 =	JJ
-stream.readUTFBytes(	JJ
+stream	NN
+.	.
+readUTFBytes	NNS
+(	(
 stream	NN
 .	.
 bytesAvailable	JJ
 )	)
-;	:
 		
-NonQuery(	NNP
+;	:
+NonQuery	NNP
+(	(
 strSql	NN
 )	)
 ;	:
@@ -726,10 +752,11 @@ strSql	NN
 public	JJ
 static	JJ
 function	NN
-NonQuery(	NNP
-strSQL	NN
-:String	VBG
+NonQuery	NNP
 		
+(	(
+strSQL	JJ
+:String	VBG
 )	)
 :void	FW
 {	(
@@ -738,11 +765,22 @@ sqlConnection	NN
 :SQLConnection	NN
 =	NNP
 new	JJ
-SQLConnection()	NNP
-;	:
-sqlConnection.open(	JJ
 		
-File.applicationStorageDirectory.resolvePath(	NNP
+SQLConnection	NNP
+(	(
+)	)
+;	:
+sqlConnection	NN
+.	.
+open	JJ
+(	(
+File	NNP
+.	.
+applicationStorageDirectory	NN
+		
+.	.
+resolvePath	NN
+(	(
 DBPATH	NNP
 )	)
 ;	:
@@ -751,9 +789,11 @@ sqlStatement	JJ
 :SQLStatement	NN
 =	NNP
 new	JJ
-SQLStatement()	NNP
-;	:
 		
+SQLStatement	NNP
+(	(
+)	)
+;	:
 sqlStatement	NN
 .	.
 text	JJ
@@ -761,15 +801,20 @@ text	JJ
 strSQL	NN
 ;	:
 sqlStatement	NN
+		
 .	.
 sqlConnection	NN
 =	JJ
 sqlConnection	NN
-		
 ;	:
 try	VB
 {	(
-sqlStatement.execute()	NN
+sqlStatement	NN
+.	.
+execute	NN
+(	(
+		
+)	)
 ;	:
 }	)
 catch	NN
@@ -777,19 +822,26 @@ catch	NN
 error	JJ
 :SQLError	NN
 )	)
-		
 {	(
-Alert.show(	NNP
-error.toString()	NN
+Alert	NNP
+.	.
+		
+show	NN
+(	(
+error	NN
+.	.
+toString	NN
+(	(
+)	)
 )	)
 ;	:
 }	)
 }	)
+		
 No	DT
 errors	NNS
 are	VBP
 generated	VBN
-		
 ,	,
 however	RB
 only	RB
@@ -797,11 +849,11 @@ tRole	JJ
 exists	NNS
 .	.
 It	PRP
+		
 seems	VBZ
 that	IN
 it	PRP
 only	RB
-		
 looks	VBZ
 at	IN
 the	DT
@@ -809,11 +861,11 @@ first	JJ
 query	NN
 (	(
 up	IN
+		
 to	TO
 the	DT
 semicolon	NN
 -	:
-		
 if	IN
 I	PRP
 remove	VBP
@@ -821,11 +873,11 @@ it	PRP
 ,	,
 the	DT
 query	NN
+		
 fails	VBZ
 )	)
 .	.
 Is	VBZ
-		
 there	EX
 a	DT
 way	NN
@@ -833,11 +885,11 @@ to	TO
 call	VB
 multiple	JJ
 queries	NNS
+		
 in	IN
 one	CD
 statement	NN
 ?	.
-		
 One	CD
 framework	NN
 I'm	NNP
@@ -845,11 +897,11 @@ considering	VBG
 would	MD
 be	VB
 for	IN
+		
 a	DT
 blogging	NN
 platform	NN
 .	.
-		
 Since	IN
 just	RB
 about	IN
@@ -857,11 +909,11 @@ any	DT
 possible	JJ
 view	NN
 of	IN
+		
 data	NNS
 you	PRP
 would	MD
 want	VB
-		
 would	MD
 be	VB
 sorted	VBN
@@ -869,11 +921,11 @@ by	IN
 date	NN
 ,	,
 I	PRP
+		
 was	VBD
 thinking	VBG
 about	IN
 this	DT
-		
 structure	NN
 :	:
 One	CD
@@ -881,11 +933,11 @@ directory	NN
 per	IN
 content	NN
 node	NN
+		
 :	:
 .	.
 /content	JJ
 /YYYYMMDDHHMMSS	JJ
-		
 /	NNP
 Subdirectories	NNP
 of	IN
@@ -893,11 +945,11 @@ each	DT
 node	NN
 including	VBG
 /tags	JJ
+		
 /authors	NNS
 /comments	NNS
 As	RB
 well	RB
-		
 as	IN
 simple	JJ
 text	NN
@@ -905,11 +957,11 @@ files	NNS
 in	IN
 the	DT
 node	JJ
+		
 directory	NN
 for	IN
 pre	JJ
 -	:
-		
 and	CC
 post-rendered	JJ
 content	NN
@@ -917,51 +969,55 @@ and	CC
 the	DT
 like	JJ
 .	.
+		
 This	DT
 would	MD
 allow	VB
 a	DT
-		
 simple	JJ
 PHP	NNP
-glob()	NN
+glob	NN
+(	(
+)	)
 call	NN
 (	(
+		
 and	CC
 probably	RB
 a	DT
 reversal	NN
 of	IN
 the	DT
-		
 result	NN
 array	NN
 )	)
 to	TO
 query	VB
+		
 on	IN
 just	RB
 about	IN
 anything	NN
 within	IN
 the	DT
-		
 content	JJ
 structure	NN
 :	:
-glob(	JJ
-"content	NN
+glob	NN
+(	(
+		
+"content	JJ
 /	NNP
 *	NNP
 /tags	NNP
 /funny	NNP
 "	NNP
 )	)
-		
 ;	:
 Would	MD
 return	VB
 paths	NNS
+		
 including	VBG
 all	DT
 articles	NNS
@@ -969,11 +1025,11 @@ tagged	VBN
 "funny	JJ
 "	NN
 .	.
-		
 So	IN
 I	PRP
 find	VBP
 myself	PRP
+		
 porting	VBG
 a	DT
 game	NN
@@ -981,11 +1037,11 @@ game	NN
 that	WDT
 was	VBD
 originally	RB
-		
 written	VBN
 for	IN
 the	DT
 Win32	NNP
+		
 API	NNP
 ,	,
 to	TO
@@ -993,11 +1049,11 @@ Linux	NNP
 (	(
 well	RB
 ,	,
-		
 porting	VBG
 the	DT
 OS	NNP
 X	NNP
+		
 port	NN
 of	IN
 the	DT
@@ -1005,11 +1061,11 @@ Win32	NNP
 port	NN
 to	TO
 Linux	NNP
-		
 )	)
 .	.
 I	PRP
 have	VBP
+		
 implemented	VBN
 QueryPerformanceCounter	NNP
 by	IN
@@ -1017,22 +1073,24 @@ giving	VBG
 the	DT
 uSeconds	NNS
 since	IN
-		
 the	DT
 process	NN
 start	VB
 up	IN
+		
 :	:
 BOOL	NNP
-QueryPerformanceCounter(	NNP
+QueryPerformanceCounter	NNP
+(	(
 LARGE_INTEGER	NNP
 *	NNP
 performanceCount	NN
 )	)
-		
 {	(
-gettimeofday(	JJ
-¤tTimeVal	NN
+gettimeofday	NN
+(	(
+		
+¤tTimeVal	UH
 ,	,
 NULL	NNP
 )	)
@@ -1041,9 +1099,9 @@ performanceCount	CC
 -	:
 >QuadPart	NN
 =	NN
-		
 (	(
 currentTimeVal	NN
+		
 .	.
 tv_sec	SYM
 -	:
@@ -1053,9 +1111,9 @@ tv_sec	NN
 )	)
 ;	:
 performanceCount	CC
-		
 -	:
 >QuadPart	NN
+		
 *	NN
 =	NNP
 (	(
@@ -1065,9 +1123,9 @@ performanceCount	CC
 )	)
 ;	:
 performanceCount	CC
-		
 -	:
 >QuadPart	NN
+		
 +	NN
 =	NNP
 (	(
@@ -1077,9 +1135,9 @@ tv_usec	SYM
 -	:
 startTimeVal	NN
 .	.
-		
 tv_usec	NN
 )	)
+		
 ;	:
 return	VB
 true	JJ
@@ -1089,8 +1147,10 @@ This	DT
 ,	,
 coupled	VBN
 with	IN
+QueryPerformanceFrequency	NNP
+(	(
 		
-QueryPerformanceFrequency()	NNP
+)	)
 giving	VBG
 a	DT
 constant	JJ
@@ -1190,14 +1250,17 @@ For	IN
 example	NN
 :	:
 $data	NN
-=	NNP
-array()	NN
+=	NN
+array	NN
+(	(
+)	)
 ;	:
-if(	CC
-$_POST	NNP
+if	IN
+(	(
+		
+$_POST	NN
 )	)
 {	(
-		
 $data	JJ
 =	NN
 $_POST	NN
@@ -1206,10 +1269,10 @@ $content	JJ
 =	NNP
 "	NNP
 <	NNP
+		
 ?php	NNP
 \n	NNP
 "	NNP
-		
 ;	:
 $content	NN
 .	.
@@ -1218,10 +1281,11 @@ $content	NN
 $data	JJ
 =	NNP
 '	POS
-.	.
-var_export(	NN
-$data	NN
 		
+.	.
+var_export	NN
+(	(
+$data	UH
 ,	,
 true	JJ
 )	)
@@ -1229,39 +1293,43 @@ true	JJ
 "	JJ
 \n	JJ
 "	NN
+		
 ;	:
 $content	NN
 .	.
 =	VB
-		
 "	NN
 ?	.
 >	JJ
 "	NN
 ;	:
-save_to_file(	CC
-$filename	VB
+save_to_file	NN
+(	(
+		
+$filename	JJ
 ,	,
-$content	NN
+$content	JJ
 )	)
 ;	:
-		
 }	)
 /	FW
 /	JJ
 echo	JJ
 form	NN
 Maybe	NNP
+		
 .	.
 But	CC
 you	PRP
 have	VBP
 bigger	JJR
-		
 problems	NNS
 .	.
-gettimeofday()	NN
+gettimeofday	NN
+(	(
+)	)
 can	MD
+		
 result	VB
 in	IN
 incorrect	JJ
@@ -1269,11 +1337,11 @@ timings	NNS
 if	IN
 there	EX
 are	VBP
-		
 processes	NNS
 on	IN
 your	PRP$
 system	NN
+		
 that	WDT
 change	VBP
 the	DT
@@ -1281,11 +1349,11 @@ timer	NN
 (	(
 ie	JJ
 ,	,
-		
 ntpd	RB
 )	)
 .	.
 On	IN
+		
 a	DT
 "normal	JJ
 "	NN
@@ -1293,21 +1361,23 @@ linux	NN
 ,	,
 though	IN
 ,	,
-		
 I	PRP
 believe	VBP
 the	DT
 resolution	NN
+		
 of	IN
-gettimeofday()	NN
+gettimeofday	NN
+(	(
+)	)
 is	VBZ
 10us	CD
 .	.
 It	PRP
 can	MD
-		
 jump	VB
 forward	RB
+		
 and	CC
 backward	RB
 and	CC
@@ -1317,9 +1387,9 @@ consequently	RB
 ,	,
 based	VBN
 on	IN
-		
 the	DT
 processes	NNS
+		
 running	VBG
 on	IN
 your	PRP$
@@ -1329,9 +1399,9 @@ This	DT
 effectively	RB
 makes	VBZ
 the	DT
-		
 answer	NN
 to	TO
+		
 your	PRP$
 question	NN
 no	DT
@@ -1340,9 +1410,10 @@ You	PRP
 should	MD
 look	VB
 into	IN
-clock_gettime(	JJ
-		
+clock_gettime	NN
+(	(
 CLOCK_MONOTONIC	NNP
+		
 )	)
 for	IN
 timing	VBG
@@ -1353,8 +1424,8 @@ suffers	VBZ
 from	IN
 several	JJ
 less	JJR
-		
 issues	NNS
+		
 due	JJ
 to	TO
 things	NNS
@@ -1365,31 +1436,35 @@ and	CC
 external	JJ
 clock	NN
 settings	NNS
-		
 .	.
+		
 Also	RB
 ,	,
 look	VB
 into	IN
 the	DT
-clock_getres()	NN
+clock_getres	NNS
+(	(
+)	)
 function	NN
 .	.
 The	DT
-actual	JJ
 		
+actual	JJ
 resolution	NN
 of	IN
-gettimeofday()	NN
-depends	NNS
+gettimeofday	NN
+(	(
+)	)
+depends	VBZ
 on	IN
 the	DT
 hardware	NN
 architecture	NN
+		
 .	.
 Intel	NNP
 processors	NNS
-		
 as	RB
 well	RB
 as	IN
@@ -1398,10 +1473,10 @@ machines	NNS
 offer	VBP
 high	JJ
 resolution	NN
+		
 timers	NNS
 that	WDT
 measure	NN
-		
 microseconds	VBZ
 .	.
 Other	JJ
@@ -1410,10 +1485,10 @@ architectures	VBZ
 fall	VBP
 back	RB
 to	TO
+		
 the	DT
 system	NN
 ’s	JJ
-		
 timer	NN
 ,	,
 which	WDT
@@ -1422,10 +1497,10 @@ typically	RB
 set	VBN
 to	TO
 100	CD
+		
 Hz	NNP
 .	.
 In	IN
-		
 such	JJ
 cases	NNS
 ,	,
@@ -1434,10 +1509,10 @@ time	NN
 resolution	NN
 will	MD
 be	VB
+		
 less	JJR
 accurate	JJ
 .	.
-		
 I	PRP
 obtained	VBD
 this	DT
@@ -1446,218 +1521,223 @@ from	IN
 High	NNP
 Resolution	NNP
 Time	NNP
+		
 Measurement	NNP
 and	CC
 Timers	NNP
-		
 ,	,
 Part	NNP
 I	PRP
 That's	NNP
 true	JJ
 .	.
-serialize()	NN
+serialize	VB
+(	(
+		
+)	)
 can	MD
 be	VB
 pretty	RB
 useful	JJ
-		
 for	IN
 that	DT
 as	RB
 well	RB
 .	.
 I	PRP
+		
 think	VBP
 the	DT
 trick	NN
 to	TO
 coming	VBG
-		
 up	RP
 with	IN
 a	DT
 viable	JJ
 system	NN
 is	VBZ
+		
 finding	VBG
 some	DT
 way	NN
 to	TO
 index	NN
-		
 the	DT
 data	NN
 nodes	NNS
 without	IN
 killing	VBG
 yourself	PRP
+		
 with	IN
 complexity	NN
 .	.
 Recently	RB
 our	PRP$
-		
 site	NN
 has	VBZ
 been	VBN
 deluged	VBN
 with	IN
 the	DT
+		
 resurgence	NN
 of	IN
 the	DT
 Asprox	NNP
 botnet	NN
-		
 SQL	NNP
 injection	NN
 attack	NN
 .	.
 Without	IN
 going	VBG
+		
 into	IN
 details	NNS
 ,	,
 the	DT
 attack	NN
-		
 attempts	VBZ
 to	TO
 execute	VB
 SQL	NNP
 code	NN
 by	IN
+		
 encoding	VBG
 the	DT
 T-SQL	NNP
 commands	NNS
 in	IN
-		
 an	DT
 ASCII	NNP
 encoded	VBD
 BINARY	NNP
 string	NN
 .	.
+		
 It	PRP
 looks	VBZ
 something	NN
 like	IN
 this	DT
-		
 :	:
 DECLARE	NNP
 %20	NNP
 @S	NNP
 %20NVARCHAR	NNP
 (	(
+		
 4000	CD
 )	)
 ;SET	FW
 %20	FW
 @S	FW
-		
 =CAST	NN
 (	(
 0x44004500	CD
 ...	:
 06F007200	CD
 %20AS	JJ
+		
 %20NVARCHAR	NN
 (	(
 4000	CD
 )	)
 )	)
-		
 ;EXEC	FW
 (	(
 @S	NNP
 )	)
 ;	:
 --	:
+		
 I	PRP
 was	VBD
 able	JJ
 to	TO
 decode	VB
-		
 this	DT
 in	IN
 SQL	NNP
 ,	,
 but	CC
 I	PRP
+		
 was	VBD
 a	DT
 little	JJ
 wary	NN
 of	IN
-		
 doing	VBG
 this	DT
 since	IN
 I	PRP
 didn't	VBP
 know	VB
+		
 exactly	RB
 what	WP
 was	VBD
 happening	VBG
 at	IN
-		
 the	DT
 time	NN
 .	.
 I	PRP
 tried	VBD
 to	TO
+		
 write	VB
 a	DT
 simple	JJ
 decode	NN
 tool	NN
-		
 ,	,
 so	IN
 I	PRP
 could	MD
 decode	VB
 this	DT
+		
 type	NN
 of	IN
 text	NN
 without	IN
 even	RB
-		
 touching	VBG
 SQL	NNP
 Server	NNP
 .	.
 The	DT
 main	JJ
+		
 part	NN
 I	PRP
 need	VBP
 decoded	VBN
 is	VBZ
-		
 :	:
-CAST(	JJ
+CAST	NNP
+(	(
 0x44004500	CD
 ...	:
 06F007200	CD
+		
 AS	IN
-NVARCHAR(	NNP
+NVARCHAR	NNP
+(	(
 4000	CD
 )	)
 )	)
 I've	NNP
-		
 tried	VBD
 all	DT
 of	IN
 the	DT
+		
 following	JJ
 commands	NNS
 with	IN
@@ -1665,50 +1745,42 @@ no	DT
 luck	NN
 :	:
 txtDecodedText	NN
-		
 .	.
 Text	NNP
-=	NNP
-System.Web.HttpUtility.UrlDecode(	NNP
-txtURLText	NN
+=	NN
+System	NNP
+		
+.	.
+Web	NNP
+.	.
+HttpUtility	NNP
+.	.
+UrlDecode	NNP
+(	(
+txtURLText	JJ
 .	.
 Text	NNP
 )	)
+		
 ;	:
 txtDecodedText	NN
 .	.
+Text	NNP
+=	JJ
+Encoding	NNP
+.	.
+ASCII	NNP
+.	.
+GetString	NNP
+(	(
 		
-Text	NNP
-=	NNP
-Encoding.ASCII.GetString(	NNP
-Encoding.ASCII.GetBytes(	NNP
-txtURLText	NN
+Encoding	NNP
 .	.
-Text	NNP
-)	)
-)	)
-;	:
-txtDecodedText	NN
-		
+ASCII	NNP
 .	.
-Text	NNP
-=	NNP
-Encoding.Unicode.GetString(	NNP
-Encoding.Unicode.GetBytes(	NNP
-txtURLText	NN
-.	.
-Text	NNP
-)	)
-)	)
-;	:
-		
-txtDecodedText	NN
-.	.
-Text	NNP
-=	NNP
-Encoding.ASCII.GetString(	NNP
-Encoding.Unicode.GetBytes(	NNP
-txtURLText	NN
+GetBytes	NNP
+(	(
+txtURLText	JJ
 .	.
 Text	NNP
 )	)
@@ -1718,17 +1790,74 @@ Text	NNP
 txtDecodedText	NN
 .	.
 Text	NNP
-=	NNP
-Encoding.Unicode.GetString(	NNP
-Convert.FromBase64String(	NNP
-txtURLText	NN
+=	JJ
+Encoding	NNP
+.	.
+Unicode	NNP
+.	.
+GetString	NNP
+(	(
+		
+Encoding	NNP
+.	.
+Unicode	NNP
+.	.
+GetBytes	NNP
+(	(
+txtURLText	JJ
 .	.
 Text	NNP
 )	)
+)	)
 		
+;	:
+txtDecodedText	NN
+.	.
+Text	NNP
+=	JJ
+Encoding	NNP
+.	.
+ASCII	NNP
+.	.
+GetString	NNP
+(	(
+		
+Encoding	NNP
+.	.
+Unicode	NNP
+.	.
+GetBytes	NNP
+(	(
+txtURLText	JJ
+.	.
+Text	NNP
+)	)
+)	)
+		
+;	:
+txtDecodedText	NN
+.	.
+Text	NNP
+=	JJ
+Encoding	NNP
+.	.
+Unicode	NNP
+.	.
+GetString	NNP
+(	(
+		
+Convert	NNP
+.	.
+FromBase64String	NNP
+(	(
+txtURLText	JJ
+.	.
+Text	NNP
+)	)
 )	)
 ;	:
 What	WP
+		
 is	VBZ
 the	DT
 proper	JJ
@@ -1737,10 +1866,10 @@ to	TO
 translate	VB
 this	DT
 encoding	VBG
-		
 without	IN
 using	VBG
 SQL	NNP
+		
 Server	NNP
 ?	.
 Is	VBZ
@@ -1749,10 +1878,10 @@ possible	JJ
 ?	.
 I'll	NNP
 take	VB
-		
 VB	NNP
 .	.
 NET	NNP
+		
 code	NN
 since	IN
 I'm	NNP
@@ -1761,10 +1890,10 @@ with	IN
 that	DT
 too	RB
 .	.
-		
 Okay	NNP
 ,	,
 I'm	NNP
+		
 sure	JJ
 I'm	NNP
 missing	VBG
@@ -1773,10 +1902,10 @@ here	RB
 ,	,
 so	RB
 here's	JJ
-		
 where	WRB
 I'm	NNP
 at	IN
+		
 .	.
 Since	IN
 my	PRP$
@@ -1785,10 +1914,10 @@ is	VBZ
 a	DT
 basic	JJ
 string	NN
-		
 ,	,
 I	PRP
 started	VBD
+		
 with	IN
 just	RB
 a	DT
@@ -1797,10 +1926,10 @@ of	IN
 the	DT
 encoded	JJ
 portion	NN
-		
 -	:
 4445434C41	CD
 (	(
+		
 which	WDT
 translates	VBZ
 to	TO
@@ -1809,10 +1938,10 @@ DECLA	NNP
 -	:
 and	CC
 the	DT
-		
 first	JJ
 attempt	NN
 was	VBD
+		
 to	TO
 do	VB
 this	DT
@@ -1820,12 +1949,23 @@ this	DT
 txtDecodedText	NN
 .	.
 Text	NNP
-=	NNP
+=	JJ
+Encoding	NNP
+.	.
+UTF8	NNP
 		
-Encoding.UTF8.GetString(	NNP
-Encoding.UTF8.GetBytes(	NNP
+.	.
+GetString	NNP
+(	(
+Encoding	NNP
+.	.
+UTF8	NNP
+.	.
+GetBytes	NNP
+(	(
 txtURL	NN
 .	.
+		
 Text	NNP
 )	)
 )	)
@@ -1833,11 +1973,11 @@ Text	NNP
 ...	:
 and	CC
 all	DT
-		
 it	PRP
 did	VBD
 was	VBD
 return	VB
+		
 the	DT
 exact	JJ
 same	JJ
@@ -1845,11 +1985,11 @@ thing	NN
 that	IN
 I	PRP
 put	VBP
-		
 in	IN
 ,	,
 since	IN
 it	PRP
+		
 converted	VBD
 each	DT
 character	NN
@@ -1857,11 +1997,11 @@ into	IN
 is	VBZ
 byte	JJ
 .	.
-		
 I	PRP
 realized	VBD
 that	IN
 I	PRP
+		
 need	VBP
 to	TO
 parse	VB
@@ -1869,11 +2009,11 @@ each	DT
 two	CD
 characters	NNS
 into	IN
-		
 a	DT
 byte	NN
 manually	RB
 since	IN
+		
 I	PRP
 don't	VBP
 know	VB
@@ -1881,11 +2021,11 @@ of	IN
 any	DT
 methods	NNS
 yet	CC
-		
 that	DT
 will	MD
 do	VB
 that	DT
+		
 ,	,
 so	RB
 now	RB
@@ -1893,31 +2033,39 @@ my	PRP$
 little	JJ
 decoder	NN
 looks	VBZ
-		
 something	NN
 like	IN
 this	DT
 :	:
+		
 while	NN
 (	(
 !boolIsDone	CD
 )	)
 {	(
 bytURLChar	JJ
-=	NNP
+=	NN
+byte	NN
+.	.
+Parse	NNP
+(	(
 		
-byte.Parse(	NN
-txtURLText.Text.Substring(	NN
+txtURLText	JJ
+.	.
+Text	NNP
+.	.
+Substring	NNP
+(	(
 intParseIndex	NN
 ,	,
 2	CD
 )	)
 )	)
+		
 ;	:
 bytURL	CC
 [intURLIndex	VB
 ]	NNP
-		
 =	NNP
 bytURLChar	NN
 ;	:
@@ -1925,11 +2073,11 @@ intParseIndex	NN
 +	VBD
 =	JJ
 2	CD
+		
 ;	:
 intURLIndex	NN
 +	NNP
 +	NNP
-		
 ;	:
 if	IN
 (	(
@@ -1937,11 +2085,11 @@ txtURLText	NN
 .	.
 Text	NNP
 .	.
+		
 Length	NNP
 -	:
 intParseIndex	NN
 <	$
-		
 2	CD
 )	)
 {	(
@@ -1949,14 +2097,20 @@ boolIsDone	NN
 =	NNP
 true	JJ
 ;	:
+		
 }	)
 }	)
 txtDecodedText	JJ
 .	.
-		
 Text	NNP
-=	NNP
-Encoding.UTF8.GetString(	NNP
+=	JJ
+Encoding	NNP
+.	.
+UTF8	NNP
+.	.
+GetString	NNP
+		
+(	(
 bytURL	NN
 )	)
 ;	:
@@ -1965,9 +2119,9 @@ look	VBP
 good	JJ
 for	IN
 the	DT
-		
 first	JJ
 couple	NN
+		
 of	IN
 pairs	NNS
 ,	,
@@ -1977,9 +2131,9 @@ the	DT
 loop	NN
 balks	NNS
 when	WRB
-		
 it	PRP
 gets	VBZ
+		
 to	TO
 the	DT
 "4C	NNP
@@ -1989,9 +2143,9 @@ and	CC
 says	VBZ
 that	IN
 the	DT
-		
 string	NN
 is	VBZ
+		
 in	IN
 the	DT
 incorrect	JJ
@@ -2001,9 +2155,9 @@ Interestingly	NNP
 enough	RB
 ,	,
 when	WRB
-		
 I	PRP
 step	VBP
+		
 through	IN
 the	DT
 debugger	NN
@@ -2013,9 +2167,9 @@ the	DT
 GetString	NNP
 method	NN
 on	IN
-		
 the	DT
 byte	NN
+		
 array	NN
 that	IN
 I	PRP
@@ -2025,9 +2179,9 @@ to	TO
 parse	VB
 up	RP
 to	TO
-		
 that	DT
 point	NN
+		
 ,	,
 I	PRP
 get	VBP
@@ -2037,9 +2191,9 @@ get	VBP
 +	NN
 "	NN
 as	IN
-		
 the	DT
 result	NN
+		
 .	.
 How	WRB
 do	VBP
@@ -2049,9 +2203,9 @@ out	RP
 what	WP
 I'm	NNP
 missing	VBG
-		
 -	:
 do	NN
+		
 I	PRP
 need	VBP
 to	TO
@@ -2061,9 +2215,9 @@ a	DT
 cast	NN
 "	NN
 for	IN
-		
 each	DT
 byte	NN
+		
 instead	RB
 of	IN
 attempting	VBG
@@ -2073,9 +2227,9 @@ it	PRP
 ?	.
 I	PRP
 wound	VBD
-		
 up	RP
 using	VBG
+		
 this	DT
 .	.
 It	PRP
@@ -2085,9 +2239,9 @@ kind	NN
 of	IN
 a	DT
 hack	NN
-		
 ,	,
 but	CC
+		
 it	PRP
 actually	RB
 works	VBZ
@@ -2097,9 +2251,9 @@ well	RB
 The	DT
 only	JJ
 thing	NN
-		
 is	VBZ
 you	PRP
+		
 have	VBP
 to	TO
 be	VB
@@ -2109,19 +2263,22 @@ with	IN
 your	PRP$
 semicolons	NNS
 .	.
-		
 :	:
 D	NNP
+		
 var	FW
 strSql	NN
 :String	VBG
-=	NNP
-stream.readUTFBytes(	NN
+=	JJ
+stream	NN
+.	.
+readUTFBytes	NNS
+(	(
 stream	NN
 .	.
 bytesAvailable	JJ
-)	)
 		
+)	)
 ;	:
 var	NN
 i	VBZ
@@ -2132,20 +2289,23 @@ i	VBZ
 var	NN
 strSqlSplit	NN
 :Array	NNP
-=	NNP
 		
-strSql.split(	NN
-"	NN
+=	NNP
+strSql	NN
+.	.
+split	NN
+(	(
+"	JJ
 ;	:
 "	NNP
 )	)
 ;	:
 for	IN
+		
 (	(
 i	JJ
 =	VBP
 0	CD
-		
 ;	:
 i	JJ
 <	VBP
@@ -2153,27 +2313,31 @@ strSqlSplit	NN
 .	.
 length	NN
 ;	:
+		
 i	CC
 +	VBP
 +	NNP
 )	)
-		
 {	(
-NonQuery(	NNP
-strSqlSplit	VBD
+NonQuery	NNP
+(	(
+strSqlSplit	JJ
 [i	NNP
 ]	NNP
 .	.
-toString()	NN
+		
+toString	NN
+(	(
+)	)
 )	)
 ;	:
 }	)
 What	WP
-		
 is	VBZ
 the	DT
 "purist	JJ
 "	NN
+		
 or	CC
 "correct	JJ
 "	JJ
@@ -2181,11 +2345,11 @@ way	NN
 to	TO
 access	NN
 an	DT
-		
 object's	NN
 properties	NNS
 from	IN
 within	IN
+		
 an	DT
 object	JJ
 method	NN
@@ -2193,11 +2357,11 @@ that	WDT
 is	VBZ
 not	RB
 a	DT
-		
 getter	NN
 /setter	NN
 method	NN
 ?	.
+		
 I	PRP
 know	VBP
 that	IN
@@ -2205,11 +2369,11 @@ from	IN
 outside	IN
 of	IN
 the	DT
-		
 object	NN
 you	PRP
 should	MD
 use	VB
+		
 a	DT
 getter	NN
 /setter	NN
@@ -2217,11 +2381,11 @@ getter	NN
 but	CC
 from	IN
 within	IN
-		
 would	MD
 you	PRP
 just	RB
 do	VBP
+		
 :	:
 Java	NN
 :	:
@@ -2229,11 +2393,11 @@ String	NNP
 property	NN
 =	NN
 this	DT
-		
 .	.
 property	NN
 ;	:
 PHP	NNP
+		
 :	:
 $property	NN
 =	NN
@@ -2241,18 +2405,22 @@ $this	NNP
 -	:
 >property	NN
 ;	:
-		
 or	CC
 would	MD
 you	PRP
 do	VB
+		
 :	:
 Java	VB
 :	:
 String	NNP
 property	NN
-=	NNP
-this.getProperty()	NN
+=	NN
+this	DT
+.	.
+getProperty	NN
+(	(
+)	)
 		
 ;	:
 PHP	NNP
@@ -2447,17 +2615,21 @@ you	PRP
 do	VBP
 		
 a	DT
-String.split()	NNP
+String	NNP
+.	.
+split	NN
+(	(
+)	)
 on	IN
 each	DT
 line	NN
 of	IN
 the	DT
+		
 file	NN
 ,	,
 remembering	VBG
 the	DT
-		
 result	NN
 array	NN
 of	IN
@@ -2465,11 +2637,11 @@ the	DT
 first	JJ
 line	NN
 to	TO
+		
 generate	VB
 the	DT
 XML	NNP
 ,	,
-		
 and	CC
 just	RB
 spit	VB
@@ -2477,11 +2649,11 @@ each	DT
 line's	NN
 array	NN
 data	NNS
+		
 out	RP
 with	IN
 the	DT
 proper	JJ
-		
 XML	NNP
 elements	NNS
 padding	VBG
@@ -2489,11 +2661,11 @@ each	DT
 iteration	NN
 of	IN
 a	DT
+		
 loop	NN
 ?	.
 I	PRP
 have	VBP
-		
 a	DT
 pretty	JJ
 standard	NN
@@ -2501,11 +2673,11 @@ table	JJ
 set-up	NN
 in	IN
 a	DT
+		
 current	JJ
 application	NN
 using	VBG
 the	DT
-		
 .	.
 NET	JJ
 XSD	NN
@@ -2513,11 +2685,11 @@ DataSet	NNP
 and	CC
 TableAdapter	NNP
 features	NNS
+		
 .	.
 My	PRP$
 contracts	NNS
 table	JJ
-		
 consists	NNS
 of	IN
 some	DT
@@ -2525,11 +2697,11 @@ standard	JJ
 contract	NN
 information	NN
 ,	,
+		
 with	IN
 a	DT
 column	NN
 for	IN
-		
 the	DT
 primary	JJ
 department	NN
@@ -2537,11 +2709,11 @@ department	NN
 This	DT
 column	NN
 is	VBZ
+		
 a	DT
 foreign	JJ
 key	NN
 to	TO
-		
 my	PRP$
 Departments	NNS
 table	NN
@@ -2549,11 +2721,11 @@ table	NN
 where	WRB
 I	PRP
 store	VBP
+		
 the	DT
 basic	JJ
 department	NN
 name	NN
-		
 ,	,
 id	NN
 ,	,
@@ -2561,11 +2733,11 @@ notes	NNS
 .	.
 This	DT
 is	VBZ
+		
 all	DT
 setup	NN
 and	CC
 functioning	NN
-		
 in	IN
 my	PRP$
 SQL	NNP
@@ -2573,11 +2745,11 @@ Server	NNP
 .	.
 When	WRB
 I	PRP
+		
 use	VBP
 the	DT
 XSD	NNP
 tool	NN
-		
 ,	,
 I	PRP
 can	MD
@@ -2585,11 +2757,11 @@ drag	VB
 both	DT
 tables	NNS
 in	IN
+		
 at	IN
 once	RB
 and	CC
 it	PRP
-		
 auto	NN
 detects	VBZ
 /creates	VBZ
@@ -2597,11 +2769,11 @@ the	DT
 foreign	JJ
 key	NN
 I	PRP
+		
 have	VBP
 between	IN
 these	DT
 two	CD
-		
 tables	NNS
 .	.
 This	DT
@@ -2609,11 +2781,11 @@ works	VBZ
 great	JJ
 when	WRB
 I'm	NNP
+		
 on	IN
 my	PRP$
 main	JJ
 page	NN
-		
 and	CC
 am	VBP
 viewing	VBG
@@ -2621,11 +2793,11 @@ contract	NN
 data	NNS
 .	.
 However	RB
+		
 ,	,
 when	WRB
 I	PRP
 go	VBP
-		
 to	TO
 my	PRP$
 administrative	JJ
@@ -2633,11 +2805,11 @@ page	NN
 to	TO
 modify	VB
 the	DT
+		
 department	NN
 data	NN
 .	.
 I	PRP
-		
 typically	RB
 do	VBP
 something	NN
@@ -2645,17 +2817,25 @@ like	IN
 this	DT
 :	:
 Dim	NNP
+		
 dtDepartment	NN
 As	IN
 New	NNP
-DepartmentDataTable()	NNP
-		
+DepartmentDataTable	NNP
+(	(
+)	)
 Dim	NNP
 taDepartment	NN
 As	IN
 New	NNP
-DepartmentTableAdapter()	NNP
-taDepartment.Fill(	NNP
+DepartmentTableAdapter	NNP
+		
+(	(
+)	)
+taDepartment	NN
+.	.
+Fill	NNP
+(	(
 dtDepartment	NN
 )	)
 However	RB
@@ -2797,15 +2977,17 @@ PHP	NN
 :	:
 public	JJ
 function	NN
-getName()	NN
+getName	NN
+(	(
+)	)
 {	(
-$this	JJ
+$this	SYM
 -	:
 >incrementNameCalled	VBN
 (	(
+		
 )	)
 ;	:
-		
 return	VB
 $this	SYM
 -	:
@@ -2815,9 +2997,11 @@ $this	SYM
 ;	:
 }protected	VBN
 function	NN
-_getName()	NNP
-{	(
 		
+_getName	NNP
+(	(
+)	)
+{	(
 return	VB
 $this	SYM
 -	:
@@ -2825,11 +3009,11 @@ $this	SYM
 ;	:
 }	)
 and	CC
+		
 then	RB
 from	IN
 within	IN
 the	DT
-		
 object	JJ
 itself	PRP
 :	:
@@ -2837,11 +3021,11 @@ PHP	NN
 :	:
 $name	NN
 =	VBZ
+		
 $this	SYM
 -	:
 >_getName	NN
 (	(
-		
 )	)
 ;	:
 This	DT
@@ -2849,11 +3033,11 @@ way	NN
 you	PRP
 can	MD
 still	RB
+		
 use	VB
 that	IN
 first	JJ
 argument	NN
-		
 for	IN
 something	NN
 else	RB
@@ -2861,11 +3045,11 @@ else	RB
 like	IN
 sending	VBG
 a	DT
+		
 flag	NN
 for	IN
 whether	IN
 or	CC
-		
 not	RB
 to	TO
 used	VBN
@@ -2873,11 +3057,11 @@ cached	VBN
 data	NNS
 here	RB
 perhaps	RB
+		
 )	)
 .	.
 The	DT
 funny	JJ
-		
 thing	NN
 is	VBZ
 i	JJ
@@ -2885,11 +3069,11 @@ wrote	VBD
 a	DT
 php	JJ
 media	NNS
+		
 gallery	NN
 for	IN
 all	DT
 my	PRP$
-		
 music	NN
 2	CD
 days	NNS
@@ -2897,11 +3081,11 @@ ago	RB
 .	.
 I	PRP
 had	VBD
+		
 a	DT
 similar	JJ
 problem	NN
 .	.
-		
 Im	NNP
 using	VBG
 http	NN
@@ -2909,11 +3093,11 @@ http	NN
 /	JJ
 /musicplayer	NN
 .	.
+		
 sourceforge	NN
 .	.
 net	JJ
 /	NN
-		
 for	IN
 the	DT
 player	NN
@@ -2921,11 +3105,11 @@ player	NN
 and	CC
 the	DT
 playlis	NN
+		
 are	VBP
 built	VBN
 via	IN
 php	NN
-		
 .	.
 all	DT
 music	NN
@@ -2933,39 +3117,43 @@ request	NN
 go	VBP
 there	RB
 a	DT
+		
 script	NN
 called	VBN
 xfer	NN
 .	.
-		
 php	NN
 ?file	IN
 =WHATEVER	JJ
 $filename	NN
 =	NNP
-base64_url_decode(	NN
-$_REQUEST	NNP
-[	NNP
-'	POS
+base64_url_decode	NN
+(	(
+		
+$_REQUEST	JJ
+[	NN
+'	''
 file	NN
 '	''
-		
 ]	NN
 )	)
 ;	:
-header(	PRP$
+header	NN
+(	(
 "Cache	NNP
+		
 -	:
 Control	NN
 :	:
 public	JJ
 "	NNP
 )	)
-		
 ;	:
-header(	PRP$
+header	NN
+(	(
 "Content	JJ
 -	:
+		
 Description	NN
 :	:
 File	NNP
@@ -2973,10 +3161,11 @@ Transfer	NNP
 "	NNP
 )	)
 ;	:
-		
-header(	VBN
+header	NN
+(	(
 '	POS
 Content-disposition	NN
+		
 :	:
 attachment	NN
 ;	:
@@ -2984,32 +3173,36 @@ filename	JJ
 =	NNP
 '	POS
 .	.
-basename(	NNS
-		
-$filename	VBP
+basename	NN
+(	(
+$filename	NNP
 )	)
+		
 )	)
 ;	:
-header(	PRP$
+header	NN
+(	(
 "Content	JJ
 -	:
 Transfer-Encoding	NN
 :	:
 binary	JJ
 "	NN
-		
 )	)
+		
 ;	:
-header(	VBN
+header	NN
+(	(
 '	POS
-Content-Length	JJ
+Content-Length	NN
 :	:
 '	POS
 .	.
-filesize(	NNS
-$filename	VBP
-)	)
+filesize	NN
+(	(
+$filename	NNP
 		
+)	)
 )	)
 ;	:
 /	CC
@@ -3020,8 +3213,8 @@ file	NN
 counting	NN
 code	NN
 here	RB
-.	.
 		
+.	.
 either	CC
 a	DT
 db	NN
@@ -3030,10 +3223,11 @@ static	JJ
 files	NNS
 /	VBP
 /	JJ
-readfile(	NN
+readfile	NN
+(	(
+		
 $filename	NN
 )	)
-		
 ;	:
 /	CC
 /and	VB
@@ -3043,60 +3237,67 @@ user	NN
 the	DT
 file	NN
 function	NN
-base64_url_decode(	IN
-$input	NNP
 		
+base64_url_decode	NN
+(	(
+$input	NNP
 )	)
 {	(
 return	NN
-base64_decode(	NN
-strtr(	NN
-$input	NNP
+base64_decode	NN
+(	(
+strtr	NN
+(	(
+$input	UH
+		
 ,	,
 '	''
 -	:
 _	NN
 ,	,
-		
 '	''
 ,	,
 '	''
 +	JJ
 /	NNP
 =	NNP
+		
 '	POS
 )	)
 )	)
 ;	:
 }	)
-		
 And	CC
 when	WRB
 you	PRP
 call	VBP
 files	NNS
 use	VBP
+		
 something	NN
 like	IN
 function	NN
-base64_url_encode(	IN
+base64_url_encode	NN
+(	(
 $input	NNP
-		
 )	)
 {	(
 return	NN
-strtr(	NN
-base64_encode(	IN
-$input	NN
+strtr	NN
+(	(
+		
+base64_encode	NN
+(	(
+$input	NNP
 )	)
 ,	,
 '	''
 +	JJ
 /	NNP
-		
 =	NNP
 '	POS
 ,	,
+		
 '	''
 -	:
 _	NN
@@ -3105,10 +3306,10 @@ _	NN
 )	)
 ;	:
 }	)
-		
 http	NN
 :	:
 /	JJ
+		
 /us	NN
 .	.
 php	NN
@@ -3117,10 +3318,10 @@ net	JJ
 /manual	JJ
 /en	NN
 /function	NN
-		
 .	.
 base64-encode	NN
 .	.
+		
 php	VB
 If	IN
 you	PRP
@@ -3129,10 +3330,10 @@ using	VBG
 some	DT
 javascript	NN
 or	CC
-		
 a	DT
 flash	JJ
 player	NN
+		
 (	(
 JW	NNP
 player	NN
@@ -3141,10 +3342,10 @@ example	NN
 )	)
 that	WDT
 requires	VBZ
-		
 the	DT
 actual	JJ
 link	NN
+		
 to	TO
 be	VB
 an	DT
@@ -3153,10 +3354,10 @@ file	NN
 or	CC
 whatever	NN
 ,	,
-		
 you	PRP
 can	MD
 append	VB
+		
 the	DT
 text	NN
 "	NNP
@@ -3165,10 +3366,10 @@ text	NN
 .	.
 mp3	NN
 "	NN
-		
 so	IN
 the	DT
 final	JJ
+		
 linke	NN
 becomes	VBZ
 something	NN
@@ -3177,10 +3378,10 @@ like	IN
 .	.
 example	NN
 .	.
-		
 com	NN
 /xfer	NN
 .	.
+		
 php	NN
 ?file	IN
 =34842ffjfjxfh	NNP
@@ -3189,10 +3390,10 @@ php	NN
 .	.
 mp3	NN
 "	NN
-		
 .	.
 That	DT
 way	NN
+		
 it	PRP
 looks	VBZ
 like	IN
@@ -3201,10 +3402,10 @@ ends	VBZ
 with	IN
 an	DT
 mp3	JJ
-		
 extension	NN
 without	IN
 affecting	VBG
+		
 the	DT
 file	NN
 link	NN
@@ -3213,10 +3414,10 @@ Well	UH
 ,	,
 what	WP
 is	VBZ
-		
 the	DT
 nature	NN
 of	IN
+		
 the	DT
 flat	JJ
 databases	NNS
@@ -3225,10 +3426,10 @@ Are	VBP
 they	PRP
 large	JJ
 or	CC
-		
 small	JJ
 .	.
 Is	VBZ
+		
 it	PRP
 simple	JJ
 arrays	NNS
@@ -3237,10 +3438,10 @@ arrays	NNS
 in	IN
 them	PRP
 ?	.
-		
 if	IN
 its	PRP$
 something	NN
+		
 simple	JJ
 say	VBP
 userprofiles	NNS
@@ -3249,10 +3450,11 @@ as	IN
 such	JJ
 :	:
 $user	NN
-		
 =	NN
-array(	NN
-"name	NN
+array	NN
+(	(
+		
+"name	JJ
 "	NNP
 =	NNP
 >	NNP
@@ -3261,20 +3463,21 @@ array(	NN
 ,	,
 "age	NN
 "	NNP
-		
 =	NNP
 >	NNP
+		
 20	CD
 ,	,
 "websites	VBZ
 "	NNP
 =	NNP
 >	NNP
-array(	NN
-"dubayou	NNP
+array	NN
+(	(
+"dubayou	UH
 .	.
-		
 com	NN
+		
 "	NN
 ,	,
 "willwharton	NNP
@@ -3285,8 +3488,8 @@ com	NN
 "codecream	NN
 .	.
 com	VB
-		
 "	NN
+		
 )	)
 ,	,
 "and_one	CD
@@ -3297,8 +3500,8 @@ com	VB
 "	NNP
 )	)
 ;	:
-		
 and	CC
+		
 to	TO
 save	VB
 or	CC
@@ -3309,8 +3512,8 @@ record	NN
 for	IN
 that	DT
 user	NN
-		
 .	.
+		
 $dir	CC
 =	JJ
 "	NNP
@@ -3321,8 +3524,8 @@ $dir	CC
 ;	:
 /	NNP
 /make	VBP
-		
 sure	JJ
+		
 to	TO
 put	VB
 it	PRP
@@ -3333,8 +3536,9 @@ server	NN
 can	MD
 reach	VB
 .	.
+file_put_contents	NNS
 		
-file_put_contents(	JJ
+(	(
 $dir	NN
 .	.
 $user	CC
@@ -3342,9 +3546,9 @@ $user	CC
 '	POS
 name	NN
 '	''
-]	NNS
-,	,
-serialize(	FW
+]	JJ
+,serialize	NNP
+(	(
 		
 $user	NNP
 )	)
@@ -3366,10 +3570,12 @@ $name	NN
 )	)
 {	(
 return	NN
-unserialize(	JJ
-file_get_contents(	NN
-"	NNP
+unserialize	NN
+(	(
+file_get_contents	NNS
 		
+(	(
+"	JJ
 ..	NNP
 /userdata	NNP
 /	NNP
@@ -3379,9 +3585,9 @@ $name	NN
 )	)
 )	)
 ;	:
+		
 }	)
 but	CC
-		
 again	RB
 this	DT
 implementation	NN
@@ -3391,9 +3597,9 @@ on	IN
 the	DT
 application	NN
 and	CC
+		
 nature	NN
 of	IN
-		
 the	DT
 database	NN
 you	PRP
@@ -3403,9 +3609,9 @@ I	PRP
 want	VBP
 to	TO
 print	VB
+		
 HTML	NNP
 from	IN
-		
 a	DT
 C	NNP
 #	#
@@ -3415,9 +3621,9 @@ service	NN
 The	DT
 Web	NNP
 Browser	NNP
+		
 control	NN
 is	VBZ
-		
 overkill	VBN
 ,	,
 and	CC
@@ -3427,9 +3633,9 @@ function	VB
 well	RB
 in	IN
 a	DT
+		
 service	NN
 environment	NN
-		
 ,	,
 nor	CC
 does	VBZ
@@ -3439,9 +3645,9 @@ well	RB
 on	IN
 a	DT
 system	NN
+		
 with	IN
 very	RB
-		
 tight	JJ
 security	NN
 constraints	NNS
@@ -3451,9 +3657,9 @@ there	RB
 any	DT
 sort	NN
 of	IN
+		
 free	JJ
 .	.
-		
 NET	JJ
 library	NN
 that	WDT
@@ -3463,9 +3669,9 @@ the	DT
 printing	NN
 of	IN
 a	DT
+		
 basic	JJ
 HTML	NNP
-		
 page	NN
 ?	.
 Here	RB
@@ -3475,9 +3681,9 @@ code	NN
 I	PRP
 have	VBP
 so	RB
+		
 far	RB
 ,	,
-		
 which	WDT
 does	VBZ
 not	RB
@@ -3486,73 +3692,94 @@ properly	RB
 .	.
 public	JJ
 void	NN
-PrintThing(	NNP
-string	NN
-document	NN
+PrintThing	NNP
 		
+(	(
+string	VBG
+document	NN
 )	)
 {	(
 if	IN
 (	(
-Thread.CurrentThread.GetApartmentState()	NNP
+Thread	NNP
+.	.
+CurrentThread	NNP
+.	.
+		
+GetApartmentState	NNP
+(	(
+)	)
 !	.
-=	NN
+=	JJ
 ApartmentState	NNP
 .	.
 STA	NNP
 )	)
-		
 {	(
 Thread	JJ
+		
 thread	NN
 =	VBD
 new	JJ
-Thread(	NNP
-(	(
+Thread	NNP
+((	NNP
 ThreadStart	NNP
 )	)
 delegate	NN
 {	(
+PrintDocument	NNP
+(	(
 		
-PrintDocument(	NNP
 document	NN
 )	)
 ;	:
 }	)
 )	)
 ;	:
-thread.SetApartmentState(	JJ
+thread	NN
+.	.
+SetApartmentState	NNP
+(	(
 ApartmentState	NNP
+		
 .	.
 STA	NNP
-		
 )	)
 ;	:
-thread.Start()	NN
+thread	NN
+.	.
+Start	NNP
+(	(
+)	)
 ;	:
 }	)
+		
 else	RB
 {	(
-PrintDocument(	NNP
+PrintDocument	NNP
+(	(
 document	NN
 )	)
 ;	:
-		
 }	)
 }	)
 protected	VBN
 void	JJ
-PrintDocument(	NNP
-string	NN
+		
+PrintDocument	NNP
+(	(
+string	VBG
 document	NN
 )	)
 {	(
 WebBrowser	NNP
 browser	RB
-		
 =	VBD
 new	JJ
-WebBrowser()	NNP
+WebBrowser	NNP
+		
+(	(
+)	)
 ;	:
 browser	NN
 .	.
@@ -3561,8 +3788,8 @@ DocumentText	NNP
 document	NN
 ;	:
 while	IN
-		
 (	(
+		
 browser	NN
 .	.
 ReadyState	VB
@@ -3573,11 +3800,20 @@ WebBrowserReadyState	NNP
 Complete	NNP
 )	)
 {	(
+Application	NNP
 		
-Application.DoEvents()	NNP
+.	.
+DoEvents	NNP
+(	(
+)	)
 ;	:
 }	)
-browser.Print()	NN
+browser	NN
+.	.
+Print	NNP
+(	(
+)	)
+		
 ;	:
 }	)
 This	DT
@@ -3585,11 +3821,11 @@ works	VBZ
 fine	JJ
 when	WRB
 called	VBN
-		
 from	IN
 UI-type	NNP
 threads	NNS
 ,	,
+		
 but	CC
 nothing	NN
 happens	NNS
@@ -3597,15 +3833,19 @@ when	WRB
 called	VBN
 from	IN
 a	DT
-		
 service-type	JJ
 thread	NN
 .	.
 Changing	VBG
-Print()	NNP
+		
+Print	NNP
+(	(
+)	)
 to	TO
-ShowPrintPreviewDialog()	NNP
-yields	NNS
+ShowPrintPreviewDialog	NNP
+(	(
+)	)
+yields	VBZ
 the	DT
 following	JJ
 IE	NNP
@@ -3665,26 +3905,23 @@ formats	NNS
 Americans	NNPS
 use	VBP
 10	CD
-,	,
-000	CD
+,000	NN
 .	.
 50	CD
-		
 Germans	NNPS
+		
 use	VBP
 10	CD
 .	.
 000	CD
-,	,
-50	CD
+,50	JJ
 French	JJ
 use	NN
 10	CD
 000	CD
-		
-,	,
-50	CD
+,50	NN
 My	NNP
+		
 first	JJ
 approach	NN
 would	MD
@@ -3693,10 +3930,10 @@ to	TO
 take	VB
 the	DT
 string	NN
-		
 ,	,
 parse	VB
 it	PRP
+		
 backwards	NNS
 ,	,
 until	IN
@@ -3705,10 +3942,10 @@ encounter	VBP
 a	DT
 separator	NN
 and	CC
-		
 use	VB
 this	DT
 as	IN
+		
 my	PRP$
 decimal	JJ
 separator	NN
@@ -3717,10 +3954,10 @@ There	EX
 is	VBZ
 an	DT
 obvious	JJ
-		
 flaw	NN
 with	IN
 that	DT
+		
 :	:
 10	CD
 .	.
@@ -3729,10 +3966,10 @@ would	MD
 be	VB
 interpreted	VBN
 as	IN
-		
 10	CD
 .	.
 Another	DT
+		
 approach	NN
 :	:
 if	IN
@@ -3741,10 +3978,10 @@ string	NN
 contains	VBZ
 2	CD
 different	JJ
-		
 non-numeric	JJ
 characters	NNS
 ,	,
+		
 use	VBP
 the	DT
 last	JJ
@@ -3753,10 +3990,10 @@ as	IN
 the	DT
 decimal	JJ
 separator	NN
-		
 and	CC
 discard	VB
 the	DT
+		
 others	NNS
 .	.
 If	IN
@@ -3765,10 +4002,10 @@ only	RB
 have	VBP
 one	CD
 ,	,
-		
 check	NN
 if	IN
 it	PRP
+		
 occurs	VBZ
 more	JJR
 than	IN
@@ -3777,10 +4014,10 @@ and	CC
 discard	VB
 it	PRP
 if	IN
-		
 it	PRP
 does	VBZ
 .	.
+		
 If	IN
 it	PRP
 only	RB
@@ -3789,10 +4026,10 @@ once	RB
 ,	,
 check	VB
 if	IN
-		
 it	PRP
 has	VBZ
 3	CD
+		
 digits	NNS
 after	IN
 it	PRP
@@ -3801,10 +4038,10 @@ If	IN
 yes	UH
 ,	,
 discard	VB
-		
 it	PRP
 ,	,
 otherwise	RB
+		
 use	NN
 it	PRP
 as	IN
@@ -3813,10 +4050,10 @@ separator	NN
 .	.
 The	DT
 obvious	JJ
-		
 "best	JJS
 solution	NN
 "	NN
+		
 would	MD
 be	VB
 to	TO
@@ -3825,10 +4062,10 @@ the	DT
 User's	NNP
 culture	NN
 or	CC
-		
 Browser	NNP
 ,	,
 but	CC
+		
 that	IN
 does	VBZ
 not	RB
@@ -3837,10 +4074,10 @@ if	IN
 you	PRP
 have	VBP
 a	DT
-		
 Frenchman	NNP
 using	VBG
 an	DT
+		
 en-US	JJ
 Windows	NNP
 /Browser	NNP
@@ -3849,10 +4086,10 @@ Does	VBZ
 the	DT
 .	.
 net	JJ
-		
 Framework	NNP
 contain	NN
 some	DT
+		
 mythical	JJ
 black	JJ
 magic	NN
@@ -3861,10 +4098,10 @@ point	NN
 parser	NN
 that	WDT
 is	VBZ
-		
 better	JJR
 than	IN
 Double	JJ
+		
 .(	JJ
 Try	NNP
 )Parse	NNP
@@ -3873,10 +4110,10 @@ Try	NNP
 in	IN
 trying	VBG
 to	TO
-		
 auto-detect	VB
 the	DT
 number	NN
+		
 format	NN
 ?	.
 I've	NNP
@@ -3885,10 +4122,10 @@ somewhere	RB
 the	DT
 human	JJ
 eye	NN
-		
 can't	NN
 distinguish	JJ
 between	IN
+		
 less	JJR
 than	IN
 4	CD
@@ -3897,10 +4134,10 @@ apart	RB
 .	.
 so	IN
 This	DT
-		
 is	VBZ
 something	NN
 to	TO
+		
 keep	VB
 in	IN
 mind	NN
@@ -3909,10 +4146,10 @@ The	DT
 following	JJ
 algorithm	NN
 does	VBZ
-		
 not	RB
 compensate	VB
 for	IN
+		
 this	DT
 .	.
 I'm	NNP
@@ -3921,10 +4158,10 @@ sure	JJ
 this	DT
 is	VBZ
 exactly	RB
-		
 what	WP
 you	PRP
 want	VBP
+		
 ,	,
 but	CC
 this	DT
@@ -3933,10 +4170,10 @@ one	CD
 way	NN
 to	TO
 randomly	VB
-		
 generate	VB
 non-repeating	JJ
 color	NN
+		
 values	NNS
 :	:
 (	(
@@ -3945,10 +4182,10 @@ beware	NN
 inconsistent	JJ
 pseudo-code	JJ
 ahead	RB
-		
 )	)
 /	NN
 /colors	NNS
+		
 entered	VBD
 as	IN
 0-255	JJ
@@ -3957,10 +4194,10 @@ as	IN
 G	NNP
 ,	,
 B	NNP
-		
 ]colors	NNPS
 =	NNP
 [	NNP
+		
 ]	NNP
 ;	:
 /	NNP
@@ -3969,32 +4206,34 @@ final	JJ
 colors	NNS
 to	TO
 be	VB
-		
 usedrand	JJ
 =	NNP
 new	JJ
-Random()	NNP
+		
+Random	NNP
+(	(
+)	)
 ;	:
-/	NNP
-/assumes	NNP
-n	FW
+/	CC
+/assumes	NNS
+n	CC
 is	VBZ
 less	JJR
 than	IN
-		
 16	CD
-,	,
-777	CD
-,	,
-216randomGen(	CD
-int	NN
+		
+,777	JJ
+,216randomGen	NNP
+(	(
+int	JJ
 n	NN
 )	)
 {	(
 while	IN
 (	(
+len	FW
+(	(
 		
-len(	JJ
 colors	NNS
 )	)
 <	VBP
@@ -4005,35 +4244,44 @@ n	RB
 /generate	VB
 a	DT
 random	JJ
-		
 number	NN
+		
 between	IN
 0	CD
-,	,
-255	CD
+,255	NNS
 for	IN
 each	DT
 color	NN
 newRed	RB
 =	NNP
-rand.next(	VB
+rand	NN
+.	.
+next	JJ
 		
+(	(
 256	CD
 )	)
 ;	:
 newGreen	JJ
 =	NNP
-rand.next(	NN
+rand	NN
+.	.
+next	JJ
+(	(
 256	CD
+		
 )	)
 ;	:
 newBlue	JJ
 =	NNP
-		
-rand.next(	NN
+rand	NN
+.	.
+next	JJ
+(	(
 256	CD
 )	)
 ;	:
+		
 temp	CC
 =	VB
 [newRed	NNP
@@ -4041,11 +4289,11 @@ temp	CC
 newGreen	JJ
 ,	,
 newBlue	JJ
-		
 ]	NN
 ;	:
 /	CC
 /only	RB
+		
 adds	VBZ
 new	JJ
 colors	NNS
@@ -4053,20 +4301,23 @@ to	TO
 the	DT
 array	NN
 if	IN
-		
 temp	NN
 not	RB
 in	IN
 colors	NNS
+		
 {	(
-colors.append(	VB
+colors	NNS
+.	.
+append	NN
+(	(
 temp	NN
 )	)
 ;	:
 }	)
 }	)
-		
 }	)
+		
 One	CD
 way	NN
 you	PRP
@@ -4077,8 +4328,8 @@ for	IN
 better	JJR
 visibility	NN
 would	MD
-		
 be	VB
+		
 to	TO
 compare	VB
 the	DT
@@ -4089,8 +4340,8 @@ new	JJ
 color	NN
 and	CC
 all	PDT
-		
 the	DT
+		
 colors	NNS
 in	IN
 the	DT
@@ -4101,8 +4352,8 @@ item	NN
 in	IN
 color	NN
 {	(
-		
 itemSq	JJ
+		
 =	NN
 (	(
 item	NN
@@ -4113,8 +4364,8 @@ item	NN
 item	NN
 [1	NNP
 ]	NNP
-		
 ^2	NNP
+		
 +	NNP
 item	NN
 [2	NNP
@@ -4125,8 +4376,8 @@ item	NN
 ^	VBD
 (.	$
 5	CD
-		
 )	)
+		
 ;	:
 tempSq	VBN
 =	NNP
@@ -4137,8 +4388,8 @@ temp	JJ
 ^2	NNP
 +	NNP
 temp	NN
-		
 [1	NNP
+		
 ]	NNP
 ^2	NNP
 +	NNP
@@ -4149,8 +4400,8 @@ temp	NN
 ]	NNP
 )	)
 ^	VBD
-		
 (.	$
+		
 5	CD
 )	)
 ;	:
@@ -4161,9 +4412,10 @@ itemSq	NN
 tempSq	NN
 ;	:
 dist	JJ
+=	NN
 		
-=	NNP
-abs(	NN
+abs	NN
+(	(
 dist	NN
 )	)
 ;	:
@@ -4189,15 +4441,18 @@ not	RB
 in	IN
 colors	NNS
 {	(
-colors.append(	VB
+colors	NNS
+.	.
+append	NN
+(	(
 temp	NN
 )	)
 ;	:
 }	)
+		
 But	CC
 this	DT
 approach	NN
-		
 would	MD
 significantly	RB
 slow	VB
@@ -4206,10 +4461,10 @@ your	PRP$
 algorithm	NN
 .	.
 Another	DT
+		
 way	NN
 would	MD
 be	VB
-		
 to	TO
 scrap	VB
 the	DT
@@ -4218,10 +4473,10 @@ and	CC
 systematically	RB
 go	VBP
 through	IN
+		
 every	DT
 4	CD
 values	NNS
-		
 and	CC
 add	VB
 a	DT
@@ -4230,8 +4485,132 @@ to	TO
 an	DT
 array	NN
 in	IN
+		
 the	DT
 above	JJ
 example	NN
+.	.
+I	PRP
+don't	VBP
+know	VB
+the	DT
+ASP	NNP
+.	.
+NET	NNP
 		
+side	NN
+of	IN
+the	DT
+problem	NN
+but	CC
+.	.
+NET	NNP
+has	VBZ
+a	DT
+pretty	RB
+powerful	JJ
+		
+class	NN
+:	:
+System	NN
+.	.
+Globalization	NNP
+.	.
+CultureInfo	NNP
+.	.
+You	PRP
+can	MD
+use	VB
+		
+the	DT
+following	JJ
+code	NN
+to	TO
+parse	VB
+a	DT
+string	NN
+containing	VBG
+a	DT
+double	JJ
+value	NN
+		
+:	:
+double	JJ
+d	NN
+=	NNP
+double	RB
+.	.
+Parse	NNP
+(	(
+"100	NNP
+.	.
+20	CD
+		
+"	NN
+,	,
+CultureInfo	NNP
+.	.
+CurrentCulture	NN
+)	)
+;	:
+/	CC
+/	CD
+--	:
+OR	NNP
+		
+--	:
+double	JJ
+d	NN
+=	NNP
+double	RB
+.	.
+Parse	NNP
+(	(
+"100	NNP
+.	.
+20	CD
+		
+"	NN
+,	,
+CultureInfo	NNP
+.	.
+CurrentUICulture	NN
+)	)
+;	:
+If	IN
+ASP	NNP
+.	.
+NET	NNP
+		
+somehow	NN
+(	(
+i	JJ
+.	.
+e	NN
+.	.
+using	VBG
+HTTP	NNP
+Request	NNP
+headers	NNS
+)	)
+		
+passes	VBZ
+current	JJ
+user's	JJ
+CultureInfo	NNP
+to	TO
+either	DT
+CultureInfo	NNP
+.	.
+CurrentCulture	NN
+or	CC
+CultureInfo	NNP
+		
+.	.
+CurrentUICulture	NN
+,	,
+these	DT
+will	MD
+work	VB
+fine	NN
 .	.

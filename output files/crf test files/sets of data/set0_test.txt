@@ -14,14 +14,15 @@ var	NN
 ts	NN
 =	NNP
 new	JJ
-TimeSpan(	NNP
+TimeSpan	NNP
+(	(
 DateTime	NNP
 .	.
 UtcNow	NNP
 .	.
 Ticks	NNP
--	:
 		
+-	:
 dt	NN
 .	.
 Ticks	NNP
@@ -30,10 +31,13 @@ Ticks	NNP
 double	JJ
 delta	NN
 =	NNP
-Math.Abs(	NNP
-ts	NN
+Math	NNP
 .	.
 		
+Abs	NNP
+(	(
+ts	NN
+.	.
 TotalSeconds	NNP
 )	)
 ;	:
@@ -41,11 +45,11 @@ if	IN
 (	(
 delta	JJ
 <	VBP
+		
 60	CD
 )	)
 {	(
 return	NN
-		
 ts	NN
 .	.
 Seconds	VBZ
@@ -53,11 +57,11 @@ Seconds	VBZ
 =	$
 1	CD
 ?	.
+		
 "one	CD
 second	JJ
 ago	RB
 "	NN
-		
 :	:
 ts	NN
 .	.
@@ -65,11 +69,11 @@ Seconds	VBZ
 +	JJ
 "	NNP
 seconds	NNS
+		
 ago	RB
 "	VBP
 ;	:
 }	)
-		
 if	IN
 (	(
 delta	JJ
@@ -77,11 +81,11 @@ delta	JJ
 120	CD
 )	)
 {	(
+		
 return	NN
 "a	NNP
 minute	NN
 ago	RB
-		
 "	NNP
 ;	:
 }	)
@@ -89,11 +93,11 @@ if	IN
 (	(
 delta	NN
 <	IN
+		
 2700	CD
 )	)
 /	VBD
 /	$
-		
 45	CD
 *	NNP
 60	CD
@@ -101,11 +105,11 @@ delta	NN
 return	NN
 ts	NN
 .	.
+		
 Minutes	NNP
 +	NNP
 "	NNP
 minutes	NNS
-		
 ago	RB
 "	VBP
 ;	:
@@ -113,11 +117,11 @@ ago	RB
 if	IN
 (	(
 delta	NN
+		
 <	IN
 5400	CD
 )	)
 /	VBD
-		
 /	$
 90	CD
 *	NNP
@@ -125,11 +129,11 @@ delta	NN
 {	(
 return	NN
 "an	FW
+		
 hour	NN
 ago	IN
 "	NN
 ;	:
-		
 }	)
 if	IN
 (	(
@@ -137,11 +141,11 @@ delta	JJ
 <	VBP
 86400	CD
 )	)
+		
 /	NN
 /	$
 24	CD
 *	$
-		
 60	CD
 *	NNP
 60	CD
@@ -149,11 +153,11 @@ delta	JJ
 return	NN
 ts	NN
 .	.
+		
 Hours	NNP
 +	NNP
 "	NNP
 hours	NNS
-		
 ago	RB
 "	VBP
 ;	:
@@ -161,11 +165,11 @@ ago	RB
 if	IN
 (	(
 delta	JJ
+		
 <	VBP
 172800	CD
 )	)
 /	NN
-		
 /	$
 48	CD
 *	$
@@ -173,11 +177,11 @@ delta	JJ
 *	NNP
 60	CD
 {	(
+		
 return	NN
 "yesterday	NNP
 "	NNP
 ;	:
-		
 }	)
 if	IN
 (	(
@@ -185,11 +189,11 @@ delta	JJ
 <	VBP
 2592000	CD
 )	)
+		
 /	NN
 /	$
 30	CD
 *	$
-		
 24	CD
 *	$
 60	CD
@@ -197,11 +201,11 @@ delta	JJ
 60	CD
 {	(
 return	NN
+		
 ts	NN
 .	.
 Days	VBZ
 +	JJ
-		
 "	NNP
 days	NNS
 ago	RB
@@ -209,11 +213,11 @@ ago	RB
 ;	:
 }	)
 if	IN
+		
 (	(
 delta	JJ
 <	VBP
 31104000	CD
-		
 )	)
 /	NN
 /	$
@@ -221,25 +225,31 @@ delta	JJ
 *	$
 30	CD
 *	$
+		
 24	CD
 *	$
 60	CD
 *	NNP
-		
 60	CD
 {	(
 int	JJ
 months	NNS
 =	IN
-Convert.ToInt32(	NNP
-Math.Floor(	NNP
+Convert	NNP
+.	.
+		
+ToInt32	NNP
 (	(
+Math	NNP
+.	.
+Floor	NNP
+((	NNP
 double	JJ
 )ts	NN
 .	.
-		
 Days	VBZ
 /	RB
+		
 30	CD
 )	)
 )	)
@@ -249,9 +259,9 @@ months	NNS
 <	NNP
 =	VBD
 1	CD
-		
 ?	.
 "one	CD
+		
 month	NN
 ago	RB
 "	VBZ
@@ -261,19 +271,24 @@ months	NNS
 "	JJ
 months	NNS
 ago	IN
-		
 "	NN
 ;	:
+		
 }	)
 int	NN
 years	NNS
 =	VBP
-Convert.ToInt32(	NNP
-Math.Floor(	NNP
+Convert	NNP
+.	.
+ToInt32	NNP
 (	(
+Math	NNP
+.	.
+Floor	NNP
+		
+((	NNP
 double	JJ
 )ts	NN
-		
 .	.
 Days	VBZ
 /	RB
@@ -282,10 +297,10 @@ Days	VBZ
 )	)
 ;	:
 return	VB
+		
 years	NNS
 <	NNP
 =	VBD
-		
 1	CD
 ?	.
 "one	CD
@@ -294,10 +309,10 @@ ago	RB
 "	IN
 :	:
 years	NNS
+		
 +	VBP
 "	CD
 years	NNS
-		
 ago	RB
 "	VBD
 ;	:
@@ -306,10 +321,10 @@ Suggestions	NNP
 Comments	NNS
 ?	.
 Ways	NNS
+		
 to	TO
 improve	VB
 this	DT
-		
 algorithm	NN
 ?	.
 What	WP
@@ -317,9 +332,18 @@ is	VBZ
 the	DT
 difference	NN
 between	IN
-Math.Floor()	NNP
+Math	NNP
+		
+.	.
+Floor	NNP
+(	(
+)	)
 and	CC
-Math.Truncate()	NNP
+Math	NNP
+.	.
+Truncate	NNP
+(	(
+)	)
 in	IN
 		
 .	.
@@ -399,51 +423,61 @@ query	NN
 public	JJ
 static	JJ
 MyDataTable	NNP
-CallMySproc()	NNP
+CallMySproc	NNP
+(	(
+)	)
 {	(
 string	VBG
 conn	NN
+		
 =	NN
 ...	:
-		
 ;	:
 MyDatabaseDataContext	NNP
 db	VBZ
 =	NNP
 new	JJ
-MyDatabaseDataContext(	NNP
+MyDatabaseDataContext	NNP
+(	(
 conn	NN
 )	)
+		
 ;	:
 MyDataTable	JJ
 dt	NN
-		
 =	NNP
 new	JJ
-MyDataTable()	NNP
+MyDataTable	NNP
+(	(
+)	)
 ;	:
-/	NNP
-/	NNP
+/	CC
+/	VB
+		
 execute	VB
 a	DT
 sproc	NN
 via	IN
 LINQ	NNP
-		
 var	FW
 query	NN
 =	NN
 from	IN
 dr	NN
 in	IN
-db.MySproc()	NN
+		
+db	NN
+.	.
+MySproc	NNP
+(	(
+)	)
 .	.
 AsEnumerable	JJ
 select	JJ
 dr	NN
-		
 ;	:
 /	CC
+		
 /	VB
 copy	NN
 LINQ	NNP
@@ -453,19 +487,23 @@ into	IN
 a	DT
 DataTable	JJ
 -	:
-		
 this	DT
 does	VBZ
+		
 not	RB
 work	VB
 !	.
 dt	JJ
-=	NNP
-query.CopyToDataTable()	NN
+=	JJ
+query	NN
+.	.
+CopyToDataTable	NNP
+(	(
+)	)
 ;	:
+		
 return	VB
 dt	NN
-		
 ;	:
 }	)
 How	WRB
@@ -475,9 +513,9 @@ get	VB
 the	DT
 resultset	NN
 of	IN
+		
 a	DT
 LINQ	NNP
-		
 query	NN
 into	IN
 a	DT
@@ -487,9 +525,9 @@ DataTable	NNP
 ?	.
 Alternatively	RB
 ,	,
+		
 is	VBZ
 the	DT
-		
 LINQ	NNP
 query	NN
 serializeable	NN
@@ -499,9 +537,9 @@ I	PRP
 can	MD
 expose	VB
 it	PRP
+		
 as	IN
 an	DT
-		
 ASMX	NNP
 web	NN
 service	NN
@@ -511,49 +549,55 @@ a	DT
 table	NN
 like	IN
 this	DT
+		
 :	:
 CREATE	NN
-		
 TABLE	NNP
 binary_data	NN
 (	(
 id	JJ
-INT(	NNP
+INT	NNP
+(	(
 4	CD
 )	)
 NOT	NNP
+		
 NULL	NNP
 AUTO_INCREMENT	NNP
 PRIMARY	NNP
-		
 KEY	NNP
 ,	,
 description	NN
-CHAR(	NNP
+CHAR	NNP
+(	(
 50	CD
 )	)
 ,	,
+		
 bin_data	JJ
 LONGBLOB	NNP
 ,	,
 filename	NN
-		
-CHAR(	NNP
+CHAR	NNP
+(	(
 50	CD
 )	)
 ,	,
-filesize	VB
-CHAR(	NNP
+filesize	JJ
+CHAR	NNP
+		
+(	(
 50	CD
 )	)
 ,	,
 filetype	JJ
-CHAR(	NNP
-		
+CHAR	NNP
+(	(
 50	CD
 )	)
 )	)
 ;	:
+		
 Here	RB
 is	VBZ
 a	DT
@@ -561,11 +605,11 @@ PHP	JJ
 example	NN
 :	:
 <	NN
-		
 ?php	NNP
 /	NNP
 /	NNP
 store	NN
+		
 .	.
 php3	CC
 -	:
@@ -573,11 +617,11 @@ by	IN
 Florian	JJ
 Dittmer	NNP
 <dittmer	NNP
-		
 @gmx	NNP
 .	.
 net	JJ
 >	NN
+		
 /	NNP
 /	NNP
 Example	NNP
@@ -585,11 +629,11 @@ php	VBP
 script	NN
 to	TO
 demonstrate	VB
-		
 the	DT
 storing	NN
 of	IN
 binary	JJ
+		
 files	NNS
 into	IN
 /	NNP
@@ -597,11 +641,11 @@ into	IN
 an	DT
 sql	JJ
 database	NN
-		
 .	.
 More	JJR
 information	NN
 can	MD
+		
 be	VB
 found	VBN
 at	IN
@@ -609,11 +653,11 @@ http	NN
 :	:
 /	JJ
 /www	NN
-		
 .	.
 phpbuilder	NN
 .	.
 com	NN
+		
 /	NN
 ?	.
 >	JJ
@@ -621,11 +665,11 @@ com	NN
 >	NNP
 <head	NNP
 >	NNP
-		
 <title	NNP
 >Store	VBD
 binary	JJ
 data	NNS
+		
 into	IN
 SQL	NNP
 Database	NNP
@@ -633,11 +677,11 @@ Database	NNP
 /title	NNP
 >	NNP
 <	NNP
-		
 /head	NNP
 >	NNP
 <body	NN
 >	NNP
+		
 <	NNP
 ?php	NNP
 /	NNP
@@ -645,11 +689,11 @@ Database	NNP
 Code	NNP
 that	WDT
 will	MD
-		
 be	VB
 executed	VBN
 if	IN
 the	DT
+		
 form	NN
 has	VBZ
 been	VBN
@@ -657,11 +701,11 @@ submitted	VBN
 :	:
 if	IN
 (	(
-		
 $submit	NN
 )	)
 {	(
 /	JJ
+		
 /	NN
 Connect	NNP
 to	TO
@@ -669,11 +713,11 @@ the	DT
 database	NN
 (	(
 you	PRP
-		
 may	MD
 have	VB
 to	TO
 adjust	VB
+		
 /	NNP
 /	NNP
 the	DT
@@ -681,55 +725,62 @@ hostname	NN
 ,	,
 username	NN
 or	CC
-		
 password	NN
 )	)
 .	.
-mysql_connect(	NN
-"localhost	NN
-"	NNP
+mysql_connect	NN
+		
+(	(
+"localhost	FW
+"	NN
 ,	,
 "root	NNP
 "	NNP
 ,	,
 "password	NNP
-		
 "	NNP
 )	)
 ;	:
-mysql_select_db(	CC
+		
+mysql_select_db	FW
+(	(
 "binary_data	NNP
 "	NNP
 )	)
 ;	:
 $data	CC
 =	VB
-mysql_real_escape_string(	NN
+mysql_real_escape_string	NN
+(	(
+fread	JJ
 		
-fread(	NN
-fopen(	NN
+(	(
+fopen	JJ
+(	(
 $form_data	NNP
 ,	,
 "r	NNP
 "	NNP
 )	)
 ,	,
-filesize(	JJ
+filesize	FW
+(	(
+		
 $form_data	NNP
 )	)
-		
 )	)
 )	)
 ;	:
 $result	CC
 =	VB
-mysql_query(	NN
+mysql_query	NN
+(	(
 "INSERT	NNP
 INTO	NNP
+		
 binary_data	NN
 (	(
 description	NN
-		
 ,	,
 bin_data	NN
 ,	,
@@ -738,10 +789,10 @@ filename	NN
 filesize	VB
 ,	,
 filetype	NN
+		
 )	)
 "	NN
 .	.
-		
 "VALUES	NN
 (	(
 '	POS
@@ -750,10 +801,10 @@ $form_description	NN
 ,	,
 '	''
 $data	NNP
+		
 '	POS
 ,	,
 '	''
-		
 $form_data_name	NN
 '	''
 ,	,
@@ -762,50 +813,55 @@ $form_data_size	NNP
 '	POS
 ,	,
 '	''
+		
 $form_data_type	NNP
 '	POS
 )	)
-		
 "	NN
 )	)
 ;	:
 $id	CC
-=	NNP
-mysql_insert_id()	NN
+=	VB
+mysql_insert_id	NN
+(	(
+)	)
+		
 ;	:
 print	NN
 "	NN
 <p	NNP
 >This	NNP
-		
 file	NN
 has	VBZ
 the	DT
 following	JJ
 Database	NNP
 ID	NNP
+		
 :	:
 <b	NN
 >	NNP
 $id	NNP
 <	NNP
-		
 /b	NNP
 >	NNP
 "	NNP
 ;	:
-mysql_close()	NN
+mysql_close	FW
+(	(
+		
+)	)
 ;	:
 }	)
 else	RB
 {	(
 /	JJ
 /	NN
-		
 else	RB
 show	VBP
 the	DT
 form	NN
+		
 to	TO
 submit	VB
 new	JJ
@@ -813,11 +869,11 @@ data	NNS
 :	:
 ?	.
 >	VB
-		
 <form	NN
 method	NN
 =	NNP
 "post	NNP
+		
 "	NNP
 action	NN
 =	NNP
@@ -825,11 +881,11 @@ action	NN
 <	NNP
 ?php	NNP
 echo	VBP
-		
 $PHP_SELF	NN
 ;	:
 ?	.
 >	FW
+		
 "	FW
 enctype	FW
 =	FW
@@ -837,11 +893,11 @@ enctype	FW
 /form	FW
 -	:
 data	NNS
-		
 "	VBP
 >	NNP
 File	NNP
 Description	NNP
+		
 :	:
 <br	NN
 >	NNP
@@ -849,11 +905,11 @@ Description	NNP
 type	NN
 =	NNP
 "text	NNP
-		
 "	NNP
 name	NN
 =	NNP
 "form_description	NNP
+		
 "	NNP
 size	NN
 =	NNP
@@ -861,11 +917,11 @@ size	NN
 "	NNP
 >	NNP
 <input	NNP
-		
 type	NN
 =	NNP
 "hidden	NNP
 "	NNP
+		
 name	NN
 =	NNP
 "MAX_FILE_SIZE	NNP
@@ -873,11 +929,11 @@ name	NN
 value	NN
 =	NNP
 "1000000	NNP
-		
 "	NNP
 >	NNP
 <br	NNP
 >File	NNP
+		
 to	TO
 upload	VB
 /store	NN
@@ -885,11 +941,11 @@ in	IN
 database	NN
 :	:
 <br	JJ
-		
 >	NNP
 <input	NNP
 type	NN
 =	NN
+		
 "file	NNP
 "	NNP
 name	NN
@@ -897,11 +953,11 @@ name	NN
 "form_data	NNP
 "	NNP
 size	NN
-		
 =	NNP
 "40	NNP
 "	NNP
 >	NNP
+		
 <p	NNP
 >	NNP
 <input	NNP
@@ -909,11 +965,11 @@ type	NN
 =	NNP
 "submit	NNP
 "	NNP
-		
 name	NN
 =	NNP
 "submit	NNP
 "	NNP
+		
 value	NN
 =	NNP
 "submit	NNP
@@ -921,11 +977,11 @@ value	NN
 >	NNP
 <	NNP
 /form	NNP
-		
 >	NNP
 <	NNP
 ?php	NNP
 }	)
+		
 ?	.
 >	JJ
 <	NN
@@ -933,11 +989,11 @@ value	NN
 >	NNP
 <	NNP
 /html	NNP
-		
 >	NNP
 Solutions	NNP
 are	VBP
 welcome	JJ
+		
 in	IN
 any	DT
 language	NN
@@ -945,11 +1001,11 @@ language	NN
 :	:
 -	:
 )	)
-		
 I'm	NNP
 looking	VBG
 for	IN
 the	DT
+		
 fastest	JJS
 way	NN
 to	TO
@@ -957,11 +1013,11 @@ obtain	VB
 the	DT
 value	NN
 of	IN
-		
 π	NNP
 ,	,
 as	IN
 a	DT
+		
 personal	JJ
 challenge	NN
 .	.
@@ -969,11 +1025,11 @@ More	RBR
 specifically	RB
 I'm	NNP
 using	VBG
-		
 ways	NNS
 that	WDT
 don't	VBP
 involve	VB
+		
 using	VBG
 #defined	JJ
 constants	NNS
@@ -981,11 +1037,11 @@ like	IN
 M_PI	NNP
 ,	,
 or	CC
-		
 hard-coding	VBG
 the	DT
 number	NN
 in	IN
+		
 .	.
 The	DT
 program	NN
@@ -993,11 +1049,11 @@ below	IN
 tests	VBZ
 the	DT
 various	JJ
-		
 ways	NNS
 I	PRP
 know	VBP
 of	IN
+		
 .	.
 The	DT
 inline	NN
@@ -1005,11 +1061,11 @@ assembly	NN
 version	NN
 is	VBZ
 ,	,
-		
 in	IN
 theory	NN
 ,	,
 the	DT
+		
 fastest	JJS
 option	NN
 ,	,
@@ -1017,11 +1073,11 @@ though	RB
 clearly	RB
 not	RB
 portable	JJ
-		
 ;	:
 I've	NNP
 included	VBD
 it	PRP
+		
 as	IN
 a	DT
 baseline	NN
@@ -1029,11 +1085,11 @@ to	TO
 compare	VB
 the	DT
 other	JJ
-		
 versions	NNS
 against	IN
 .	.
 In	IN
+		
 my	PRP$
 tests	NNS
 ,	,
@@ -1041,10 +1097,11 @@ with	IN
 built-ins	NNS
 ,	,
 the	DT
-		
 4	CD
-*	NNP
-atan(	RB
+*	NN
+atan	NN
+(	(
+		
 1	CD
 )	)
 version	NN
@@ -1053,21 +1110,22 @@ fastest	JJS
 on	IN
 GCC	NNP
 4	CD
-		
 .	.
 2	CD
 ,	,
+		
 because	IN
 it	PRP
 auto-folds	VBZ
 the	DT
-atan(	JJ
+atan	NN
+(	(
 1	CD
 )	)
 into	IN
-		
 a	DT
 constant	JJ
+		
 .	.
 With	IN
 -	:
@@ -1075,10 +1133,11 @@ fno-builtin	JJ
 specified	VBN
 ,	,
 the	DT
-atan2(	NN
+atan2	NN
+(	(
 0	CD
-		
 ,	,
+		
 -	:
 1	CD
 )	)
@@ -1089,8 +1148,8 @@ fastest	JJS
 Here's	NNP
 the	DT
 main	JJ
-		
 testing	NN
+		
 program	NN
 (	(
 pitimes	NNS
@@ -1101,8 +1160,8 @@ c	NN
 #include	JJ
 <math	NN
 .	.
-		
 h	NN
+		
 >	JJ
 #include	NN
 <stdio	NNP
@@ -1113,13 +1172,14 @@ h	NN
 <time	NNP
 .	.
 h	NN
-		
 >	JJ
+		
 #define	NN
 ITERS	NNP
 10000000	CD
-#define	NNP
-TESTWITH(	NNP
+#define	NN
+TESTWITH	NNP
+(	(
 x	NNP
 )	)
 {	(
@@ -1133,11 +1193,13 @@ diff	NN
 ;	:
 \	NNP
 time1	VBZ
-=	NNP
-clock()	NN
-;	:
-\	CC
+=	JJ
+clock	NN
+(	(
+)	)
 		
+;	:
+\	VBN
 for	IN
 (	(
 i	JJ
@@ -1147,9 +1209,9 @@ i	JJ
 i	JJ
 <	VBP
 ITERS	NNPS
+		
 ;	:
 +	NNP
-		
 +i	NNP
 )	)
 \	VBP
@@ -1159,61 +1221,67 @@ diff	JJ
 (	(
 x	NNP
 )	)
+		
 -	:
 M_PI	NN
-		
 ;	:
 \	CC
 time2	VB
-=	NNP
-clock()	NN
+=	JJ
+clock	NN
+(	(
+)	)
 ;	:
-\	CC
-printf(	VB
+\	VBN
+		
+printf	NN
+(	(
 "	JJ
 %s	NNP
 \t	NNP
-		
 =	NNP
 >	NNP
 %e	NNP
 ,	,
 time	NN
 =	NNP
+		
 >	NNP
 %f	NNP
 \n	NNP
 "	NNP
 ,	,
-		
 #x	NNP
 ,	,
 diff	NN
 ,	,
-diffclock(	NN
+diffclock	NN
+(	(
+		
 time2	NN
 ,	,
 time1	NN
 )	)
 )	)
 ;	:
-		
 \	CC
 }	)
 static	JJ
 inline	NN
 double	JJ
-diffclock(	NN
-clock_t	NN
+		
+diffclock	NN
+(	(
+clock_t	JJ
 time1	NN
 ,	,
 clock_t	VB
 time0	NN
-		
 )	)
 {	(
 return	NN
 (	(
+		
 double	JJ
 )	)
 (	(
@@ -1221,21 +1289,23 @@ time1	JJ
 -	:
 time0	NN
 )	)
-		
 /	VBZ
 CLOCKS_PER_SEC	NNP
 ;	:
 }	)
+		
 int	NN
-main()	NNS
+main	JJ
+(	(
+)	)
 {	(
 int	NN
 i	NN
 ;	:
 clock_t	NN
-		
 time1	NN
 ,	,
+		
 time2	NN
 ;	:
 double	JJ
@@ -1245,9 +1315,9 @@ diff	NN
 *	VB
 Warmup	NNP
 .	.
-		
 The	DT
 atan2	JJ
+		
 case	NN
 catches	NNS
 GCC's	NNP
@@ -1257,20 +1327,21 @@ folding	NN
 which	WDT
 would	MD
 *	VB
-		
 optimise	VB
 the	DT
+		
 `	``
 `4	JJ
 *	NN
-atan(	IN
+atan	NN
+(	(
 1	CD
 )	)
 -	:
 M_PI	NNP
 '	POS
-		
 '	''
+		
 to	TO
 a	DT
 no-op	JJ
@@ -1281,56 +1352,69 @@ if	IN
 fno-builtin	JJ
 *	NN
 is	VBZ
-		
 not	RB
+		
 used	VBN
 .	.
 *	JJ
-/	JJ
-TESTWITH(	NNP
+/	NN
+TESTWITH	NNP
+(	(
 4	CD
-*	NNP
-atan(	RB
+*	NN
+atan	NN
+(	(
 1	CD
-)	)
 		
 )	)
-TESTWITH(	$
+)	)
+TESTWITH	NNP
+(	(
 4	CD
-*	NNP
-atan2(	NN
+*	NN
+atan2	NN
+(	(
 1	CD
 ,	,
 1	CD
-)	)
-)	)
-#if	VBP
 		
-defined(	JJ
+)	)
+)	)
+#if	NN
+defined	VBN
+(	(
 __GNUC__	NNP
 )	)
 &	CC
 &	CC
 (	(
-defined(	JJ
+defined	VBN
+		
+(	(
 __i386__	NN
 )	)
 |	VBZ
 |	JJ
-		
-defined(	NN
+defined	VBN
+(	(
 __amd64__	NNP
 )	)
 )	)
 extern	VBP
+		
 double	JJ
-fldpi()	NN
+fldpi	NN
+(	(
+)	)
 ;	:
-TESTWITH(	NNP
-fldpi()	NN
+TESTWITH	NNP
+(	(
+fldpi	NN
+(	(
+)	)
 )	)
 		
-#endif	VBZ
+#endif	VBP
 /	JJ
 *	NNP
 Actual	NNP
@@ -1339,47 +1423,57 @@ start	VBP
 here	RB
 .	.
 *	JJ
-/	JJ
-TESTWITH(	NNP
+/	NN
+TESTWITH	NNP
 		
-atan2(	NN
+(	(
+atan2	NN
+(	(
 0	CD
 ,	,
 -	:
 1	CD
 )	)
 )	)
-TESTWITH(	NNP
-acos(	SYM
--	:
-1	CD
+TESTWITH	NNP
+(	(
 		
+acos	JJ
+(-	JJ
+1	CD
 )	)
 )	)
-TESTWITH(	$
+TESTWITH	NNP
+(	(
 2	CD
-*	NNP
-asin(	RB
+*	NN
+asin	NN
+(	(
+		
 1	CD
 )	)
 )	)
-TESTWITH(	$
+TESTWITH	NNP
+(	(
 4	CD
-		
-*	NNP
-atan2(	NN
+*	NN
+atan2	NN
+(	(
 1	CD
 ,	,
-1	CD
-)	)
-)	)
-TESTWITH(	$
-4	CD
-*	NNP
-atan(	RB
 		
 1	CD
 )	)
+)	)
+TESTWITH	NNP
+(	(
+4	CD
+*	NN
+atan	NN
+(	(
+1	CD
+)	)
+		
 )	)
 return	VBP
 0	CD
@@ -1389,9 +1483,9 @@ And	CC
 the	DT
 inline	NN
 assembly	NN
-		
 stuff	NN
 (	(
+		
 fldpi	JJ
 .	.
 c	NN
@@ -1401,9 +1495,9 @@ noting	VBG
 that	IN
 it	PRP
 will	MD
-		
 only	RB
 work	VB
+		
 for	IN
 x86	NN
 and	CC
@@ -1411,21 +1505,24 @@ x64	JJ
 systems	NNS
 :	:
 double	JJ
-fldpi()	NN
+fldpi	NN
+(	(
+)	)
 {	(
 		
 double	JJ
 pi	NN
 ;	:
-asm(	CC
+asm	CC
+(	(
 "fldpi	JJ
 "	NN
 :	:
 "	JJ
 =t	NN
 "	NNP
-(	(
 		
+(	(
 pi	NN
 )	)
 )	)
@@ -1436,8 +1533,8 @@ pi	NN
 }	)
 And	CC
 a	DT
-build	JJ
 		
+build	JJ
 script	NN
 that	WDT
 builds	VBZ
@@ -1448,8 +1545,8 @@ I'm	NNP
 testing	VBG
 (	(
 build	VB
-.	.
 		
+.	.
 sh	NN
 )	)
 :	:
@@ -1460,8 +1557,8 @@ sh	NN
 gcc	NN
 -	:
 O3	NNP
--	:
 		
+-	:
 Wall	NNP
 -	:
 c	SYM
@@ -1472,8 +1569,8 @@ o	JJ
 fldpi-32	JJ
 .	.
 o	JJ
-fldpi	NN
 		
+fldpi	NN
 .	.
 c	VB
 gcc	JJ
@@ -1484,8 +1581,8 @@ Wall	NNP
 -	:
 c	SYM
 -	:
-m64	NN
 		
+m64	NN
 -	:
 o	JJ
 fldpi-64	JJ
@@ -1496,8 +1593,8 @@ fldpi	NN
 c	VB
 gcc	JJ
 -	:
-O3	NNP
 		
+O3	NNP
 -	:
 Wall	NNP
 -	:
@@ -1508,8 +1605,8 @@ m32	NN
 o	JJ
 pitimes1-32	JJ
 pitimes	NNS
-.	.
 		
+.	.
 c	VB
 fldpi-32	JJ
 .	.
@@ -1520,8 +1617,8 @@ O3	NNP
 -	:
 Wall	NNP
 -	:
-m32	NN
 		
+m32	NN
 -	:
 o	JJ
 pitimes2-32	JJ
@@ -1532,8 +1629,8 @@ fldpi-32	JJ
 .	.
 o	SYM
 -	:
-lm	NN
 		
+lm	NN
 gcc	SYM
 -	:
 O3	NNP
@@ -1544,8 +1641,8 @@ fno-builtin	JJ
 -	:
 m32	NN
 -	:
-o	JJ
 		
+o	JJ
 pitimes3-32	JJ
 pitimes	NNS
 .	.
@@ -1556,8 +1653,8 @@ o	SYM
 -	:
 lm	NN
 gcc	SYM
--	:
 		
+-	:
 O3	NNP
 -	:
 Wall	NNP
@@ -1568,8 +1665,8 @@ m64	NN
 -	:
 o	JJ
 pitimes1-64	JJ
-pitimes	NNS
 		
+pitimes	NNS
 .	.
 c	VB
 fldpi-64	JJ
@@ -1580,8 +1677,8 @@ lm	NN
 gcc	SYM
 -	:
 O3	NNP
--	:
 		
+-	:
 Wall	NNP
 -	:
 m64	NN
@@ -1592,8 +1689,8 @@ pitimes	NNS
 .	.
 c	VB
 fldpi-64	JJ
-.	.
 		
+.	.
 o	SYM
 -	:
 lm	NN
@@ -1604,8 +1701,8 @@ O3	NNP
 Wall	NNP
 -	:
 fno-builtin	JJ
--	:
 		
+-	:
 m64	NN
 -	:
 o	JJ
@@ -1616,8 +1713,8 @@ c	VB
 fldpi-64	JJ
 .	.
 o	SYM
--	:
 		
+-	:
 lm	JJ
 Apart	NNP
 from	IN
@@ -1628,8 +1725,8 @@ compiler	NN
 flags	NNS
 (	(
 I've	NNP
-compared	VBN
 		
+compared	VBN
 32-bit	CD
 against	IN
 64-bit	CD
@@ -1640,8 +1737,8 @@ the	DT
 optimisations	NNS
 are	VBP
 different	JJ
-)	)
 		
+)	)
 ,	,
 I've	NNP
 also	RB
@@ -1652,20 +1749,21 @@ order	NN
 of	IN
 the	DT
 tests	NNS
-around	IN
 		
+around	IN
 .	.
 The	DT
-atan2(	NN
+atan2	NN
+(	(
 0	CD
 ,	,
 -	:
 1	CD
 )	)
 version	NN
+		
 still	RB
 comes	VBZ
-		
 out	RP
 top	JJ
 every	DT
@@ -1675,9 +1773,9 @@ though	RB
 .	.
 Many	JJ
 years	NNS
+		
 ago	RB
 ,	,
-		
 to	TO
 provide	VB
 an	DT
@@ -1687,9 +1785,9 @@ gimmick	NN
 on	IN
 my	PRP$
 website	NN
+		
 ,	,
 I	PRP
-		
 wrote	VBD
 a	DT
 function	NN
@@ -1699,9 +1797,9 @@ age	NN
 to	TO
 a	DT
 fraction	NN
+		
 .	.
 This	DT
-		
 is	VBZ
 a	DT
 quick	JJ
@@ -1711,9 +1809,9 @@ that	DT
 function	NN
 to	TO
 C	NNP
+		
 #	#
 (	(
-		
 from	IN
 the	DT
 PHP	NNP
@@ -1723,9 +1821,9 @@ version	NN
 I'm	NNP
 afraid	VBD
 I	PRP
+		
 haven't	VBP
 been	VBN
-		
 able	JJ
 to	TO
 test	VB
@@ -1735,9 +1833,9 @@ C	NNP
 version	NN
 ,	,
 but	CC
+		
 hope	VBP
 you	PRP
-		
 enjoy	VBP
 all	PDT
 the	DT
@@ -1747,9 +1845,9 @@ same	JJ
 Admittedly	RB
 this	DT
 is	VBZ
+		
 a	DT
 bit	NN
-		
 gimmicky	JJ
 for	IN
 the	DT
@@ -1759,9 +1857,9 @@ showing	VBG
 user	JJ
 profiles	NNS
 on	IN
+		
 Stack	NNP
 Overflow	NNP
-		
 ,	,
 but	CC
 maybe	RB
@@ -1771,21 +1869,22 @@ find	VB
 some	DT
 use	NN
 for	IN
+		
 it	PRP
 .	.
-		
 :	:
 -	:
 )	)
 )	)
 double	JJ
-AgeDiff(	NNP
+AgeDiff	NNP
+(	(
 DateTime	NNP
 date1	NN
+		
 ,	,
 DateTime	NNP
 date2	NN
-		
 )	)
 {	(
 double	JJ
@@ -1794,10 +1893,10 @@ years	NNS
 date2	NN
 .	.
 Year	SYM
+		
 -	:
 date1	NN
 .	.
-		
 Year	NN
 ;	:
 /	CC
@@ -1806,22 +1905,23 @@ Year	NN
 If	IN
 date2	NN
 and	CC
-date1	NN
-+	NNP
-round(	NN
 		
-date2	NN
+date1	NN
++	NN
+round	NN
+(	(
+date2	JJ
 -	:
 date1	NN
 )	)
 are	VBP
 on	IN
 different	JJ
+		
 sides	NNS
 *	NN
 of	IN
 29	CD
-		
 February	NNP
 ,	,
 then	RB
@@ -1829,11 +1929,11 @@ our	PRP$
 partial	JJ
 year	NN
 is	VBZ
+		
 considered	VBN
 to	TO
 have	VB
 366	CD
-		
 *	NNP
 days	NNS
 total	NN
@@ -1841,11 +1941,11 @@ total	NN
 otherwise	RB
 it's	JJ
 365	CD
+		
 .	.
 Note	NN
 that	IN
 59	CD
-		
 is	VBZ
 the	DT
 day	NN
@@ -1853,27 +1953,31 @@ number	NN
 *	NNP
 of	IN
 29	CD
+		
 Feb	NNP
 .	.
 *	CC
 /	JJ
-		
 double	JJ
 fraction	NN
 =	VBD
 365	CD
 +	NNP
 (	(
-DateTime.IsLeapYear(	NNP
+DateTime	NNP
+		
+.	.
+IsLeapYear	NNP
+(	(
 date2	NN
 .	.
 Year	NN
 )	)
-		
 &	CC
 &	CC
 date2	NN
 .	.
+		
 DayOfYear	NNP
 >	NNP
 =	NNP
@@ -1881,11 +1985,11 @@ DayOfYear	NNP
 &	CC
 &	CC
 (	(
-		
 date1	NN
 .	.
 DayOfYear	NNP
 <	VBD
+		
 59	CD
 |	NNP
 |	NNP
@@ -1893,11 +1997,11 @@ date1	NN
 .	.
 DayOfYear	NNP
 >	JJ
-		
 date2	NN
 .	.
 DayOfYear	NNP
 )	)
+		
 ?	.
 1	CD
 :	:
@@ -1905,11 +2009,11 @@ DayOfYear	NNP
 )	)
 ;	:
 /	CC
-		
 *	VB
 *	VBZ
 The	DT
 only	JJ
+		
 really	RB
 nontrivial	JJ
 case	NN
@@ -1917,11 +2021,11 @@ is	VBZ
 if	IN
 date1	NN
 is	VBZ
-		
 in	IN
 a	DT
 leap	JJ
 year	NN
+		
 ,	,
 *	NNP
 and	CC
@@ -1929,11 +2033,11 @@ date2	NN
 is	VBZ
 not	RB
 .	.
-		
 So	RB
 let's	JJ
 handle	VBP
 the	DT
+		
 others	NNS
 first	RB
 .	.
@@ -1941,19 +2045,25 @@ first	RB
 /	JJ
 if	IN
 (	(
+DateTime	NNP
+.	.
+IsLeapYear	NNP
+(	(
 		
-DateTime.IsLeapYear(	NNP
 date2	NN
 .	.
 Year	NN
 )	)
 =	NN
-=	NNP
-DateTime.IsLeapYear(	NNP
+=	JJ
+DateTime	NNP
+.	.
+IsLeapYear	NNP
+(	(
 date1	NN
+		
 .	.
 Year	NNP
-		
 )	)
 )	)
 return	VBP
@@ -1963,9 +2073,9 @@ years	NNS
 date2	NN
 .	.
 DayOfYear	NNP
+		
 -	:
 date1	NN
-		
 .	.
 DayOfYear	NNP
 )	)
@@ -1975,9 +2085,9 @@ fraction	NN
 /	CC
 *	VB
 *	NN
+		
 If	IN
 date2	NN
-		
 is	VBZ
 in	IN
 a	DT
@@ -1987,9 +2097,9 @@ year	NN
 but	CC
 date1	NN
 is	VBZ
+		
 not	RB
 and	CC
-		
 is	VBZ
 March	NNP
 or	CC
@@ -1999,273 +2109,275 @@ beyond	IN
 shift	VB
 up	RP
 by	IN
+		
 a	DT
 day	NN
-		
 .	.
 *	VB
 /	JJ
 if	IN
 (	(
-DateTime.IsLeapYear(	NNP
+DateTime	NNP
+.	.
+IsLeapYear	NNP
+(	(
+		
 date2	NN
 .	.
 Year	NNP
 )	)
 )	)
-		
 {	(
 return	NN
 years	NNS
 +	NNP
 (	(
 date2	NN
+		
 .	.
 DayOfYear	NNP
 -	:
 date1	NN
 .	.
-		
 DayOfYear	NNP
 -	:
 (	(
 date1	NN
 .	.
 DayOfYear	NNP
+		
 >	NNP
 =	VBD
 59	CD
 ?	.
 1	CD
-		
 :	:
 0	CD
 )	)
 )	)
 /	$
 fraction	NN
+		
 ;	:
 }	)
 /	FW
 *	FW
 *	FW
-		
 If	IN
 date1	NN
 is	VBZ
 not	RB
 on	IN
 29	CD
+		
 February	NNP
 ,	,
 shift	VB
 down	RP
 date1	NN
-		
 by	IN
 a	DT
 day	NN
 if	IN
 *	VBN
 March	NNP
+		
 or	CC
 later	RB
 .	.
 Proceed	VB
 normally	RB
-		
 .	.
 *	VB
 /	JJ
 if	IN
 (	(
 date1	NN
+		
 .	.
 DayOfYear	JJ
 !	.
 =	$
 59	CD
-		
 )	)
 {	(
 return	NN
 years	NNS
 +	NNP
 (	(
+		
 date2	NN
 .	.
 DayOfYear	NNP
 -	:
 date1	NN
-		
 .	.
 DayOfYear	NNP
 +	NNP
 (	(
 date1	NN
 .	.
+		
 DayOfYear	NNP
 >	VBD
 59	CD
 ?	.
 1	CD
-		
 :	:
 0	CD
 )	)
 )	)
 /	$
 fraction	NN
+		
 ;	:
 }	)
 /	FW
 *	JJ
 *	NNP
-		
 Okay	NNP
 ,	,
 here	RB
 date1	NN
 is	VBZ
 on	IN
+		
 29	CD
 February	NNP
 ,	,
 and	CC
 date2	NN
-		
 is	VBZ
 not	RB
 on	IN
 a	DT
 leap	NN
 *	JJ
+		
 year	NN
 .	.
 What	WP
 to	TO
 do	VB
-		
 now	RB
 ?	.
 On	IN
 28	CD
 Feb	NNP
 in	IN
+		
 date2's	JJ
 year	NN
 ,	,
 the	DT
 `	``
-		
 `age	NN
 '	''
 '	POS
 *	NNS
 should	MD
 be	VB
+		
 just	RB
 shy	NN
 of	IN
 a	DT
 whole	JJ
-		
 number	NN
 ,	,
 and	CC
 on	IN
 1	CD
 Mar	NNP
+		
 should	MD
 be	VB
 *	JJ
 just	RB
 over	IN
-		
 .	.
 Perhaps	RB
 the	DT
 easiest	JJS
 way	NN
 is	VBZ
+		
 to	TO
 a	DT
 point	NN
 halfway	NN
 *	NN
-		
 between	IN
 those	DT
 two	CD
 :	:
 58	CD
 .	.
+		
 5	CD
 .	.
 *	JJ
 /	JJ
 return	NN
-		
 years	NNS
 +	NNP
 (	(
 date2	NN
 .	.
 DayOfYear	NNP
+		
 -	:
 58	CD
 .	.
 5	CD
 )	)
-		
 /	NN
 fraction	NN
 ;	:
 }	)
 The	DT
 best	JJS
+		
 way	NN
 that	IN
 I	PRP
 know	VBP
 of	IN
-		
 because	IN
 of	IN
 leap	JJ
 years	NNS
 and	CC
 everything	NN
+		
 is	VBZ
 :	:
 DateTime	JJ
 birthDate	NN
 =	NNP
-		
 new	JJ
-DateTime(	NNP
+DateTime	NNP
+(	(
 2000	CD
-,	,
-3	CD
-,	,
-1	CD
+,3	NNP
+,1	NNP
+		
 )	)
 ;int	NN
 age	NN
 =	NNP
-		
 (	(
 int	JJ
 )Math	NN
 .	.
-Floor(	NNP
-(	(
+Floor	NNP
+((	JJ
 DateTime	NNP
+		
 .	.
 Now	RB
 -	:
 birthDate	NN
-		
 )	)
 .	.
 TotalDays	NNP
@@ -2273,11 +2385,11 @@ TotalDays	NNP
 365	CD
 .	.
 25D	CD
+		
 )	)
 ;	:
 Hope	NNP
 this	DT
-		
 helps	VBZ
 .	.
 @jeff	VB
@@ -2285,11 +2397,11 @@ IMHO	NNP
 yours	NNPS
 seems	VBZ
 a	DT
+		
 little	JJ
 long	JJ
 .	.
 However	RB
-		
 it	PRP
 does	VBZ
 seem	VB
@@ -2297,11 +2409,11 @@ a	DT
 little	RB
 more	RBR
 robust	JJ
+		
 with	IN
 support	NN
 for	IN
 "yesterday	JJ
-		
 "	NNP
 and	CC
 "years	NNP
@@ -2309,11 +2421,11 @@ and	CC
 .	.
 But	CC
 in	IN
+		
 my	PRP$
 experience	NN
 when	WRB
 this	DT
-		
 is	VBZ
 used	VBN
 the	DT
@@ -2321,11 +2433,11 @@ person	NN
 is	VBZ
 most	RBS
 likely	JJ
+		
 to	TO
 view	VB
 the	DT
 content	NN
-		
 in	IN
 the	DT
 first	JJ
@@ -2333,11 +2445,11 @@ first	JJ
 days	NNS
 .	.
 It	PRP
+		
 is	VBZ
 only	RB
 the	DT
 really	RB
-		
 hardcore	JJ
 people	NNS
 that	IN
@@ -2345,11 +2457,11 @@ come	VBP
 after	IN
 that	DT
 .	.
+		
 So	IN
 that	DT
 is	VBZ
 why	WRB
-		
 I	PRP
 usually	RB
 elect	VBP
@@ -2357,11 +2469,11 @@ to	TO
 keep	VB
 this	DT
 short	JJ
+		
 and	CC
 simple	JJ
 .	.
 This	DT
-		
 is	VBZ
 the	DT
 method	NN
@@ -2369,11 +2481,11 @@ I	PRP
 am	VBP
 currently	RB
 using	VBG
+		
 on	IN
 one	CD
 of	IN
 my	PRP$
-		
 websites	NNS
 .	.
 This	DT
@@ -2381,11 +2493,11 @@ only	JJ
 returns	VBZ
 a	DT
 relative	JJ
+		
 day	NN
 ,	,
 hour	NN
 ,	,
-		
 time	NN
 .	.
 And	CC
@@ -2393,11 +2505,11 @@ then	RB
 the	DT
 user	NN
 has	VBZ
+		
 to	TO
 slap	VB
 on	IN
 "ago	JJ
-		
 "	NN
 in	IN
 the	DT
@@ -2405,135 +2517,141 @@ output	NN
 .	.
 public	JJ
 static	JJ
+		
 string	NN
-ToLongString(	NNP
+ToLongString	NNP
+(	(
 this	DT
 TimeSpan	NNP
-		
 time	NN
 )	)
 {	(
 string	VBG
 output	NN
 =	NNP
+		
 String	NNP
 .	.
 Empty	NNP
 ;	:
 if	IN
-		
 (	(
 time	NN
 .	.
 Days	VBZ
 >	RB
 0	CD
+		
 )	)
 output	NN
 +	NNP
 =	NNP
 time	NN
-		
 .	.
 Days	NNS
 +	VBP
 "	JJ
 days	NNS
 "	VBP
+		
 ;	:
 if	IN
 ((	JJ
 time	NN
 .	.
-		
 Days	NNS
 =	VBP
 =	JJ
 0	CD
 |	JJ
 |	JJ
+		
 time	NN
 .	.
 Days	NNS
 =	VBP
 =	JJ
-		
 1	CD
 )	)
 &	CC
 &	CC
 time	NN
 .	.
+		
 Hours	NNP
 >	NNP
 0	CD
 )	)
 output	NN
-		
 +	NNP
 =	NNP
 time	NN
 .	.
 Hours	NNP
 +	NNP
+		
 "	NNP
 hr	NN
 "	NN
 ;	:
 if	IN
-		
 (	(
 time	NN
 .	.
 Days	NNS
 =	VBP
 =	JJ
+		
 0	CD
 &	CC
 &	CC
 time	NN
 .	.
-		
 Minutes	NNS
 >	VBP
 0	CD
 )	)
 output	NN
 +	NNP
+		
 =	NNP
 time	NN
 .	.
 Minutes	NNS
 +	VBP
-		
 "	JJ
 min	NN
 "	NN
 ;	:
 if	IN
 (	(
+		
 output	NN
 .	.
 Length	NNP
 =	NNP
 =	NNP
-		
 0	CD
 )	)
 output	NN
 +	NNP
 =	NNP
 time	NN
+		
 .	.
 Seconds	NNS
 +	JJ
 "	NNP
 sec	NN
-		
 "	NN
 ;	:
-return	VB
-output.Trim()	NN
+return	NN
+output	NN
+.	.
+Trim	NNP
+		
+(	(
+)	)
 ;	:
 }	)
 I've	NNP
@@ -2541,9 +2659,9 @@ had	VBD
 no	DT
 trouble	NN
 using	VBG
-		
 the	DT
 BSD	NNP
+		
 sockets	NNS
 API	NNP
 in	IN
@@ -2553,9 +2671,9 @@ C	NNP
 ,	,
 in	IN
 GNU	NNP
-		
 /Linux	NNP
 .	.
+		
 Here's	NNP
 the	DT
 sample	JJ
@@ -2565,9 +2683,9 @@ used	VBD
 :	:
 #include	NN
 <sys	NN
-		
 /socket	NN
 .	.
+		
 h	NN
 >intmain	NNP
 (	(
@@ -2577,9 +2695,9 @@ return	JJ
 AF_INET	NNP
 ;	:
 }	)
-		
 So	IN
 my	PRP$
+		
 take	NN
 on	IN
 this	DT
@@ -2589,9 +2707,9 @@ z	NN
 /OS	NN
 is	VBZ
 probably	RB
-		
 the	DT
 complicating	NN
+		
 factor	NN
 here	RB
 ,	,
@@ -2601,9 +2719,9 @@ because	IN
 I've	NNP
 never	RB
 used	VBD
-		
 z	NN
 /OS	NN
+		
 before	IN
 ,	,
 much	RB
@@ -2613,9 +2731,9 @@ in	IN
 it	PRP
 ,	,
 I	PRP
-		
 can't	VBP
 say	VB
+		
 this	DT
 definitively	RB
 .	.
@@ -2625,9 +2743,9 @@ P	VB
 How	WRB
 do	VB
 I	PRP
-		
 forcefully	RB
 unload	VBP
+		
 a	DT
 ByteArray	NNP
 from	IN
@@ -2637,9 +2755,9 @@ ActionScript	NNP
 3	CD
 ?	.
 I	PRP
-		
 have	VBP
 tried	VBN
+		
 (	(
 without	IN
 success	NN
@@ -2649,13 +2767,15 @@ byteArray	NN
 .	.
 length	NN
 =	VBD
-		
 0	CD
 ;	:
+		
 byteArray	NN
 =	VBD
 new	JJ
-ByteArray()	NNP
+ByteArray	NNP
+(	(
+)	)
 ;	:
 And	CC
 for	IN
@@ -2892,16 +3012,18 @@ query	NN
 		
 :	:
 SELECT	NNP
-CHECKSUM_AGG(	NNP
-BINARY_CHECKSUM(	NNP
+CHECKSUM_AGG	NNP
+(	(
+BINARY_CHECKSUM	NNP
+(	(
 *	NNP
 )	)
 )	)
 FROM	NNP
 sample_table	JJ
+		
 WITH	NNP
 (	(
-		
 NOLOCK	NNP
 )	)
 ;	:
@@ -2911,9 +3033,9 @@ that	DT
 against	IN
 the	DT
 stored	JJ
+		
 value	NN
 .	.
-		
 If	IN
 the	DT
 value	NN
@@ -2923,9 +3045,9 @@ changed	VBN
 go	VBP
 through	IN
 the	DT
+		
 table	NN
 row	NN
-		
 by	IN
 row	NN
 using	VBG
@@ -2933,11 +3055,11 @@ the	DT
 query	NN
 select	NN
 row_id	NN
-,	,
-BINARY_CHECKSUM(	NNP
+,BINARY_CHECKSUM	NNP
+(	(
+		
 *	NNP
 )	)
-		
 from	IN
 sample_table	JJ
 WITH	NNP
@@ -2947,9 +3069,9 @@ NOLOCK	NNP
 ;	:
 and	CC
 compare	VB
+		
 the	DT
 returned	JJ
-		
 checksums	NNS
 against	IN
 stored	VBN
@@ -2959,9 +3081,9 @@ Sure	JJ
 I	PRP
 can	MD
 post	VB
+		
 a	DT
 test	NN
-		
 app	NN
 .	.
 #include	VB
@@ -2970,10 +3092,12 @@ app	NN
 .	.
 h	JJ
 >int	NN
-main()	NN
+main	JJ
+		
+(	(
+)	)
 {	(
 return	JJ
-		
 AF_INET	NNP
 ;	:
 }	)
@@ -2981,23 +3105,21 @@ Compile	NNP
 /Link	NNP
 Output	NNP
 :	:
+		
 cxx	NN
 -	:
 Wc	NNP
-,	,
-		
-xplink	NNP
+,xplink	NNP
 -	:
 Wl	NNP
-,	,
-xplink	NNP
+,xplink	NNP
 -	:
 o	NN
 inet_test	JJ
 inet	NN
+		
 .	.
 C	NNP
-		
 "	NNP
 .	.
 /inet	NN
@@ -3007,9 +3129,9 @@ C	NNP
 ,	,
 line	NN
 5	CD
+		
 .	.
 16	CD
-		
 :	:
 CCN5274	NNP
 (	(
@@ -3019,21 +3141,22 @@ The	DT
 name	NN
 lookup	NN
 for	IN
+		
 "AF_INET	NNP
 "	NNP
-		
 did	VBD
 not	RB
 find	VB
 a	DT
 declaration	NN
 .	.
-CCN0797(	NNP
+CCN0797	NNP
+(	(
 I	PRP
+		
 )	)
 Compilation	NN
 failed	VBD
-		
 for	IN
 file	NN
 .	.
@@ -3042,10 +3165,10 @@ file	NN
 C	NNP
 .	.
 Object	NNP
+		
 file	NN
 not	RB
 created	VBN
-		
 .	.
 A	DT
 check	NN
@@ -3054,10 +3177,10 @@ sys	JJ
 /sockets	NNS
 .	.
 h	NN
+		
 does	VBZ
 include	VB
 the	DT
-		
 definition	NN
 I	PRP
 need	VBP
@@ -3066,10 +3189,10 @@ and	CC
 as	RB
 far	RB
 as	IN
+		
 I	PRP
 can	MD
 tell	VB
-		
 ,	,
 it	PRP
 is	VBZ
@@ -3078,10 +3201,10 @@ being	VBG
 blocked	VBN
 by	IN
 any	DT
+		
 #ifdef	JJ
 statements	NNS
 .	.
-		
 I	PRP
 have	VBP
 however	RB
@@ -3090,10 +3213,10 @@ it	PRP
 contains	VBZ
 a	DT
 the	DT
+		
 following	JJ
 :	:
 #ifdef	JJ
-		
 __cplusplus	CC
 extern	JJ
 "C	NNP
@@ -3102,10 +3225,10 @@ extern	JJ
 #endif	NNP
 which	WDT
 encapsulates	VBZ
+		
 basically	RB
 the	DT
 whole	JJ
-		
 file	NN
 .	.
 Not	RB
@@ -3114,10 +3237,10 @@ if	IN
 it	PRP
 matters	VBZ
 .	.
+		
 Consider	VB
 using	VBG
 a	DT
-		
 ManualResetEvent	NN
 to	TO
 block	VB
@@ -3126,60 +3249,67 @@ main	JJ
 thread	NN
 at	IN
 the	DT
+		
 end	NN
 of	IN
 its	PRP$
-		
 processing	NN
 ,	,
 and	CC
 call	VB
-Reset()	NNP
+Reset	NNP
+(	(
+)	)
 on	IN
+		
 it	PRP
 once	RB
 the	DT
 timer's	NN
 processing	NN
-		
 has	VBZ
 finished	VBN
 .	.
 If	IN
 this	DT
 is	VBZ
+		
 something	NN
 that	WDT
 needs	VBZ
 to	TO
 run	VB
-		
 constantly	RB
 ,	,
 consider	VB
 moving	VBG
 this	DT
 into	IN
+		
 a	DT
 service	NN
 process	NN
 instead	RB
 of	IN
-		
 a	DT
 console	JJ
 app	NN
 .	.
 You	PRP
 can	MD
+		
 use	VB
 something	NN
 like	IN
-Console.ReadLine()	NNP
+Console	NNP
+.	.
+ReadLine	NNP
+(	(
+)	)
 to	TO
-		
 block	VB
 the	DT
+		
 main	JJ
 thread	NN
 ,	,
@@ -3189,9 +3319,9 @@ background	NN
 threads	NNS
 (	(
 like	IN
-		
 timer	NN
 threads	NNS
+		
 )	)
 will	MD
 still	RB
@@ -3201,9 +3331,9 @@ You	PRP
 may	MD
 also	RB
 use	VB
-		
 an	DT
 AutoResetEvent	NN
+		
 to	TO
 block	VB
 the	DT
@@ -3213,14 +3343,16 @@ then	RB
 (	(
 when	WRB
 you	PRP
-		
 need	VBP
 to	TO
+		
 )	)
 you	PRP
 can	MD
 call	VB
-Set()	NNP
+Set	NNP
+(	(
+)	)
 method	NN
 on	IN
 that	DT
@@ -3340,72 +3472,99 @@ gcCount	NN
 :int	NN
 ;private	NNP
 function	NN
-startGCCycle()	NN
-:void	NNP
+startGCCycle	NN
+(	(
+)	)
+:void	VBP
 {	(
+		
 gcCount	NN
 =	RB
-		
 0	CD
 ;	:
-addEventListener(	JJ
+addEventListener	NN
+(	(
 Event	NNP
 .	.
 ENTER_FRAME	NNP
 ,	,
 doGC	NN
+		
 )	)
 ;	:
 }private	JJ
-		
 function	NN
-doGC(	NN
-evt	FW
+doGC	NN
+(	(
+evt	JJ
 :Event	NN
 )	)
 :void	FW
 {	(
-flash.system.System.gc()	NN
-;	:
-if(	CC
-+	NNP
 		
+flash	NN
+.	.
+system	NN
+.	.
+System	NNP
+.	.
+gc	NN
+(	(
+)	)
+;	:
+if	IN
+		
+(	(
++	JJ
 +gcCount	NNP
 >	NNP
 1	CD
 )	)
 {	(
-removeEventListener(	JJ
+removeEventListener	NN
+(	(
 Event	NNP
 .	.
+		
 ENTER_FRAME	NNP
 ,	,
 doGC	NN
-		
 )	)
 ;	:
-setTimeout(	JJ
-lastGC	NN
+setTimeout	NN
+(	(
+lastGC	UH
 ,	,
 40	CD
 )	)
+		
 ;	:
 }	)
 }private	VBP
 function	NN
-		
-lastGC()	NN
-:void	NNP
+lastGC	NN
+(	(
+)	)
+:void	VBP
 {	(
-flash.system.System.gc()	NN
+flash	NN
+.	.
+		
+system	NN
+.	.
+System	NNP
+.	.
+gc	NN
+(	(
+)	)
 ;	:
 }	)
 (	(
 I'm	NNP
+		
 not	RB
 positive	JJ
 about	IN
-		
 this	DT
 ,	,
 but	CC
@@ -3414,10 +3573,10 @@ but	CC
 AS3	VBP
 uses	VBZ
 a	DT
+		
 non-deterministic	JJ
 garbage	NN
 collection	NN
-		
 .	.
 Which	JJ
 means	VBZ
@@ -3426,10 +3585,10 @@ unreferenced	JJ
 memory	NN
 will	MD
 be	VB
+		
 freed	VBN
 up	RP
 whenever	WRB
-		
 the	DT
 runtime	NN
 feels	NNS
@@ -3438,10 +3597,10 @@ it	PRP
 (	(
 typically	RB
 not	RB
+		
 unless	IN
 there's	VB
 a	DT
-		
 reason	NN
 to	TO
 run	VB
@@ -3450,10 +3609,10 @@ since	IN
 it's	NN
 an	DT
 expensive	JJ
+		
 operation	NN
 to	TO
 execute	VB
-		
 )	)
 .	.
 This	DT
@@ -3462,10 +3621,10 @@ the	DT
 same	JJ
 approach	NN
 used	VBN
+		
 by	IN
 most	JJS
 modern	JJ
-		
 garbage	NN
 collected	VBN
 languages	NNS
@@ -3474,10 +3633,10 @@ like	IN
 C	NNP
 #	#
 and	CC
+		
 Java	NNP
 as	RB
 well	RB
-		
 )	)
 .	.
 Assuming	VBG
@@ -3486,10 +3645,10 @@ are	VBP
 no	DT
 other	JJ
 references	NNS
+		
 to	TO
 the	DT
 memory	NN
-		
 pointed	VBD
 to	TO
 by	IN
@@ -3498,10 +3657,10 @@ or	CC
 the	DT
 items	NNS
 within	IN
+		
 the	DT
 array	NN
 itself	PRP
-		
 ,	,
 the	DT
 memory	NN
@@ -3510,10 +3669,10 @@ be	VB
 freed	VBN
 at	IN
 some	DT
+		
 point	NN
 after	IN
 you	PRP
-		
 exit	VBP
 the	DT
 scope	NN
@@ -3522,10 +3681,10 @@ byteArray	NN
 is	VBZ
 declared	VBN
 .	.
+		
 You	PRP
 can	MD
 force	VB
-		
 a	DT
 garbage	NN
 collection	NN
@@ -3534,10 +3693,10 @@ though	IN
 you	PRP
 really	RB
 shouldn't	VB
+		
 .	.
 If	IN
 you	PRP
-		
 do	VBP
 ,	,
 do	VB
@@ -3546,10 +3705,10 @@ only	RB
 for	IN
 testing	VBG
 ...	:
+		
 if	IN
 you	PRP
 do	VBP
-		
 it	PRP
 in	IN
 production	NN
@@ -3558,10 +3717,10 @@ you'll	JJ
 hurt	VBD
 performance	NN
 much	RB
+		
 more	JJR
 than	IN
 help	NN
-		
 it	PRP
 .	.
 To	TO
@@ -3570,25 +3729,43 @@ a	DT
 GC	NNP
 ,	,
 try	NN
+		
 (	(
 yes	UH
 ,	,
-		
 twice	RB
 )	)
 :	:
-flash.system.System.gc()	NN
+flash	NN
+.	.
+system	NN
+.	.
+System	NNP
+		
+.	.
+gc	NN
+(	(
+)	)
 ;	:
-flash.system.System.gc()	CC
+flash	VBN
+.	.
+system	NN
+.	.
+System	NNP
+.	.
+		
+gc	NN
+(	(
+)	)
 ;	:
 You	PRP
 can	MD
 read	VB
 more	JJR
-		
 here	RB
 .	.
 Give	VB
+		
 your	PRP$
 submit	NN
 buttons	NNS
@@ -3597,10 +3774,10 @@ name	NN
 like	IN
 this	DT
 :	:
-		
 <input	NN
 type	NN
 =	NNP
+		
 "submit	NNP
 "	NNP
 name	NN
@@ -3609,10 +3786,10 @@ name	NN
 "	NNP
 value	NN
 =	NNP
-		
 "Previous	JJ
 Page	NNP
 "	NNP
+		
 /	NNP
 >	NNP
 <input	NNP
@@ -3621,10 +3798,10 @@ type	NN
 "submit	NNP
 "	NNP
 name	NN
-		
 =	NNP
 "submitButton	NNP
 "	NNP
+		
 value	NN
 =	NNP
 "Next	NNP
@@ -3633,10 +3810,10 @@ Page	NNP
 /	NNP
 >	NN
 When	WRB
-		
 the	DT
 user	NN
 presses	VBZ
+		
 enter	RBR
 and	CC
 the	DT
@@ -3645,10 +3822,10 @@ goes	VBZ
 to	TO
 server	VB
 ,	,
-		
 you	PRP
 can	MD
 check	VB
+		
 the	DT
 value	NN
 for	IN
@@ -3657,10 +3834,10 @@ on	IN
 your	PRP$
 server-side	JJ
 code	NN
-		
 which	WDT
 contains	VBZ
 a	DT
+		
 collection	NN
 of	IN
 form	NN
@@ -3669,14 +3846,17 @@ name	NN
 pairs	NNS
 .	.
 For	IN
-		
 example	NN
 in	IN
 classic	JJ
+		
 ASP	NN
 :	:
 If	IN
-Request.Form(	NNP
+Request	NNP
+.	.
+Form	NNP
+(	(
 "submitButton	NNP
 "	NNP
 )	)
@@ -3692,8 +3872,11 @@ for	IN
 Previous	NNP
 Page	NNP
 ElseIf	NNP
-Request.Form(	NNP
+Request	NNP
 		
+.	.
+Form	NNP
+(	(
 "submitButton	NNP
 "	NNP
 )	)
@@ -3702,10 +3885,10 @@ Request.Form(	NNP
 Page	NNP
 "	NNP
 Then	RB
+		
 '	POS
 Code	NNP
 for	IN
-		
 Next	NNP
 Page	NNP
 End	NNP
@@ -3714,10 +3897,10 @@ Reference	NNP
 :	:
 Using	VBG
 multiple	JJ
+		
 submit	NN
 buttons	NNS
 on	IN
-		
 a	DT
 single	JJ
 form	NN
@@ -3726,10 +3909,10 @@ say	VBP
 I	PRP
 have	VBP
 a	DT
+		
 DataTable	JJ
 with	IN
 a	DT
-		
 Name	NN
 column	NN
 .	.
@@ -3738,10 +3921,10 @@ want	VBP
 to	TO
 have	VB
 a	DT
+		
 collection	NN
 of	IN
 the	DT
-		
 unique	JJ
 names	NNS
 ordered	VBN
@@ -3750,10 +3933,10 @@ alphabetically	RB
 The	DT
 following	JJ
 query	NN
+		
 ignores	VBZ
 the	DT
 order	NN
-		
 by	IN
 clause	NN
 .	.
@@ -3762,10 +3945,10 @@ names	NNS
 =	VBP
 (	(
 from	IN
+		
 DataRow	NNP
 dr	NN
 in	IN
-		
 dataTable	JJ
 .	.
 Rows	NNP
@@ -3774,10 +3957,10 @@ orderby	NN
 string	VBG
 )dr	NNP
 [	NNP
+		
 "Name	NNP
 "	NNP
 ]	NNP
-		
 select	NN
 (	(
 string	VBG
@@ -3786,96 +3969,103 @@ string	VBG
 "Name	NNP
 "	NNP
 ]	NNP
+		
 )	)
 .	.
-Distinct()	NNP
-		
+Distinct	NNP
+(	(
+)	)
 ;	:
 Why	WRB
 does	VBZ
 the	DT
 orderby	NN
 not	RB
+		
 get	VB
 enforced	VBN
 ?	.
 Unfortunately	RB
 when	WRB
-		
 it	PRP
 comes	VBZ
 to	TO
 memory	VB
 management	NN
 in	IN
+		
 Flash	NNP
 /actionscript	NNP
 there	EX
 isn't	VBZ
 a	DT
-		
 whole	JJ
 lot	NN
 you	PRP
 can	MD
 do	VB
 .	.
+		
 ActionScript	NNP
 was	VBD
 designed	VBN
 to	TO
 be	VB
-		
 easy	JJ
 to	TO
 use	VB
 (	(
 so	IN
 they	PRP
+		
 didn't	VBP
 want	JJ
 people	NNS
 to	TO
 have	VB
-		
 to	TO
 worry	VB
 about	IN
 memory	NN
 management	NN
 )	)
+		
 The	DT
 following	NN
 is	VBZ
 a	DT
 workaround	NN
-		
 ,	,
 instead	RB
 of	IN
 creating	VBG
 a	DT
 ByteArray	NNP
+		
 variable	JJ
 try	NN
 this	DT
 .	.
 var	NN
-		
 byteObject	NN
 :Object	NNP
 =	NNP
 new	JJ
-Object()	NNP
+Object	NNP
+(	(
+		
+)	)
 ;	:
 byteObject	NN
 .	.
 byteArray	NN
 =	VBD
 new	JJ
-		
-ByteArray()	NNP
+ByteArray	NNP
+(	(
+)	)
 ;	:
+		
 ...	:
 /	VBP
 /Then	VB
@@ -3885,9 +4075,9 @@ are	VBP
 finished	VBN
 delete	IN
 the	DT
-		
 variable	JJ
 from	IN
+		
 byteObject	JJ
 delete	JJ
 byteObject	NN
@@ -3897,9 +4087,9 @@ byteArray	NN
 Where	NNP
 byteArray	NN
 is	VBZ
-		
 a	DT
 dynamic	JJ
+		
 property	NN
 of	IN
 byteObject	NN
@@ -3909,9 +4099,9 @@ can	MD
 free	VB
 the	DT
 memory	NN
-		
 that	WDT
 was	VBD
+		
 allocated	VBN
 for	IN
 it	PRP
@@ -3921,9 +4111,9 @@ problem	NN
 is	VBZ
 that	IN
 the	DT
-		
 Distinct	NNP
 operator	NN
+		
 does	VBZ
 not	RB
 grant	VB
@@ -3933,9 +4123,9 @@ will	MD
 maintain	VB
 the	DT
 original	JJ
-		
 order	NN
 of	IN
+		
 values	NNS
 .	.
 So	RB
@@ -3945,9 +4135,9 @@ will	MD
 need	VB
 to	TO
 work	VB
-		
 like	IN
 this	DT
+		
 var	NN
 names	VBZ
 =	NNP
@@ -3957,9 +4147,9 @@ DataRow	NNP
 dr	NN
 in	IN
 dataTable	JJ
-		
 .	.
 Rows	NNS
+		
 select	VBP
 (	(
 string	VBG
@@ -3969,11 +4159,14 @@ string	VBG
 "	NNP
 ]	NNP
 )	)
+.	.
+Distinct	NNP
 		
+(	(
+)	)
 .	.
-Distinct()	NNP
-.	.
-OrderBy(	NNP
+OrderBy	NNP
+(	(
 name	NN
 =	NNP
 >	NNP

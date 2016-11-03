@@ -1,5 +1,14 @@
 import re
 import nltk
+import spacy
+from nltk.tokenize import RegexpTokenizer
+from nltk.tokenize import WhitespaceTokenizer
+from nltk.tokenize import StanfordTokenizer
+from nltk.tokenize.punkt import PunktSentenceTokenizer
+
+# pre-load spacy's library
+# takes about 30 seconds to load
+# nlp = spacy.load('en')
 
 # using regex to tokenize
 #p = re.compile(r"(((\w+)((\.)\w+)*\(([^\s]*)(\s?,\s?[^\s]*)*\))|(\w+(?:[-']\w+)+|'|[-.(]+|\S\w*))")
@@ -9,116 +18,94 @@ import nltk
 2) string ending with a '(' e.g. strin(
 3) function() purely with no parameters
 '''
-#p = re.compile(r"(((\w+)((\.)\w+)*\(\)?)|(\w+(?:[-']\w+)+|'|[-.(]+|\S\w*))")
-p = re.compile(r"(((\w+)((\.)\w+)*\(\)?)|,|\w+(?:[-']\w+)+|'|[-.(]+|\S\w*)")
+#expre = "(((\w+)((\.)\w+)*\(\)?)|,|\w+(?:[-']\w+)+|'|[-.(]+|\S\w*)"
+expre = "\w+(?:[-']\w+)*|'|[-.(]+|\S\w*"
+p = re.compile(expre)
+re_tokenizer = RegexpTokenizer(expre)
 
 wordList = []
 annotateList = []
 
 annotate = True
 
-#filetext = open('50_posts_api_mentions.txt', 'r', encoding='utf8').read()
+fname = input("Enter the file name to open (without extensions): ")
 
+# load into spacy's nlp object
+# doc = nlp(open(fname + '.txt', 'r', encoding='utf8').read())
 
-with open('52_posts_api_mentions_test.txt', 'r', encoding='utf8') as fp:
+s = open(fname + '.txt', 'r', encoding='utf8').read()
+
+with open(fname + '.txt', 'r', encoding='utf8') as fp:
     for line in fp:
         # only using finditer was i able to obtain the results without greedy search
         # the function returns an iteratable so we have to use a for loop on it
         for x in re.finditer(p, line):
             # x.group(0) contains the regex matched expression
             wordList.append(x.group(0))
-        wordList.append('\n')
-
 
 posTagList = nltk.pos_tag(wordList)
-# print(nltk.pos_tag(wordList))
+annotateIndexes = []
 
-u = re.compile(r"((\w+)((\.)\w+)*\(\))")
-b = re.compile(r"((\w+)((\.)\w+)*\()")
+with open(fname + '.ann', 'r', encoding='utf8') as fp:
+    for line in fp:
+        wordArr = line.split("\t")
+        indices = wordArr[1].split(" ")
+        annotateIndexes.append(indices)
+
+wordSpanIndex = list(re_tokenizer.span_tokenize(s))
 
 index = 0
 
 if not annotate:
     annotateList = posTagList
 
-# annotation loop
-while index < len(posTagList) and annotate:
+while index < len(posTagList) and annotate:                    
     x = posTagList[index]
-    tag = ('O', )
+    annotated = False
+
+    totalNewlines = s[0:wordSpanIndex[index][0]].count('\n\n')
+    spanStart = wordSpanIndex[index][0] # + totalNewlines
+            
+    for annotateObj in annotateIndexes:
+        tag = annotateObj[0]
+        startIndex = int(annotateObj[1])
+        endIndex = int(annotateObj[2])
+
+        if spanStart in range(startIndex, endIndex):
+            annotated = True
+            annotateList.append( x + (tag ,))
+            break
+
+    if not annotated:
+        annotateList.append( x + ("O", ))
     
-    # if string matches U tag, just tag a U
-    if(u.match(wordList[index]) or (index+1 < len(wordList) and wordList[index+1] == "function" ) ):
-        annotateList.append(x + ('U-API', ))
-    # if string contains an open bracket at the end
-    elif(b.match(wordList[index])):
-        # start to evaluate for a close bracket
-        anchor = index
-        scanner = anchor
-        
-        # we have a scanner to run through the array of text until we find a close bracket
-        # we may have to implement a limit for the scanner to run to since it is impossible to have X amount of parameters
-        # for a function
-        while True:
-            if(scanner+1 < len(wordList) and
-               wordList[scanner+1] != ")" and
-               scanner+2 < len(wordList)):
-                scanner += 1
-                pass
-            elif(scanner+1 >= len(wordList)):
-                scanner = -1
-                break
-            # when the closing bracket has been found
-            else:
-                scanner += 1
-                break
-
-        # if there is a closing bracket, we now evaluate it the contents inside of the bracket are
-        # valid params or not
-        if (scanner != -1):
-            i_index = anchor
-            i_count = 0
-            i_valid = True
-            while i_index < scanner:
-                if(i_count % 2 == 1 and wordList[i_index] != ","):
-                    i_valid = False
-                    break
-                i_index += 1
-        else:
-            i_valid = False
-
-        if(i_valid):
-            annotateList.append(x + ('B-API', ))
-            # tag everything here
-            for i in range(anchor+1, scanner):
-                #print(i)
-                pos_i = posTagList[i]
-                annotateList.append(pos_i + ('I-API', ))
-
-            annotateList.append(posTagList[scanner] + ('L-API', ))
-            # shift index to scanner + 1
-            index = scanner
-
-        # skip the next line
-        pass
-    else:
-        annotateList.append(x + tag)
-    
-    # if not related, append O
     index += 1
 
-# print(annotateList)
-name = input("Annotation complete. What do you want to name the file? ")
+for t in range(0,2):
+    lineCount = 0
+    if t == 0 :
+        annotate = True
+        file_type = "_training"
+    else :
+        annotate = False
+        annotateList = posTagList
+        file_type = "_test"
+        
+    with open(fname + file_type + ".txt", "wb") as myfile:
+        for x in annotateList:
+            if(lineCount > 0 and lineCount % 11 == 0):
+                myfile.write("\t\t\n".encode('utf8'))
+                
+            if(annotate):
+                string = str(x[0]) + "\t" + x[1] + "\t" + x[2] + "\n"
+                myfile.write(string.encode('utf8'))
+            else:
+                string = str(x[0]) + "\t" + x[1] + "\n"
+                myfile.write(string.encode('utf8'))
 
-with open(name + ".txt", "wb") as myfile:
-    for x in annotateList:
-        #print(x)
-        if(x[0] == "\n"):
-            myfile.write("\t\t\n".encode('utf8'))
-        elif(annotate):
-            string = x[0] + "\t" + x[1] + "\t" + x[2] + "\n"
-            myfile.write(string.encode('utf8'))
-        else:
-            string = x[0] + "\t" + x[1] + "\n"
-            myfile.write(string.encode('utf8'))
+            lineCount += 1
+
+
+print("Annotation complete.")
 
 print("done")

@@ -98,14 +98,16 @@ like	IN
 double	JJ
 d	NN
 =	NNP
-Double.Parse(	NNP
-"5	NNP
-,	,
-000	CD
+Double	NNP
 .	.
+Parse	NNP
+(	(
+"5	JJ
+,000	NN
+.	.
+		
 00	CD
 "	NN
-		
 ,	,
 NumberStyles	NNP
 .	.
@@ -115,21 +117,22 @@ CultureInfo	NNP
 .	.
 InvariantCulture	NNP
 )	)
+		
 ;	:
 I	PRP
-		
 have	VBP
 the	DT
 following	JJ
 arrays	NNS
 :	:
 $artist	NN
-=	NNP
-array(	VBZ
+=	JJ
+array	NN
+(	(
+		
 "the	JJ
 roots	NNS
 "	VBP
-		
 ,	,
 "michael	NNP
 jackson	NNP
@@ -138,10 +141,10 @@ jackson	NNP
 "billy	RB
 idol	JJ
 "	NNP
+		
 ,	,
 "more	NNP
 "	NNP
-		
 ,	,
 "and	NNP
 more	RBR
@@ -150,22 +153,23 @@ more	RBR
 "and_YET_MORE	NNP
 "	NNP
 )	)
+		
 ;	:
 $count	NNP
 =	NNP
-		
-array(	VBD
+array	NN
+(	(
 5	CD
 ,	,
 3	CD
 ,	,
 9	CD
 ,	,
-1	CD
-,	,
-1	CD
-,	,
 		
+1	CD
+,	,
+1	CD
+,	,
 3	CD
 )	)
 ;	:
@@ -173,11 +177,11 @@ I	PRP
 want	VBP
 to	TO
 generate	VB
+		
 a	DT
 tag	NN
 cloud	NN
 that	WDT
-		
 will	MD
 have	VB
 artists	NNS
@@ -185,11 +189,11 @@ with	IN
 a	DT
 higher	JJR
 number	NN
+		
 in	IN
 $count	NNP
 enclosed	VBD
 in	IN
-		
 h6	NN
 tags	NNS
 and	CC
@@ -197,11 +201,11 @@ the	DT
 lowest	JJS
 enclosed	JJ
 h1	NN
+		
 tags	NNS
 .	.
 From	IN
 what	WP
-		
 I've	NNP
 seen	VBN
 ,	,
@@ -209,11 +213,11 @@ there	EX
 are	VBP
 a	DT
 few	JJ
+		
 registry	NN
 keys	NNS
 that	WDT
 set	VBD
-		
 the	DT
 default	NN
 mail	NN
@@ -221,11 +225,11 @@ client	NN
 .	.
 One	CD
 of	IN
+		
 them	PRP
 being	VBG
 :	:
 System	NN
-		
 Key	NNP
 :	:
 [HKEY_CLASSES_ROOT	NN
@@ -233,11 +237,11 @@ Key	NNP
 \shell	NNP
 \open	NNP
 \command	NNP
+		
 ]	NNP
 Value	NNP
 Name	NN
 :	:
-		
 (	(
 Default	NNP
 )	)
@@ -245,11 +249,11 @@ Data	NNP
 Type	NN
 :	:
 REG_SZ	NNP
+		
 (	(
 String	NNP
 Value	NNP
 )	)
-		
 Value	NNP
 Data	NNP
 :	:
@@ -257,11 +261,11 @@ Mail	NN
 program	NN
 command-line	NN
 .	.
+		
 I'm	NNP
 not	RB
 familar	JJ
 with	IN
-		
 Delphi	NNP
 7	CD
 ,	,
@@ -269,11 +273,11 @@ but	CC
 I'm	NNP
 sure	VBP
 there	EX
+		
 are	VBP
 some	DT
 registry	NN
 editing	VBG
-		
 libraries	NNS
 in	IN
 there	EX
@@ -281,11 +285,11 @@ that	IN
 you	PRP
 could	MD
 use	VB
+		
 to	TO
 modify	VB
 this	DT
 value	NN
-		
 .	.
 Some	DT
 places	NNS
@@ -293,11 +297,11 @@ list	VBD
 more	JJR
 than	IN
 this	DT
+		
 key	NN
 ,	,
 others	NNS
 just	RB
-		
 this	DT
 key	NN
 ,	,
@@ -305,63 +309,67 @@ so	IN
 you	PRP
 may	MD
 need	VB
+		
 to	TO
 test	VB
 a	DT
 little	JJ
-		
 bit	NN
 to	TO
 find	VB
 the	DT
 proper	JJ
-one(	NN
+one	CD
+(	(
+		
 s	NN
 )	)
 .	.
 MySQL	NNP
 has	VBZ
-		
 this	DT
 incredibly	RB
 useful	JJ
 yet	RB
 properitary	JJ
 REPLACE	NNP
+		
 INTO	NNP
 SQL	NNP
 Command	NNP
 .	.
 I	PRP
-		
 wonder	VBP
 :	:
 Can	MD
 this	DT
 easily	RB
 be	VB
+		
 emulated	VBN
 in	IN
 SQL	NNP
 Server	NNP
 2005	CD
-		
 ?	.
 Starting	VBG
 a	DT
 new	JJ
 Transaction	NNP
 ,	,
+		
 doing	VBG
 a	DT
-Select()	NNP
+Select	NNP
+(	(
+)	)
 and	CC
 then	RB
-		
 either	DT
 UPDATE	NNP
 or	CC
 INSERT	NNP
+		
 and	CC
 COMMIT	NNP
 is	VBZ
@@ -369,11 +377,11 @@ always	RB
 a	DT
 little	JJ
 bit	NN
-		
 of	IN
 a	DT
 pain	NN
 ,	,
+		
 especially	RB
 when	WRB
 doing	VBG
@@ -381,11 +389,11 @@ it	PRP
 in	IN
 the	DT
 application	NN
-		
 and	CC
 therefore	NN
 always	RB
 keeping	VBG
+		
 2	CD
 versions	NNS
 of	IN
@@ -393,11 +401,11 @@ the	DT
 statement	NN
 .	.
 I	PRP
-		
 wonder	VBP
 if	IN
 there	EX
 is	VBZ
+		
 an	DT
 easy	JJ
 and	CC
@@ -405,11 +413,11 @@ universal	JJ
 way	NN
 to	TO
 implement	VB
-		
 such	PDT
 a	DT
 function	NN
 into	IN
+		
 SQL	NNP
 Server	NNP
 2005	CD
@@ -417,10 +425,12 @@ Server	NNP
 The	DT
 default	NN
 behaviour	NN
-		
 is	VBZ
 for	IN
-error_log()	NN
+error_log	NN
+(	(
+		
+)	)
 to	TO
 output	NN
 to	TO
@@ -429,9 +439,9 @@ Apache	NNP
 error	NN
 log	NN
 .	.
-		
 If	IN
 this	DT
+		
 isn't	NN
 happening	VBG
 check	VB
@@ -441,9 +451,9 @@ php	NN
 ini	JJ
 settings	NNS
 for	IN
-		
 the	DT
 error_log	NN
+		
 directive	JJ
 -	:
 leave	VBP
@@ -453,9 +463,9 @@ to	TO
 use	VB
 the	DT
 Apache	NNP
-		
 log	NN
 file	NN
+		
 for	IN
 the	DT
 current	JJ
@@ -465,20 +475,21 @@ Off	IN
 the	DT
 top	NN
 of	IN
-		
 my	PRP$
 head	NN
+		
 ...	:
 $artist	JJ
-=	NNP
-array(	NN
-"the	NNP
+=	JJ
+array	NN
+(	(
+"the	JJ
 roots	NNS
-"	NNP
+"	VBP
 ,	,
 "michael	NNP
-		
 jackson	NNP
+		
 "	NNP
 ,	,
 "billy	RB
@@ -489,8 +500,8 @@ idol	JJ
 "	NNP
 ,	,
 "and	NNP
-		
 more	RBR
+		
 "	JJ
 ,	,
 "and_YET_MORE	NNP
@@ -499,25 +510,22 @@ more	RBR
 ;	:
 $count	NNP
 =	NNP
-array(	VBD
+array	NN
+(	(
 5	CD
 		
-,	,
-3	CD
-,	,
-9	CD
-,	,
-1	CD
-,	,
-1	CD
-,	,
-3	CD
+,3	NNP
+,9	NNP
+,1	NNP
+,1	NNP
+,3	NNP
 )	)
-		
 ;	:
 $highest	JJS
 =	NN
-max(	NN
+max	NN
+(	(
+		
 $count	NN
 )	)
 ;for	NN
@@ -525,22 +533,23 @@ $count	NN
 int	JJ
 $x	NNP
 =	NNP
-		
 0	CD
 ;	:
 x	NNP
 <	NNP
-count(	JJ
-$artist	NN
+		
+count	NN
+(	(
+$artist	JJ
 )	)
 ;	:
 $x	CC
 +	NNP
 +	NNP
-		
 )	)
 {	(
 $normalized	VBN
+		
 =	RB
 $count	NNP
 [	NNP
@@ -549,11 +558,12 @@ $x	NNP
 /	NNP
 $highest	NNP
 ;	:
-		
 $heading	VBG
-=	NNP
-ceil(	NN
-$normalized	VBD
+=	FW
+ceil	NN
+		
+(	(
+$normalized	VBN
 *	RB
 6	CD
 )	)
@@ -561,9 +571,9 @@ $normalized	VBD
 /	CC
 /	$
 6	CD
-		
 heading	VBG
 types	NNS
+		
 echo	VBP
 "	JJ
 <h	NNP
@@ -573,9 +583,9 @@ $heading	VBG
 .	.
 "	JJ
 >	JJ
-		
 "	NN
 .	.
+		
 $artist	JJ
 [	JJ
 $x	NN
@@ -585,9 +595,9 @@ $x	NN
 <	JJ
 /h	NNP
 "	NNP
-		
 .	.
 $heading	VBG
+		
 .	.
 "	JJ
 >	JJ
@@ -597,9 +607,9 @@ $heading	VBG
 I	PRP
 have	VBP
 a	DT
-		
 little	JJ
 game	NN
+		
 written	VBN
 in	IN
 C	NNP
@@ -609,9 +619,9 @@ It	PRP
 uses	VBZ
 a	DT
 database	NN
-		
 as	IN
 back-end	NN
+		
 .	.
 It's	VB
 a	DT
@@ -621,9 +631,9 @@ game	NN
 ,	,
 and	CC
 I	PRP
-		
 wanted	VBD
 to	TO
+		
 implement	VB
 the	DT
 function	NN
@@ -633,9 +643,9 @@ cards	NNS
 as	IN
 a	DT
 script	NN
-		
 .	.
 What	WP
+		
 I	PRP
 mean	VBP
 is	VBZ
@@ -645,9 +655,9 @@ essentially	RB
 have	VBP
 an	DT
 interface	NN
-		
 ,	,
 ICard	NNP
+		
 ,	,
 which	WDT
 a	DT
@@ -657,9 +667,9 @@ implements	NNS
 (	(
 public	JJ
 class	NN
-		
 Card056	NNP
 :	:
+		
 ICard	NNP
 )	)
 and	CC
@@ -669,9 +679,9 @@ function	NN
 that	WDT
 are	VBP
 called	VBN
-		
 by	IN
 the	DT
+		
 game	NN
 .	.
 Now	RB
@@ -681,9 +691,9 @@ make	VB
 the	DT
 thing	NN
 maintainable	JJ
-		
 /moddable	JJ
 ,	,
+		
 I	PRP
 would	MD
 like	VB
@@ -693,9 +703,9 @@ the	DT
 class	NN
 for	IN
 each	DT
-		
 card	NN
 as	IN
+		
 source	NN
 code	NN
 in	IN
@@ -705,9 +715,9 @@ and	CC
 essentially	RB
 compile	VB
 it	PRP
-		
 on	IN
 first	JJ
+		
 use	NN
 .	.
 So	IN
@@ -717,9 +727,9 @@ have	VBP
 to	TO
 add	VB
 /change	VB
-		
 a	DT
 card	NN
+		
 ,	,
 I'll	NNP
 just	RB
@@ -729,9 +739,9 @@ to	TO
 the	DT
 database	NN
 and	CC
-		
 tell	VB
 my	PRP$
+		
 application	NN
 to	TO
 refresh	VB
@@ -741,9 +751,9 @@ needing	VBG
 any	DT
 assembly	NN
 deployment	NN
-		
 (	(
 especially	RB
+		
 since	IN
 we	PRP
 would	MD
@@ -753,9 +763,9 @@ about	IN
 1	CD
 assembly	NN
 per	IN
-		
 card	NN
 which	WDT
+		
 means	VBZ
 hundreds	NNS
 of	IN
@@ -765,9 +775,9 @@ assemblies	NNS
 Is	VBZ
 that	IN
 possible	JJ
-		
 ?	.
 Register	NNP
+		
 a	DT
 class	NN
 from	IN
@@ -777,9 +787,9 @@ file	NN
 and	CC
 then	RB
 instantiate	VB
-		
 it	PRP
 ,	,
+		
 etc	FW
 .	.
 ICard	NNP
@@ -788,192 +798,214 @@ Cards	NNP
 ]	NNP
 =	NNP
 new	JJ
-MyGame.CardLibrary.Card056()	NNP
+MyGame	NNP
+.	.
+CardLibrary	NNP
 		
+.	.
+Card056	NNP
+(	(
+)	)
 ;	:
 Cards	NNP
 [current	NNP
 ]	NNP
 .	.
-OnEnterPlay(	NNP
-ref	JJ
+OnEnterPlay	NNP
+(	(
+		
+ref	VB
 currentGameState	NN
 )	)
 ;	:
 The	DT
-		
 language	NN
 is	VBZ
 C	NNP
 #	#
 ,	,
 but	CC
+		
 extra	JJ
 bonus	NN
 if	IN
 it's	JJ
 possible	JJ
-		
 to	TO
 write	VB
 the	DT
 script	NN
 in	IN
 any	DT
+		
 .	.
 NET	JJ
 language	NN
 .	.
 I	PRP
-		
 have	VBP
 been	VBN
 trying	VBG
 to	TO
 implement	VB
 Win32's	NNP
+		
 MessageBox	NNP
 using	VBG
 GTK	NNP
 .	.
 The	DT
-		
 app	NN
 using	VBG
 SDL	NNP
 /OpenGL	NNP
 ,	,
 so	IN
+		
 this	DT
 isn't	NN
 a	DT
 GTK	NNP
 app	NN
-		
 .	.
 I	PRP
 handle	VBP
 the	DT
 initialisation	NN
 (	(
+		
 gtk_init	NN
 )	)
 sort	NN
 of	IN
 stuff	NN
-		
 inside	IN
 the	DT
 MessageBox	NNP
 function	NN
 as	IN
 follows	VBZ
+		
 :	:
 int	NN
-MessageBox(	NNP
+MessageBox	NNP
+(	(
 HWND	NNP
 hwnd	NN
-		
 ,	,
 const	NN
 char	NN
 *	NNP
 text	NN
+		
 ,	,
 const	NN
 char	NN
 *	NNP
 caption	NN
 ,	,
-		
 UINT	NNP
 type	NN
 )	)
 {	(
 GtkWidget	NNP
+		
 *window	NNP
 =	NNP
 NULL	NNP
 ;	:
 GtkWidget	NNP
 *dialog	NNP
-		
 =	NNP
 NULL	NNP
 ;	:
-gtk_init(	NN
->kArgc	NN
+gtk_init	NN
+(	(
+		
+>kArgc	UH
 ,	,
 >kArgv	NNP
 )	)
 ;	:
 window	CC
 =	VB
-		
-gtk_window_new(	JJ
+gtk_window_new	NN
+(	(
 GTK_WINDOW_TOPLEVEL	NNP
 )	)
+		
 ;	:
-g_signal_connect(	CC
-G_OBJECT(	NNP
+g_signal_connect	NN
+(	(
+G_OBJECT	NNP
+(	(
 window	NN
 )	)
 ,	,
 "delete_event	JJ
 "	NN
-		
 ,	,
-G_CALLBACK(	NNP
+		
+G_CALLBACK	NNP
+(	(
 delete_event	NN
 )	)
 ,	,
 NULL	NNP
 )	)
 ;	:
-g_signal_connect(	CC
-G_OBJECT(	NNP
-window	NN
+g_signal_connect	NN
+(	(
+G_OBJECT	NNP
 		
+(	(
+window	NN
 )	)
 ,	,
 "destroy	NNP
 "	NNP
 ,	,
-G_CALLBACK(	NNP
+G_CALLBACK	NNP
+(	(
 destroy	NN
 )	)
+		
 ,	,
 NULL	NNP
 )	)
-		
 ;	:
 /	CC
 /	VB
 gcallback	NN
 calls	VBZ
-gtk_main_quit()	JJ
-gtk_init_add(	NN
+gtk_main_quit	NN
 (	(
-GtkFunction	NNP
-)gcallback	NNP
-,	,
+)	)
 		
+gtk_init_add	VBP
+((	JJ
+GtkFunction	NNP
+)gcallback	NN
+,	,
 NULL	NNP
 )	)
 ;	:
 if	IN
 (	(
 type	NN
+		
 &	CC
 MB_YESNO	NNP
 )	)
 {	(
 dialog	NN
-		
-=	NNP
-gtk_message_dialog_new(	NN
-GTK_WINDOW(	NNP
+=	VBZ
+gtk_message_dialog_new	NN
+(	(
+GTK_WINDOW	NNP
+(	(
 window	NN
+		
 )	)
 ,	,
 GTK_DIALOG_DESTROY_WITH_PARENT	NNP
@@ -981,21 +1013,23 @@ GTK_DIALOG_DESTROY_WITH_PARENT	NNP
 GTK_MESSAGE_QUESTION	NNP
 ,	,
 GTK_BUTTONS_YES_NO	NNP
-		
 ,	,
 text	NN
 )	)
 ;	:
+		
 }	)
 else	RB
 {	(
 dialog	NN
-=	NNP
-gtk_message_dialog_new(	NN
-GTK_WINDOW(	NNP
-		
+=	VBZ
+gtk_message_dialog_new	NN
+(	(
+GTK_WINDOW	NNP
+(	(
 window	NN
 )	)
+		
 ,	,
 GTK_DIALOG_DESTROY_WITH_PARENT	NNP
 ,	,
@@ -1005,11 +1039,13 @@ GTK_BUTTONS_OK	NNP
 ,	,
 text	NN
 )	)
-		
 ;	:
 }	)
-gtk_window_set_title(	VBP
-GTK_WINDOW(	NNP
+		
+gtk_window_set_title	FW
+(	(
+GTK_WINDOW	NNP
+(	(
 dialog	NN
 )	)
 ,	,
@@ -1020,152 +1056,160 @@ gint	NN
 		
 result	NN
 =	NNP
-gtk_dialog_run(	NN
-GTK_DIALOG(	NNP
+gtk_dialog_run	NN
+(	(
+GTK_DIALOG	NNP
+(	(
 dialog	NN
 )	)
 )	)
 ;	:
-gtk_main()	NN
-;	:
-gtk_widget_destroy(	CC
+gtk_main	NN
 		
+(	(
+)	)
+;	:
+gtk_widget_destroy	NN
+(	(
 dialog	NN
 )	)
 ;	:
 if	IN
 (	(
 type	NN
+		
 &	CC
 MB_YESNO	NNP
 )	)
 {	(
 switch	NN
-		
 (	(
 result	NN
 )	)
 {	(
 default	NN
 :	:
+		
 case	NN
 GTK_RESPONSE_DELETE_EVENT	NNP
 :	:
 case	NN
 GTK_RESPONSE_NO	NNP
-		
 :	:
 return	NN
 IDNO	NNP
 ;	:
 break	NN
 ;	:
+		
 case	NN
 GTK_RESPONSE_YES	NNP
 :	:
 return	NN
 IDYES	NNP
-		
 ;	:
 break	NN
 ;	:
 }	)
 }	)
 return	VBP
+		
 IDOK	NNP
 ;	:
 }	)
 Now	RB
 ,	,
-		
 I	PRP
 am	VBP
 by	IN
 no	DT
 means	NNS
 an	DT
+		
 experienced	JJ
 GTK	NNP
 programmer	NN
 ,	,
 and	CC
-		
 I	PRP
 realise	VBP
 that	IN
 I'm	NNP
 probably	RB
 doing	VBG
-something(	JJ
-s	NN
+		
+something	NN
+(	(
+s	JJ
 )	)
 horribly	RB
 wrong	JJ
-		
 .	.
 However	RB
 ,	,
 my	PRP$
 problem	NN
+		
 is	VBZ
 that	IN
 the	DT
 last	JJ
 dialog	NN
 popped	VBD
-		
 up	RP
 with	IN
 this	DT
 function	NN
 stays	VBZ
+		
 around	IN
 until	IN
 the	DT
 process	NN
 exits	NNS
 .	.
-		
 Any	DT
 ideas	NNS
 ?	.
 @Ryan	JJ
 That's	NNP
+		
 correct	NN
 but	CC
 it	PRP
 actually	RB
 makes	VBZ
 the	DT
-		
 tags	NNS
 with	IN
 the	DT
 least	JJS
 number	NN
+		
 ,	,
 larger	JJR
 .	.
 This	DT
 code	NN
 has	VBZ
-		
 been	VBN
 tested	VBN
 :	:
 $artist	JJ
-=	NNP
-array(	NN
-"the	NNP
+=	JJ
+		
+array	NN
+(	(
+"the	JJ
 roots	NNS
-"	NNP
+"	VBP
 ,	,
 "michael	NNP
-		
 jackson	NNP
 "	NNP
 ,	,
 "billy	RB
+		
 idol	JJ
 "	NNP
 ,	,
@@ -1173,199 +1217,207 @@ idol	JJ
 "	NNP
 ,	,
 "and	NNP
-		
 more	RBR
 "	JJ
 ,	,
 "and_YET_MORE	NNP
+		
 "	NNP
 )	)
 ;	:
 $count	NNP
 =	NNP
-array(	VBD
+array	NN
+(	(
 5	CD
+,3	NNP
+,9	NNP
+,1	NNP
 		
-,	,
-3	CD
-,	,
-9	CD
-,	,
-1	CD
-,	,
-1	CD
-,	,
-3	CD
+,1	NNP
+,3	NNP
 )	)
-		
 ;	:
 $highest	JJS
 =	NN
-max(	NN
+max	NN
+(	(
 $count	NN
 )	)
 ;for	NN
+		
 (	(
 $x	JJ
 =	VBZ
 0	CD
-		
 ;	:
 $x	NNP
 <	NNP
-count(	VBP
-$artist	NN
+count	NN
+(	(
+$artist	JJ
 )	)
+		
 ;	:
 $x	CC
 +	NNP
 +	NNP
 )	)
-		
 {	(
 $normalized	VBN
 =	NN
 (	(
 $highest	JJS
 -	:
+		
 $count	NN
 [	JJ
 $x	NNP
 ]	NNP
 +1	NNP
-		
 )	)
 /	VBP
 $highest	JJS
 ;	:
 $heading	VBG
-=	NNP
-ceil(	NN
-$normalized	VBD
+=	FW
+		
+ceil	NN
+(	(
+$normalized	VBN
 *	RB
 6	CD
 )	)
-		
 ;	:
 /	CC
 /	$
 6	CD
 heading	VBG
+		
 types	NNS
 echo	VBP
 "	JJ
 <h	NNP
 $heading	NNP
 >	NNP
-		
 {	(
 $artist	JJ
 [	NNP
 $x	NNP
 ]	NNP
+		
 }	)
 <	NNP
 /h	NNP
 $heading	VBG
 >	NNP
 "	NNP
-		
 ;	:
 }	)
 On	IN
 a	DT
 high	JJ
+		
 level	NN
 ,	,
 you	PRP
 have	VBP
 no	DT
 other	JJ
-		
 choice	NN
 then	RB
 to	TO
 walk	VB
 through	IN
+		
 the	DT
 whole	JJ
 Dictionary	NNP
 and	CC
 look	VB
 at	IN
-		
 each	DT
 value	NN
 .	.
 Maybe	RB
 this	DT
+		
 helps	VBZ
 :	:
 http	NN
 :	:
 /	NN
 /bytes	NNS
-		
 .	.
 com	NN
 /forum	NN
 /thread563638	NNP
 .	.
+		
 html	NN
 Copy	NNP
 /Pasting	VBG
 from	IN
 John	NNP
 Timney	NNP
-		
 :	:
 Dictionary	JJ
 <string	NN
 ,	,
 string	VBG
+		
 >	JJ
 s	NNS
 =	VBP
 new	JJ
 Dictionary	NNP
 <string	NN
-		
 ,	,
 string	VBG
 >	NNP
 (	(
 )	)
-;	:
-s.Add(	CC
-"1	NNP
-"	NNP
-,	,
-"a	NNP
 		
-Item	NNP
-"	NNP
-)	)
 ;	:
-s.Add(	CC
-"2	NNP
-"	NNP
+s	NN
+.	.
+Add	NNP
+(	(
+"1	JJ
+"	NN
 ,	,
-"c	NNP
+"a	JJ
 Item	NNP
 "	NNP
 		
 )	)
 ;	:
-s.Add(	CC
-"3	NNP
-"	NNP
+s	NN
+.	.
+Add	NNP
+(	(
+"2	JJ
+"	NN
 ,	,
-"b	NNP
+"c	JJ
+Item	NNP
+		
+"	NNP
+)	)
+;	:
+s	NN
+.	.
+Add	NNP
+(	(
+"3	JJ
+"	NN
+,	,
+"b	JJ
+		
 Item	NNP
 "	NNP
 )	)
 ;	:
-		
 List	NNP
 <KeyValuePair	NNP
 <string	NNP
@@ -1373,11 +1425,11 @@ List	NNP
 string	VBG
 >	JJ
 >	JJ
+		
 myList	NN
 =	NNP
 new	JJ
 List	NNP
-		
 <KeyValuePair	NN
 <string	VBG
 ,	,
@@ -1385,14 +1437,19 @@ string	VBG
 >	JJ
 >	NNP
 (	(
+		
 s	NN
 )	)
 ;	:
-myList.Sort(	CC
-		
-delegate(	VB
+myList	NN
+.	.
+Sort	NNP
+(	(
+delegate	NN
+(	(
 KeyValuePair	NNP
 <string	NNP
+		
 ,	,
 string	VBG
 >	NNP
@@ -1401,19 +1458,24 @@ firstPair	NN
 KeyValuePair	NNP
 <string	NNP
 ,	,
-		
 string	VBG
 >	NNP
 nextPair	NN
+		
 )	)
 {	(
 return	NN
-firstPair.Value.CompareTo(	RB
-nextPair	RB
+firstPair	NN
 .	.
 Value	NNP
-)	)
+.	.
+CompareTo	NNP
+(	(
+nextPair	NN
+.	.
 		
+Value	NNP
+)	)
 ;	:
 }	)
 )	)
@@ -1423,9 +1485,9 @@ System	NNP
 .	.
 Linq	NNP
 .	.
+		
 Enumerable	JJ
 ;	:
-		
 ...	:
 List	NNP
 <KeyValuePair	NNP
@@ -1435,12 +1497,21 @@ string	VBG
 >	JJ
 >	JJ
 myList	NN
-=	NNP
-aDictionary.ToList()	NN
 		
+=	NNP
+aDictionary	NN
+.	.
+ToList	NNP
+(	(
+)	)
 ;	:
-myList.Sort(	CC
-delegate(	VB
+myList	NN
+.	.
+Sort	NNP
+(	(
+		
+delegate	NN
+(	(
 KeyValuePair	NNP
 <string	NNP
 ,	,
@@ -1449,8 +1520,8 @@ string	VBG
 pair1	NN
 ,	,
 KeyValuePair	NNP
-		
 <string	NNP
+		
 ,	,
 string	VBG
 >	NNP
@@ -1458,10 +1529,15 @@ pair2	NN
 )	)
 {	(
 return	NN
-pair1.Value.CompareTo(	NN
-pair2	NN
+pair1	NN
+.	.
+Value	NNP
 .	.
 		
+CompareTo	NNP
+(	(
+pair2	NN
+.	.
 Value	NNP
 )	)
 ;	:
@@ -1469,11 +1545,11 @@ Value	NNP
 )	)
 ;	:
 Since	IN
+		
 you're	NN
 targeting	VBG
 .	.
 net	JJ
-		
 2	CD
 .	.
 0	CD
@@ -1481,11 +1557,11 @@ or	CC
 above	RB
 ,	,
 you	PRP
+		
 can	MD
 simplify	VB
 this	DT
 into	IN
-		
 lambda	JJ
 syntax	NN
 --	:
@@ -1493,11 +1569,11 @@ it's	JJ
 equivalent	JJ
 but	CC
 shorter	JJR
+		
 .	.
 If	IN
 you're	JJ
 targeting	VBG
-		
 .	.
 net	JJ
 2	CD
@@ -1505,11 +1581,11 @@ net	JJ
 0	CD
 you	PRP
 can	MD
+		
 only	RB
 use	VB
 this	DT
 syntax	NN
-		
 if	IN
 you're	JJ
 using	VBG
@@ -1517,35 +1593,46 @@ the	DT
 compiler	NN
 from	IN
 vs2008	NN
+		
 (	(
 or	CC
 above	RB
 )	)
-		
 .	.
 var	JJ
 myList	NN
 =	NNP
-aDictionary.ToList()	NN
-;	:
-myList.Sort(	CC
-(	(
-pair1	NN
-,	,
-pair2	NN
+aDictionary	NN
+.	.
+ToList	NNP
 		
+(	(
+)	)
+;	:
+myList	NN
+.	.
+Sort	NNP
+((	NNP
+pair1	NN
+,pair2	NN
 )	)
 =	VBZ
+		
 >	JJ
-pair1.Value.CompareTo(	NN
+pair1	NN
+.	.
+Value	NNP
+.	.
+CompareTo	NNP
+(	(
 pair2	NN
 .	.
 Value	NNP
 )	)
+		
 )	)
 ;	:
 I	PRP
-		
 am	VBP
 working	VBG
 on	IN
@@ -1554,10 +1641,10 @@ collection	NN
 of	IN
 classes	NNS
 used	VBN
+		
 for	IN
 video	JJ
 playback	NN
-		
 and	CC
 recording	NN
 .	.
@@ -1566,10 +1653,10 @@ have	VBP
 one	CD
 main	JJ
 class	NN
+		
 which	WDT
 acts	VBZ
 like	IN
-		
 the	DT
 public	JJ
 interface	NN
@@ -1577,14 +1664,23 @@ interface	NN
 with	IN
 methods	NNS
 like	IN
-play()	NN
+play	NN
+		
+(	(
+)	)
 ,	,
-stop()	NN
+stop	FW
+(	(
+)	)
+,	,
+pause	RB
+(	(
+)	)
 ,	,
 		
-pause()	NN
-,	,
-record()	NN
+record	NN
+(	(
+)	)
 etc	NN
 ...	:
 Then	RB
@@ -1855,9 +1951,10 @@ do	VB
 :	:
 $username	VB
 =	NNP
-filter_input(	NN
-INPUT_POST	NNP
+filter_input	NN
+(	(
 		
+INPUT_POST	NNP
 ,	,
 '	''
 username	JJ
@@ -1868,20 +1965,21 @@ FILTER_SANITIZE_STRING	NNP
 ;	:
 or	CC
 even	RB
-just	RB
 		
+just	RB
 :	:
 $username	JJ
 =	NNP
-filter_input(	NN
+filter_input	NN
+(	(
 INPUT_POST	NNP
 ,	,
 '	''
 username	JJ
 '	POS
+		
 )	)
 ;	:
-		
 This	DT
 is	VBZ
 pretty	JJ
@@ -1891,9 +1989,9 @@ obvious	JJ
 ,	,
 but	CC
 be	VB
+		
 sure	JJ
 to	TO
-		
 session_destroy	VB
 after	IN
 every	DT
@@ -1903,9 +2001,9 @@ This	DT
 can	MD
 be	VB
 difficult	JJ
+		
 to	TO
 implement	VB
-		
 if	IN
 the	DT
 user	NN
@@ -1915,9 +2013,9 @@ log	VB
 out	RP
 explicitly	RB
 ,	,
+		
 so	IN
 a	DT
-		
 timer	NN
 can	MD
 be	VB
@@ -1927,93 +2025,105 @@ do	VB
 this	DT
 .	.
 Here	RB
+		
 is	VBZ
 a	DT
-		
 good	JJ
 tutorial	NN
 on	IN
-setTimer()	NN
+setTimer	NN
+(	(
+)	)
 and	CC
-clearTimer()	NN
+clearTimer	NN
+(	(
+		
+)	)
 .	.
 When	WRB
 is	VBZ
 it	PRP
 appropriate	JJ
-		
 to	TO
 use	VB
 an	DT
 unsigned	JJ
 variable	NN
+		
 over	IN
 a	DT
 signed	JJ
 one	CD
 ?	.
 What	WP
-		
 about	IN
 in	IN
 a	DT
 for	IN
 loop	NN
+		
 ?	.
 I	PRP
 hear	VBP
 a	DT
 lot	NN
 of	IN
-		
 opinions	NNS
 about	IN
 this	DT
 and	CC
 I	PRP
+		
 wanted	VBD
 to	TO
 see	VB
 if	IN
 there	EX
 was	VBD
-		
 anything	NN
 resembling	VBG
 a	DT
 consensus	NN
 .	.
+		
 for	IN
 (	(
 unsigned	JJ
 int	NN
 i	NN
 =	VBP
-		
 0	CD
 ;	:
-i	JJ
+i	NNS
 <	VBP
-someThing.length()	NN
+someThing	VBG
+		
+.	.
+length	NN
+(	(
+)	)
 ;	:
-i	CC
+i	JJ
 +	VBP
-+	NNP
++	NN
 )	)
 {	(
-		
 SomeThing	VBG
-var	JJ
+		
+var	NNS
 =	JJ
-someThing.at(	NN
+someThing	NN
+.	.
+at	IN
+(	(
 i	NN
 )	)
 ;	:
 /	CC
 /	VB
+		
 You	PRP
 get	VBP
-		
 the	DT
 idea	NN
 .	.
@@ -2023,9 +2133,9 @@ know	VBP
 Java	NNP
 doesn't	NNS
 have	VBP
+		
 unsigned	VBN
 values	NNS
-		
 ,	,
 and	CC
 that	DT
@@ -2035,9 +2145,9 @@ been	VBN
 a	DT
 concious	JJ
 decision	NN
+		
 on	IN
 Sun	NNP
-		
 Microsystems	NNPS
 '	POS
 part	NN
@@ -2047,9 +2157,9 @@ Personally	RB
 I've	NNP
 played	VBN
 with	IN
+		
 several	JJ
 of	IN
-		
 the	DT
 built-in	NN
 options	NNS
@@ -2059,9 +2169,9 @@ XML-heavy	JJ
 project	NN
 and	CC
 have	VBP
+		
 settled	VBN
 on	IN
-		
 pulldom	NN
 as	IN
 the	DT
@@ -2071,9 +2181,9 @@ for	IN
 less	JJR
 complex	JJ
 documents	NNS
+		
 .	.
 Especially	RB
-		
 for	IN
 small	JJ
 simple	JJ
@@ -2083,9 +2193,9 @@ I	PRP
 like	VBP
 the	DT
 event-driven	JJ
+		
 theory	NN
 of	IN
-		
 parsing	VBG
 rather	RB
 than	IN
@@ -2095,9 +2205,9 @@ a	DT
 whole	JJ
 slew	NN
 of	IN
+		
 callbacks	NNS
 for	IN
-		
 a	DT
 relatively	RB
 simple	JJ
@@ -2107,9 +2217,9 @@ Here	RB
 is	VBZ
 a	DT
 good	JJ
+		
 quick	JJ
 discussion	NN
-		
 of	IN
 how	WRB
 to	TO
@@ -2119,9 +2229,9 @@ API	NNP
 .	.
 What	WP
 I	PRP
+		
 like	VBP
 :	:
-		
 you	PRP
 can	MD
 handle	VB
@@ -2131,9 +2241,9 @@ in	IN
 a	DT
 for	IN
 loop	NN
+		
 rather	RB
 than	IN
-		
 using	VBG
 callbacks	NNS
 .	.
@@ -2143,9 +2253,9 @@ delay	VBP
 full	JJ
 parsing	NN
 (	(
+		
 the	DT
 "pull	NN
-		
 "	NNP
 part	NN
 )	)
@@ -2155,21 +2265,23 @@ get	VB
 additional	JJ
 detail	NN
 when	WRB
+		
 you	PRP
 call	VBP
-		
-expandNode()	RB
+expandNode	RB
+(	(
+)	)
 .	.
 This	DT
 satisfies	VBZ
 my	PRP$
 general	JJ
 requirement	NN
+		
 for	IN
 "responsible	JJ
 "	JJ
 efficiency	NN
-		
 without	IN
 sacrificing	VBG
 ease	NN
@@ -2177,98 +2289,103 @@ of	IN
 use	NN
 and	CC
 simplicity	NN
+		
 .	.
 Take	VB
 a	DT
 look	NN
-		
 at	IN
 the	DT
 CHECKSUM	NNP
 command	NN
 :	:
 SELECT	NNP
-CHECKSUM_AGG(	NNP
-BINARY_CHECKSUM(	NNP
+CHECKSUM_AGG	NNP
+		
+(	(
+BINARY_CHECKSUM	NNP
+(	(
 *	NNP
 )	)
 )	)
-		
 FROM	NNP
 sample_table	JJ
 WITH	NNP
 (	(
 NOLOCK	NNP
+		
 )	)
 ;	:
 That	WDT
 will	MD
 return	VB
 the	DT
-		
 same	JJ
 number	NN
 each	DT
 time	NN
 it's	JJ
+		
 run	NN
 as	RB
 long	RB
 as	IN
 the	DT
 table	NN
-		
 contents	NNS
 haven't	RB
 changed	VBD
 .	.
 See	VB
+		
 my	PRP$
 post	NN
 on	IN
 this	DT
 for	IN
 more	JJR
-		
 information	NN
 :	:
 CHECKSUM	NNP
 Here's	NNP
 how	WRB
+		
 I	PRP
 used	VBD
 it	PRP
 to	TO
 rebuild	VB
 cache	NN
-		
 dependencies	NNS
 when	WRB
 tables	NNS
 changed	VBD
 :	:
+		
 ASP	NNP
 .	.
 NET	JJ
 1	CD
 .	.
 1	CD
-		
 database	NN
 cache	NN
 dependency	NN
 (	(
 without	IN
+		
 triggers	NNS
 )	)
 timezone	NN
 .	.
 js	NN
 :	:
-		
 function	NN
-ajaxpage()	IN
+ajaxpage	NN
+(	(
+)	)
 {	(
+		
 var	JJ
 url	JJ
 =	NNP
@@ -2277,19 +2394,25 @@ url	JJ
 php	JJ
 "	NN
 ;	:
-		
 var	CC
 visitortime	VB
 =	JJ
+		
 new	JJ
-Date()	NNP
+Date	NNP
+(	(
+)	)
 ;	:
 var	JJ
 time	NN
-=	NNP
-visitortime.getTimezoneOffset()	NN
-/60	NN
+=	JJ
+visitortime	NN
+.	.
+getTimezoneOffset	NN
 		
+(	(
+)	)
+/60	NN
 ;	:
 var	CC
 page_request	JJS
@@ -2298,62 +2421,67 @@ false	RB
 ;	:
 if	IN
 (	(
+		
 window	NN
 .	.
 XMLHttpRequest	JJS
-		
 )	)
 {	(
 page_request	JJS
 =	RB
 new	JJ
-XMLHttpRequest()	NNP
+XMLHttpRequest	NNP
+(	(
+)	)
+		
 ;	:
 }	)
 else	RB
 if	IN
 (	(
-		
 window	NN
 .	.
 ActiveXObject	NNP
 )	)
 {	(
 try	VB
+		
 {	(
 page_request	VB
 =	CD
 new	JJ
-ActiveXObject(	NNP
-		
+ActiveXObject	NNP
+(	(
 "Msxml2	NNP
 .	.
 XMLHTTP	NNP
 "	NNP
 )	)
+		
 ;	:
 }	)
 catch	NN
 (	(
 e	NN
 )	)
-		
 {	(
 try	VB
 {	(
 page_request	VB
 =	CD
+		
 new	JJ
-ActiveXObject(	NNP
+ActiveXObject	NNP
+(	(
 "Microsoft	NNP
 .	.
 XMLHTTP	NNP
 "	NNP
-		
 )	)
 ;	:
 }	)
 catch	NN
+		
 (	(
 e	NN
 )	)
@@ -2361,22 +2489,25 @@ e	NN
 }	)
 }	)
 }	)
-		
 else	RB
 {	(
 return	NN
 false	RB
+		
 ;	:
 }	)
 page_request	JJS
 .	.
 onreadystatechange	NN
-=	NNP
-function()	NN
-		
+=	JJ
+function	NN
+(	(
+)	)
 {	(
-loadpage(	JJ
-page_request	NN
+loadpage	NN
+		
+(	(
+page_request	JJS
 ,	,
 containerid	NN
 )	)
@@ -2385,19 +2516,22 @@ containerid	NN
 if	IN
 (	(
 bustcachevar	NN
-		
 )	)
+		
 {	(
 bustcacheparameter	NN
 =	NNP
 (	(
-url.indexOf(	JJ
-"	NN
+url	JJ
+.	.
+indexOf	NN
+(	(
+"	VB
 ?	.
 "	NN
+		
 )	)
 !	.
-		
 =	SYM
 -	:
 1	CD
@@ -2407,23 +2541,35 @@ url.indexOf(	JJ
 &	CC
 "	NNP
 +new	NNP
-Date()	NNP
-.	.
 		
-getTime()	NN
+Date	NNP
+(	(
+)	)
+.	.
+getTime	NN
+(	(
+)	)
 :	:
 "	NN
 ?	.
 "	JJ
-+new	NNP
-Date()	NNP
+		
++new	NN
+Date	NNP
+(	(
+)	)
 .	.
-getTime()	NN
+getTime	NN
+(	(
+)	)
 ;	:
 }	)
+page_request	JJS
 		
-page_request.open(	NN
-'	''
+.	.
+open	JJ
+(	(
+'	POS
 GET	NNP
 '	POS
 ,	,
@@ -2431,97 +2577,115 @@ url	JJ
 +bustcacheparameter	NN
 +	NNP
 "	NNP
+		
 &time	NNP
 =	NNP
-		
 "	NNP
 +time	NNP
 ,	,
 true	JJ
 )	)
 ;	:
-page_request.send(	CC
-null	NN
+page_request	JJS
+.	.
+send	NN
+		
+(	(
+null	JJ
 )	)
 ;	:
 }	)
-		
 function	NN
-loadpage(	JJ
-page_request	NN
+loadpage	NN
+(	(
+page_request	JJS
 ,	,
 containerid	NN
+		
 )	)
 {	(
 if	IN
 (	(
 page_request	JJS
 .	.
-		
 readyState	VB
 =	JJ
 =	NNP
 4	CD
 &	CC
+		
 &	CC
 (	(
 page_request	JJS
 .	.
 status	NN
 =	JJ
-		
 =200	NNP
 |	NNP
 |	NNP
-window.location.href.indexOf(	VBD
+window	NN
+.	.
+		
+location	NN
+.	.
+href	NN
+.	.
+indexOf	NN
+(	(
 "http	NNP
 "	NNP
 )	)
 =	VBP
 =	SYM
+		
 -	:
 1	CD
-		
 )	)
 )	)
 {	(
-document.write(	NN
-'	''
-<meta	JJ
-http-equiv	JJ
-=	NN
+document	NN
+.	.
+write	NN
+(	(
+'	POS
+<meta	NN
+		
+http-equiv	NN
+=	NNP
 "refresh	NNP
 "	NNP
 content	NN
-		
 =	NNP
 "0	NNP
 ;url	NNP
 =http	NN
 :	:
 /	JJ
+		
 /example	NN
 .	.
 com	NN
 /	JJ
 "	NNP
-		
 /	NNP
 >	NNP
 '	POS
 )	)
 ;	:
 }	)
+		
 }	)
 timezone	NN
 .	.
 php	NN
 :	:
-		
 <	JJ
 ?php	NNP
-session_start()	NN
+session_start	NN
+(	(
+)	)
 ;	:
+		
 $_SESSION	CC
 [	VB
 '	''
@@ -2529,11 +2693,11 @@ time	NN
 '	''
 ]	JJ
 =	NNP
-		
 $_GET	NNP
 [	NNP
 '	POS
 time	NN
+		
 '	''
 ]	NNS
 ;	:
@@ -2541,11 +2705,11 @@ time	NN
 >	VB
 When	WRB
 you	PRP
-		
 want	VBP
 to	TO
 use	VB
 it	PRP
+		
 add	VB
 onLoad	JJ
 =	JJ
@@ -2553,11 +2717,11 @@ onLoad	JJ
 (	(
 )	)
 ;	:
-		
 to	TO
 the	DT
 body	NN
 tag	NN
+		
 and	CC
 it	PRP
 should	MD
@@ -2565,11 +2729,11 @@ cause	VB
 the	DT
 timezone	NN
 to	TO
-		
 be	VB
 stored	VBN
 in	IN
 the	DT
+		
 PHP	NNP
 session	NN
 variable	JJ
@@ -2577,11 +2741,11 @@ $_SESSION	NN
 [	NNP
 '	POS
 time	NN
-		
 '	''
 ]	JJ
 Edit	NN
 :	:
+		
 P	NNP
 .	.
 S	NNP
@@ -2589,11 +2753,11 @@ S	NNP
 This	DT
 is	VBZ
 untested	JJ
-		
 .	.
 There	EX
 are	VBP
 several	JJ
+		
 ways	NNS
 to	TO
 do	VB
@@ -2601,11 +2765,11 @@ this	DT
 .	.
 Common	NNP
 methods	NNS
-		
 use	VBP
 recursion	NN
 ,	,
 memoization	NN
+		
 ,	,
 or	CC
 dynamic	JJ
@@ -2613,11 +2777,11 @@ programming	NN
 .	.
 The	DT
 basic	JJ
-		
 idea	NN
 is	VBZ
 that	IN
 you	PRP
+		
 produce	VBP
 a	DT
 list	NN
@@ -2625,11 +2789,11 @@ of	IN
 all	DT
 strings	NNS
 of	IN
-		
 length	NN
 1	CD
 ,	,
 then	RB
+		
 in	IN
 each	DT
 iteration	NN
@@ -2637,11 +2801,11 @@ iteration	NN
 for	IN
 all	DT
 strings	NNS
-		
 produced	VBN
 in	IN
 the	DT
 last	JJ
+		
 iteration	NN
 ,	,
 add	VBP
@@ -2649,11 +2813,11 @@ that	IN
 string	VBG
 concatenated	VBN
 with	IN
-		
 each	DT
 character	NN
 in	IN
 the	DT
+		
 string	NN
 individually	RB
 .	.
@@ -2661,11 +2825,11 @@ individually	RB
 the	DT
 variable	NN
 index	NN
-		
 in	IN
 the	DT
 code	NN
 below	IN
+		
 keeps	NNS
 track	NN
 of	IN
@@ -2673,11 +2837,11 @@ the	DT
 start	NN
 of	IN
 the	DT
-		
 last	JJ
 and	CC
 the	DT
 next	JJ
+		
 iteration	NN
 )	)
 Some	DT
@@ -2685,21 +2849,23 @@ pseudocode	NN
 :	:
 list	NN
 =	IN
+originalString	VBG
+.	.
+split	NN
+(	(
 		
-originalString.split(	NN
-'	''
+'	POS
 '	POS
 )	)
 index	NN
 =	NNP
 (	(
 0	CD
-,	,
-0	CD
+,0	NN
 )	)
-		
 list	NN
 =	NNP
+		
 [	NNP
 "	NNP
 "	NNP
@@ -2709,9 +2875,9 @@ iteration	NN
 n	NN
 in	IN
 1	CD
-		
 to	TO
 y	VB
+		
 :	:
 index	NN
 =	NNP
@@ -2720,20 +2886,24 @@ index	NN
 [1	NNP
 ]	NNP
 ,	,
-len(	JJ
-		
+len	NN
+(	(
 list	NN
+		
 )	)
 )	)
 for	IN
 string	VBG
 s	NN
 in	IN
-list.subset(	JJ
+list	NN
+.	.
+subset	NN
+(	(
 index	NN
-[0	VBD
-]	NNP
 		
+[0	NNP
+]	NNP
 to	TO
 end	VB
 )	)
@@ -2743,61 +2913,67 @@ character	NN
 c	NN
 in	IN
 originalString	VBG
-:	:
-list.add(	NN
 		
-s	NN
+:	:
+list	NN
+.	.
+add	VB
+(	(
+s	JJ
 +	NNP
 c	NN
 )	)
 you'd	NN
 then	RB
+		
 need	VB
 to	TO
 remove	VB
 all	DT
 strings	NNS
-		
 less	JJR
 than	IN
 x	NN
 in	IN
 length	NN
 ,	,
+		
 they'll	RB
 be	VB
 the	DT
 first	JJ
 (	(
-		
 x-1	JJ
 )	)
 *	FW
-len(	FW
+len	VBN
+(	(
 originalString	VBG
+		
 )	)
 entries	NNS
 in	IN
 the	DT
 list	NN
 .	.
-		
 I	PRP
 just	RB
 whipped	VBD
 this	DT
 up	RP
+		
 quick	NN
 in	IN
 Ruby	NNP
 :	:
 def	NN
-perms(	NN
+perms	NNS
+(	(
+x	NN
+,	,
+y	UH
+,	,
 		
-x	NNP
-,	,
-y	NN
-,	,
 possible_characters	NNS
 )	)
 all	DT
@@ -2805,20 +2981,23 @@ all	DT
 [	JJ
 "	NNP
 "	NNP
-		
 ]	NNP
 current_array	NN
 =	NNP
 all	DT
+		
 .	.
 clone	NN
-1.upto(	CD
+1	CD
+.	.
+upto	NN
+(	(
 y	NN
 )	)
 {	(
 |iteration	NN
-		
 |	NNP
+		
 next_array	NN
 =	NNP
 [	NNP
@@ -2829,8 +3008,8 @@ each	DT
 {	(
 |string	VBG
 |	JJ
-		
 possible_characters	NNS
+		
 .	.
 each	DT
 {	(
@@ -2841,8 +3020,8 @@ value	NN
 string	VBG
 +	NNP
 c	JJ
-		
 next_array	NN
+		
 .	.
 insert	JJ
 next_array	NN
@@ -2853,8 +3032,8 @@ value	NN
 all	DT
 .	.
 insert	VB
-		
 all	DT
+		
 .	.
 length	NN
 ,	,
@@ -2865,8 +3044,8 @@ current_array	JJ
 =	JJ
 next_array	NN
 }	)
-		
 all	DT
+		
 .	.
 delete_if	VB
 {	(
@@ -2877,8 +3056,8 @@ string	NN
 length	NN
 <	JJ
 x	NNP
-		
 }end	NNP
+		
 You	PRP
 might	MD
 look	VB
@@ -2889,8 +3068,8 @@ for	IN
 built	VBN
 in	IN
 permutation	NN
-		
 type	NN
+		
 functions	NNS
 ,	,
 and	CC
@@ -2901,8 +3080,8 @@ able	JJ
 to	TO
 write	VB
 more	JJR
-		
 optimized	JJ
+		
 code	NN
 ,	,
 but	CC
@@ -2913,8 +3092,8 @@ are	VBP
 all	PDT
 that	DT
 high	JJ
-		
 ,	,
+		
 I'm	NNP
 not	RB
 sure	JJ
@@ -2925,8 +3104,8 @@ of	IN
 a	DT
 way	NN
 around	IN
-		
 having	VBG
+		
 a	DT
 lot	NN
 of	IN
@@ -2937,8 +3116,8 @@ Anyways	NNP
 the	DT
 idea	NN
 behind	IN
-		
 the	DT
+		
 code	NN
 is	VBZ
 start	JJ
@@ -2949,8 +3128,8 @@ length	NN
 0	CD
 ,	,
 then	RB
-		
 keep	VB
+		
 track	NN
 of	IN
 all	PDT
@@ -2961,8 +3140,8 @@ length	NN
 Z	NNP
 where	WRB
 Z	NNP
-		
 is	VBZ
+		
 the	DT
 current	JJ
 size	NN
@@ -2973,8 +3152,8 @@ iteration	NN
 Then	RB
 ,	,
 go	VBP
-		
 through	IN
+		
 each	DT
 string	NN
 and	CC
@@ -2985,8 +3164,8 @@ onto	IN
 each	DT
 string	NN
 .	.
-		
 Finally	RB
+		
 at	IN
 the	DT
 end	NN
@@ -2997,8 +3176,8 @@ that	WDT
 were	VBD
 below	IN
 the	DT
-		
 x	NNP
+		
 threshold	NN
 and	CC
 return	VB
@@ -3009,8 +3188,8 @@ I	PRP
 didn't	VBP
 test	VB
 it	PRP
-		
 with	IN
+		
 potentially	RB
 meaningless	JJ
 input	NN
@@ -3021,8 +3200,8 @@ list	NN
 ,	,
 weird	JJ
 values	NNS
-		
 of	IN
+		
 x	NN
 and	CC
 y	NN

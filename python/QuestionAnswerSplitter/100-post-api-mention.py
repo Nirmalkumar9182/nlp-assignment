@@ -33,15 +33,15 @@ api_mention_regex = re.compile(r'(\w+)((\.)\w+)*\(([^\s]*)(\s?,\s?[^\s]*)*\)')
 
 
 api_count = 0
-api_limit = 50
-with open("50_posts_api_mentions_training.txt", "wb") as myfile:
+api_limit = 20
+with open("set0.txt", "wb") as myfile:
     for s in itemlist :
             text = str(s.attributes['Body'].value)
             text = strip_tags(text)
             text = html.unescape(text)
             if api_mention_regex.search(text) is not None:
                 # split a single post so that all new lines are removed from the post
-                text = " ".join(text.split()) + "\r\n"
+                text = " ".join(text.split()) + "\n"
                 myfile.write(text.encode('utf8'))
                 api_count += 1
 
@@ -49,20 +49,22 @@ with open("50_posts_api_mentions_training.txt", "wb") as myfile:
                 break
 
 api_count = 0
-iteration = 1
-api_limit = api_limit + 3
+iteration = 5
+api_limit = api_limit * iteration
+count = 0
 # takes data after the training dataset            
-with open("52_posts_api_mentions_test.txt", "wb") as myfile:
+with open("set"+str(iteration)+".txt", "wb") as myfile:
     for s in itemlist :
             text = str(s.attributes['Body'].value)
             text = strip_tags(text)
             text = html.unescape(text)
             if api_mention_regex.search(text) is not None:
+                text = " ".join(text.split()) + "\n"
                 if api_count > api_limit:
-                    # split a single post so that all new lines are removed from the post
-                    text = " ".join(text.split()) + "\r\n"
                     myfile.write(text.encode('utf8'))
                 api_count += 1
 
-            if(api_count - api_limit >= api_limit) :
+            if(api_count - (api_limit / iteration) > api_limit) :
                 break
+            #else:
+                #print(api_count)

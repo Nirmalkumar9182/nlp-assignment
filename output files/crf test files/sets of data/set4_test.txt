@@ -1,2943 +1,6 @@
-I	PRP
-would	MD
-use	VB
-Javascript	NNP
-to	TO
-submit	VB
-the	DT
-form	NN
-.	.
-The	DT
-function	NN
-		
-would	MD
-be	VB
-triggered	VBN
-by	IN
-the	DT
-OnKeyPress	NNP
-event	NN
-of	IN
-the	DT
-form	NN
-element	NN
-		
-,	,
-and	CC
-would	MD
-detect	VB
-whether	IN
-the	DT
-Enter	NNP
-key	NN
-was	VBD
-selected	VBN
-.	.
-		
-If	IN
-this	DT
-is	VBZ
-the	DT
-case	NN
-,	,
-it	PRP
-will	MD
-submit	VB
-the	DT
-form	NN
-		
-.	.
-Here	RB
-are	VBP
-two	CD
-pages	NNS
-that	WDT
-give	VBP
-techniques	NNS
-on	IN
-how	WRB
-to	TO
-		
-do	VB
-this	DT
-:	:
-1	CD
-,	,
-2	CD
-.	.
-Based	VBN
-on	IN
-these	DT
-,	,
-		
-here	RB
-is	VBZ
-an	DT
-example	NN
-of	IN
-usage	NN
-(	(
-based	VBN
-on	IN
-here	RB
-)	)
-		
-:	:
-<SCRIPT	JJ
-TYPE	NNP
-=	NNP
-"text	NNP
-/javascript	NNP
-"	NNP
->	NNP
-<	NN
-!	.
---	:
-		
-function	NN
-submitenter(	JJ
-myfield	NN
-,	,
-e	NN
-)	)
-{	(
-var	JJ
-keycode	NN
-;	:
-if	IN
-		
-(	(
-window	NN
-.	.
-event	NN
-)	)
-{	(
-keycode	NN
-=	NN
-window	NN
-.	.
-event	NN
-		
-.	.
-keyCode	NN
-;	:
-}	)
-else	RB
-if	IN
-(	(
-e	NN
-)	)
-{	(
-keycode	VB
-		
-=	NNP
-e	NN
-.	.
-which	WDT
-;	:
-}	)
-else	RB
-{	(
-return	NN
-true	JJ
-;	:
-		
-}	)
-if	IN
-(	(
-keycode	FW
-=	NNP
-=	NNP
-13	CD
-)	)
-{	(
-myfield.form.submit()	NN
-;	:
-		
-return	NN
-false	JJ
-;	:
-}	)
-else	RB
-{	(
-return	NN
-true	JJ
-;	:
-}	)
-}	)
-		
-/	JJ
-/	NNP
---	:
->	JJ
-<	JJ
-/SCRIPT	NN
->	NNP
-<INPUT	NNP
-NAME	NNP
-=	NNP
-"MyText	NNP
-		
-"	NNP
-TYPE	NNP
-=	NNP
-"Text	NNP
-"	NNP
-onKeyPress	NN
-=	NNP
-"return	NNP
-submitenter(	NN
-this	DT
-,	,
-		
-event	NN
-)	)
-"	NN
-/	NNP
->	NNP
-How	NNP
-often	RB
-do	VBP
-you	PRP
-need	VB
-to	TO
-		
-check	VB
-for	IN
-changes	NNS
-and	CC
-how	WRB
-large	JJ
-(	(
-in	IN
-terms	NNS
-of	IN
-row	NN
-		
-size	NN
-)	)
-are	VBP
-the	DT
-tables	NNS
-in	IN
-the	DT
-database	NN
-?	.
-If	IN
-you	PRP
-		
-use	VBP
-the	DT
-CHECKSUM_AGG(	NNP
-BINARY_CHECKSUM(	NNP
-*	NNP
-)	)
-)	)
-method	NN
-suggested	VBN
-by	IN
-John	NNP
-		
-,	,
-it	PRP
-will	MD
-scan	VB
-every	DT
-row	NN
-of	IN
-the	DT
-specified	VBN
-table	NN
-.	.
-		
-The	DT
-NOLOCK	NNP
-hint	NN
-helps	VBZ
-,	,
-but	CC
-on	IN
-a	DT
-large	JJ
-database	NN
-,	,
-		
-you	PRP
-are	VBP
-still	RB
-hitting	VBG
-every	DT
-row	NN
-.	.
-You	PRP
-will	MD
-also	RB
-need	VB
-		
-to	TO
-store	VB
-the	DT
-checksum	NN
-for	IN
-every	DT
-row	NN
-so	IN
-that	IN
-you	PRP
-tell	VBP
-		
-one	CD
-has	VBZ
-changed	VBN
-.	.
-Have	VBP
-you	PRP
-considered	VBN
-going	VBG
-at	IN
-this	DT
-from	IN
-		
-a	DT
-different	JJ
-angle	NN
-?	.
-If	IN
-you	PRP
-do	VBP
-not	RB
-want	VB
-to	TO
-modify	VB
-		
-the	DT
-schema	NN
-to	TO
-add	VB
-triggers	NNS
-,	,
-(	(
-which	WDT
-makes	VBZ
-a	DT
-sense	NN
-		
-,	,
-it's	VBZ
-not	RB
-your	PRP$
-database	NN
-)	)
-,	,
-have	VBP
-you	PRP
-considered	VBN
-working	VBG
-		
-with	IN
-the	DT
-application	NN
-vendor	NN
-that	WDT
-does	VBZ
-make	VB
-the	DT
-database	NN
-?	.
-They	PRP
-		
-could	MD
-implement	VB
-an	DT
-API	NNP
-that	WDT
-provides	VBZ
-a	DT
-mechanism	NN
-for	IN
-notifying	VBG
-accessory	JJ
-		
-apps	NN
-that	WDT
-data	NN
-has	VBZ
-changed	VBN
-.	.
-It	PRP
-could	MD
-be	VB
-as	RB
-simple	JJ
-		
-as	IN
-writing	VBG
-to	TO
-a	DT
-notification	NN
-table	NN
-that	WDT
-lists	VBZ
-what	WP
-table	NN
-and	CC
-		
-which	WDT
-row	VBP
-were	VBD
-modified	VBN
-.	.
-That	DT
-could	MD
-be	VB
-implemented	VBN
-through	IN
-triggers	NNS
-		
-or	CC
-application	NN
-code	NN
-.	.
-From	IN
-your	PRP$
-side	NN
-,	,
-ti	VBP
-wouldn't	JJ
-matter	NN
-		
-,	,
-your	PRP$
-only	JJ
-concern	NN
-would	MD
-be	VB
-scanning	VBG
-the	DT
-notification	NN
-table	NN
-on	IN
-		
-a	DT
-periodic	JJ
-basis	NN
-.	.
-The	DT
-performance	NN
-hit	VBD
-on	IN
-the	DT
-database	NN
-would	MD
-		
-be	VB
-far	RB
-less	JJR
-than	IN
-scanning	VBG
-every	DT
-row	NN
-for	IN
-changes	NNS
-.	.
-The	DT
-		
-hard	JJ
-part	NN
-would	MD
-be	VB
-convincing	VBG
-the	DT
-application	NN
-vendor	NN
-to	TO
-implement	VB
-this	DT
-		
-feature	NN
-.	.
-Since	IN
-this	DT
-can	MD
-be	VB
-handles	NNS
-entirely	RB
-through	IN
-SQL	NNP
-via	IN
-		
-triggers	NNS
-,	,
-you	PRP
-could	MD
-do	VB
-the	DT
-bulk	NN
-of	IN
-the	DT
-work	NN
-for	IN
-		
-them	PRP
-by	IN
-writing	VBG
-and	CC
-testing	VBG
-the	DT
-triggers	NNS
-and	CC
-then	RB
-bringing	VBG
-the	DT
-		
-code	NN
-to	TO
-the	DT
-application	NN
-vendor	NN
-.	.
-By	IN
-having	VBG
-the	DT
-vendor	NN
-support	NN
-		
-the	DT
-triggers	NNS
-,	,
-it	PRP
-prevent	VBD
-the	DT
-situation	NN
-where	WRB
-your	PRP$
-adding	VBG
-a	DT
-		
-trigger	NN
-inadvertently	RB
-replaces	VBZ
-a	DT
-trigger	NN
-supplied	VBN
-by	IN
-the	DT
-vendor	NN
-.	.
-No	UH
-		
-,	,
-you	PRP
-were	VBD
-not	RB
-dreaming	VBG
-.	.
-Python	NNP
-has	VBZ
-a	DT
-pretty	RB
-excellent	JJ
-		
-list	NN
-comprehension	NN
-system	NN
-that	WDT
-lets	VBZ
-you	PRP
-manipulate	VBP
-lists	NNS
-pretty	RB
-elegantly	RB
-,	,
-		
-and	CC
-depending	VBG
-on	IN
-exactly	RB
-what	WP
-you	PRP
-want	VBP
-to	TO
-accomplish	VB
-,	,
-this	DT
-		
-can	MD
-be	VB
-done	VBN
-a	DT
-couple	NN
-of	IN
-ways	NNS
-.	.
-In	IN
-essence	NN
-,	,
-		
-what	WP
-you're	NN
-doing	VBG
-is	VBZ
-saying	VBG
-"For	JJ
-item	NN
-in	IN
-list	NN
-if	IN
-criteria	NNS
-		
-.	.
-matches	NNS
-"	VBP
-,	,
-and	CC
-from	IN
-that	IN
-you	PRP
-can	MD
-just	RB
-iterate	VB
-		
-through	IN
-the	DT
-results	NNS
-or	CC
-dump	VB
-the	DT
-results	NNS
-into	IN
-a	DT
-new	JJ
-list	NN
-		
-.	.
-I'm	NNP
-going	VBG
-to	TO
-crib	VB
-an	DT
-example	NN
-from	IN
-Dive	NNP
-Into	NNP
-Python	NNP
-		
-here	RB
-,	,
-because	IN
-it's	JJ
-pretty	JJ
-elegant	JJ
-and	CC
-they're	JJ
-smarter	NN
-than	IN
-I	PRP
-		
-am	VBP
-.	.
-Here	RB
-they're	VBZ
-getting	VBG
-a	DT
-list	NN
-of	IN
-files	NNS
-in	IN
-a	DT
-		
-directory	NN
-,	,
-then	RB
-filtering	VBG
-the	DT
-list	NN
-for	IN
-all	DT
-files	NNS
-that	WDT
-match	VBP
-		
-a	DT
-regular	JJ
-expression	NN
-criteria	NNS
-.	.
-files	NNS
-=	VBP
-os.listdir(	JJ
-path	NN
-)	)
-test	NN
-		
-=	NN
-re.compile(	NN
-"test	NNP
-\	NNP
-.	.
-py	VB
-$	$
-"	CD
-,	,
-re	NN
-.	.
-		
-IGNORECASE	NNP
-)	)
-files	VBZ
-=	JJ
-[f	NN
-for	IN
-f	NN
-in	IN
-files	NNS
-if	IN
-test.search(	JJ
-		
-f	NN
-)	)
-]	NN
-You	PRP
-could	MD
-do	VB
-this	DT
-without	IN
-regular	JJ
-expressions	NNS
-,	,
-		
-for	IN
-your	PRP$
-example	NN
-,	,
-for	IN
-anything	NN
-where	WRB
-your	PRP$
-expression	NN
-at	IN
-the	DT
-		
-end	NN
-returns	VBZ
-true	JJ
-for	IN
-a	DT
-match	NN
-.	.
-There	EX
-are	VBP
-other	JJ
-options	NNS
-		
-like	IN
-using	VBG
-the	DT
-filter()	NN
-function	NN
-,	,
-but	CC
-if	IN
-I	PRP
-were	VBD
-going	VBG
-		
-to	TO
-choose	VB
-,	,
-I'd	NNP
-go	VBP
-with	IN
-this	DT
-.	.
-Eric	JJ
-Sipple	NNP
-I	PRP
-		
-think	VBP
-:	:
-#	#
-!	.
-/bin	JJ
-/pythonbar	NN
-in	IN
-dict(	JJ
-Foo	NNP
-)	)
-Is	VBZ
-		
-what	WP
-you	PRP
-are	VBP
-thinking	VBG
-of	IN
-.	.
-When	WRB
-trying	VBG
-to	TO
-see	VB
-if	IN
-		
-a	DT
-certain	JJ
-key	JJ
-exists	NNS
-within	IN
-a	DT
-dictionary	JJ
-in	IN
-python	NN
-(	(
-python's	JJ
-		
-version	NN
-of	IN
-a	DT
-hash	NN
-table	NN
-)	)
-there	EX
-are	VBP
-two	CD
-ways	NNS
-to	TO
-		
-check	VB
-.	.
-First	NNP
-is	VBZ
-the	DT
-has_key()	NN
-method	NN
-attached	VBN
-to	TO
-the	DT
-dictionary	JJ
-		
-and	CC
-second	JJ
-is	VBZ
-the	DT
-example	NN
-given	VBN
-above	IN
-.	.
-It	PRP
-will	MD
-return	VB
-		
-a	DT
-boolean	JJ
-value	NN
-.	.
-That	DT
-should	MD
-answer	VB
-your	PRP$
-question	NN
-.	.
-And	CC
-		
-now	RB
-a	DT
-little	JJ
-off	RP
-topic	NN
-to	TO
-tie	VB
-this	DT
-in	IN
-to	TO
-the	DT
-		
-list	NN
-comprehension	NN
-answer	VBZ
-previously	RB
-given	VBN
-(	(
-for	IN
-a	DT
-bit	NN
-more	JJR
-clarity	NN
-		
-)	)
-.	.
-List	JJ
-Comprehensions	NNP
-construct	NN
-a	DT
-list	NN
-from	IN
-a	DT
-basic	JJ
-for	IN
-		
-loop	NN
-with	IN
-modifiers	NNS
-.	.
-As	IN
-an	DT
-example	NN
-(	(
-to	TO
-clarify	VB
-slightly	RB
-		
-)	)
-,	,
-a	DT
-way	NN
-to	TO
-use	VB
-the	DT
-in	IN
-dict	JJ
-language	NN
-construct	NN
-		
-in	IN
-a	DT
-_list	JJ
-comprehension_	NN
-:	:
-Say	NNP
-you	PRP
-have	VBP
-a	DT
-two	CD
-dimensional	JJ
-		
-dictionary	JJ
-foo	NN
-and	CC
-you	PRP
-only	RB
-want	VBP
-the	DT
-second	JJ
-dimension	NN
-dictionaries	NNS
-which	WDT
-		
-contain	VBP
-the	DT
-key	JJ
-bar	NN
-.	.
-A	DT
-relatively	RB
-straightforward	JJ
-way	NN
-to	TO
-do	VB
-		
-so	RB
-would	MD
-be	VB
-to	TO
-use	VB
-a	DT
-list	NN
-comprehension	NN
-with	IN
-a	DT
-conditional	JJ
-		
-as	IN
-follows	VBZ
-:	:
-#	#
-!	.
-/bin	NN
-/pythonbaz	NNP
-=	NNP
-dict(	NN
-[	NNP
-(	(
-		
-key	JJ
-,	,
-value	NN
-)	)
-for	IN
-key	NN
-,	,
-value	NN
-in	IN
-foo	NN
-if	IN
-		
-bar	NN
-in	IN
-value	NN
-]	NN
-)	)
-Note	VBP
-the	DT
-if	IN
-bar	NN
-in	IN
-value	NN
-		
-at	IN
-the	DT
-end	NN
-of	IN
-the	DT
-statement	NN
-,	,
-this	DT
-is	VBZ
-a	DT
-modifying	NN
-		
-clause	NN
-which	WDT
-tells	VBZ
-the	DT
-list	NN
-comprehension	NN
-to	TO
-only	RB
-keep	VB
-those	DT
-key-value	JJ
-		
-pairs	NNS
-which	WDT
-meet	VBP
-the	DT
-conditional	NN
-.	.
-In	IN
-this	DT
-case	NN
-baz	NN
-is	VBZ
-		
-a	DT
-new	JJ
-dictionary	NN
-which	WDT
-contains	VBZ
-only	RB
-the	DT
-dictionaries	NNS
-from	IN
-foo	NN
-which	WDT
-		
-contain	VBP
-bar	NN
-(	(
-Hopefully	NNP
-I	PRP
-didn't	VBP
-miss	JJ
-anything	NN
-in	IN
-that	DT
-code	NN
-		
-example	NN
-...	:
-you	PRP
-may	MD
-have	VB
-to	TO
-take	VB
-a	DT
-look	NN
-at	IN
-the	DT
-		
-list	NN
-comprehension	NN
-documentation	NN
-found	VBD
-in	IN
-docs	NN
-.	.
-python	NN
-.	.
-org	JJ
-tutorials	NNS
-		
-and	CC
-at	IN
-secnetix	NN
-.	.
-de	NN
-,	,
-both	DT
-sites	NNS
-are	VBP
-good	JJ
-references	NNS
-		
-if	IN
-you	PRP
-have	VBP
-questions	NNS
-in	IN
-the	DT
-future	NN
-.	.
-)	)
-.	.
-Are	VBP
-		
-you	PRP
-looking	VBG
-to	TO
-get	VB
-a	DT
-list	NN
-of	IN
-objects	NNS
-that	WDT
-have	VBP
-a	DT
-		
-certain	JJ
-attribute	NN
-?	.
-If	IN
-so	RB
-,	,
-a	DT
-list	NN
-comprehension	NN
-is	VBZ
-the	DT
-		
-right	JJ
-way	NN
-to	TO
-do	VB
-this	DT
-.	.
-result	NN
-=	JJ
-[obj	NN
-for	IN
-obj	NN
-		
-in	IN
-listOfObjs	NN
-if	IN
-hasattr(	JJ
-obj	NN
-,	,
-'	''
-attributeName	NN
-'	''
-)	)
-]	NN
-		
-Here	RB
-is	VBZ
-a	DT
-simple	JJ
-static	JJ
-method	NN
-to	TO
-do	VB
-this	DT
-in	IN
-C	NNP
-		
-#	#
-:	:
-public	JJ
-static	JJ
-string	NN
-ToTitleCaseInvariant(	NNP
-string	VBG
-targetString	VBG
-)	)
-{	(
-return	NN
-		
-System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(	NNP
-targetString	NN
-)	)
-;	:
-}	)
-In	IN
-what	WP
-language	NN
-?	.
-In	IN
-PHP	NNP
-		
-it	PRP
-is	VBZ
-:	:
-ucwords()	JJ
-example	NN
-:	:
-$HelloWorld	NN
-=	VBZ
-ucwords(	JJ
-'	''
-hello	JJ
-		
-world	NN
-'	''
-)	)
-;	:
-What	WP
-I	PRP
-was	VBD
-thinking	VBG
-of	IN
-can	MD
-be	VB
-		
-achieved	VBN
-using	VBG
-list	NN
-comprehensions	NNS
-,	,
-but	CC
-I	PRP
-thought	VBD
-that	IN
-there	EX
-was	VBD
-		
-a	DT
-function	NN
-that	WDT
-did	VBD
-this	DT
-in	IN
-a	DT
-slightly	RB
-neater	JJ
-way	NN
-.	.
-		
-i	NN
-.	.
-e	NN
-.	.
-'	''
-bar	NN
-'	''
-is	VBZ
-a	DT
-list	NN
-of	IN
-		
-objects	NNS
-,	,
-all	DT
-of	IN
-which	WDT
-have	VBP
-the	DT
-attribute	NN
-'	POS
-id	NN
-'	''
-		
-The	DT
-mythical	JJ
-functional	JJ
-way	NN
-:	:
-foo	NN
-=	VBZ
-12foo	CD
-in	IN
-iter_attr(	JJ
-bar	NN
-		
-,	,
-'	''
-id	NN
-'	''
-)	)
-The	DT
-list	NN
-comprehension	NN
-way	NN
-:	:
-foo	NN
-		
-=	VBZ
-12foo	CD
-in	IN
-[obj	NN
-.	.
-id	NN
-for	IN
-obj	NN
-in	IN
-bar	NN
-]	NN
-		
-In	IN
-retrospect	NN
-the	DT
-list	NN
-comprehension	NN
-way	NN
-is	VBZ
-pretty	JJ
-neat	JJ
-anyway	RB
-.	.
-		
-One	CD
-implementation	NN
-of	IN
-this	DT
-problem	NN
-is	VBZ
-to	TO
-attempt	VB
-to	TO
-call	VB
-the	DT
-		
-parameter-less	JJ
-constructor	NN
-of	IN
-the	DT
-Type	NN
-:	:
-public	JJ
-static	JJ
-object	NN
-GetNewObject(	NNP
-Type	NNP
-		
-t	NN
-)	)
-{	(
-try	VB
-{	(
-return	VB
-t.GetConstructor(	RP
-new	JJ
-Type	NNP
-[	NNP
-]	NNP
-		
-{	(
-}	)
-)	)
-.	.
-Invoke(	NNP
-new	JJ
-object	JJ
-[	NNP
-]	NNP
-{	(
-}	)
-		
-)	)
-;	:
-}	)
-catch	VB
-{	(
-return	VB
-null	NN
-;	:
-}	)
-}	)
-Here	RB
-		
-is	VBZ
-the	DT
-same	JJ
-approach	NN
-,	,
-contained	VBN
-in	IN
-a	DT
-generic	JJ
-method	NN
-:	:
-		
-public	JJ
-static	JJ
-T	NNP
-GetNewObject	NNP
-<T	NNP
->	NNP
-(	(
-)	)
-{	(
-try	VB
-{	(
-		
-return	NN
-(	(
-T	NNP
-)typeof	NNP
-(	(
-T	NNP
-)	)
-.	.
-GetConstructor(	NNP
-new	JJ
-Type	NNP
-		
-[	NNP
-]	NNP
-{	(
-}	)
-)	)
-.	.
-Invoke(	NNP
-new	JJ
-object	JJ
-[	NNP
-]	NNP
-		
-{	(
-}	)
-)	)
-;	:
-}	)
-catch	VB
-{	(
-return	VB
-default(	JJ
-T	NNP
-)	)
-		
-;	:
-}	)
-}	)
-The	DT
-Activator	NNP
-class	NN
-within	IN
-the	DT
-root	NN
-System	NNP
-namespace	NN
-		
-is	VBZ
-pretty	RB
-powerful	JJ
-.	.
-There	EX
-are	VBP
-a	DT
-lot	NN
-of	IN
-overloads	NNS
-for	IN
-		
-passing	VBG
-parameters	NNS
-to	TO
-the	DT
-constructor	NN
-and	CC
-such	JJ
-.	.
-Check	VB
-out	IN
-the	DT
-		
-documentation	NN
-at	IN
-:	:
-http	NN
-:	:
-/	JJ
-/msdn	NN
-.	.
-microsoft	NN
-.	.
-com	NN
-		
-/en	SYM
--	:
-us	PRP
-/library	JJ
-/system	NN
-.	.
-activator	NN
-.	.
-createinstance	NN
-.	.
-aspx	NN
-		
-Here	RB
-are	VBP
-some	DT
-simple	JJ
-examples	NNS
-:	:
-ObjectType	NNP
-instance	NN
-=	NNP
-(	(
-ObjectType	NNP
-		
-)Activator	NNP
-.	.
-CreateInstance(	NNP
-objectType	NN
-)	)
-;	:
-ObjectType	NNP
-instance	NN
-=	NNP
-(	(
-ObjectType	NNP
-		
-)Activator	NNP
-.	.
-CreateInstance(	NNP
-"MyAssembly	RB
-"	NNP
-,	,
-"MyNamespace	NNP
-.	.
-ObjectType	NNP
-"	NNP
-)	)
-		
-;	:
-Here	RB
-is	VBZ
-my	PRP$
-current	JJ
-method	NN
-.	.
-Any	DT
-suggestions	NNS
-?	.
-Regex	NNP
-		
-singleMToDoubleRegex	VBD
-=	NNP
-new	JJ
-Regex(	NNP
-"	NNP
-(	(
-?	.
-<	''
-!m	JJ
-)m	NN
-(	(
-		
-?	.
-!m	NN
-)	)
-"	NN
-)	)
-;Regex	VBZ
-singleDToDoubleRegex	JJ
-=	NNP
-new	JJ
-Regex(	NNP
-"	NNP
-		
-(	(
-?	.
-<	''
-!d	JJ
-)d	NN
-(	(
-?	.
-!d	NN
-)	)
-"	NN
-)	)
-		
-;CultureInfo	VBZ
-currentCulture	NN
-=	NNP
-CultureInfo	NNP
-.	.
-CurrentUICulture	NN
-;	:
-/	CC
-/	VB
-If	IN
-the	DT
-		
-culture	NN
-is	VBZ
-netural	JJ
-there	EX
-is	VBZ
-no	DT
-date	NN
-pattern	NN
-to	TO
-use	VB
-,	,
-		
-so	RB
-use	IN
-the	DT
-default	NN
-.	.
-if	IN
-(	(
-currentCulture	NN
-.	.
-IsNeutralCulture	NN
-)	)
-		
-{	(
-currentCulture	NN
-=	VBZ
-CultureInfo	NNP
-.	.
-InvariantCulture	NN
-;	:
-}	)
-/	FW
-/	JJ
-Massage	NNP
-		
-the	DT
-format	NN
-into	IN
-a	DT
-more	RBR
-general	JJ
-user	NN
-friendly	JJ
-form	NN
-.	.
-string	VBG
-		
-shortDatePattern	JJ
-=	NNP
-CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern.ToLower()	NNP
-;shortDatePattern	NNP
-=	NNP
-singleMToDoubleRegex.Replace(	NN
-shortDatePattern	NN
-,	,
-"mm	NNP
-"	NNP
-)	)
-		
-;shortDatePattern	VBP
-=	JJ
-singleDToDoubleRegex.Replace(	NN
-shortDatePattern	NN
-,	,
-"dd	NNP
-"	NNP
-)	)
-;	:
-You	PRP
-can	MD
-		
-print	VB
-from	IN
-the	DT
-command	NN
-line	NN
-using	VBG
-the	DT
-following	NN
-:	:
-rundll32	NN
-.	.
-		
-exe	VB
-%WINDIR	CD
-%	NN
-\System32	JJ
-\mshtml	NNP
-.	.
-dll	NN
-,	,
-PrintHTML	NNP
-"	NNP
-%1	NNP
-		
-"	NNP
-Where	NNP
-%1	NNP
-is	VBZ
-the	DT
-file	JJ
-path	NN
-of	IN
-the	DT
-html	NN
-file	NN
-		
-to	TO
-be	VB
-printed	VBN
-.	.
-If	IN
-you	PRP
-don't	VBP
-need	VB
-to	TO
-print	VB
-from	IN
-		
-memory	NN
-(	(
-or	CC
-can	MD
-afford	VB
-to	TO
-write	VB
-to	TO
-the	DT
-disk	NN
-in	IN
-		
-a	DT
-temp	NN
-file	NN
-)	)
-you	PRP
-can	MD
-use	VB
-:	:
-using	VBG
-(	(
-Process	NNP
-		
-printProcess	RB
-=	VBD
-new	JJ
-Process()	NNP
-)	)
-{	(
-string	VBG
-systemPath	NN
-=	NNP
-Environment.GetFolderPath(	NNP
-Environment	NNP
-		
-.	.
-SpecialFolder	NNP
-.	.
-System	NNP
-)	)
-;	:
-printProcess	NN
-.	.
-StartInfo	NNP
-.	.
-FileName	NNP
-		
-=	NNP
-systemPath	NN
-+	NNP
-@	NNP
-"	NNP
-\rundll32	NNP
-.	.
-exe	NN
-"	NN
-;	:
-printProcess	NN
-		
-.	.
-StartInfo	NNP
-.	.
-Arguments	NNS
-=	JJ
-systemPath	NN
-+	NNP
-@	NNP
-"	NNP
-\mshtml	NNP
-.	.
-		
-dll	NN
-,	,
-PrintHTML	NNP
-"	NNP
-"	NNP
-"	NNP
-+	NNP
-fileToPrint	NN
-+	NNP
-@	NNP
-"	NNP
-		
-"	NNP
-"	NNP
-"	NNP
-;	:
-printProcess.Start()	NN
-;	:
-}	)
-N	NNP
-.	.
-B	NNP
-.	.
-		
-This	DT
-only	JJ
-works	VBZ
-on	IN
-Windows	NNP
-2000	CD
-and	CC
-above	IN
-I	PRP
-think	VBP
-.	.
-		
-Here's	VB
-a	DT
-Perl	NNP
-solution	NN
-http	NN
-:	:
-/	NN
-/daringfireball	NN
-.	.
-net	JJ
-/2008	NN
-		
-/05	NNP
-/title_case	NNP
-Here's	NNP
-a	DT
-Ruby	NNP
-solution	NN
-http	NN
-:	:
-/	JJ
-/frankschmitt	NN
-.	.
-		
-org	JJ
-/projects	NNS
-/title	SYM
--	:
-case	NN
-Here's	NNP
-a	DT
-Ruby	NNP
-one-liner	JJ
-solution	NN
-:	:
-		
-http	NN
-:	:
-/	JJ
-/snippets	NNS
-.	.
-dzone	NN
-.	.
-com	NN
-/posts	VBZ
-/show	VBP
-/4702	NNP
-		
-'	POS
-some	DT
-string	NN
-here	RB
-'	POS
-.	.
-gsub(	NN
-/	JJ
-\b	NNP
-\w	NNP
-/	NNP
-		
-)	)
-{	(
-$	$
-&	CC
-.	.
-upcase	NN
-}	)
-What	WP
-the	DT
-one-liner	NN
-is	VBZ
-		
-doing	VBG
-is	VBZ
-using	VBG
-a	DT
-regular	JJ
-expression	NN
-substitution	NN
-of	IN
-the	DT
-first	JJ
-character	NN
-		
-of	IN
-each	DT
-word	NN
-with	IN
-the	DT
-uppercase	JJ
-version	NN
-of	IN
-it	PRP
-.	.
-I	PRP
-		
-haven't	VBP
-been	VBN
-able	JJ
-to	TO
-find	VB
-an	DT
-understandable	JJ
-explanation	NN
-of	IN
-how	WRB
-to	TO
-		
-actually	RB
-use	VB
-Python's	NNP
-itertools.groupby()	JJ
-function	NN
-.	.
-What	WP
-I'm	NNP
-trying	VBG
-to	TO
-do	VB
-		
-is	VBZ
-this	DT
-:	:
-Take	VB
-a	DT
-list	NN
--	:
-in	IN
-this	DT
-case	NN
-,	,
-		
-the	DT
-children	NNS
-of	IN
-an	DT
-objectified	JJ
-lxml	NN
-element	NN
-Divide	NNP
-it	PRP
-into	IN
-groups	NNS
-		
-based	VBN
-on	IN
-some	DT
-criteria	NNS
-Then	RB
-later	RB
-iterate	VB
-over	IN
-each	DT
-of	IN
-these	DT
-		
-groups	NNS
-separately	RB
-.	.
-I've	NNP
-reviewed	VBD
-the	DT
-documentation	NN
-,	,
-and	CC
-the	DT
-examples	NNS
-		
-,	,
-but	CC
-I've	NNP
-had	VBD
-trouble	NN
-trying	VBG
-to	TO
-apply	VB
-them	PRP
-beyond	IN
-a	DT
-		
-simple	JJ
-list	NN
-of	IN
-numbers	NNS
-.	.
-So	RB
-,	,
-how	WRB
-do	VBP
-I	PRP
-use	NN
-		
-of	IN
-itertools.groupby()	NN
-?	.
-Is	VBZ
-there	RB
-another	DT
-technique	NN
-I	PRP
-should	MD
-be	VB
-using	VBG
-		
-?	.
-Pointers	NNS
-to	TO
-good	JJ
-"prerequisite	NNP
-"	NN
-reading	NN
-would	MD
-also	RB
-be	VB
-appreciated	VBN
-		
-.	.
-I	PRP
-don't	VBP
-have	VB
-any	DT
-experience	NN
-with	IN
-http	NN
-:	:
-/	JJ
-/www	NN
-		
-.	.
-SiteGround	NNP
-.	.
-com	NN
-as	IN
-a	DT
-web	NN
-host	NN
-personally	RB
-.	.
-This	DT
-		
-is	VBZ
-just	RB
-a	DT
-guess	NN
-,	,
-but	CC
-it's	JJ
-common	JJ
-for	IN
-a	DT
-shared	VBN
-		
-host	NN
-to	TO
-support	VB
-Python	NNP
-and	CC
-MySQL	NNP
-with	IN
-the	DT
-MySQLdb	NNP
-module	NN
-(	(
-		
-e	NN
-.	.
-g	NN
-.	.
-,	,
-GoDaddy	NNP
-does	VBZ
-this	DT
-)	)
-.	.
-Try	VB
-		
-the	DT
-following	JJ
-CGI	NNP
-script	NN
-to	TO
-see	VB
-if	IN
-MySQLdb	NNP
-is	VBZ
-installed	VBN
-.	.
-		
-#	#
-!	.
-/usr	JJ
-/bin	JJ
-/pythonmodule_name	NN
-=	NNP
-'	POS
-MySQLdb'head	NNP
-=	NNP
-'	POS
-'	''
-		
-'	POS
-Content-Type	JJ
-:	:
-text	NN
-/html	NN
-%s	NNP
-is	VBZ
-'	POS
-'	''
-'	POS
-%	NN
-		
-module_nametry	NN
-:	:
-__import__(	JJ
-module_name	NN
-)	)
-print	NN
-head	NN
-+	NNP
-'	POS
-installed'except	JJ
-ImportError	NN
-		
-:	:
-print	NN
-head	NN
-+	NNP
-'	''
-not	RB
-installed	VBN
-'	''
-Can	MD
-you	PRP
-show	VB
-		
-us	PRP
-your	PRP$
-code	NN
-?	.
-The	DT
-example	NN
-on	IN
-the	DT
-Python	NNP
-docs	NN
-is	VBZ
-		
-quite	RB
-straightforward	JJ
-:	:
-groups	NNS
-=	VBP
-[	JJ
-]	NNP
-uniquekeys	NNS
-=	VBP
-[	JJ
-]	NN
-		
-for	IN
-k	NN
-,	,
-g	NN
-in	IN
-groupby(	NN
-data	NNS
-,	,
-keyfunc	NN
-)	)
-:	:
-		
-groups.append(	NN
-list(	VBZ
-g	NN
-)	)
-)	)
-#	#
-Store	NNP
-group	NN
-iterator	NN
-as	IN
-a	DT
-		
-list	NN
-uniquekeys.append(	JJ
-k	NN
-)	)
-So	RB
-in	IN
-your	PRP$
-case	NN
-,	,
-data	NN
-is	VBZ
-		
-a	DT
-list	NN
-of	IN
-nodes	NNS
-,	,
-keyfunc	NN
-is	VBZ
-where	WRB
-the	DT
-logic	NN
-of	IN
-		
-your	PRP$
-criteria	NNS
-function	NN
-goes	VBZ
-and	CC
-then	RB
-groupby()	VB
-groups	NNS
-the	DT
-data	NNS
-.	.
-		
-You	PRP
-must	MD
-be	VB
-careful	JJ
-to	TO
-sort	VB
-the	DT
-data	NN
-by	IN
-the	DT
-criteria	NNS
-		
-before	IN
-you	PRP
-call	VBP
-groupby	NNS
-or	CC
-it	PRP
-won't	JJ
-work	NN
-.	.
-groupby	VB
-method	JJ
-		
-actually	RB
-just	RB
-iterates	VBZ
-through	IN
-a	DT
-list	NN
-and	CC
-whenever	VB
-the	DT
-key	NN
-changes	VBZ
-		
-it	PRP
-creates	VBZ
-a	DT
-new	JJ
-group	NN
-.	.
-Absolutely	RB
-,	,
-especially	RB
-dealing	VBG
-with	IN
-		
-lots	NNS
-of	IN
-these	DT
-permutations	NNS
-/combinations	NNS
-I	PRP
-can	MD
-definitely	RB
-see	VB
-that	IN
-the	DT
-		
-first	JJ
-pass	NN
-would	MD
-be	VB
-an	DT
-issue	NN
-.	.
-Interesting	VBG
-implementation	NN
-in	IN
-python	NN
-		
-,	,
-though	IN
-I	PRP
-wrote	VBD
-a	DT
-nice	JJ
-one	CD
-in	IN
-C	NNP
-and	CC
-Ocaml	NNP
-		
-based	VBN
-on	IN
-"Algorithm	JJ
-515	CD
-"	NN
-(	(
-see	VB
-below	IN
-)	)
-.	.
-He	PRP
-		
-wrote	VBD
-his	PRP$
-in	IN
-Fortran	NNP
-as	IN
-it	PRP
-was	VBD
-common	JJ
-back	RB
-then	RB
-for	IN
-		
-all	PDT
-the	DT
-"Algorithm	NNP
-XX	NNP
-"	NNP
-papers	NNS
-,	,
-well	RB
-,	,
-that	DT
-assembly	NN
-		
-or	CC
-c	NN
-.	.
-I	PRP
-had	VBD
-to	TO
-re-write	VB
-it	PRP
-and	CC
-make	VB
-some	DT
-		
-small	JJ
-improvements	NNS
-to	TO
-work	VB
-with	IN
-arrays	NNS
-not	RB
-ranges	NNS
-of	IN
-numbers	NNS
-.	.
-		
-This	DT
-one	NN
-does	VBZ
-random	VB
-access	NN
-,	,
-I'm	NNP
-still	RB
-working	VBG
-on	IN
-getting	VBG
-		
-some	DT
-nice	JJ
-implementations	NNS
-of	IN
-the	DT
-ones	NNS
-mentioned	VBN
-in	IN
-Knuth	NNP
-4th	CD
-volume	NN
-		
-fascicle	NN
-2	CD
-.	.
-I'll	NNP
-an	DT
-explanation	NN
-of	IN
-how	WRB
-this	DT
-works	VBZ
-to	TO
-		
-the	DT
-reader	NN
-.	.
-Though	IN
-if	IN
-someone	NN
-is	VBZ
-curious	JJ
-,	,
-I	PRP
-wouldn't	VBP
-		
-object	JJ
-to	TO
-writing	VBG
-something	NN
-up	RB
-.	.
-/	VB
-*	JJ
-*	NNP
-[combination	NNP
-c	VBZ
-		
-n	JJ
-p	NN
-x	NNP
-]	NNP
-*	NNP
-get	VB
-the	DT
-[x	NNP
-]th	NNP
-lexicographically	RB
-ordered	VBD
-		
-set	NN
-of	IN
-[p	NNP
-]	NNP
-elements	NNS
-in	IN
-[n	NNP
-]	NNP
-*	NNP
-output	NN
-is	VBZ
-		
-in	IN
-[c	NNP
-]	NNP
-,	,
-and	CC
-should	MD
-be	VB
-sizeof(	JJ
-int	NN
-)	)
-*	VBZ
-		
-[p	JJ
-]	NNP
-*	NNP
-/void	NNP
-combination(	NN
-int	NN
-*	NNP
-c	NN
-,	,
-int	NN
-n	NN
-		
-,	,
-int	NN
-p	NN
-,	,
-int	NN
-x	NN
-)	)
-{	(
-int	NN
-i	NN
-,	,
-		
-r	NN
-,	,
-k	VB
-=	NNP
-0	CD
-;	:
-for(	NN
-i	NN
-=0	VBP
-;i	NN
-<p	NNP
-		
--	:
-1	CD
-;i	JJ
-+	NNP
-+	NNP
-)	)
-{	(
-c	JJ
-[i	NNP
-]	NNP
-=	NNP
-		
-(	(
-i	NN
-!	.
-=	$
-0	CD
-)	)
-?	.
-c	JJ
-[i	NNP
--	:
-1	CD
-		
-]	NN
-:	:
-0	CD
-;	:
-do	VB
-{	(
-c	VB
-[i	NNP
-]	NNP
-+	NNP
-+	NNP
-		
-;	:
-r	NN
-=	VBZ
-choose(	JJ
-n-c	JJ
-[i	NN
-]	NN
-,	,
-p	JJ
--(	NN
-i	NN
-		
-+1	NNP
-)	)
-)	)
-;	:
-k	CC
-=	NNP
-k	NNP
-+	NNP
-r	NN
-;	:
-}	)
-		
-while(	VBP
-k	JJ
-<	NNP
-x	NNP
-)	)
-;	:
-k	CC
-=	NNP
-k	NNP
--	:
-r	NN
-		
-;	:
-}	)
-c	VBP
-[p	JJ
--	:
-1	CD
-]	JJ
-=	NNP
-c	NN
-[p	NNP
--	:
-		
-2	CD
-]	JJ
-+	NNP
-x	NNP
--	:
-k	NN
-;	:
-}	)
-~	VBP
-"Algorithm	JJ
-515	CD
-		
-:	:
-Generation	NN
-of	IN
-a	DT
-Vector	NN
-from	IN
-the	DT
-Lexicographical	NNP
-Index	NNP
-"	NNP
-;	:
-		
-Buckles	NNP
-,	,
-B	NNP
-.	.
-P	NNP
-.	.
-,	,
-and	CC
-Lybanon	NNP
-,	,
-M	NNP
-		
-.	.
-ACM	NNP
-Transactions	NNPS
-on	IN
-Mathematical	NNP
-Software	NNP
-,	,
-Vol	NNP
-.	.
-3	CD
-,	,
-		
-No	NNP
-.	.
-2	CD
-,	,
-June	NNP
-1977	CD
-.	.
-I	PRP
-uploaded	VBD
-it	PRP
-and	CC
-		
-got	VBD
-an	DT
-internal	JJ
-error	NN
-Premature	NNP
-end	NN
-of	IN
-script	NN
-headers	NNS
-After	IN
-much	JJ
-		
-playing	NN
-around	IN
-,	,
-I	PRP
-found	VBD
-that	IN
-if	IN
-I	PRP
-had	VBD
-import	NN
-cgiimport	NN
-		
-cgitb	NN
-;	:
-cgitb.enable()	CC
-import	NN
-MySQLdb	NNP
-It	PRP
-would	MD
-give	VB
-me	PRP
-a	DT
-much	RB
-		
-more	RBR
-useful	JJ
-answer	NN
-and	CC
-say	VBP
-that	IN
-it	PRP
-was	VBD
-not	RB
-installed	VBN
-,	,
-		
-you	PRP
-can	MD
-see	VB
-it	PRP
-yourself	PRP
--	:
->	NN
-http	NN
-:	:
-/	JJ
-/woarl	NNP
-		
-.	.
-com	NN
-/db	NN
-.	.
-py	NN
-Oddly	RB
-enough	RB
-,	,
-this	DT
-would	MD
-produce	VB
-		
-an	DT
-error	NN
-import	NN
-MySQLdbimport	NNP
-cgiimport	NN
-cgitb	NN
-;	:
-cgitb.enable()	NN
-I	PRP
-looked	VBD
-at	IN
-		
-some	DT
-of	IN
-the	DT
-other	JJ
-files	NNS
-I	PRP
-had	VBD
-up	RP
-there	RB
-and	CC
-it	PRP
-		
-seems	VBZ
-that	IN
-library	NN
-was	VBD
-one	CD
-of	IN
-the	DT
-ones	NNS
-I	PRP
-had	VBD
-already	RB
-		
-tried	VBN
-.	.
-The	DT
-magic	NN
-all	DT
-seems	VBZ
-to	TO
-be	VB
-in	IN
-visitortime.getTimezoneOffset()	JJ
-That's	NNP
-		
-cool	NN
-,	,
-I	PRP
-didn't	VBP
-know	VB
-about	IN
-that	DT
-.	.
-Does	VBZ
-it	PRP
-work	VB
-		
-in	IN
-IE	NNP
-,	,
-etc	FW
-?	.
-From	IN
-there	EX
-you	PRP
-should	MD
-be	VB
-able	JJ
-		
-to	TO
-use	VB
-JS	NNP
-to	TO
-ajax	VB
-,	,
-set	VB
-cookies	NNS
-,	,
-whatever	WDT
-.	.
-		
-I'd	NNP
-probably	RB
-go	VBP
-the	DT
-cookie	NN
-route	NN
-myself	PRP
-.	.
-You'll	CC
-need	MD
-to	TO
-		
-allow	VB
-the	DT
-user	NN
-to	TO
-change	VB
-it	PRP
-though	IN
-.	.
-We	PRP
-tried	VBD
-to	TO
-		
-use	VB
-geolocation	NN
-(	(
-via	IN
-maxmind	NN
-)	)
-to	TO
-do	VB
-this	DT
-a	DT
-while	NN
-		
-ago	RB
-,	,
-and	CC
-it	PRP
-was	VBD
-wrong	JJ
-reasonably	RB
-often	RB
--	:
-enough	JJ
-to	TO
-		
-make	VB
-it	PRP
-not	RB
-worth	IN
-doing	VBG
-,	,
-so	IN
-we	PRP
-just	RB
-let	VB
-the	DT
-		
-user	NN
-set	VBD
-it	PRP
-in	IN
-their	PRP$
-profile	NN
-,	,
-and	CC
-show	VB
-a	DT
-notice	NN
-		
-to	TO
-users	NNS
-who	WP
-haven't	VBP
-set	VBN
-theirs	JJ
-yet	RB
-.	.
-SQL	NN
-:	:
-SELECT	NNP
-		
-u	NN
-.	.
-id	NN
-,	,
-u	JJ
-.	.
-name	NN
-,	,
-isnull(	JJ
-MAX(	NNP
-h	NN
-		
-.	.
-dateCol	NN
-)	)
-,	,
-'	''
-1900-01-01	JJ
-'	POS
-)	)
-dateColWithDefault	NN
-FROM	NNP
-universe	NN
-		
-u	NN
-LEFT	NNP
-JOIN	NNP
-history	NN
-h	NN
-ON	NNP
-u	NN
-.	.
-id	JJ
-=h	NN
-.	.
-		
-id	NN
-AND	CC
-h	NN
-.	.
-dateCol	NN
-<GETDATE	NN
-(	(
-)	)
--	:
-1	CD
-GROUP	NNP
-		
-BY	NNP
-u	NN
-.	.
-Id	NNP
-,	,
-u	NN
-.	.
-name	NN
 A	DT
 solution	NN
 ,	,
-		
 albeit	IN
 one	CD
 that	WDT
@@ -2946,10 +9,10 @@ handling	NN
 of	IN
 the	DT
 null	JJ
+		
 value	NN
 to	TO
 the	DT
-		
 code	NN
 ,	,
 could	MD
@@ -2958,12 +21,19 @@ be	VB
 DateTime	NNP
 yesterday	NN
 =	NNP
-DateTime.Now.Date.AddDays(	NNP
--	:
-1	CD
 		
+DateTime	NNP
+.	.
+Now	RB
+.	.
+Date	NNP
+.	.
+AddDays	NNP
+(-	JJ
+1	CD
 )	)
 ;	:
+		
 var	CC
 collection	NN
 =	NN
@@ -2973,9 +43,9 @@ in	IN
 db	NN
 .	.
 Universe	NNP
-		
 select	JJ
 new	JJ
+		
 {	(
 u	JJ
 .	.
@@ -2985,9 +55,9 @@ u	JJ
 .	.
 name	NN
 ,	,
-		
 MaxDate	NNP
 =	NNP
+		
 (	(
 DateTime	NNP
 ?	.
@@ -2997,9 +67,9 @@ from	IN
 h	NN
 in	IN
 db	NN
-		
 .	.
 History	NNP
+		
 where	WRB
 u	NN
 .	.
@@ -3009,9 +79,9 @@ Id	NNP
 h	NN
 .	.
 Id	NNP
+&	CC
+&	CC
 		
-&	CC
-&	CC
 h	NN
 .	.
 dateCol	NN
@@ -3021,10 +91,12 @@ select	VBP
 h	NN
 .	.
 dateCol	NN
-		
 )	)
 .	.
-Max()	NNP
+		
+Max	NNP
+(	(
+)	)
 }	)
 ;	:
 This	DT
@@ -3183,13 +255,14 @@ $var2	NNP
 "bar	NNP
 "	NNP
 ;	:
-changeThem(	NN
-$var1	NN
+changeThem	NN
+(	(
+$var1	UH
 ,	,
 $var2	NNP
 )	)
-;	:
 		
+;	:
 print	NN
 "var1	NN
 :	:
@@ -3200,9 +273,10 @@ var2	NN
 $var2	JJ
 "	NN
 ;	:
-function	NN
 		
-changeThem(	NN
+function	NN
+changeThem	NN
+(	(
 $var1	NNP
 ,	,
 &	CC
@@ -3211,9 +285,9 @@ $var2	NNP
 {	(
 $var1	JJ
 =	NNP
+		
 "FOO	NNP
 "	NNP
-		
 ;	:
 $var2	NNP
 =	NNP
@@ -3223,9 +297,9 @@ $var2	NNP
 }	)
 would	MD
 output	NN
+		
 :	:
 "var1	NN
-		
 :	:
 foo	NN
 ,	,
@@ -3235,9 +309,9 @@ BAR	NNP
 .	.
 Object	NNP
 variables	NNS
+		
 passed	VBN
 by	IN
-		
 reference	NN
 exampe	NN
 :	:
@@ -3247,9 +321,11 @@ Foo	NNP
 public	JJ
 $var1	NNPS
 ;	:
-function	NN
-__construct()	FW
 		
+function	NN
+__construct	NN
+(	(
+)	)
 {	(
 $this	SYM
 -	:
@@ -3257,27 +333,33 @@ $this	SYM
 =	JJ
 "foo	NNP
 "	NNP
+		
 ;	:
 }	)
 public	JJ
 function	NN
-		
-printFoo()	NN
+printFoo	NN
+(	(
+)	)
 {	(
 print	NN
 $this	SYM
 -	:
+		
 >var1	NN
 ;	:
 }	)
 }	)
 $foo	NNP
 =	NNP
-		
 new	JJ
-Foo()	NNP
+Foo	NNP
+(	(
+)	)
 ;	:
-changeFoo(	VB
+		
+changeFoo	NN
+(	(
 $foo	NNP
 )	)
 ;	:
@@ -3285,11 +367,12 @@ $foo	SYM
 -	:
 >printFoo	NN
 (	(
-		
 )	)
 ;	:
+		
 function	NN
-changeFoo(	NN
+changeFoo	NN
+(	(
 $foo	NNP
 )	)
 {	(
@@ -3297,8 +380,8 @@ $foo	SYM
 -	:
 >var1	NN
 =	JJ
-		
 "FOO	NNP
+		
 "	NNP
 ;	:
 }	)
@@ -3309,8 +392,8 @@ output	NN
 "	NN
 (	(
 that	IN
-		
 last	JJ
+		
 example	NN
 could	MD
 be	VB
@@ -3321,8 +404,8 @@ probably	RB
 Rather	JJR
 than	IN
 coding	VBG
-		
 this	DT
+		
 out	IN
 ,	,
 I	PRP
@@ -3333,8 +416,8 @@ it	PRP
 in	IN
 steps	NNS
 and	CC
-		
 explain	VB
+		
 my	PRP$
 logic	NN
 ,	,
@@ -3345,8 +428,8 @@ programmers	NNS
 can	MD
 poke	VB
 holes	NNS
-		
 in	IN
+		
 my	PRP$
 logic	NN
 if	IN
@@ -3357,8 +440,8 @@ the	DT
 first	JJ
 step	NN
 we	PRP
-		
 start	VBP
+		
 out	RP
 with	IN
 a	DT
@@ -3369,8 +452,8 @@ length	VBP
 n	RB
 .	.
 For	IN
-		
 each	DT
+		
 number	NN
 we	PRP
 need	VBP
@@ -3381,8 +464,8 @@ list	NN
 of	IN
 length	JJ
 n-1	JJ
-		
 becuase	NN
+		
 we	PRP
 aren't	VBP
 adding	VBG
@@ -3393,8 +476,8 @@ itself	PRP
 .	.
 By	IN
 the	DT
-		
 end	NN
+		
 we	PRP
 have	VBP
 a	DT
@@ -3405,13 +488,14 @@ n	NN
 sorted	VBD
 lists	NNS
 that	WDT
-		
 was	VBD
+		
 generated	VBN
 in	IN
-O(	NNP
-n	FW
-^2	NNP
+O	NNP
+(	(
+n	JJ
+^2	NN
 )	)
 time	NN
 .	.
@@ -3505,15 +589,16 @@ end	NN
 this	DT
 should	MD
 take	VB
-O(	NNP
-n	NNP
-^2	NNP
+O	NNP
+(	(
+n	JJ
+^2	NN
 )	)
 time	NN
 .	.
 step	VB
-2	CD
 		
+2	CD
 (	(
 sumlist	NN
 )	)
@@ -3524,8 +609,8 @@ list	NN
 mergedlist	NN
 for	IN
 each	DT
-list	NN
 		
+list	NN
 templist	NN
 in	IN
 sumlist	NN
@@ -3534,11 +619,11 @@ mergelist	JJ
 equal	JJ
 to	TO
 :	:
-merge(	NN
-mergedlist	NN
-,	,
+merge	NN
+(	(
 		
-templist	NN
+mergedlist	JJ
+,templist	NN
 )	)
 return	NN
 mergedlist	VBP
@@ -3548,8 +633,8 @@ method	NN
 would	MD
 be	VB
 then	RB
-the	DT
 		
+the	DT
 normal	JJ
 merge	JJ
 step	NN
@@ -3560,8 +645,8 @@ to	TO
 make	VB
 sure	JJ
 that	IN
-there	EX
 		
+there	EX
 are	VBP
 no	DT
 duplicate	NN
@@ -3572,8 +657,8 @@ won't	VBP
 write	VB
 this	DT
 out	RP
-because	IN
 		
+because	IN
 anyone	NN
 can	MD
 look	VB
@@ -3584,20 +669,21 @@ So	RB
 there's	JJ
 my	PRP$
 solution	NN
-.	.
 		
+.	.
 The	DT
 entire	JJ
 algorithm	NN
 is	VBZ
-O(	NNP
-n	RB
-^2	NNP
+O	NNP
+(	(
+n	JJ
+^2	NN
 )	)
 time	NN
+		
 .	.
 Feel	NNP
-		
 free	JJ
 to	TO
 point	VB
@@ -3607,9 +693,9 @@ mistakes	NNS
 or	CC
 improvements	NNS
 .	.
+		
 It's	NNP
 by	IN
-		
 value	NN
 according	VBG
 to	TO
@@ -3619,9 +705,9 @@ Documentation	NNP
 .	.
 By	IN
 default	NN
+		
 ,	,
 function	NN
-		
 arguments	NNS
 are	VBP
 passed	VBN
@@ -3631,9 +717,9 @@ value	NN
 so	IN
 that	IN
 if	IN
+		
 the	DT
 value	NN
-		
 of	IN
 the	DT
 argument	NN
@@ -3643,9 +729,9 @@ function	NN
 is	VBZ
 changed	VBN
 ,	,
+		
 it	PRP
 does	VBZ
-		
 not	RB
 get	VB
 changed	VBN
@@ -3655,9 +741,9 @@ the	DT
 function	NN
 )	)
 .	.
+		
 To	TO
 allow	VB
-		
 a	DT
 function	NN
 to	TO
@@ -3667,9 +753,9 @@ arguments	NNS
 ,	,
 they	PRP
 must	MD
+		
 be	VB
 passed	VBN
-		
 by	IN
 reference	NN
 .	.
@@ -3679,9 +765,9 @@ an	DT
 argument	NN
 to	TO
 a	DT
+		
 function	NN
 always	RB
-		
 passed	VBN
 by	IN
 reference	NN
@@ -3691,9 +777,9 @@ an	DT
 ampersand	NN
 (	(
 &	CC
+		
 )	)
 to	TO
-		
 the	DT
 argument	NN
 name	NN
@@ -3703,10 +789,11 @@ function	NN
 definition	NN
 .	.
 <	CC
+		
 ?php	JJ
 function	NN
-		
-add_some_extra(	NN
+add_some_extra	NN
+(	(
 &	CC
 $string	VBG
 )	)
@@ -3714,10 +801,10 @@ $string	VBG
 $string	VBG
 .	.
 =	NN
+		
 '	''
 and	CC
 something	NN
-		
 extra	JJ
 .	.
 '	''
@@ -3726,22 +813,23 @@ extra	JJ
 $str	FW
 =	NNP
 '	POS
+		
 This	DT
 is	VBZ
 a	DT
-		
 string	NN
 ,	,
 '	''
 ;	:
-add_some_extra(	IN
-$str	NNP
+add_some_extra	NNS
+(	(
+$str	NN
 )	)
+		
 ;	:
 echo	JJ
 $str	NN
 ;	:
-		
 /	CC
 /	VB
 outputs	NNS
@@ -3749,11 +837,11 @@ outputs	NNS
 This	DT
 is	VBZ
 a	DT
+		
 string	NN
 ,	,
 and	CC
 something	NN
-		
 extra	JJ
 .	.
 '	''
@@ -3761,11 +849,11 @@ extra	JJ
 >	JJ
 Try	NNP
 Eclipse	NNP
+		
 PDT	NNP
 to	TO
 setup	VB
 an	DT
-		
 Eclipse	NNP
 environment	NN
 that	WDT
@@ -3773,11 +861,11 @@ has	VBZ
 debugging	VBG
 features	NNS
 like	IN
+		
 you	PRP
 mentioned	VBD
 .	.
 The	DT
-		
 ability	NN
 to	TO
 step	VB
@@ -3785,11 +873,11 @@ into	IN
 the	DT
 code	NN
 is	VBZ
+		
 a	DT
 much	RB
 better	JJR
 way	NN
-		
 to	TO
 debug	VB
 then	RB
@@ -3797,11 +885,11 @@ the	DT
 old	JJ
 method	NN
 of	IN
+		
 var_dump	NN
 and	CC
 print	NN
 at	IN
-		
 various	JJ
 points	NNS
 to	TO
@@ -3809,11 +897,11 @@ see	VB
 where	WRB
 your	PRP$
 flow	NN
+		
 goes	VBZ
 wrong	JJ
 .	.
 When	WRB
-		
 all	DT
 else	RB
 fails	VBZ
@@ -3821,37 +909,43 @@ though	IN
 and	CC
 all	DT
 I	PRP
+		
 have	VBP
 is	VBZ
 SSH	NNP
 and	CC
-		
 vim	NN
 I	PRP
 still	RB
-var_dump()	VBP
+var_dump	VBP
+(	(
+)	)
 /die	NNP
+		
 (	(
 )	)
 to	TO
 find	VB
 where	WRB
 the	DT
-		
 code	NN
 goes	VBZ
 south	RB
 .	.
-print_r(	VB
-debug_backtrace()	NN
+print_r	NN
+		
+(	(
+debug_backtrace	NN
+(	(
+)	)
 )	)
 ;	:
 or	CC
 something	NN
 like	IN
-		
 that	DT
 :	:
+		
 -	:
 )	)
 Attempting	VBG
@@ -3861,9 +955,9 @@ an	DT
 escape	NN
 character	NN
 into	IN
-		
 a	DT
 table	JJ
+		
 results	NNS
 in	IN
 a	DT
@@ -3873,20 +967,21 @@ For	IN
 example	NN
 :	:
 create	NN
-		
 table	JJ
 EscapeTest	NNP
+		
 (	(
 text	JJ
-varchar(	NN
+varchar	NN
+(	(
 50	CD
 )	)
 )	)
 ;	:
 insert	VB
 into	IN
-		
 EscapeTest	NNP
+		
 (	(
 text	NN
 )	)
@@ -3897,8 +992,8 @@ This	DT
 is	VBZ
 the	DT
 first	JJ
-		
 part	NN
+		
 \n	NN
 And	CC
 this	DT
@@ -3909,8 +1004,8 @@ second	JJ
 )	)
 ;	:
 Produces	VBZ
-		
 the	DT
+		
 warning	NN
 :	:
 WARNING	NN
@@ -3921,8 +1016,8 @@ of	IN
 escape	NN
 in	IN
 a	DT
-		
 string	JJ
+		
 literal	NN
 (	(
 Using	VBG
@@ -3933,8 +1028,8 @@ PSQL	NNP
 )	)
 Anyone	NN
 know	VB
-		
 how	WRB
+		
 to	TO
 get	VB
 around	IN
@@ -3945,8 +1040,8 @@ roughly	RB
 and	CC
 from	IN
 memory	NN
-		
 since	IN
+		
 I	PRP
 don't	VBP
 have	VBP
@@ -3957,19 +1052,21 @@ laptop	NN
 :	:
 using	VBG
 (	(
-		
 OleDBConnection	NNP
+		
 conn	VBZ
 =	NNP
 new	JJ
-OleDbConnection()	NNP
+OleDbConnection	NNP
+(	(
+)	)
 )	)
 {	(
 conn	NN
 .	.
 ConnectionString	VBG
-=	JJ
 		
+=	JJ
 "Whatever	JJ
 connection	NN
 string	VBG
@@ -3980,9 +1077,11 @@ using	VBG
 OleDbCommand	NNP
 cmd	VBZ
 =	NNP
-new	JJ
 		
-OleDbCommand()	NNP
+new	JJ
+OleDbCommand	NNP
+(	(
+)	)
 )	)
 {	(
 cmd	NN
@@ -3990,10 +1089,10 @@ cmd	NN
 Connection	NNP
 =	NNP
 conn	NN
+		
 ;	:
 cmd	NN
 .	.
-		
 CommandText	NNP
 =	NNP
 "Select	NNP
@@ -4002,18 +1101,27 @@ from	IN
 CoolTable	NNP
 "	NNP
 ;	:
+		
 using	VBG
 (	(
 OleDbDataReader	NNP
-		
 dr	VBZ
 =	NNP
-cmd.ExecuteReader()	NN
+cmd	NN
+.	.
+ExecuteReader	NNP
+(	(
 )	)
+)	)
+		
 {	(
 while	IN
 (	(
-dr.Read()	NN
+dr	NN
+.	.
+Read	NNP
+(	(
+)	)
 )	)
 {	(
 /	JJ
@@ -4022,14 +1130,17 @@ dr.Read()	NN
 do	VBP
 something	NN
 like	IN
-Console.WriteLine(	NNP
-dr	NN
+Console	NNP
+.	.
+WriteLine	NNP
+(	(
+dr	JJ
 [	NNP
-"column	NNP
+"column	NN
+		
 name	NN
 "	NNP
 ]	NNP
-		
 as	IN
 String	NNP
 )	)
@@ -4038,10 +1149,10 @@ String	NNP
 }	)
 }	)
 }	)
+		
 Cool	NNP
 .	.
 I	PRP
-		
 also	RB
 found	VBD
 the	DT
@@ -4050,10 +1161,10 @@ regarding	VBG
 the	DT
 E	NN
 :	:
+		
 http	NN
 :	:
 /	JJ
-		
 /www	NN
 .	.
 postgresql	NN
@@ -4062,10 +1173,10 @@ org	JJ
 /docs	JJ
 /8	NN
 .	.
+		
 3	CD
 /interactive	JJ
 /sql	NNP
-		
 -	:
 syntax-lexical	JJ
 .	.
@@ -4074,10 +1185,10 @@ html	NN
 -	:
 SYNTAX-STRINGS	JJ
 PostgreSQL	NNP
+		
 also	RB
 accepts	VBZ
 "escape	NN
-		
 "	NN
 string	NN
 constants	NNS
@@ -4086,10 +1197,10 @@ which	WDT
 are	VBP
 an	DT
 extension	NN
+		
 to	TO
 the	DT
 SQL	NNP
-		
 standard	NN
 .	.
 An	DT
@@ -4098,10 +1209,10 @@ string	NN
 constant	NN
 is	VBZ
 specified	VBN
+		
 by	IN
 writing	VBG
 the	DT
-		
 letter	NN
 E	NNP
 (	(
@@ -4110,10 +1221,10 @@ or	CC
 lower	JJR
 case	NN
 )	)
+		
 just	RB
 before	IN
 the	DT
-		
 opening	NN
 single	JJ
 quote	NN
@@ -4122,10 +1233,10 @@ e	NN
 .	.
 g	NN
 .	.
+		
 E'foo	NNP
 '	POS
 .	.
-		
 (	(
 When	WRB
 continuing	VBG
@@ -4134,10 +1245,10 @@ escape	NN
 string	NN
 constant	JJ
 across	IN
+		
 lines	NNS
 ,	,
 write	VB
-		
 E	NNP
 only	RB
 before	IN
@@ -4146,10 +1257,10 @@ first	JJ
 opening	NN
 quote	NN
 .	.
+		
 )	)
 Within	IN
 an	DT
-		
 escape	NN
 string	NN
 ,	,
@@ -4158,10 +1269,10 @@ backslash	NN
 character	NN
 (	(
 \	JJ
+		
 )	)
 begins	VBZ
 a	DT
-		
 C-like	JJ
 backslash	NN
 escape	NN
@@ -4170,22 +1281,23 @@ sequence	NN
 in	IN
 which	WDT
 the	DT
+		
 combination	NN
 of	IN
 backslash	NN
-		
 and	CC
 following	VBG
-character(	NN
-s	NN
+character	NN
+(	(
+s	PRP
 )	)
 represents	VBZ
 a	DT
+		
 special	JJ
 byte	NN
 value	NN
 .	.
-		
 \b	CC
 is	VBZ
 a	DT
@@ -4193,11 +1305,11 @@ backspace	NN
 ,	,
 \f	NNP
 is	VBZ
+		
 a	DT
 form	NN
 feed	NN
 ,	,
-		
 \n	NNP
 is	VBZ
 a	DT
@@ -4205,11 +1317,11 @@ newline	NN
 ,	,
 \r	NNP
 is	VBZ
+		
 a	DT
 carriage	NN
 return	NN
 ,	,
-		
 \t	NNP
 is	VBZ
 a	DT
@@ -4217,11 +1329,11 @@ tab	NN
 .	.
 Also	RB
 supported	VBN
+		
 are	VBP
 \digits	NNS
 ,	,
 where	WRB
-		
 digits	NNS
 represents	VBZ
 an	DT
@@ -4229,11 +1341,11 @@ octal	JJ
 byte	NN
 value	NN
 ,	,
+		
 and	CC
 \xhexdigits	NNS
 ,	,
 where	WRB
-		
 hexdigits	NNS
 represents	VBZ
 a	DT
@@ -4241,11 +1353,11 @@ hexadecimal	JJ
 byte	NN
 value	NN
 .	.
+		
 (	(
 It	PRP
 is	VBZ
 your	PRP$
-		
 responsibility	NN
 that	IN
 the	DT
@@ -4253,11 +1365,11 @@ byte	NN
 sequences	NNS
 you	PRP
 create	VBP
+		
 are	VBP
 valid	JJ
 characters	NNS
 in	IN
-		
 the	DT
 server	NN
 character	NN
@@ -4265,11 +1377,11 @@ set	VBN
 encoding	VBG
 .	.
 )	)
+		
 Any	IN
 other	JJ
 character	NN
 following	VBG
-		
 a	DT
 backslash	NN
 is	VBZ
@@ -4277,11 +1389,11 @@ taken	VBN
 literally	RB
 .	.
 Thus	RB
+		
 ,	,
 to	TO
 include	VB
 a	DT
-		
 backslash	JJ
 character	NN
 ,	,
@@ -4289,11 +1401,11 @@ write	JJ
 two	CD
 backslashes	NNS
 (	(
+		
 \	NNP
 \	NNP
 )	)
 .	.
-		
 Also	RB
 ,	,
 a	DT
@@ -4301,11 +1413,11 @@ single	JJ
 quote	NN
 can	MD
 be	VB
+		
 included	VBN
 in	IN
 an	DT
 escape	NN
-		
 string	NN
 by	IN
 writing	VBG
@@ -4313,11 +1425,11 @@ writing	VBG
 '	''
 ,	,
 in	IN
+		
 addition	NN
 to	TO
 the	DT
 normal	JJ
-		
 way	NN
 of	IN
 '	''
@@ -4325,11 +1437,11 @@ of	IN
 .	.
 @Goyuix	NNS
 --	:
+		
 that's	VB
 excellent	JJ
 for	IN
 something	NN
-		
 written	VBN
 from	IN
 memory	NN
@@ -4337,11 +1449,11 @@ memory	NN
 tested	VBD
 it	PRP
 here	RB
+		
 --	:
 found	VBD
 the	DT
 connection	NN
-		
 wasn't	NN
 opened	VBD
 .	.
@@ -4349,11 +1461,11 @@ Otherwise	VB
 very	RB
 nice	JJ
 .	.
+		
 using	VBG
 System	NNP
 .	.
 Data	NNP
-		
 .	.
 OleDb	NNP
 ;	:
@@ -4361,47 +1473,56 @@ OleDb	NNP
 using	VBG
 (	(
 OleDbConnection	NNP
+		
 conn	VBZ
 =	NNP
 new	JJ
-OleDbConnection()	NNP
-		
+OleDbConnection	NNP
+(	(
+)	)
 )	)
 {	(
 conn	NN
 .	.
 ConnectionString	VBG
+		
 =	JJ
 "Provider	NN
 =sqloledb	NNP
 ;Data	NNP
 Source	NNP
 =yourServername	NNP
-		
 \	NNP
 \yourInstance	NNP
 ;Initial	NNP
 Catalog	NNP
 =databaseName	NNP
+		
 ;Integrated	VBD
 Security	NNP
 =SSPI	NNP
 ;	:
 "	NNP
 ;	:
-		
 using	VBG
 (	(
 OleDbCommand	NNP
 cmd	VBZ
 =	NNP
+		
 new	JJ
-OleDbCommand()	NNP
+OleDbCommand	NNP
+(	(
+)	)
 )	)
 {	(
-conn.Open()	NN
-;	:
+conn	NN
+.	.
+Open	NNP
+(	(
+)	)
 		
+;	:
 cmd	NN
 .	.
 Connection	NNP
@@ -4412,8 +1533,8 @@ cmd	NN
 .	.
 CommandText	NNP
 =	NNP
-"Select	NNP
 		
+"Select	NNP
 *	NNP
 from	IN
 yourTable	JJ
@@ -4424,20 +1545,32 @@ using	VBG
 OleDbDataReader	NNP
 dr	VBZ
 =	NNP
-cmd.ExecuteReader()	NN
 		
+cmd	NN
+.	.
+ExecuteReader	NNP
+(	(
+)	)
 )	)
 {	(
 while	IN
 (	(
-dr.Read()	NN
+dr	NN
+.	.
+		
+Read	NNP
+(	(
+)	)
 )	)
 {	(
-Console.WriteLine(	NNP
-dr	VBZ
-[	JJ
-"columnName	NNP
+Console	NNP
+.	.
+WriteLine	NNP
+(	(
+dr	JJ
+[	NN
 		
+"columnName	NN
 "	NNP
 ]	NNP
 )	)
@@ -4448,8 +1581,8 @@ dr	VBZ
 }	)
 I've	NNP
 read	VBP
-that	IN
 		
+that	IN
 it	PRP
 is	VBZ
 possible	JJ
@@ -4460,8 +1593,8 @@ method	NN
 to	TO
 an	DT
 existing	VBG
-object	NN
 		
+object	NN
 (	(
 e	NN
 .	.
@@ -4472,8 +1605,8 @@ in	IN
 the	DT
 class	NN
 definition	NN
-)	)
 		
+)	)
 in	IN
 Python	NNP
 ,	,
@@ -4484,8 +1617,8 @@ is	VBZ
 called	VBN
 Monkey	NNP
 Patching	NNP
-(	(
 		
+(	(
 or	CC
 in	IN
 some	DT
@@ -4496,8 +1629,8 @@ Punching	NNP
 .	.
 I	PRP
 understand	VBP
-that	DT
 		
+that	DT
 it's	NN
 not	RB
 always	RB
@@ -4508,8 +1641,8 @@ to	TO
 do	VB
 so	RB
 .	.
-But	CC
 		
+But	CC
 ,	,
 how	WRB
 might	MD
@@ -4520,8 +1653,8 @@ this	DT
 UPDATE	$
 8	CD
 /04	NNP
-/2008	VBD
 		
+/2008	VBD
 00	CD
 :21	NNP
 :01	NN
@@ -4532,8 +1665,8 @@ looks	VBZ
 like	IN
 a	DT
 good	JJ
-answer	NN
 		
+answer	NN
 John	NNP
 Downey	NNP
 ,	,
@@ -4544,8 +1677,8 @@ but	CC
 it	PRP
 appears	VBZ
 that	IN
-it	PRP
 		
+it	PRP
 ends	VBZ
 up	RP
 being	VBG
@@ -4556,8 +1689,8 @@ method	NN
 .	.
 Your	PRP$
 example	NN
-defines	VBZ
 		
+defines	VBZ
 the	DT
 new	JJ
 patch	NN
@@ -4568,8 +1701,8 @@ argument	NN
 of	IN
 self	NN
 ,	,
-but	CC
 		
+but	CC
 if	IN
 you	PRP
 write	VBP
@@ -4580,8 +1713,8 @@ way	NN
 ,	,
 the	DT
 now	RB
-patched	JJ
 		
+patched	JJ
 class	NN
 method	NN
 asks	VBZ
@@ -4592,8 +1725,8 @@ named	VBN
 self	NN
 (	(
 it	PRP
-doesn't	VBZ
 		
+doesn't	VBZ
 automagically	RB
 recognize	VB
 it	PRP
@@ -4604,8 +1737,8 @@ to	TO
 which	WDT
 it	PRP
 is	VBZ
-supposed	VBN
 		
+supposed	VBN
 to	TO
 bind	VB
 ,	,
@@ -4616,8 +1749,8 @@ would	MD
 happen	VB
 if	IN
 defined	VBN
-within	IN
 		
+within	IN
 the	DT
 class	NN
 definition	NN
@@ -4628,23 +1761,31 @@ you	PRP
 have	VBP
 to	TO
 call	VB
-class.patch(	JJ
 		
-obj	NN
+class	NN
+.	.
+patch	NN
+(	(
+obj	PRP
 )	)
 instead	RB
 of	IN
 just	RB
-class.patch()	VB
+class	NN
+.	.
+		
+patch	NN
+(	(
+)	)
 if	IN
 you	PRP
 want	VBP
 the	DT
 same	JJ
-		
 functionality	NN
 as	IN
 a	DT
+		
 true	JJ
 method	NN
 .	.
@@ -4653,10 +1794,10 @@ looks	VBZ
 like	IN
 Python	NNP
 isn't	VBP
-		
 really	RB
 treating	VBG
 it	PRP
+		
 as	IN
 a	DT
 method	NN
@@ -4665,10 +1806,10 @@ but	CC
 more	JJR
 just	RB
 as	IN
-		
 a	DT
 variable	JJ
 which	WDT
+		
 happens	VBZ
 to	TO
 be	VB
@@ -4677,10 +1818,10 @@ function	NN
 (	(
 and	CC
 as	IN
-		
 such	JJ
 is	VBZ
 callable	JJ
+		
 )	)
 .	.
 Is	VBZ
@@ -4689,10 +1830,10 @@ any	DT
 way	NN
 to	TO
 attach	VB
-		
 an	DT
 actual	JJ
 method	NN
+		
 to	TO
 a	DT
 class	NN
@@ -4701,10 +1842,10 @@ Oh	UH
 ,	,
 and	CC
 Ryan	NNP
-		
 ,	,
 that	WDT
 isn't	VBZ
+		
 exactly	RB
 what	WP
 I	PRP
@@ -4713,10 +1854,10 @@ looking	VBG
 for	IN
 (	(
 it	PRP
-		
 isn't	VBZ
 a	DT
 builtin	JJ
+		
 functionality	NN
 )	)
 ,	,
@@ -4725,10 +1866,10 @@ it	PRP
 is	VBZ
 quite	RB
 cool	JJ
-		
 nonetheless	RB
 .	.
 In	IN
+		
 Python	NNP
 monkey	NN
 patching	VBG
@@ -4737,10 +1878,10 @@ works	VBN
 by	IN
 overwriting	VBG
 a	DT
-		
 class	NN
 or	CC
 functions	NNS
+		
 signature	VBP
 with	IN
 your	PRP$
@@ -4749,10 +1890,10 @@ own	JJ
 Below	NNP
 is	VBZ
 an	DT
-		
 example	NN
 from	IN
 the	DT
+		
 Zope	NNP
 Wiki	NNP
 :	:
@@ -4761,9 +1902,10 @@ SomeOtherProduct	NNP
 .	.
 SomeModule	NNP
 import	NN
-		
 SomeClassdef	NNP
-speak(	VBZ
+speak	NN
+(	(
+		
 self	PRP
 )	)
 :	:
@@ -4773,9 +1915,9 @@ ook	NN
 eee	NN
 eee	NN
 eee	NN
-		
 !	.
 "SomeClass	NN
+		
 .	.
 speak	JJ
 =	JJ
@@ -4785,9 +1927,9 @@ code	NN
 will	MD
 overwrite	VB
 /create	VB
-		
 a	DT
 method	NN
+		
 called	VBN
 speak	NN
 on	IN
@@ -4797,9 +1939,9 @@ class	NN
 In	IN
 Jeff	NNP
 Atwood's	NNP
-		
 recent	JJ
 post	NN
+		
 on	IN
 monkey	NN
 patching	NN
@@ -4809,9 +1951,9 @@ shows	VBZ
 an	DT
 example	NN
 in	IN
-		
 C	NNP
 #	#
+		
 3	CD
 .	.
 0	CD
@@ -4821,9 +1963,9 @@ the	DT
 current	JJ
 language	NN
 I	PRP
-		
 use	VBP
 for	IN
+		
 work	NN
 .	.
 That's	NNP
@@ -4833,9 +1975,9 @@ good	JJ
 way	NN
 to	TO
 do	VB
-		
 it	PRP
 .	.
+		
 But	CC
 you	PRP
 if	IN
@@ -4845,9 +1987,9 @@ to	TO
 be	VB
 using	VBG
 a	DT
-		
 database	NN
 that	WDT
+		
 supports	VBZ
 LINQ	NNP
 to	TO
@@ -4857,9 +1999,9 @@ it	PRP
 can	MD
 be	VB
 a	DT
-		
 lot	NN
 more	JJR
+		
 fun	NN
 .	.
 It	PRP
@@ -4869,20 +2011,21 @@ something	NN
 like	IN
 this	DT
 :	:
-		
 MyDB	NNP
 db	VBZ
+		
 =	NNP
 new	JJ
-MyDB(	NNP
+MyDB	NNP
+(	(
 "Data	NNP
 Source	NNP
 =	NN
 ...	:
 "	NN
 )	)
-		
 ;var	VBZ
+		
 q	JJ
 =	NN
 from	IN
@@ -4893,22 +2036,32 @@ select	JJ
 c	NN
 ;foreach	NN
 (	(
-		
 var	JJ
+		
 c	NN
 in	IN
 q	NN
 )	)
-Console.WriteLine(	NNP
-c.MyField.ToString()	NN
+Console	NNP
+.	.
+WriteLine	NNP
+(	(
+c	NN
+.	.
+MyField	NNP
+		
+.	.
+ToString	NNP
+(	(
+)	)
 )	)
 ;	:
 This	DT
 was	VBD
-		
 caused	VBN
 by	IN
 a	DT
+		
 change	NN
 in	IN
 rails	NNS
@@ -4917,10 +2070,10 @@ rails	NNS
 1	CD
 which	WDT
 prevents	NNS
-		
 rails	VBZ
 from	IN
 loading	VBG
+		
 views	NNS
 from	IN
 any	DT
@@ -4929,10 +2082,10 @@ path	NN
 for	IN
 security	NN
 reasons	NNS
-		
 .	.
 There	EX
 is	VBZ
+		
 now	RB
 an	DT
 updated	JJ
@@ -4941,10 +2094,10 @@ of	IN
 the	DT
 plugin	NN
 on	IN
-		
 github	NN
 ,	,
 so	IN
+		
 the	DT
 solution	NN
 is	VBZ
@@ -4953,10 +2106,10 @@ use	VB
 that	DT
 .	.
 The	DT
-		
 old	JJ
 solution	NN
 here	RB
+		
 for	IN
 posterity	NN
 To	TO
@@ -4965,10 +2118,10 @@ around	IN
 it	PRP
 ,	,
 edit	VBZ
-		
 init	NN
 .	.
 rb	VB
+		
 under	IN
 your	PRP$
 vendor	NN
@@ -4977,10 +2130,10 @@ vendor	NN
 directory	NN
 ,	,
 and	CC
-		
 add	VB
 the	DT
 following	JJ
+		
 code	NN
 to	TO
 the	DT
@@ -4989,11 +2142,14 @@ ActionController	NN
 :	:
 :Base	NN
 .	.
-		
 class_eval	NN
 do	VBP
 append_view_path	RB
-File.dirname(	NNP
+		
+File	NNP
+.	.
+dirname	NN
+(	(
 __FILE__	NNP
 )	)
 +	NNP
@@ -5131,9 +2287,13 @@ with	IN
 the	DT
 control	NN
 :	:
-AxShockwaveFlash1.Stop()	NNP
 AxShockwaveFlash1	NNP
+.	.
 		
+Stop	NNP
+(	(
+)	)
+AxShockwaveFlash1	NNP
 .	.
 Movie	NNP
 =	NNP
@@ -5141,14 +2301,19 @@ FilePath	NNP
 &	CC
 "	NNP
 \FileName	NNP
+		
 .	.
 swf	NN
-"	NNP
-AxShockwaveFlash1.Play()	NNP
-		
+"	JJ
+AxShockwaveFlash1	NNP
+.	.
+Play	NNP
+(	(
+)	)
 which	WDT
 ,	,
 I	PRP
+		
 think	VBP
 ,	,
 are	VBP
@@ -5157,10 +2322,10 @@ self	JJ
 explanatory	NN
 .	.
 It	PRP
-		
 would	MD
 be	VB
 great	JJ
+		
 to	TO
 be	VB
 able	JJ
@@ -5169,10 +2334,10 @@ load	VB
 the	DT
 flash	NN
 content	NN
-		
 from	IN
 a	DT
 stream	NN
+		
 of	IN
 sorts	NNS
 rather	RB
@@ -5181,10 +2346,10 @@ a	DT
 file	NN
 on	IN
 disk	NN
-		
 .	.
 I	PRP
 just	RB
+		
 saw	VBD
 you	PRP
 are	VBP
@@ -5193,10 +2358,10 @@ looking	VBG
 for	IN
 a	DT
 means	NNS
-		
 to	TO
 load	VB
 the	DT
+		
 content	NN
 from	IN
 a	DT
@@ -5205,10 +2370,10 @@ stream	NN
 and	CC
 because	RB
 I'm	NNP
-		
 not	RB
 really	RB
 sure	JJ
+		
 that	WDT
 is	VBZ
 possible	JJ
@@ -5217,10 +2382,10 @@ the	DT
 shockwave	NN
 flash	NN
 object	NN
-		
 I	PRP
 will	MD
 give	VB
+		
 you	PRP
 another	DT
 option	NN
@@ -5229,10 +2394,10 @@ two	CD
 actually	RB
 )	)
 .	.
-		
 the	DT
 first	JJ
 is	VBZ
+		
 the	DT
 one	NN
 I	PRP
@@ -5241,10 +2406,10 @@ advise	VB
 you	PRP
 to	TO
 use	VB
-		
 only	RB
 when	WRB
 necessary	JJ
+		
 ,	,
 as	IN
 it	PRP
@@ -5253,10 +2418,10 @@ the	DT
 full	JJ
 blown	NN
 "webbrowser	NNP
-		
 component	NN
 "	NN
 (	(
+		
 also	RB
 available	JJ
 as	IN
@@ -5265,10 +2430,10 @@ extra	JJ
 toolbox	NN
 item	NN
 )	)
-		
 ,	,
 which	WDT
 is	VBZ
+		
 like	IN
 trying	VBG
 to	TO
@@ -5277,10 +2442,10 @@ a	DT
 fly	NN
 with	IN
 a	DT
-		
 bazooka	NN
 .	.
 of	IN
+		
 course	NN
 it	PRP
 will	MD
@@ -5289,10 +2454,10 @@ work	VB
 as	IN
 the	DT
 control	NN
-		
 will	MD
 act	VB
 as	IN
+		
 a	DT
 real	JJ
 browser	NN
@@ -5301,10 +2466,10 @@ window	NN
 actually	RB
 the	DT
 internet	JJ
-		
 explorer	NN
 browser	NN
 )	)
+		
 ,	,
 but	CC
 its	PRP$
@@ -5313,10 +2478,10 @@ really	RB
 meant	VB
 to	TO
 be	VB
-		
 used	VBN
 in	IN
 the	DT
+		
 way	NN
 you	PRP
 need	VBP
@@ -5325,10 +2490,10 @@ it	PRP
 the	DT
 second	JJ
 option	NN
-		
 is	VBZ
 to	TO
 use	VB
+		
 something	NN
 I	PRP
 just	RB
@@ -5337,10 +2502,10 @@ while	IN
 looking	VBG
 for	IN
 more	JJR
-		
 information	NN
 about	IN
 playing	VBG
+		
 flash	JJ
 content	NN
 inside	IN
@@ -5349,10 +2514,10 @@ windows	JJ
 form	NN
 .	.
 F-IN-BOX	NNP
-		
 is	VBZ
 a	DT
 commercial	JJ
+		
 solution	NN
 that	WDT
 will	MD
@@ -5361,10 +2526,10 @@ play	VB
 content	NN
 from	IN
 a	DT
-		
 given	VBN
 website	NN
 URL	NNP
+		
 .	.
 (	(
 The	DT
@@ -5373,10 +2538,10 @@ provided	VBD
 will	MD
 direct	VB
 you	PRP
-		
 to	TO
 the	DT
 .	.
+		
 NET	JJ
 code	NN
 you	PRP
@@ -5385,10 +2550,10 @@ to	TO
 use	VB
 )	)
 .	.
-		
 I'm	NNP
 looking	VBG
 for	IN
+		
 a	DT
 way	NN
 to	TO
@@ -5397,10 +2562,10 @@ a	DT
 file	NN
 which	WDT
 is	VBZ
-		
 locked	VBN
 by	IN
 another	DT
+		
 process	NN
 using	VBG
 C	NNP
@@ -5409,10 +2574,10 @@ C	NNP
 I	PRP
 suspect	VBP
 the	DT
-		
 method	NN
 must	MD
 be	VB
+		
 able	JJ
 to	TO
 find	VB
@@ -5421,10 +2586,10 @@ process	NN
 is	VBZ
 locking	VBG
 the	DT
-		
 file	NN
 (	(
 perhaps	RB
+		
 by	IN
 tracking	VBG
 the	DT
@@ -5433,10 +2598,10 @@ handles	NNS
 although	IN
 I'm	NNP
 not	RB
-		
 sure	JJ
 how	WRB
 to	TO
+		
 do	VB
 this	DT
 in	IN
@@ -5445,10 +2610,10 @@ C	NNP
 )	)
 then	RB
 close	VB
-		
 that	IN
 process	NN
 before	IN
+		
 being	VBG
 able	JJ
 to	TO
@@ -5457,8 +2622,12 @@ the	DT
 file	NN
 delete	NN
 using	VBG
+File	NNP
+.	.
+Delete	NNP
 		
-File.Delete()	NNP
+(	(
+)	)
 .	.
 For	IN
 instance	NN
@@ -5468,8 +2637,8 @@ query	NN
 is	VBZ
 like	IN
 the	DT
-following	VBG
 		
+following	VBG
 using	VBG
 SQL	NNP
 Server	NNP
@@ -5480,8 +2649,9 @@ SELECT	NNP
 FROM	NNP
 Table	NNP
 WHERE	NNP
-FREETEXT(	NNP
 		
+FREETEXT	NNP
+(	(
 SearchField	NNP
 ,	,
 '	''
@@ -5491,9 +2661,9 @@ c	JJ
 )	)
 I	PRP
 have	VBP
+		
 a	DT
 full	JJ
-		
 text	NN
 index	NN
 defined	VBD
@@ -5503,9 +2673,9 @@ the	DT
 column	NN
 SearchField	NNP
 which	WDT
+		
 returns	VBZ
 results	NNS
-		
 when	WRB
 using	VBG
 :	:
@@ -5515,9 +2685,9 @@ FROM	NNP
 Table	NNP
 WHERE	NNP
 SearchField	NNP
+		
 LIKE	NNP
 '	POS
-		
 %c	JJ
 #	#
 %	NN
@@ -5527,9 +2697,9 @@ believe	VBP
 #	#
 is	VBZ
 a	DT
+		
 special	JJ
 letter	NN
-		
 ,	,
 so	IN
 how	WRB
@@ -5539,9 +2709,9 @@ allow	VB
 FREETEXT	NNP
 to	TO
 work	VB
+		
 correctly	RB
 for	IN
-		
 the	DT
 query	NN
 above	IN
@@ -5551,9 +2721,9 @@ you	PRP
 want	VBP
 to	TO
 do	VB
+		
 it	PRP
 programatically	RB
-		
 .	.
 I'm	NNP
 not	RB
@@ -5563,9 +2733,9 @@ and	CC
 I'd	NNP
 really	RB
 recommend	VB
+		
 against	IN
 it	PRP
-		
 .	.
 If	IN
 you're	JJ
@@ -5575,9 +2745,9 @@ stuff	NN
 on	IN
 your	PRP$
 own	JJ
+		
 machine	NN
 ,	,
-		
 SysInternals	NNP
 Process	NNP
 Explorer	NNP
@@ -5587,9 +2757,9 @@ you	PRP
 Run	VB
 it	PRP
 ,	,
+		
 use	VB
 the	DT
-		
 Find	NNP
 Handle	NNP
 command	NN
@@ -5599,9 +2769,9 @@ think	VBP
 it's	JJ
 either	CC
 in	IN
+		
 the	DT
 find	NN
-		
 or	CC
 handle	VB
 menu	NN
@@ -5611,21 +2781,22 @@ and	CC
 search	NN
 for	IN
 the	DT
+		
 name	NN
 of	IN
-		
 your	PRP$
 file	NN
 .	.
 Once	IN
 the	DT
-handle(	NN
+handle	NN
+(	(
 s	NN
 )	)
+		
 is	VBZ
 found	VBN
 ,	,
-		
 you	PRP
 can	MD
 forcibly	RB
@@ -5634,10 +2805,10 @@ them	PRP
 .	.
 You	PRP
 can	MD
+		
 then	RB
 delete	VB
 the	DT
-		
 file	NN
 and	CC
 so	RB
@@ -5646,10 +2817,10 @@ on	IN
 Beware	NNP
 ,	,
 doing	VBG
+		
 this	DT
 may	MD
 cause	VB
-		
 the	DT
 program	NN
 which	WDT
@@ -5658,10 +2829,10 @@ the	DT
 handles	NNS
 to	TO
 behave	VB
+		
 strangely	RB
 ,	,
 as	IN
-		
 you've	NN
 just	RB
 pulled	VBD
@@ -5670,10 +2841,10 @@ proverbial	JJ
 rug	NN
 out	IN
 from	IN
+		
 under	IN
 it	PRP
 ,	,
-		
 but	CC
 it	PRP
 works	VBZ
@@ -5682,10 +2853,10 @@ when	WRB
 you	PRP
 are	VBP
 debugging	VBG
+		
 your	PRP$
 own	JJ
 errant	JJ
-		
 code	NN
 ,	,
 or	CC
@@ -5694,10 +2865,10 @@ visual	JJ
 studio	NN
 /	NN
 windows	NNS
+		
 explorer	NN
 is	VBZ
 being	VBG
-		
 crap	NNS
 and	CC
 not	RB
@@ -5706,10 +2877,10 @@ file	NN
 handles	NNS
 even	RB
 though	IN
+		
 you	PRP
 told	VBD
 them	PRP
-		
 to	TO
 close	VB
 the	DT
@@ -5718,10 +2889,10 @@ ages	VBZ
 ago	RB
 ...	:
 sigh	NN
+		
 :	:
 -	:
 )	)
-		
 The	DT
 typical	JJ
 method	NN
@@ -5730,10 +2901,10 @@ as	IN
 follows	VBZ
 .	.
 You've	NNP
+		
 said	VBD
 you	PRP
 want	VBP
-		
 to	TO
 do	VB
 this	DT
@@ -5742,10 +2913,10 @@ C	NNP
 #	#
 so	RB
 here	RB
+		
 goes	VBZ
 ...	:
 If	IN
-		
 you	PRP
 don't	VBP
 know	VB
@@ -5754,10 +2925,10 @@ process	NN
 has	VBZ
 the	DT
 file	NN
+		
 locked	VBN
 ,	,
 you'll	RB
-		
 need	MD
 to	TO
 examine	VB
@@ -5766,10 +2937,10 @@ process's	NN
 handle	JJ
 list	NN
 ,	,
+		
 and	CC
 query	RB
 each	DT
-		
 handle	NN
 to	TO
 determine	VB
@@ -5778,10 +2949,10 @@ it	PRP
 identifies	VBZ
 the	DT
 locked	JJ
+		
 file	NN
 .	.
 Doing	VBG
-		
 this	DT
 in	IN
 C	NNP
@@ -5790,10 +2961,10 @@ will	MD
 likely	RB
 require	VB
 P	NNP
+		
 /Invoke	NNP
 or	CC
 an	DT
-		
 intermediary	JJ
 C	NNP
 +	NNP
@@ -5802,10 +2973,10 @@ C	NNP
 to	TO
 call	VB
 the	DT
+		
 native	JJ
 APIs	NNP
 you'll	NN
-		
 need	NN
 .	.
 Once	RB
@@ -5813,11 +2984,12 @@ you've	RB
 figured	VBN
 out	RP
 which	WDT
-process(	VBP
+process	NN
+		
+(	(
 es	NN
 )	)
 have	VBP
-		
 the	DT
 file	NN
 locked	VBN
@@ -5825,11 +2997,11 @@ locked	VBN
 you'll	RB
 need	VB
 to	TO
+		
 safely	RB
 inject	VB
 a	DT
 small	JJ
-		
 native	JJ
 DLL	NNP
 into	IN
@@ -5837,11 +3009,11 @@ the	DT
 process	NN
 (	(
 you	PRP
+		
 can	MD
 also	RB
 inject	VB
 a	DT
-		
 managed	JJ
 DLL	NNP
 ,	,
@@ -5849,11 +3021,11 @@ but	CC
 this	DT
 is	VBZ
 messier	JJR
+		
 ,	,
 as	IN
 you	PRP
 then	RB
-		
 have	VBP
 to	TO
 start	VB
@@ -5861,11 +3033,11 @@ or	CC
 attach	VB
 to	TO
 the	DT
+		
 .	.
 NET	NNP
 runtime	NN
 )	)
-		
 .	.
 That	DT
 bootstrap	NN
@@ -5873,11 +3045,11 @@ DLL	NNP
 then	RB
 closes	VBZ
 the	DT
+		
 handle	NN
 using	VBG
 CloseHandle	NNP
 etc	NN
-		
 .	.
 Essentially	RB
 :	:
@@ -5885,11 +3057,11 @@ the	DT
 way	NN
 to	TO
 unlock	VB
+		
 a	DT
 "locked	JJ
 "	NN
 file	NN
-		
 is	VBZ
 to	TO
 inject	VB
@@ -5897,11 +3069,11 @@ a	DT
 DLL	NNP
 into	IN
 the	DT
+		
 offending	VBG
 process's	NN
 address	NN
 space	NN
-		
 and	CC
 close	VB
 it	PRP
@@ -5909,11 +3081,11 @@ yourself	PRP
 .	.
 You	PRP
 can	MD
+		
 do	VB
 this	DT
 using	VBG
 native	JJ
-		
 or	CC
 managed	VBN
 code	NN
@@ -5921,11 +3093,11 @@ code	NN
 No	DT
 matter	NN
 what	WP
+		
 ,	,
 you're	RB
 going	VBG
 to	TO
-		
 need	VB
 a	DT
 small	JJ
@@ -5933,11 +3105,11 @@ amount	NN
 of	IN
 native	JJ
 code	NN
+		
 or	CC
 at	IN
 least	JJS
 P	NNP
-		
 /Invoke	VBD
 into	IN
 the	DT
@@ -5945,11 +3117,11 @@ same	JJ
 .	.
 Helpful	JJ
 links	NNS
+		
 :	:
 http	NN
 :	:
 /	JJ
-		
 /www	NN
 .	.
 codeproject	NN
@@ -5957,11 +3129,11 @@ codeproject	NN
 com	NN
 /KB	JJ
 /threads	NNP
+		
 /winspy	NNP
 .	.
 aspx	NN
 http	NN
-		
 :	:
 /	JJ
 /damianblog	NN
@@ -5969,12 +3141,300 @@ http	NN
 com	NN
 /2008	JJ
 /07	NNP
+		
 /02	NNP
 /net	NNP
 -	:
 code-injection	NN
-		
 /	NN
 Good	NNP
 luck	NN
 !	.
+Here's	VBZ
+a	DT
+short	JJ
+		
+list	NN
+of	IN
+implementations	NNS
+and	CC
+languages	NNS
+I've	NNP
+tried	VBD
+.	.
+It's	NNP
+sorted	VBN
+by	IN
+		
+closeness	NN
+to	TO
+zero	CD
+:	:
+Scheme	NN
+:	:
+(	(
++	VB
+1	CD
+(	(
+make-polar	JJ
+		
+1	CD
+(	(
+atan	JJ
+0	CD
+-	:
+1	CD
+)	)
+)	)
+)	)
+⇒	$
+0	CD
+		
+.	.
+0	CD
++1	NN
+.	.
+2246063538223773e-16i	JJ
+(	(
+Chez	NNP
+Scheme	NNP
+,	,
+MIT	NNP
+Scheme	NNP
+		
+)	)
+⇒	VBD
+0	CD
+.	.
+0	CD
++1	NN
+.	.
+22460635382238e-16i	JJ
+(	(
+Guile	NNP
+)	)
+		
+⇒	VBD
+0	CD
+.	.
+0	CD
++1	NN
+.	.
+22464679914735e-16i	JJ
+(	(
+Chicken	NNP
+with	IN
+numbers	NNS
+		
+egg	VBP
+)	)
+⇒	$
+0	CD
+.	.
+0	CD
++1	NN
+.	.
+2246467991473532e-16i	JJ
+(	(
+MzScheme	NNP
+		
+,	,
+SISC	NNP
+,	,
+Gauche	NNP
+,	,
+Gambit	NNP
+)	)
+⇒	VBD
+0	CD
+.	.
+0	CD
+		
++1	NN
+.	.
+2246467991473533e-16i	JJ
+(	(
+SCM	NNP
+)	)
+Common	NNP
+Lisp	NNP
+:	:
+(	(
+1	CD
+		
++	NN
+(	(
+exp	JJ
+(	(
+complex	JJ
+0	CD
+pi	NN
+)	)
+)	)
+)	)
+⇒	FW
+		
+#C	NNP
+(	(
+0	CD
+.	.
+0L0	CD
+-	:
+5	CD
+.	.
+0165576136843360246L-20	NN
+)	)
+(	(
+		
+CLISP	NNP
+)	)
+⇒	VBP
+#C	NNP
+(	(
+0	CD
+.	.
+0d0	CD
+1	CD
+.	.
+2246063538223773d-16	JJ
+		
+)	)
+(	(
+CMUCL	NNP
+)	)
+⇒	VBP
+#C	NNP
+(	(
+0	CD
+.	.
+0d0	CD
+1	CD
+		
+.	.
+2246467991473532d-16	JJ
+)	)
+(	(
+SBCL	NNP
+)	)
+Perl	NN
+:	:
+use	NN
+Math	NN
+:	:
+		
+:Complex	NN
+;	:
+Math	NNP
+:	:
+:Complex	JJ
+-	:
+>emake	NN
+(	(
+1	CD
+,	,
+pi	NN
+		
+)	)
++	VBZ
+1	CD
+⇒	NN
+1	CD
+.	.
+22464679914735e-16i	JJ
+Python	NN
+:	:
+from	IN
+cmath	NN
+		
+import	NN
+exp	NN
+,	,
+pi	NN
+;	:
+exp	CC
+(	(
+complex	JJ
+(	(
+0	CD
+,	,
+		
+pi	NN
+)	)
+)	)
++	$
+1	CD
+⇒	JJ
+1	CD
+.	.
+2246467991473532e-16j	JJ
+(	(
+CPython	NNP
+		
+)	)
+Ruby	NN
+:	:
+require	NN
+'	''
+complex	JJ
+'	POS
+;	:
+Complex	NNP
+:	:
+:polar	NN
+		
+(	(
+1	CD
+,	,
+Math	NN
+:	:
+:PI	NN
+)	)
++	VBZ
+1	CD
+⇒	NN
+Complex	NNP
+		
+(	(
+0	CD
+.	.
+0	CD
+,	,
+1	CD
+.	.
+22464679914735e-16	JJ
+)	)
+(	(
+MRI	NNP
+		
+)	)
+⇒	NN
+Complex	NNP
+(	(
+0	CD
+.	.
+0	CD
+,	,
+1	CD
+.	.
+2246467991473532e-16	JJ
+		
+)	)
+(	(
+JRuby	NNP
+)	)
+R	NN
+:	:
+complex	NN
+(	(
+argument	JJ
+=	NNP
+pi	NN
+		
+)	)
++	VBZ
+1	CD
+⇒	NN
+0	CD
++1	NN
+.	.
+224606353822377e-16i	JJ
