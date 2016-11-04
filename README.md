@@ -10,6 +10,7 @@ The following libraries are used in this project:
 The following IDEs have been used to run the programs created for this project:
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 * [Eclipse](http://www.eclipse.org)
+* [pyCharm](https://www.jetbrains.com/pycharm/)
 * [IDLE 3.5.2](https://www.python.org/downloads/)
 * [Visual Studio 2015 Community](https://www.visualstudio.com/downloads/)
 
@@ -22,7 +23,7 @@ Our team's project revolves around the output.xml file which was generated from 
 4. The files which were used for k-fold validations can be found in the following folder:
     1. https://github.com/shouxian92/nlp-assignment/tree/master/CRF/Folds
 
-Due of the immense number of individual programs created for the sake of this project. It is highly recommended to view this readme using a markdown viewer like http://dillinger.io/ or can be viewed directly online at our team's git https://github.com/shouxian92/nlp-assignment. However, reading it in a text editor is still very much welcome.
+Due of the immense number of individual programs created for the sake of this project. It is highly recommended to view this readme using a markdown viewer like http://dillinger.io/ or viewed directly online at our team's git https://github.com/shouxian92/nlp-assignment. However, reading it in a text editor is still very much welcome.
 
 # 7-Zip extractor
 A Java program was written by our team to read files compressed in a .7z format. The program is located inside of the '7zip extractor' folder.
@@ -52,6 +53,29 @@ Instructions to use this program:
 1. Place the file (make sure it is named as output.xml) which was generated from the 7-Zip extractor into the same folder as the program
 2. Run the python program
 3. 2 files named questions.txt and answers.txt will be generated from the program inside of the same folder
+
+# Data Collection
+For dataset analysis, 3 python scripts were used, any Python IDE like IDLE or pyCharm can be used to run them. It is important to make sure that output.xml is in the same directory as the scripts, otherwise the file path has to be specified when ouput.xml is opened.
+
+### QuestionAnswerCounter.py
+This script counts the amount of question posts and answer posts in output.xml.
+
+The relevant attribute for this task is "PostTypeId". An ID of 1 indicates that the post is a question, and an ID of 2 indicates that the post is an answer. Simply run the script and the counts will be returned.
+
+### AnswerDistribution.py
+This script gives the amount of question posts with x answers in output.xml, where x starts from 0 and increments until equal to the answer count of the post with the most answers.
+
+The relevant attribute for this task is "AnswerCount". The script counts the amount of posts with "AnswerCount=x", lists the number, and then increments x and repeats. After running the script the distribution will be returned. The numbers were then copied into an excel spreadsheet "Data Collection.xlsx" and a simple function was used to obtain the percentages.
+
+### PostLengthDistribution.py
+
+This script gives the amount of posts that have a word count within a certain range in output.xml, and displays all the ranges. The ranges start from 0 - 50, and keep incrementing by 50 until the longest post has been assigned to a range.
+
+Upon running the script there is an option to include the titles of question posts in the count, press 'Y' to include them or 'N' not to, then press enter.
+
+The Python split() method is used to split each post into a list of words, the length of the list is then taken as the length of that particular post, and appended to another list. At the end, this other list will contain the lengths of all posts. It is then sorted and lengths within each range are categorized accordingly to produce the distribution.
+
+The numbers were then copied into an excel spreadsheet "Data Collection.xlsx" and a simple function was used to obtain the percentages.
 
 # 100-Post API mentions extractor
 This extractor is a Python program written to filter out 100 posts from the given output.xml file. By applying a regex pattern, we count the number of posts which appears until the counter hits 100. The program is located under 'python/QuestionAnswerSplitter/100-post-api-mention.py'.
