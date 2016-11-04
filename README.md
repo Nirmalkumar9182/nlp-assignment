@@ -1,7 +1,7 @@
 # CZ4045 NLP Assignment Readme
 4th November 2016
 
-The following libraries are used in the entire project's lifetime:
+The following libraries are used in this project:
 * [Apache Commons Compress](http://commons.apache.org/proper/commons-compress/index.html)
 * [XZ for Java (Maven)](http://tukaani.org/xz/java.html)
 * [Natural Language Toolkit (NLTK)](http://www.nltk.org/)
@@ -9,17 +9,25 @@ The following libraries are used in the entire project's lifetime:
 
 The following IDEs have been used to run the programs created for this project:
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+* [Eclipse](http://www.eclipse.org)
 * [IDLE 3.5.2](https://www.python.org/downloads/)
 * [Visual Studio 2015 Community](https://www.visualstudio.com/downloads/)
 
-Due of the immense number of individual programs created for the sake of this project. It is highly recommended to view this readme using a markdown viewer like http://dillinger.io/ or http://markdownlivepreview.com/. However, reading it in a text editor is still very much welcome.
+Our team's project revolves around the output.xml file which was generated from the 7z archive:
+
+1. The project uses the dataset downloaded from https://archive.org/details/stackexchange. The particular file used was https://archive.org/download/stackexchange/stackoverflow.com-Posts.7z (sized 9.2GB as of current date)
+2. The file which was used for analysing statistics for more than 500 posts can be found at https://github.com/shouxian92/nlp-assignment/blob/master/output%20files/others/output.xml
+3. The files which were used for annotations can be found in the following folder:
+    1. https://github.com/shouxian92/nlp-assignment/blob/master/output%20files/for%20brat
+4. The files which were used for k-fold validations can be found in the following folder:
+    1. https://github.com/shouxian92/nlp-assignment/tree/master/CRF/Folds
+
+Due of the immense number of individual programs created for the sake of this project. It is highly recommended to view this readme using a markdown viewer like http://dillinger.io/ or can be viewed directly online at our team's git https://github.com/shouxian92/nlp-assignment. However, reading it in a text editor is still very much welcome.
 
 # 7-Zip extractor
-The project uses the dataset downloaded from https://archive.org/details/stackexchange. The particular file used was 'stackoverflow.com-Posts.7z' (sized 9.2GB as of current date)
-
 A Java program was written by our team to read files compressed in a .7z format. The program is located inside of the '7zip extractor' folder.
 
-This program was coded using IntelliJ IDEA, it is recommended to only be opened with IntelliJ IDEA.
+This program was coded using IntelliJ IDEA, it is recommended to only be opened with IntelliJ IDEA. The reason why IntelliJ was used in particular for this program is because of how easy IntelliJ can be used to add Maven libraries into a Java project.
 
 There are several libraries which are essential to run the project:
 
@@ -29,6 +37,12 @@ There are several libraries which are essential to run the project:
 If all libraries are present, the Main java class should be able to execute without any errors. The program will prompt for a location which you have stored the relevant 7z file inside of your computer. If the path is correct, it should extract the relevant XML file into an output file named as output.xml in the root folder of the project.
 
 Note that this program will only run for 2 seconds because the 7z file which was used for this project is too big to complete the actual output processing. This will also mean that the file generated (output.xml) is not a complete XML file, so any incomplete information like broken XML tags at the end of the file should be expected and to be removed. A <rows> tag should be added to the end of the file.
+
+# Porter's Stemming
+In order to observe stemming of words from our output file. Our team has used the Porter's Stemming library for Java. The program can be found under 'java/PortersSemming'
+
+# POS Tagging
+The POS tag set which was used in this project was the Maxent Treebank POS tag set. To observe how the tagging works, a Java program has been written to first tokenize a string, followed by the tagging of tokens. The POS Tagger can be found under 'java/POSTagger'
 
 # Question-Answer splitter
 The question-answer splitter is a Python program written to separate the question posts from the answer posts from the generated output.xml file. The program is located under 'python/QuestionAnswerSplitter/question-answer-splitter.py'.
@@ -54,30 +68,30 @@ For the purpose of API recognition in our project, a Conditional Random Field im
 Files and folders included in the CRF folder are as follows:
 
 #### CRFSharpDemoPackage
-The CRF tool obtained from https://github.com/zhongkaifu/CRFSharp under "Releases", the bin folder contains CRFSharpWrapper.dll, used for encoding(training), and CRFSharpConsole.exe, used for decoding(testing). The other files remain unused. 
+> The CRF tool obtained from https://github.com/zhongkaifu/CRFSharp under "Releases", the bin folder contains CRFSharpWrapper.dll, used for encoding(training), and CRFSharpConsole.exe, used for decoding(testing). The other files remain unused. 
 This library is included because the file size is extremely small (343 KB)
 
 #### CRF_for_NLP
-Contains a C# project created in Visual Studio Community 2015. Inside is Program.cs, which is the code for encoding(training) a CRF model.
+> Contains a C# project created in Visual Studio Community 2015. Inside is Program.cs, which is the code for encoding(training) a CRF model.
 
 #### training.txt
-A sample file used for the encoding(training) process. 
+> A sample file used for the encoding(training) process. 
 Each line contains one token, then a tab, then the POS tag of the token, then another tab, then the BILOU tag of the token.
 
 #### testing.txt
-A sample file used for the decoding(testing) process.
+> A sample file used for the decoding(testing) process.
 Each line contains one token, then a tab, then the POS tag of the token, but no BILOU tag.
 
 #### template.NE
-The template file used by the CRF tool for feature generation. Each line in the file is an index followed by a rule string. 
+> The template file used by the CRF tool for feature generation. Each line in the file is an index followed by a rule string. 
 The simplest format for rule string is "%x[y,z]", x is a variable that the result will be assigned to, z can be either 0 for the current token or 1 for its POS tag, and y denotes the position relative to the current token.
 
-For example, assuming the current token is "cats" in:
+> For example, assuming the current token is "cats" in:
 
     like  VB  O
     cats  NNS O
   
-then %x[0,0] will give "cats", %x[0,1] will give "NNS", and %x[-1,0] will give "like".
+> then %x[0,0] will give "cats", %x[0,1] will give "NNS", and %x[-1,0] will give "like".
 The rule strings can be further combined like "%x[-1,1]/%x[0,1]" which will give "VB/NNS"
 
 ### Instructions for encoding:
@@ -99,12 +113,16 @@ The rule strings can be further combined like "%x[-1,1]/%x[0,1]" which will give
 # CRF training/test file generator
 In order to feed the CRF library a file with the correct format it requires, a Python program was written to generate a file suitable for the CRF library. The program is located under 'python/Annotation + POSTagging/api_annotation_parser.py'.
 
+This program tokenizes strings within a file and performs POS tagging with BILOU notation
+
 Instructions to use this program:
 
 1. Place the 2 files required in the same folder as the program. (Namely, the generated set of text file from the 100-Post extractor and the .ann file which was generated from annotating through BRAT)
 2. Run the Python program
 3. The program will ask for the file name that you wish to perform the processing on
 4. The program will then generate 2 new files using the name which was entered in the previous step with a suffix of _training and _test where the latter will not contain the annotation tags while the former will.
+
+Note that the POS tagger still tags the tokens according to the Maxent Treebank POS Tag set
 
 # CRF validator
 In order to test the results of our API recognition module, a Python program was written to display the frequency of false, true positives and negatives scores, along with the precision, recall and F1 scores. The program basically compares the BILOU notation using the test result against the validation set. The program is located under 'python/CRFValidator/validator.py'.
