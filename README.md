@@ -10,6 +10,7 @@ The following libraries are used in this project:
 The following IDEs have been used to run the programs created for this project:
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 * [Eclipse](http://www.eclipse.org)
+* [pyCharm](https://www.jetbrains.com/pycharm/)
 * [IDLE 3.5.2](https://www.python.org/downloads/)
 * [Visual Studio 2015 Community](https://www.visualstudio.com/downloads/)
 
