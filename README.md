@@ -23,7 +23,7 @@ Our team's project revolves around the output.xml file which was generated from 
 4. The files which were used for k-fold validations can be found in the following folder:
     1. https://github.com/shouxian92/nlp-assignment/tree/master/CRF/Folds
 
-Due of the immense number of individual programs created for the sake of this project. It is highly recommended to view this readme using a markdown viewer like http://dillinger.io/ or can be viewed directly online at our team's git https://github.com/shouxian92/nlp-assignment. However, reading it in a text editor is still very much welcome.
+Due of the immense number of individual programs created for the sake of this project. It is highly recommended to view this readme using a markdown viewer like http://dillinger.io/ or viewed directly online at our team's git https://github.com/shouxian92/nlp-assignment. However, reading it in a text editor is still very much welcome.
 
 # 7-Zip extractor
 A Java program was written by our team to read files compressed in a .7z format. The program is located inside of the '7zip extractor' folder.
