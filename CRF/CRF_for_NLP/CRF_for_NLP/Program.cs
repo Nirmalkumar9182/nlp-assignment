@@ -15,7 +15,7 @@ namespace CRF_for_NLP
             var options = new EncoderArgs();
             options.debugLevel = 1;
             options.strTemplateFileName = @"D:\NLP\template.NE"; //template file name  
-            options.strTrainingCorpus = @"D:\NLP\fold4_training.txt"; //training corpus file name  
+            options.strTrainingCorpus = @"D:\NLP\training.txt"; //training corpus file name  
             options.strEncodedModelFileName = @"D:\NLP\ner_model"; //encoded model output file name  
             options.max_iter = 1000;
             options.min_feature_freq = 2;

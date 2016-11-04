@@ -1,0 +1,11 @@
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\CRF_for_NLP.exe.config
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\obj\Debug\CRF_for_NLP.exe
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\obj\Debug\CRF_for_NLP.pdb
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\CRF_for_NLP.exe
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\CRF_for_NLP.pdb
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\CRFSharp.dll
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\CRFSharpWrapper.dll
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\AdvUtils.dll
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\CRFSharp.pdb
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\bin\Debug\CRFSharpWrapper.pdb
+C:\Users\Jo\documents\visual studio 2015\Projects\CRF_for_NLP\CRF_for_NLP\obj\Debug\CRF_for_NLP.csprojResolveAssemblyReference.cache
