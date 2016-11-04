@@ -28,7 +28,7 @@ itemlist = xmldoc.getElementsByTagName('row')
 # WE NEED TO IMPROVE THIS PART
 angled_bracket_pattern = r'\<[^>]*\>'
 
-with open("question_without_angle.txt", "wb") as myfile:
+with open("questions.txt", "wb") as myfile:
     for s in itemlist :
         if s.attributes['PostTypeId'].value == "1":
             text = str(s.attributes['Body'].value) + "\r\n"
@@ -37,7 +37,7 @@ with open("question_without_angle.txt", "wb") as myfile:
 #            text = re.sub(angled_bracket_pattern, "", text)
             myfile.write(text.encode('utf8'))
 
-with open("answer_without_angle.txt", "wb") as myfile:
+with open("answers.txt", "wb") as myfile:
     for s in itemlist :
         if s.attributes['PostTypeId'].value == "2":
             text = str(s.attributes['Body'].value) + "\r\n"

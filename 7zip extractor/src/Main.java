@@ -3,22 +3,26 @@ import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         SevenZFile sevenZFile;
         try {
-            // change this file to the 7z file which you have downloaded
-            File zipFile = new File("/Users/shouxian/Downloads/stackoverflow.com-Posts.7z");
+            Scanner scan = new Scanner(System.in);
+            System.out.print("Please enter the full path to the 7z file: ");
 
-            Path f = Paths.get("/Users/shouxian/Downloads/stackoverflow.com-Posts.7z");
+            String filepath = scan.nextLine();
+
+            // change this file to the 7z file which you have downloaded
+            // on shouxian's computer it was /Users/shouxian/Downloads/stackoverflow.com-Posts.7z
+            File zipFile = new File(filepath);
             sevenZFile = new SevenZFile(zipFile);
 
             // the files inside of the SevenZFile object acts like a list
             // getNexEntry() will get the next item inside of the list
+            // credits: http://stackoverflow.com/questions/21897286/how-to-extract-files-from-a-7-zip-stream-in-java-without-store-it-on-hard-disk
             SevenZArchiveEntry entry = sevenZFile.getNextEntry();
             while(entry!=null){
                 String name = entry.getName();

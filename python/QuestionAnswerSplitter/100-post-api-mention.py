@@ -48,23 +48,23 @@ with open("set0.txt", "wb") as myfile:
             if(api_count >= api_limit) :
                 break
 
-api_count = 0
-iteration = 5
-api_limit = api_limit * iteration
-count = 0
-# takes data after the training dataset            
-with open("set"+str(iteration)+".txt", "wb") as myfile:
-    for s in itemlist :
-            text = str(s.attributes['Body'].value)
-            text = strip_tags(text)
-            text = html.unescape(text)
-            if api_mention_regex.search(text) is not None:
-                text = " ".join(text.split()) + "\n"
-                if api_count > api_limit:
-                    myfile.write(text.encode('utf8'))
-                api_count += 1
+for iteration in range(1,5):
+    api_count = 0
+    api_limit = 20 * iteration
+    count = 0
+    # takes data after the training dataset
+    with open("set"+str(iteration)+".txt", "wb") as myfile:
+        for s in itemlist :
+                text = str(s.attributes['Body'].value)
+                text = strip_tags(text)
+                text = html.unescape(text)
+                if api_mention_regex.search(text) is not None:
+                    text = " ".join(text.split()) + "\n"
+                    if api_count > api_limit:
+                        myfile.write(text.encode('utf8'))
+                    api_count += 1
 
-            if(api_count - (api_limit / iteration) > api_limit) :
-                break
-            #else:
-                #print(api_count)
+                if(api_count - (api_limit / iteration) > api_limit) :
+                    break
+                #else:
+                    #print(api_count)
